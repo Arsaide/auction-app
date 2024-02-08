@@ -19,6 +19,9 @@ import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} fr
 import LoginForm from "../../pages/auth/loginForm/LoginForm";
 import useOpenModal from "../../../hooks/useOpenModal/useOpenModal";
 import RegistrationForm from "../../pages/auth/regestrationForm/RegistrationForm";
+import {useContext} from "react";
+import {Context} from "../../../index";
+import {FormikHelpers} from "formik";
 
 
 interface ResponsiveDrawerProps {
@@ -26,6 +29,11 @@ interface ResponsiveDrawerProps {
 }
 
 export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
+    const {store} = useContext(Context);
+    const handleSubmit = () => {
+        store.logout();
+    };
+
     const { mobileOpen, handleDrawerClose, handleDrawerTransitionEnd, handleDrawerToggle } = useDrawerState();
     const { handleOpenUserMenu, anchorElUser , handleCloseUserMenu } = useOpenUserMenu();
 
@@ -142,7 +150,7 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                                     <Typography textAlign="center">Account</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">Log out</Typography>
+                                    <Button onClick={handleSubmit}>Log out</Button>
                                 </MenuItem>
                             </Menu>
                         </Box>
