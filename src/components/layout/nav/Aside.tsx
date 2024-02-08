@@ -15,6 +15,10 @@ import Button from '@mui/material/Button';
 import SideBar from './sideBar/SideBar'
 import useOpenUserMenu from "../../../hooks/useOpenUserMenu/useOpenUserMenu";
 import useDrawerState from "../../../hooks/useDrawerState/useDrawerState";
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import LoginForm from "../../pages/auth/loginForm/LoginForm";
+import useOpenModal from "../../../hooks/useOpenModal/useOpenModal";
+import RegistrationForm from "../../pages/auth/regestrationForm/RegistrationForm";
 
 
 interface ResponsiveDrawerProps {
@@ -23,7 +27,15 @@ interface ResponsiveDrawerProps {
 
 export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
     const { mobileOpen, handleDrawerClose, handleDrawerTransitionEnd, handleDrawerToggle } = useDrawerState();
-    const { handleOpenUserMenu, anchorElUser , handleCloseUserMenu } = useOpenUserMenu()
+    const { handleOpenUserMenu, anchorElUser , handleCloseUserMenu } = useOpenUserMenu();
+
+    const {
+        openLoginModal,
+        openRegistrationModal,
+        handleLoginClickOpen,
+        handleRegistrationClickOpen,
+        handleClose,
+    } = useOpenModal();
 
     return (
         <Box sx={{display: 'flex'}}>
@@ -51,13 +63,60 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                             <MenuIcon/>
                         </IconButton>
                         <Box sx={{flexGrow: 0}}>
+
+
+
+
+
                             <Button
                                 variant="contained"
                                 color='inherit'
                                 sx={{color: 'black'}}
-                                href="/auth-page">
-                                Login
+                                onClick={handleLoginClickOpen}>
+                                Log in
                             </Button>
+                            <Button
+                                variant="contained"
+                                color='inherit'
+                                sx={{color: 'black'}}
+                                onClick={handleRegistrationClickOpen}>
+                                Registration
+                            </Button>
+
+                            <Dialog open={openLoginModal} onClose={handleClose} aria-labelledby={"form-dialog-title"}>
+                                <DialogTitle id={"form-dialog-title"}>Log in</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText>
+                                        Log in to use website
+                                    </DialogContentText>
+                                    <LoginForm/>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleClose} color={"primary"}>Cancel</Button>
+                                </DialogActions>
+                            </Dialog>
+
+                            <Dialog open={openRegistrationModal} onClose={handleClose} aria-labelledby={"form-dialog-title"}>
+                                <DialogTitle id={"form-dialog-title"}>Log in</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText>
+                                        Registration
+                                    </DialogContentText>
+                                    <RegistrationForm/>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleClose} color={"primary"}>Cancel</Button>
+                                </DialogActions>
+                            </Dialog>
+
+
+
+
+
+
+
+
+
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                                     <Avatar alt="Monkey King" src="/avatar/avatar.jpg"/>

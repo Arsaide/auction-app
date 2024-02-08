@@ -6,7 +6,7 @@ import HomePage from "./pages/home/page";
 import BetPage from "./pages/bet/page";
 import OnlineChatPage from "./pages/online-chat/page";
 import InformationPage from "./pages/information/page";
-import AuthPage from "./pages/auth-page/page";
+// import AuthPage from "./pages/auth-page/page";
 
 function App() {
     return (
@@ -17,7 +17,7 @@ function App() {
                     <Route path={"bet"} element={<BetPage/>}/>
                     <Route path={"online-chat"} element={<OnlineChatPage/>}/>
                     <Route path={"information"} element={<InformationPage/>}/>
-                    <Route path={"auth-page"} element={<AuthPage/>}/>
+                    {/*<Route path={"/auth-page"} element={<AuthPage />}/>*/}
                 </Routes>
             </ResponsiveDrawer>
         </div>
