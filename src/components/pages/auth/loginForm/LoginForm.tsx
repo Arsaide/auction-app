@@ -5,6 +5,8 @@ import {loginValidationSchema} from "./loginValidation/loginValidationSchema";
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
 import Input from "../../../layout/common/input/Input";
+import Typography from "@mui/material/Typography";
+import {toast, ToastContainer} from "react-toastify";
 
 interface LoginFormValues {
     email: string;
@@ -13,14 +15,23 @@ interface LoginFormValues {
 
 const LoginForm: FC = () => {
     const {store} = useContext(Context);
+    const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
     const initialValues = {
         email: '',
         password: ''
     };
 
-    const handleSubmit = (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
-        store.login(values.email, values.password);
+    const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
+        try {
+            const response = await store.login(values.email, values.password);
+            if(response && response.status === 200) {
+                toast.success('Authorization successful!');
+            }
+        } catch (e: any) {
+            toast.error(e.response?.data?.message);
+            setErrorMessage(e.response?.data?.message);
+        }
     };
 
     return (
@@ -54,6 +65,7 @@ const LoginForm: FC = () => {
                                 Login
                             </Button>
                         </Box>
+                        {errorMessage && <Typography sx={{color: 'red', maxWidth: 330}}>{errorMessage}</Typography>}
                     </Form>
                 )}
             </Formik>

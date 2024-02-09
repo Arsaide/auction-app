@@ -25,8 +25,9 @@ export default class Store {
             localStorage.setItem('token', response.data.token);
             this.setAuth(true);
             this.setUser(response.data.user);
+            return response;
         } catch (e: any) {
-            console.log(e.response?.data?.message);
+            throw e;
         }
     }
 
@@ -38,8 +39,9 @@ export default class Store {
             this.setAuth(true);
             this.setUser(response.data.user);
             await AuthService.sendemail();
+            return response;
         } catch (e: any) {
-            console.log(e.response?.data?.message);
+            throw e;
         }
     }
 
@@ -47,8 +49,9 @@ export default class Store {
         try {
             const response = await AuthService.registercreate(code);
             console.log(response);
+            return response;
         } catch (e: any) {
-            console.log(e.response?.data?.message);
+            throw e;
         }
     }
 

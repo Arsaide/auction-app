@@ -7,6 +7,7 @@ import BetPage from "./pages/bet/page";
 import OnlineChatPage from "./pages/online-chat/page";
 import InformationPage from "./pages/information/page";
 import AuthPage from "./pages/auth-page/page";
+import ToastMessage from "./components/layout/common/toastMessage/ToastMessage";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path={"information"} element={<InformationPage/>}/>
                     <Route path={"/auth-page"} element={<AuthPage />}/>
                 </Routes>
+                <ToastMessage/>
             </ResponsiveDrawer>
         </div>
     );
