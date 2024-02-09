@@ -1,6 +1,9 @@
 import {IUser} from "../models/IUser";
 import {makeAutoObservable } from 'mobx'
 import AuthService from "../services/AuthService";
+import axios from "axios";
+import {AuthResponse} from "../models/response/AuthResponse";
+import {API_URL} from "../request";
 
 export default class Store {
     user = {} as IUser;
@@ -23,6 +26,8 @@ export default class Store {
             const response = await AuthService.login(email, password);
             console.log(response);
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPassword', password);
             this.setAuth(true);
             this.setUser(response.data.user);
             return response;
@@ -57,8 +62,10 @@ export default class Store {
 
     async logout() {
         try {
-            // const response = await AuthService.logout();
             localStorage.removeItem('token');
+            localStorage.removeItem('isAuth');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userPassword');
             this.setAuth(true);
             this.setUser({} as IUser);
         } catch (e: any) {
@@ -68,7 +75,12 @@ export default class Store {
 
     async checkAuth() {
         try {
-
+            const token = localStorage.getItem('token');
+            if (token !== undefined && token !== null) {
+                localStorage.setItem('isAuth', 'true');
+            } else {
+                localStorage.setItem('isAuth', 'false');
+            }
         } catch (e: any) {
             console.log(e.response?.data?.message);
         }

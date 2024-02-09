@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 import ResponsiveDrawer from "./components/layout/nav/Aside";
@@ -10,18 +10,36 @@ import AuthPage from "./pages/auth-page/page";
 import ToastMessage from "./components/layout/common/toastMessage/ToastMessage";
 
 function App() {
+    const [userEmail, setUserEmail] = useState<string | null>(null);
+    const [userPassword, setUserPassword] = useState<string | null>(null);
+
+    useEffect(() => {
+        const email = localStorage.getItem('userEmail');
+        const password = localStorage.getItem('userPassword');
+        if (email && password) {
+            setUserEmail(email);
+            setUserPassword(password);
+        }
+    }, []);
+
     return (
         <div className="App">
             <ResponsiveDrawer>
+                {userEmail && userPassword && (
+                    <div>
+                        <p>User Email: {userEmail}</p>
+                        <p>User Password: {userPassword}</p>
+                    </div>
+                )}
                 <Routes>
-                    <Route path={"/"} element={<HomePage/>}/>
-                    <Route path={"bet"} element={<BetPage/>}/>
-                    <Route path={"online-chat"} element={<OnlineChatPage/>}/>
-                    <Route path={"information"} element={<InformationPage/>}/>
-                    <Route path={"/auth-page"} element={<AuthPage />}/>
+                    <Route path={"/"} element={<HomePage />} />
+                    <Route path={"bet"} element={<BetPage />} />
+                    <Route path={"online-chat"} element={<OnlineChatPage />} />
+                    <Route path={"information"} element={<InformationPage />} />
+                    <Route path={"/auth-page"} element={<AuthPage />} />
                 </Routes>
-                <ToastMessage/>
             </ResponsiveDrawer>
+            <ToastMessage />
         </div>
     );
 }
