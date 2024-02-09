@@ -1,21 +1,24 @@
-import React, {FC, useContext} from 'react';
-import {Form, Formik, FormikHelpers} from "formik";
-import {Context} from "../../../../index";
-import {loginValidationSchema} from "./loginValidation/loginValidationSchema";
-import Button from '@mui/material/Button';
+import React, { useContext, useState } from 'react';
+import { Form, Formik, FormikHelpers } from "formik";
+import { toast } from "react-toastify";
+import { Context } from "../../../../index";
 import Box from "@mui/material/Box";
 import Input from "../../../layout/common/inputs/input/Input";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {toast, ToastContainer} from "react-toastify";
+import ImageForm from '../../../layout/common/inputs/imgInput/ImgInput';
+import {betFormValidationSchema} from "./betFormValidation/betFormValidationSchema";
+
 
 interface LoginFormValues {
     email: string;
     password: string;
 }
 
-const LoginForm: FC = () => {
-    const {store} = useContext(Context);
-    const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+const BetForm = () => {
+    const { store } = useContext(Context);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
     const initialValues = {
         email: '',
@@ -24,13 +27,9 @@ const LoginForm: FC = () => {
 
     const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
         try {
-            const response = await store.login(values.email, values.password);
+            const response = await store.sendimg(values.email, values.password, selectedImage);
             if(response && response.status === 200) {
-                await store.checkAuth();
-                // toast.success('Authorization successful!');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
+
             }
         } catch (e: any) {
             toast.error(e.response?.data?.message);
@@ -38,37 +37,43 @@ const LoginForm: FC = () => {
         }
     };
 
+    const handleImageSubmit = (image: File) => {
+        setSelectedImage(image);
+    };
+
     return (
         <>
             <Formik
-                validationSchema={loginValidationSchema}
+                validationSchema={betFormValidationSchema}
                 validateOnMount
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
             >
-                {({isValid}) => (
+                {({ isValid }) => (
                     <Form>
-                        <Box sx={{display: 'flex', flexDirection: 'column', width: '340px', gap: 2 }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                            <ImageForm onSubmit={handleImageSubmit} />
                             <Input
                                 id={'email'}
                                 label={'Email'}
                                 name={'email'}
-                                placeholder={'Enter your email'}/>
+                                placeholder={'Enter your email'} />
                             <Input
                                 id={'password'}
                                 label={'Password'}
                                 name={'password'}
-                                placeholder={'Enter your password'}/>
+                                placeholder={'Enter your password'} />
                             <p>valid : {isValid.toString()}</p>
                             <Button
                                 variant="contained"
                                 type="submit"
                                 disabled={!isValid}
+                                sx={{ height: 60 }}
                             >
                                 Login
                             </Button>
                         </Box>
-                        {errorMessage && <Typography sx={{color: 'red', maxWidth: '340px'}}>{errorMessage}</Typography>}
+                        {errorMessage && <Typography sx={{ color: 'red' }}>{errorMessage}</Typography>}
                     </Form>
                 )}
             </Formik>
@@ -76,4 +81,5 @@ const LoginForm: FC = () => {
     );
 };
 
-export default LoginForm;
+export default BetForm;
+

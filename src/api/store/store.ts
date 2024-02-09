@@ -76,8 +76,24 @@ export default class Store {
             localStorage.setItem('token', response.data.token);
             this.setAuth(true);
             this.setUser(response.data.user);
-            // await AuthService.sendemail();
             await this.sendemail()
+            return response;
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async sendimg(email: string, password: string, image: File | null){
+        try {
+            const response = await toast.promise(
+                AuthService.sendimg(email, password, image),
+                {
+                    pending: 'Send request...',
+                    success: 'Request successfully!',
+                    error: 'Failed to request, please try again...'
+                }
+            )
+            console.log(response);
             return response;
         } catch (e: any) {
             throw e;
@@ -126,4 +142,7 @@ export default class Store {
             console.log(e.response?.data?.message);
         }
     }
+
+
+
 }

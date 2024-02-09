@@ -3,7 +3,7 @@ import {Context} from "../../../../index";
 import {Form, Formik, FormikHelpers} from "formik";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Input from "../../../layout/common/input/Input";
+import Input from "../../../layout/common/inputs/input/Input";
 import {regCreateValidationSchema} from "./regCreateValidation/regCreateValidationSchema";
 import Typography from "@mui/material/Typography";
 import {toast} from "react-toastify";
@@ -47,7 +47,7 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
             >
                 {({isValid}) => (
                     <Form>
-                        <Box sx={{display: 'flex', flexDirection: 'column', width: 320 }}>
+                        <Box sx={{display: 'flex', flexDirection: 'column', width: '340px', gap: 2 }}>
                             <Input
                                 id={"code"}
                                 label={"Your Code"}
@@ -58,12 +58,11 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                 variant="contained"
                                 type="submit"
                                 disabled={!isValid}
-                                sx={{width: 330}}
                             >
                                 Access code
                             </Button>
                         </Box>
-                        {errorMessage && <Typography sx={{color: 'red', maxWidth: 330}}>{errorMessage}</Typography>}
+                        {errorMessage && <Typography sx={{color: 'red', maxWidth: '340px'}}>{errorMessage}</Typography>}
                     </Form>
                 )}
             </Formik>

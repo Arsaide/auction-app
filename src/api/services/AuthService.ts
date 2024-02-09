@@ -1,5 +1,5 @@
 import $api from "../request";
-import { AxiosResponse } from 'axios'
+import {AxiosResponse} from 'axios'
 import {AuthResponse} from "../models/response/AuthResponse";
 
 
@@ -22,5 +22,17 @@ export default class AuthService {
 
     static async registercreate(code: string): Promise<AxiosResponse<AuthResponse>> {
         return $api.post<AuthResponse>('/registercreate', {code})
+    }
+
+    static async sendimg(email: string, password: string, image: File | null): Promise<AxiosResponse<AuthResponse>> {
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('password', password);
+        if (image) {
+            formData.append('image', image);
+        }
+
+
+        return await $api.post<AuthResponse>('/sendimg', formData);
     }
 }

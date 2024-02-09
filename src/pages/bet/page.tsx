@@ -1,10 +1,11 @@
 import React from 'react';
+import BetForm from "../../components/pages/bet/betForm/BetForm";
 
 const BetPage = () => {
     return (
-        <div>
-            bet page
-        </div>
+        <section>
+            <BetForm/>
+        </section>
     );
 };
 
