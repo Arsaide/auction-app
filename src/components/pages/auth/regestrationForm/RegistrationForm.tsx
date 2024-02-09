@@ -33,7 +33,6 @@ const RegistrationForm: FC = () => {
             const response = await store.registration(values.email, values.password);
             if (response && response.status === 200) {
                 setIsRegistered(true);
-                toast.success(response.data.message);
             }
         } catch (e: any) {
             setErrorMessage(e.response?.data?.message);

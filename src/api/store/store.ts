@@ -4,6 +4,7 @@ import AuthService from "../services/AuthService";
 import axios from "axios";
 import {AuthResponse} from "../models/response/AuthResponse";
 import {API_URL} from "../request";
+import {toast} from "react-toastify";
 
 export default class Store {
     user = {} as IUser;
@@ -21,9 +22,34 @@ export default class Store {
         this.user = user;
     }
 
+    async sendemail() {
+        try {
+            const response = await toast.promise(
+                AuthService.sendemail(),
+                {
+                    pending: 'Sending code...',
+                    success: 'Code sent!',
+                    error: 'Sending code error, please try again...'
+                }
+            );
+            console.log(response);
+            return response;
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
     async login(email: string, password: string) {
         try {
-            const response = await AuthService.login(email, password);
+            // const response = await AuthService.login(email, password);
+            const response = await toast.promise(
+                AuthService.login(email, password),
+                {
+                    pending: 'Logging in...',
+                    success: 'Logged in successfully!',
+                    error: 'Failed to login, please try again...'
+                }
+            );
             console.log(response);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userEmail', email);
@@ -38,12 +64,20 @@ export default class Store {
 
     async registration(email: string, password: string) {
         try {
-            const response = await AuthService.registration(email, password);
+            const response = await toast.promise(
+                AuthService.registration(email, password),
+                {
+                    pending: 'Registering...',
+                    success: 'Registered successfully!',
+                    error: 'Failed to register, please try again...'
+                }
+            );
             console.log(response);
             localStorage.setItem('token', response.data.token);
             this.setAuth(true);
             this.setUser(response.data.user);
-            await AuthService.sendemail();
+            // await AuthService.sendemail();
+            await this.sendemail()
             return response;
         } catch (e: any) {
             throw e;
@@ -52,7 +86,14 @@ export default class Store {
 
     async registercreate(code: string) {
         try {
-            const response = await AuthService.registercreate(code);
+            const response = await toast.promise(
+                AuthService.registercreate(code),
+                {
+                    pending: 'Sending code...',
+                    success: 'Created successfully!',
+                    error: 'Invalid code, please try again...'
+                }
+            );
             console.log(response);
             return response;
         } catch (e: any) {

@@ -27,7 +27,7 @@ const LoginForm: FC = () => {
             const response = await store.login(values.email, values.password);
             if(response && response.status === 200) {
                 await store.checkAuth();
-                toast.success('Authorization successful!');
+                // toast.success('Authorization successful!');
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);

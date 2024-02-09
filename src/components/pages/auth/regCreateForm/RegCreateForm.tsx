@@ -29,7 +29,6 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
         try {
             const response = await store.registercreate(values.code);
             if(response && response.status === 200) {
-                toast.success(response.data.message);
                 onSubmit();
             }
         } catch (e: any) {
