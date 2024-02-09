@@ -35,7 +35,7 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
         window.location.reload();
     };
 
-    const hasToken = localStorage.getItem('token');
+    const isAuth = localStorage.getItem('isAuth') === 'true';
 
     const {mobileOpen, handleDrawerClose, handleDrawerTransitionEnd, handleDrawerToggle} = useDrawerState();
     const {handleOpenUserMenu, anchorElUser, handleCloseUserMenu} = useOpenUserMenu();
@@ -75,7 +75,7 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                         </IconButton>
                         <Box sx={{flexGrow: 0}}>
 
-                            {!hasToken && (
+                            {!isAuth && (
                                 <>
                                     <Button
                                         variant="contained"
@@ -121,7 +121,7 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                                 </>
                             )}
 
-                            {hasToken && (
+                            {isAuth && (
                                 <>
                                     <Tooltip title="Open settings">
                                         <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
