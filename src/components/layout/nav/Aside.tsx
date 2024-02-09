@@ -32,10 +32,13 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
     const {store} = useContext(Context);
     const handleSubmit = () => {
         store.logout();
+        window.location.reload();
     };
 
-    const { mobileOpen, handleDrawerClose, handleDrawerTransitionEnd, handleDrawerToggle } = useDrawerState();
-    const { handleOpenUserMenu, anchorElUser , handleCloseUserMenu } = useOpenUserMenu();
+    const hasToken = localStorage.getItem('token');
+
+    const {mobileOpen, handleDrawerClose, handleDrawerTransitionEnd, handleDrawerToggle} = useDrawerState();
+    const {handleOpenUserMenu, anchorElUser, handleCloseUserMenu} = useOpenUserMenu();
 
     const {
         openLoginModal,
@@ -72,87 +75,84 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                         </IconButton>
                         <Box sx={{flexGrow: 0}}>
 
-
-
-
-
-                            <Button
-                                variant="contained"
-                                color='inherit'
-                                sx={{color: 'black'}}
-                                onClick={handleLoginClickOpen}>
-                                Log in
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color='inherit'
-                                sx={{color: 'black'}}
-                                onClick={handleRegistrationClickOpen}>
-                                Registration
-                            </Button>
-
-                            <Dialog open={openLoginModal} onClose={handleClose} aria-labelledby={"form-dialog-title"}>
-                                <DialogTitle id={"form-dialog-title"}>Log in</DialogTitle>
-                                <DialogContent>
-                                    <DialogContentText>
-                                        Log in to use website
-                                    </DialogContentText>
-                                    <LoginForm/>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={handleClose} color={"primary"}>Cancel</Button>
-                                </DialogActions>
-                            </Dialog>
-
-                            <Dialog open={openRegistrationModal} onClose={handleClose} aria-labelledby={"form-dialog-title"}>
-                                <DialogTitle id={"form-dialog-title"}>Log in</DialogTitle>
-                                <DialogContent>
-                                    <DialogContentText>
+                            {!hasToken && (
+                                <>
+                                    <Button
+                                        variant="contained"
+                                        color='inherit'
+                                        sx={{color: 'black'}}
+                                        onClick={handleLoginClickOpen}>
+                                        Log in
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color='inherit'
+                                        sx={{color: 'black'}}
+                                        onClick={handleRegistrationClickOpen}>
                                         Registration
-                                    </DialogContentText>
-                                    <RegistrationForm/>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={handleClose} color={"primary"}>Cancel</Button>
-                                </DialogActions>
-                            </Dialog>
+                                    </Button>
+                                    <Dialog open={openLoginModal} onClose={handleClose}
+                                            aria-labelledby={"form-dialog-title"}>
+                                        <DialogTitle id={"form-dialog-title"}>Log in</DialogTitle>
+                                        <DialogContent>
+                                            <DialogContentText>
+                                                Log in to use website
+                                            </DialogContentText>
+                                            <LoginForm/>
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Button onClick={handleClose} color={"primary"}>Cancel</Button>
+                                        </DialogActions>
+                                    </Dialog>
 
+                                    <Dialog open={openRegistrationModal} onClose={handleClose}
+                                            aria-labelledby={"form-dialog-title"}>
+                                        <DialogTitle id={"form-dialog-title"}>Log in</DialogTitle>
+                                        <DialogContent>
+                                            <DialogContentText>
+                                                Registration
+                                            </DialogContentText>
+                                            <RegistrationForm/>
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Button onClick={handleClose} color={"primary"}>Cancel</Button>
+                                        </DialogActions>
+                                    </Dialog>
+                                </>
+                            )}
 
+                            {hasToken && (
+                                <>
+                                    <Tooltip title="Open settings">
+                                        <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                                            <Avatar alt="Monkey King" src="/avatar/avatar.jpg"/>
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Menu
+                                        sx={{mt: '45px'}}
+                                        id="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}>
 
-
-
-
-
-
-
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                    <Avatar alt="Monkey King" src="/avatar/avatar.jpg"/>
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{mt: '45px'}}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}>
-
-                                <MenuItem onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">Account</Typography>
-                                </MenuItem>
-                                <MenuItem onClick={handleCloseUserMenu}>
-                                    <Button onClick={handleSubmit}>Log out</Button>
-                                </MenuItem>
-                            </Menu>
+                                        <MenuItem onClick={handleCloseUserMenu}>
+                                            <Typography textAlign="center">Account</Typography>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleCloseUserMenu}>
+                                            <Button onClick={handleSubmit}>Log out</Button>
+                                        </MenuItem>
+                                    </Menu>
+                                </>
+                            )}
                         </Box>
                     </Box>
                 </Toolbar>
