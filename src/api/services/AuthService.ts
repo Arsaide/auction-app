@@ -12,10 +12,6 @@ export default class AuthService {
         return $api.post<AuthResponse>('/registration', {email, password});
     }
 
-    // static async logout(): Promise<void> {
-    //     return $api.post('/logout');
-    // }
-
     static async sendemail(): Promise<void> {
         return $api.get('/sendemail');
     }
