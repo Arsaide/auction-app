@@ -1,10 +1,9 @@
 import React from 'react';
+import { Typography } from '@mui/material';
 
 const BetPage = () => {
     return (
-        <div>
-            bet page
-        </div>
+        <Typography sx={{color:"white"}}>bet page</Typography>
     );
 };
 

@@ -1,10 +1,9 @@
 import React from 'react';
+import { Typography } from '@mui/material';
 
 const InformationPage = () => {
     return (
-        <div>
-            Information Page
-        </div>
+        <Typography sx={{color: "white"}}>Information Page</Typography>
     );
 };
 

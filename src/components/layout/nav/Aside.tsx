@@ -22,7 +22,7 @@ import RegistrationForm from "../../pages/auth/regestrationForm/RegistrationForm
 import {useContext} from "react";
 import {Context} from "../../../index";
 import {FormikHelpers} from "formik";
-
+import { hover } from '@testing-library/user-event/dist/hover';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
@@ -47,11 +47,12 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
 
     return (
         <Box sx={{display: 'flex'}}>
-            <AppBar
+            <AppBar  
                 position="fixed"
                 sx={{
                     width: {sm: `calc(100% - ${drawerWidth}px)`},
                     ml: {sm: `${drawerWidth}px`},
+                    bgcolor: "#040A2F",
                 }}>
                 <Toolbar>
                     <Box sx={{
@@ -68,25 +69,21 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                             edge="start"
                             onClick={handleDrawerToggle}
                             sx={{mr: 2, display: {sm: 'none'}}}>
-                            <MenuIcon/>
+                            <MenuIcon />
                         </IconButton>
                         <Box sx={{flexGrow: 0}}>
-
-
-
-
 
                             <Button
                                 variant="contained"
                                 color='inherit'
-                                sx={{color: 'black'}}
+                                sx={{color: 'white', bgcolor:"#1B266B"}}
                                 onClick={handleLoginClickOpen}>
                                 Log in
                             </Button>
                             <Button
                                 variant="contained"
                                 color='inherit'
-                                sx={{color: 'black'}}
+                                sx={{color: 'white', bgcolor:"#1B266B", ml:2, mr:2}}
                                 onClick={handleRegistrationClickOpen}>
                                 Registration
                             </Button>
@@ -116,14 +113,6 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                                     <Button onClick={handleClose} color={"primary"}>Cancel</Button>
                                 </DialogActions>
                             </Dialog>
-
-
-
-
-
-
-
-
 
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
