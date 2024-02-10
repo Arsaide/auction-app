@@ -23,16 +23,16 @@ export default class AuthService {
     static async createauction(
         title: string,
         desc: string,
-        rates: string,
+   
         minRates: string,
-        image: File | null,
+   
         date: Date[],
         token: string
     ): Promise<AxiosResponse<AuthResponse>> {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('desc', desc);
-        formData.append('rates', rates);
+        // formData.append('rates', rates);
         formData.append('minRates', minRates);
         // if (image) {
         //     formData.append('img', image);
