@@ -83,16 +83,24 @@ export default class Store {
         }
     }
 
-    async sendimg(email: string, password: string, image: File | null){
+    async createauction(title: string, desc: string, rates: string, minRates: string, image: File | null, date: Date[]){
         try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                toast.error('Token not found in LocalStorage');
+                return
+            }
+
             const response = await toast.promise(
-                AuthService.sendimg(email, password, image),
+                AuthService.createauction(title, desc, rates, minRates, image, date, token),
                 {
                     pending: 'Send request...',
                     success: 'Request successfully!',
                     error: 'Failed to request, please try again...'
                 }
             )
+
             console.log(response);
             return response;
         } catch (e: any) {

@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Box from "@mui/material/Box";
 
 interface ImageFormProps {
+    name: string;
     onSubmit: (image: File) => void;
 }
 
-const ImageForm: React.FC<ImageFormProps> = ({onSubmit}) => {
+const ImageForm: React.FC<ImageFormProps> = ({ onSubmit, name }) => {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
         if (file) {
-
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result as string);
@@ -22,14 +22,15 @@ const ImageForm: React.FC<ImageFormProps> = ({onSubmit}) => {
     };
 
     return (
-        <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <input
                 type="file"
+                name={name}
                 accept="image/png, image/jpeg, image/webp"
                 onChange={handleImageChange}
             />
             {imagePreview && (
-                <img src={imagePreview} alt="Preview" style={{maxWidth: '200px', marginTop: '1rem'}}/>
+                <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', marginTop: '1rem' }} />
             )}
         </Box>
     );

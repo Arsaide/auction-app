@@ -20,15 +20,28 @@ export default class AuthService {
         return $api.post<AuthResponse>('/registercreate', {code})
     }
 
-    static async sendimg(email: string, password: string, image: File | null): Promise<AxiosResponse<AuthResponse>> {
+    static async createauction(
+        title: string,
+        desc: string,
+        rates: string,
+        minRates: string,
+        image: File | null,
+        date: Date[],
+        token: string
+    ): Promise<AxiosResponse<AuthResponse>> {
         const formData = new FormData();
-        formData.append('email', email);
-        formData.append('password', password);
-        if (image) {
-            formData.append('image', image);
-        }
+        formData.append('title', title);
+        formData.append('desc', desc);
+        formData.append('rates', rates);
+        formData.append('minRates', minRates);
+        // if (image) {
+        //     formData.append('img', image);
+        // }
+        formData.append('endDate', date[0].toISOString());
+        formData.append('token', token);
 
+        console.log(token)
 
-        return await $api.post<AuthResponse>('/sendimg', formData);
+        return await $api.post<AuthResponse>('/createauction', formData);
     }
 }

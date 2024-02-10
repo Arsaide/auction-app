@@ -17,9 +17,12 @@ import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 import dayjs from 'dayjs';
 
 interface LoginFormValues {
-    email: string;
-    password: string;
+    title: string;
+    desc: string;
+    rates: string;
+    minRates: string;
     date: Date[];
+    image: string;
 }
 
 const BetForm = () => {
@@ -28,17 +31,27 @@ const BetForm = () => {
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
     const initialValues = {
-        email: '',
-        password: '',
-        date: [new Date(), new Date()],
+        title: '',
+        desc: '',
+        rates: '',
+        minRates: '',
+        date: [new Date()],
+        image: '',
     };
 
     const today = dayjs();
-    const yesterday = dayjs().subtract(1, 'day');
+    const yesterday = dayjs().subtract(-1, 'day');
 
     const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
         try {
-            const response = await store.sendimg(values.email, values.password, selectedImage);
+            const response = await store.createauction(
+                values.title,
+                values.desc,
+                values.rates,
+                values.minRates,
+                selectedImage,
+                values.date
+            );
             if (response && response.status === 200) {
 
             }
@@ -65,18 +78,38 @@ const BetForm = () => {
                         {({isValid}) => (
                             <Form>
                                 <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
-                                    <ImageForm onSubmit={handleImageSubmit}/>
+                                    <ImageForm name={'image'} onSubmit={handleImageSubmit}/>
                                     <Input
-                                        id={'rate'}
+                                        id={'title'}
                                         label={'Your rate'}
-                                        name={'rate'}
+                                        name={'title'}
                                         placeholder={'Enter your rate'}/>
-                                    <DateRangePicker name={'date'} defaultValue={[yesterday, today]} disablePast />
                                     <Input
-                                        id={'password'}
-                                        label={'Password'}
-                                        name={'password'}
-                                        placeholder={'Enter your password'}/>
+                                        id={'desc'}
+                                        label={'Your description'}
+                                        name={'desc'}
+                                        placeholder={'Enter your description'}/>
+                                    <Input
+                                        id={'rates'}
+                                        label={'Your rate'}
+                                        name={'rates'}
+                                        placeholder={'Enter your rates'}/>
+                                    <Input
+                                        id={'minRates'}
+                                        label={'Your min rates'}
+                                        name={'minRates'}
+                                        placeholder={'Enter your min rates'}/>
+                                    <Box sx={{display: 'flex', gap: 20}}>
+                                        <DatePicker
+                                            value={today}
+                                            disabled
+                                        />
+                                        <DatePicker
+                                            name={'date'}
+                                            value={yesterday}
+                                            disablePast
+                                        />
+                                    </Box>
                                     <p>valid : {isValid.toString()}</p>
                                     <Button
                                         variant="contained"
@@ -84,7 +117,7 @@ const BetForm = () => {
                                         disabled={!isValid}
                                         sx={{height: 60}}
                                     >
-                                        Login
+                                        Rate
                                     </Button>
                                 </Box>
                                 {errorMessage && <Typography sx={{color: 'red'}}>{errorMessage}</Typography>}

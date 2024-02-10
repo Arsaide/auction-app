@@ -1,22 +1,32 @@
 import * as yup from 'yup';
+
 export const betFormValidationSchema = yup.object().shape({
-    rate: yup
+    title: yup
         .string()
         .required('Required field'),
 
-    password: yup
+    desc: yup
         .string()
         .required('Required field')
-        .min(6, 'Not shorter than 6 characters!')
-        .max(32, 'No longer than 32 characters!')
-        .matches(/^(?=.*\d)(?=.*[a-zA-Z]).*$/, 'At least one Latin letter and one number!'),
+        .min(15, 'Not shorter than 6 characters!')
+        .max(300, 'No longer than 32 characters!'),
+
+    rates: yup
+        .string()
+        .required('Required field'),
+
+    minRates: yup
+        .string()
+        .required('Required field'),
+
 
     image: yup
         .mixed(),
+        // .required("Required"),
 
     date: yup
         .array()
         .of(yup.date())
-        .min(2, 'Please select a date range')
+        .min(1, 'Please select a date range')
         .required('Please select a date range')
 });
