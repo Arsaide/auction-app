@@ -10,7 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider, createTheme} from '@mui/material';
 
 const theme = createTheme({
     components: {

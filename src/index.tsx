@@ -11,7 +11,6 @@ interface State {
 }
 
 const store = new Store();
-
 export const Context = createContext<State>({
     store
 })

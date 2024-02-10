@@ -1,9 +1,11 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import BetForm from "../../components/pages/bet/betForm/BetForm";
 
 const BetPage = () => {
     return (
-        <Typography sx={{color:"white"}}>bet page</Typography>
+        <section>
+            <BetForm/>
+        </section>
     );
 };
 

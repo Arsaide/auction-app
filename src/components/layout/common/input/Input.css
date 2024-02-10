@@ -2,21 +2,27 @@
   position: relative;
   margin-bottom: 26px;
   width: 100%;
+  margin: 20px 0 0 -7px
 }
 
 .input-container label {
   display: block;
-  padding: 0 0 6px 6px;
+  padding: 0 0 6px 0px;
+  color: white;
+  margin-left: -1px;
 }
 
 .input-container input {
-  max-width: 320px;
   width: 100%;
   padding: 10px 0 10px 10px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #0064FB;
   border-radius: 5px;
   font-size: 18px;
+  background: #1b266b;
+  color: white;
 }
+
+.input-container input::placeholder{color: rgba(255, 255, 255, .2);}
 
 .input-container span {
   display: block;
