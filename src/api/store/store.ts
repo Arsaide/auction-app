@@ -149,5 +149,13 @@ export default class Store {
     }
 
 
-
+    async getauctionone(id: string | undefined) {
+        try {
+            const response = await AuthService.getauctionone(id);
+            console.log(response);
+            return response;
+        } catch (e: any) {
+            throw e;
+        }
+    }
 }

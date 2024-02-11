@@ -8,6 +8,7 @@ import OnlineChatPage from "./pages/online-chat/page";
 import InformationPage from "./pages/information/page";
 import AuthPage from "./pages/auth-page/page";
 import ToastMessage from "./components/layout/common/toastMessage/ToastMessage";
+import { BetId } from "./pages/bet/bet-id/BetId";
 
 function App() {
     const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -34,6 +35,7 @@ function App() {
                 <Routes>
                     <Route path={"/"} element={<HomePage />} />
                     <Route path={"bet"} element={<BetPage />} />
+                    <Route path={"bet/:id/"} element={<BetId />} />
                     <Route path={"online-chat"} element={<OnlineChatPage />} />
                     <Route path={"information"} element={<InformationPage />} />
                     <Route path={"/auth-page"} element={<AuthPage />} />

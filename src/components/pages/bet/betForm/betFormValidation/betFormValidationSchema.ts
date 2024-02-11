@@ -9,7 +9,7 @@ export const betFormValidationSchema = yup.object().shape({
         .string()
         .required('Required field')
         .min(15, 'Not shorter than 15 characters!')
-        .max(300, 'No longer than 300 characters!'),
+        .max(3000, 'No longer than 3000 characters!'),
 
     minRates: yup
         .string()

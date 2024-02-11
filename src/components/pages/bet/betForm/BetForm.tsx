@@ -96,14 +96,18 @@ const BetForm = () => {
                                             disabled
                                             sx={{
                                                 '& input.MuiInputBase-input': {
-                                                    color: 'white !important',
+                                                    color: '#999999 !important',
                                                 },
                                                 '& fieldset': {
-                                                    borderColor: 'white !important',
+                                                    borderColor: '#999999 !important',
                                                 },
                                                 '& .MuiSvgIcon-root': {
-                                                    color: 'white !important',
+                                                    color: '#999999 !important',
                                                 },
+                                                "& .MuiInputBase-input.Mui-disabled": {
+                                                    WebkitTextFillColor: "#999999",
+                                                },
+
                                             }}
                                         />
                                         <DatePicker

@@ -42,4 +42,8 @@ export default class AuthService {
 
         return await $api.post<AuthResponse>('/createauction', formData);
     }
+
+    static async getauctionone(id: string | undefined): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post('/getauctionone', {id});
+    }
 }
