@@ -55,7 +55,7 @@ const RegistrationForm: FC = () => {
                 >
                     {({isValid}) => (
                         <Form>
-                            <Box sx={{display: 'flex', flexDirection: 'column', width: '340px', gap: 2  }}>
+                            <Box sx={{display: 'flex', flexDirection: 'column', width: '340px', gap: 1.5  }}>
                                 <Input
                                     id={"email"}
                                     label={"Email"}
@@ -71,11 +71,21 @@ const RegistrationForm: FC = () => {
                                     label={"Confirm password"}
                                     name={"confirmPassword"}
                                     placeholder={"Confirm your password"}/>
-                                <p>valid : {isValid.toString()}</p>
+                                {/*<p>valid : {isValid.toString()}</p>*/}
                                 <Button
                                     variant="contained"
                                     type="submit"
                                     disabled={!isValid}
+                                    sx={{
+                                        bgcolor: '#7dc738',
+                                        '&:hover': {
+                                            bgcolor: '#5a8f29'
+                                        },
+                                        '&:disabled': {
+                                            bgcolor: '#f54242',
+                                            color: 'white',
+                                        },
+                                    }}
                                 >
                                     Registration
                                 </Button>

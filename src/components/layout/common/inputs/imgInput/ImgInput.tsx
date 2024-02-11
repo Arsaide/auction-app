@@ -28,6 +28,7 @@ const ImageForm: React.FC<ImageFormProps> = ({ onSubmit, name }) => {
                 name={name}
                 accept="image/png, image/jpeg, image/webp"
                 onChange={handleImageChange}
+                style={{color: 'white'}}
             />
             {imagePreview && (
                 <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', marginTop: '1rem' }} />

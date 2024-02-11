@@ -12,16 +12,14 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 
 import dayjs from 'dayjs';
 
 interface LoginFormValues {
     title: string;
     desc: string;
-    rates: string;
     minRates: string;
-    date: Date[];
+    endDate: Date[];
     image: string;
 }
 
@@ -33,9 +31,8 @@ const BetForm = () => {
     const initialValues = {
         title: '',
         desc: '',
-        rates: '',
         minRates: '',
-        date: [new Date()],
+        endDate: [new Date()],
         image: '',
     };
 
@@ -47,10 +44,9 @@ const BetForm = () => {
             const response = await store.createauction(
                 values.title,
                 values.desc,
-                values.rates,
                 values.minRates,
                 selectedImage,
-                values.date
+                values.endDate
             );
             if (response && response.status === 200) {
 
@@ -90,11 +86,6 @@ const BetForm = () => {
                                         name={'desc'}
                                         placeholder={'Enter your description'}/>
                                     <Input
-                                        id={'rates'}
-                                        label={'Your rate'}
-                                        name={'rates'}
-                                        placeholder={'Enter your rates'}/>
-                                    <Input
                                         id={'minRates'}
                                         label={'Your min rates'}
                                         name={'minRates'}
@@ -103,21 +94,64 @@ const BetForm = () => {
                                         <DatePicker
                                             value={today}
                                             disabled
+                                            sx={{
+                                                '& input.MuiInputBase-input': {
+                                                    color: 'white !important',
+                                                },
+                                                '& fieldset': {
+                                                    borderColor: 'white !important',
+                                                },
+                                                '& .MuiSvgIcon-root': {
+                                                    color: 'white !important',
+                                                },
+                                            }}
                                         />
                                         <DatePicker
-                                            name={'date'}
+                                            name={'endDate'}
                                             value={yesterday}
                                             disablePast
+                                            sx={{
+                                                '& input': {
+                                                    color: 'white',
+                                                },
+                                                '& fieldset': {
+                                                    borderColor: 'white',
+                                                },
+                                                '& .MuiSvgIcon-root': {
+                                                    color: 'white',
+                                                },
+                                                '&:hover': {
+                                                    '& input': {
+                                                        color: '#a3a3a3',
+                                                    },
+                                                    '& fieldset': {
+                                                        borderColor: '#a3a3a3 !important',
+                                                    },
+                                                    '& .MuiSvgIcon-root': {
+                                                        color: '#a3a3a3',
+                                                    },
+                                                },
+                                            }}
                                         />
                                     </Box>
-                                    <p>valid : {isValid.toString()}</p>
+                                    {/*<p>valid : {isValid.toString()}</p>*/}
                                     <Button
                                         variant="contained"
                                         type="submit"
                                         disabled={!isValid}
-                                        sx={{height: 60}}
+                                        sx={{
+                                            height: 60,
+                                            bgcolor: '#7dc738',
+                                            '&:hover': {
+                                                bgcolor: '#5a8f29'
+                                            },
+                                            '&:disabled': {
+                                                bgcolor: '#f54242',
+                                                color: 'white',
+                                            },
+                                        }}
                                     >
-                                        Rate
+                                        Place a bet
                                     </Button>
                                 </Box>
                                 {errorMessage && <Typography sx={{color: 'red'}}>{errorMessage}</Typography>}

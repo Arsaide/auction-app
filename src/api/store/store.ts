@@ -83,7 +83,7 @@ export default class Store {
         }
     }
 
-    async createauction(title: string, desc: string, rates: string, minRates: string, image: File | null, date: Date[]){
+    async createauction(title: string, desc: string, minRates: string, image: File | null, endDate: Date[]){
         try {
             const token = localStorage.getItem('token');
 
@@ -93,7 +93,7 @@ export default class Store {
             }
 
             const response = await toast.promise(
-                AuthService.createauction(title, desc, rates, minRates, image, date, token),
+                AuthService.createauction(title, desc, minRates, image, endDate, token),
                 {
                     pending: 'Send request...',
                     success: 'Request successfully!',

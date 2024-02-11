@@ -21,8 +21,6 @@ import useOpenModal from "../../../hooks/useOpenModal/useOpenModal";
 import RegistrationForm from "../../pages/auth/regestrationForm/RegistrationForm";
 import {useContext} from "react";
 import {Context} from "../../../index";
-import {FormikHelpers} from "formik";
-
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
@@ -55,6 +53,7 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                 sx={{
                     width: {sm: `calc(100% - ${drawerWidth}px)`},
                     ml: {sm: `${drawerWidth}px`},
+                    bgcolor: "#040A2F",
                 }}>
                 <Toolbar>
                     <Box sx={{
@@ -80,42 +79,90 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                                     <Button
                                         variant="contained"
                                         color='inherit'
-                                        sx={{color: 'black'}}
+                                        sx={{
+                                            color: 'white',
+                                            bgcolor:"#1B266B",
+                                            '&:hover': {
+                                                bgcolor: '#2c3f9e',
+                                            },
+                                    }}
                                         onClick={handleLoginClickOpen}>
                                         Log in
                                     </Button>
                                     <Button
                                         variant="contained"
                                         color='inherit'
-                                        sx={{color: 'black'}}
+                                        sx={{
+                                            color: 'white',
+                                            bgcolor:"#1B266B",
+                                            ml:2,
+                                            '&:hover': {
+                                                bgcolor: '#2c3f9e',
+                                            },
+                                    }}
                                         onClick={handleRegistrationClickOpen}>
                                         Registration
                                     </Button>
-                                    <Dialog open={openLoginModal} onClose={handleClose}
-                                            aria-labelledby={"form-dialog-title"}>
-                                        <DialogTitle id={"form-dialog-title"}>Log in</DialogTitle>
-                                        <DialogContent>
-                                            <DialogContentText>
-                                                Log in to use website
+                                    <Dialog
+                                        open={openLoginModal}
+                                        onClose={handleClose}
+                                        aria-labelledby={"form-dialog-title"}
+                                    >
+                                        <DialogTitle
+                                            id={"form-dialog-title"}
+                                            sx={{bgcolor:"#081041", color:"white", pl:3}}>
+                                            Log in
+                                        </DialogTitle>
+                                        <DialogContent sx={{bgcolor:"#081041"}}>
+                                            <DialogContentText sx={{color:"white", ml:0, mb:2}}>
+                                                Enter your account login information
                                             </DialogContentText>
                                             <LoginForm/>
                                         </DialogContent>
-                                        <DialogActions>
-                                            <Button onClick={handleClose} color={"primary"}>Cancel</Button>
+                                        <DialogActions sx={{bgcolor:"#081041"}}>
+                                            <Button
+                                                onClick={handleClose}
+                                                variant="outlined"
+                                                sx={{
+                                                    color:"white",
+                                                    mr:1,
+                                                    mb:1,
+                                                    p:1,
+                                                }}
+                                            >
+                                                Cancel
+                                            </Button>
                                         </DialogActions>
                                     </Dialog>
 
                                     <Dialog open={openRegistrationModal} onClose={handleClose}
                                             aria-labelledby={"form-dialog-title"}>
-                                        <DialogTitle id={"form-dialog-title"}>Log in</DialogTitle>
-                                        <DialogContent>
-                                            <DialogContentText>
-                                                Registration
+                                        <DialogTitle
+                                            id={"form-dialog-title"}
+                                            sx={{bgcolor:"#081041", color:"white", pl:3}}>
+                                            Registration
+                                        </DialogTitle>
+                                        <DialogContent
+                                            sx={{bgcolor:"#081041"}}
+                                        >
+                                            <DialogContentText sx={{color:"white", ml:0, mb:2}}>
+                                                Enter your details. Everything is confidential!
                                             </DialogContentText>
                                             <RegistrationForm/>
                                         </DialogContent>
-                                        <DialogActions>
-                                            <Button onClick={handleClose} color={"primary"}>Cancel</Button>
+                                        <DialogActions sx={{bgcolor:"#081041"}}>
+                                            <Button
+                                                onClick={handleClose}
+                                                variant="outlined"
+                                                sx={{
+                                                    color:"white",
+                                                    mr:1,
+                                                    mb:1,
+                                                    p:1,
+                                                }}
+                                            >
+                                                Cancel
+                                            </Button>
                                         </DialogActions>
                                     </Dialog>
                                 </>
@@ -160,7 +207,8 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
             </AppBar>
             <Box
                 component="nav"
-                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}>
+                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
+            >
                 <Drawer
                     variant="temporary"
                     open={mobileOpen}
@@ -171,7 +219,7 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                     }}
                     sx={{
                         display: {xs: 'block', sm: 'none'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                        '& .MuiDrawer-paper': {bgcolor: "#040A2F", boxSizing: 'border-box', width: drawerWidth},
                     }}>
                     <SideBar/>
                 </Drawer>
@@ -179,7 +227,7 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                     variant="permanent"
                     sx={{
                         display: {xs: 'none', sm: 'block'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                        '& .MuiDrawer-paper': {bgcolor: "#040A2F", boxSizing: 'border-box', width: drawerWidth},
                     }}
                     open>
                     <SideBar/>

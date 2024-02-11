@@ -1,0 +1,52 @@
+import React, {FC, useEffect, useState} from 'react';
+import Typography from "@mui/material/Typography";
+
+interface TimerProps {
+    endDate: string[];
+}
+
+const Timer:FC<TimerProps> = ({ endDate }) => {
+    const [timeRemaining, setTimeRemaining] = useState<number>(0);
+    const [timeExpired, setTimeExpired] = useState<boolean>(false);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const now = new Date().getTime();
+            const endTime = new Date(endDate[0]).getTime();
+            const timeLeft = endTime - now;
+
+            setTimeRemaining(timeLeft);
+
+            if (timeLeft <= 0) {
+                clearInterval(intervalId);
+                setTimeExpired(true);
+            }
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, [endDate]);
+
+
+    const formatTime = (time: number):string => {
+        if (time <= 0) return '00:00:00';
+
+        const days = Math.floor(time / (1000 * 60 * 60  * 24));
+        const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((time / (1000 * 60) % 60));
+        const seconds = Math.floor((time / 1000) % 60);
+
+        return `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    return (
+        <div>
+            {timeExpired ? (
+                <Typography variant={'h5'}>Auction finished: 00:00:00:00</Typography>
+            ) : (
+                <Typography variant={'h5'}>Time left: {formatTime(timeRemaining)}</Typography>
+            )}
+        </div>
+    );
+};
+
+export default Timer;

@@ -59,11 +59,21 @@ const LoginForm: FC = () => {
                                 label={'Password'}
                                 name={'password'}
                                 placeholder={'Enter your password'}/>
-                            <p>valid : {isValid.toString()}</p>
+                            {/*<p>valid : {isValid.toString()}</p>*/}
                             <Button
                                 variant="contained"
                                 type="submit"
                                 disabled={!isValid}
+                                sx={{
+                                    bgcolor: '#7dc738',
+                                    '&:hover': {
+                                        bgcolor: '#5a8f29'
+                                    },
+                                    '&:disabled': {
+                                        bgcolor: '#f54242',
+                                        color: 'white',
+                                    },
+                                }}
                             >
                                 Login
                             </Button>

@@ -53,11 +53,21 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                 label={"Your Code"}
                                 name={"code"}
                                 placeholder={"Enter your code"}/>
-                            <p>valid : {isValid.toString()}</p>
+                            {/*<p>valid : {isValid.toString()}</p>*/}
                             <Button
                                 variant="contained"
                                 type="submit"
                                 disabled={!isValid}
+                                sx={{
+                                    bgcolor: '#7dc738',
+                                    '&:hover': {
+                                        bgcolor: '#5a8f29'
+                                    },
+                                    '&:disabled': {
+                                        bgcolor: '#f54242',
+                                        color: 'white',
+                                    },
+                                }}
                             >
                                 Access code
                             </Button>

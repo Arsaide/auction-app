@@ -14,40 +14,39 @@ import Toolbar from '@mui/material/Toolbar';
 const SideBar = () => {
     return (
         <>
-            <Toolbar/>
-            <Divider/>
+            <Toolbar sx={{ bgcolor: "#040A2F" }} />
+            <Divider />
             <List>
-
-                <ListItem disablePadding>
-                    <ListItemButton href='/'>
-                        <ListItemIcon>
-                            <HomeIcon/>
+                <ListItem disablePadding sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
+                    <ListItemButton href='/' sx={{ color: '#d1d1d1' }}>
+                        <ListItemIcon sx={{ color: '#d1d1d1' }}>
+                            <HomeIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Home'}/>
+                        <ListItemText primary={'Home'} />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton href='/bet'>
-                        <ListItemIcon>
-                            <CurrencyBitcoinIcon/>
+                <ListItem disablePadding sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
+                    <ListItemButton href='/bet' sx={{ color: '#d1d1d1' }}>
+                        <ListItemIcon sx={{ color: '#d1d1d1' }}>
+                            <CurrencyBitcoinIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Place a bet'}/>
+                        <ListItemText primary={'Place a bet'} />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton href='/online-chat'>
-                        <ListItemIcon>
-                            <QuestionAnswerIcon/>
+                <ListItem disablePadding sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
+                    <ListItemButton href='/online-chat' sx={{ color: '#d1d1d1' }}>
+                        <ListItemIcon sx={{ color: '#d1d1d1' }}>
+                            <QuestionAnswerIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Online chat'}/>
+                        <ListItemText primary={'Online chat'} />
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton href='/information'>
-                        <ListItemIcon>
-                            <AssistantIcon/>
+                <ListItem disablePadding sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
+                    <ListItemButton href='/information' sx={{ color: '#d1d1d1' }}>
+                        <ListItemIcon sx={{ color: '#d1d1d1' }}>
+                            <AssistantIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Information'}/>
+                        <ListItemText primary={'Information'} />
                     </ListItemButton>
                 </ListItem>
             </List>
