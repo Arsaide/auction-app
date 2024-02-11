@@ -6,8 +6,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Timer from "../timer/Timer";
-import {Paper} from '@mui/material';
-
 
 interface AuctionCardProps {
     title: string,

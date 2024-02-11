@@ -10,7 +10,6 @@ import LoginForm from "../loginForm/LoginForm";
 import Typography from "@mui/material/Typography";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ToastMessage from "../../../layout/common/toastMessage/ToastMessage";
 
 interface RegistrationFormValues {
     email: string;

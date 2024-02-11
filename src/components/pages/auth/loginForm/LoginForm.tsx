@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
 import Input from "../../../layout/common/inputs/input/Input";
 import Typography from "@mui/material/Typography";
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 
 interface LoginFormValues {
     email: string;

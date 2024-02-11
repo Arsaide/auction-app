@@ -1,9 +1,6 @@
 import {IUser} from "../models/IUser";
 import {makeAutoObservable } from 'mobx'
 import AuthService from "../services/AuthService";
-import axios from "axios";
-import {AuthResponse} from "../models/response/AuthResponse";
-import {API_URL} from "../request";
 import {toast} from "react-toastify";
 
 export default class Store {
