@@ -10,10 +10,9 @@ import ImageForm from '../../../layout/common/inputs/imgInput/ImgInput';
 import {betFormValidationSchema} from "./betFormValidation/betFormValidationSchema";
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 
-import dayjs from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs';
 
 interface LoginFormValues {
     title: string;
@@ -27,6 +26,7 @@ const BetForm = () => {
     const {store} = useContext(Context);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [value, setValue] = React.useState<Dayjs | null>(dayjs().subtract(-1, 'day'));
 
     const initialValues = {
         title: '',
@@ -36,8 +36,7 @@ const BetForm = () => {
         image: '',
     };
 
-    const today = dayjs();
-    const yesterday = dayjs().subtract(-1, 'day');
+    const today = dayjs(); // Для датапикера(disabled) что бы он был по умолчанию днем которые сейчас
 
     const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
         try {
@@ -64,7 +63,6 @@ const BetForm = () => {
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['DatePicker', 'DatePicker', 'DateRangePicker']}>
                     <Formik
                         validationSchema={betFormValidationSchema}
                         validateOnMount
@@ -112,7 +110,8 @@ const BetForm = () => {
                                         />
                                         <DatePicker
                                             name={'endDate'}
-                                            value={yesterday}
+                                            value={value}
+                                            onChange={(newValue) => setValue(newValue)}
                                             disablePast
                                             sx={{
                                                 '& input': {
@@ -162,7 +161,6 @@ const BetForm = () => {
                             </Form>
                         )}
                     </Formik>
-                </DemoContainer>
             </LocalizationProvider>
         </>
     );

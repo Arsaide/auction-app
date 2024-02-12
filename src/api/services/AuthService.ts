@@ -1,6 +1,7 @@
 import $api from "../request";
 import {AxiosResponse} from 'axios'
 import {AuthResponse} from "../models/response/AuthResponse";
+import {Dayjs} from "dayjs";
 
 
 export default class AuthService {
@@ -37,8 +38,6 @@ export default class AuthService {
         }
         formData.append('endDate', endDate[0].toISOString());
         formData.append('token', token);
-
-        console.log(token)
 
         return await $api.post<AuthResponse>('/createauction', formData);
     }

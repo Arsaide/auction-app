@@ -2,6 +2,7 @@ import {IUser} from "../models/IUser";
 import {makeAutoObservable } from 'mobx'
 import AuthService from "../services/AuthService";
 import {toast} from "react-toastify";
+import {Dayjs} from "dayjs";
 
 export default class Store {
     user = {} as IUser;
@@ -29,7 +30,6 @@ export default class Store {
                     error: 'Sending code error, please try again...'
                 }
             );
-            console.log(response);
             return response;
         } catch (e: any) {
             throw e;
@@ -38,7 +38,6 @@ export default class Store {
 
     async login(email: string, password: string) {
         try {
-            // const response = await AuthService.login(email, password);
             const response = await toast.promise(
                 AuthService.login(email, password),
                 {
@@ -47,7 +46,6 @@ export default class Store {
                     error: 'Failed to login, please try again...'
                 }
             );
-            console.log(response);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userEmail', email);
             localStorage.setItem('userPassword', password);
@@ -69,7 +67,6 @@ export default class Store {
                     error: 'Failed to register, please try again...'
                 }
             );
-            console.log(response);
             localStorage.setItem('token', response.data.token);
             this.setAuth(true);
             this.setUser(response.data.user);
@@ -98,7 +95,7 @@ export default class Store {
                 }
             )
 
-            console.log(response);
+            console.log(endDate);
             return response;
         } catch (e: any) {
             throw e;
@@ -115,7 +112,6 @@ export default class Store {
                     error: 'Invalid code, please try again...'
                 }
             );
-            console.log(response);
             return response;
         } catch (e: any) {
             throw e;
@@ -128,7 +124,7 @@ export default class Store {
             localStorage.removeItem('isAuth');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('userPassword');
-            this.setAuth(true);
+            this.setAuth(false);
             this.setUser({} as IUser);
         } catch (e: any) {
             console.log(e.response?.data?.message);
@@ -152,7 +148,6 @@ export default class Store {
     async getauctionone(id: string | undefined) {
         try {
             const response = await AuthService.getauctionone(id);
-            console.log(response);
             return response;
         } catch (e: any) {
             throw e;
