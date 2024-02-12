@@ -1,8 +1,6 @@
 import $api from "../request";
 import {AxiosResponse} from 'axios'
 import {AuthResponse} from "../models/response/AuthResponse";
-import {Dayjs} from "dayjs";
-
 
 export default class AuthService {
     static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {

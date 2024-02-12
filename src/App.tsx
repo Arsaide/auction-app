@@ -6,9 +6,9 @@ import HomePage from "./pages/home/page";
 import BetPage from "./pages/bet/page";
 import OnlineChatPage from "./pages/online-chat/page";
 import InformationPage from "./pages/information/page";
-import AuthPage from "./pages/auth-page/page";
 import ToastMessage from "./components/layout/common/toastMessage/ToastMessage";
 import { BetId } from "./pages/bet/bet-id/BetId";
+import {PersonalAccount} from "./pages/personal-account/page";
 
 function App() {
     const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -38,7 +38,7 @@ function App() {
                     <Route path={"bet/:id/"} element={<BetId />} />
                     <Route path={"online-chat"} element={<OnlineChatPage />} />
                     <Route path={"information"} element={<InformationPage />} />
-                    <Route path={"/auth-page"} element={<AuthPage />} />
+                    <Route path={"personal-account/:id/"} element={<PersonalAccount />} />
                 </Routes>
             </ResponsiveDrawer>
             <ToastMessage />

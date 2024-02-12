@@ -28,6 +28,8 @@ const BetForm = () => {
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [value, setValue] = React.useState<Dayjs | null>(dayjs().subtract(-1, 'day'));
 
+    const today = dayjs(); // Для датапикера(disabled) что бы он был по умолчанию днем которые сейчас
+
     const initialValues = {
         title: '',
         desc: '',
@@ -36,9 +38,7 @@ const BetForm = () => {
         image: '',
     };
 
-    const today = dayjs(); // Для датапикера(disabled) что бы он был по умолчанию днем которые сейчас
-
-    const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
+    const handleSubmit = async (values: LoginFormValues) => {
         try {
             const response = await store.createauction(
                 values.title,
@@ -71,7 +71,7 @@ const BetForm = () => {
                     >
                         {({isValid}) => (
                             <Form>
-                                <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
+                                <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, mb: 6}}>
                                     <ImageForm name={'image'} onSubmit={handleImageSubmit}/>
                                     <Input
                                         id={'title'}
@@ -137,7 +137,6 @@ const BetForm = () => {
                                             }}
                                         />
                                     </Box>
-                                    {/*<p>valid : {isValid.toString()}</p>*/}
                                     <Button
                                         variant="contained"
                                         type="submit"

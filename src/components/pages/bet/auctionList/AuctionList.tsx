@@ -5,6 +5,7 @@ import {API_URL} from "../../../../api/request";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import Typography from "@mui/material/Typography";
 
 interface AuctionItem {
     _id: string;
@@ -26,6 +27,7 @@ const AuctionList = () => {
 
     return (
         <Box justifyContent={'center'}>
+            <Typography variant='h3' sx={{mb: 2, textAlign: 'center'}}>Auction List</Typography>
             <Grid
                 container
                 spacing={{xs: 2, md: 3}}
@@ -62,7 +64,6 @@ const AuctionList = () => {
                                 title={card.title}
                                 desc={card.desct}
                                 minRates={card.minRates}
-                                rates={'RATES'}
                                 timeEnd={card.timeEnd}
                                 id={card._id}
                             />

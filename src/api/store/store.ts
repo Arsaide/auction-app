@@ -1,8 +1,7 @@
 import {IUser} from "../models/IUser";
-import {makeAutoObservable } from 'mobx'
+import {makeAutoObservable} from 'mobx'
 import AuthService from "../services/AuthService";
 import {toast} from "react-toastify";
-import {Dayjs} from "dayjs";
 
 export default class Store {
     user = {} as IUser;
@@ -22,7 +21,7 @@ export default class Store {
 
     async sendemail() {
         try {
-            const response = await toast.promise(
+            return await toast.promise(
                 AuthService.sendemail(),
                 {
                     pending: 'Sending code...',
@@ -30,7 +29,6 @@ export default class Store {
                     error: 'Sending code error, please try again...'
                 }
             );
-            return response;
         } catch (e: any) {
             throw e;
         }
@@ -104,7 +102,7 @@ export default class Store {
 
     async registercreate(code: string) {
         try {
-            const response = await toast.promise(
+            return await toast.promise(
                 AuthService.registercreate(code),
                 {
                     pending: 'Sending code...',
@@ -112,7 +110,6 @@ export default class Store {
                     error: 'Invalid code, please try again...'
                 }
             );
-            return response;
         } catch (e: any) {
             throw e;
         }
@@ -147,8 +144,7 @@ export default class Store {
 
     async getauctionone(id: string | undefined) {
         try {
-            const response = await AuthService.getauctionone(id);
-            return response;
+            return await AuthService.getauctionone(id);
         } catch (e: any) {
             throw e;
         }
