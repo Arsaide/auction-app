@@ -2,6 +2,7 @@ import {IUser} from "../models/IUser";
 import {makeAutoObservable} from 'mobx'
 import AuthService from "../services/AuthService";
 import {toast} from "react-toastify";
+import {Dayjs} from "dayjs";
 
 export default class Store {
     user = {} as IUser;
@@ -75,7 +76,7 @@ export default class Store {
         }
     }
 
-    async createauction(title: string, desc: string, minRates: string, image: File | null, endDate: Date[]){
+    async createauction(title: string, desc: string, minRates: string, image: File | null, endDate: Dayjs | null){
         try {
             const token = localStorage.getItem('token');
 

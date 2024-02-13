@@ -1,6 +1,7 @@
 import $api from "../request";
 import {AxiosResponse} from 'axios'
 import {AuthResponse} from "../models/response/AuthResponse";
+import {Dayjs} from "dayjs";
 
 export default class AuthService {
     static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
@@ -24,7 +25,7 @@ export default class AuthService {
         desc: string,
         minRates: string,
         image: File | null,
-        endDate: Date[],
+        endDate: Dayjs | null,
         token: string
     ): Promise<AxiosResponse<AuthResponse>> {
         const formData = new FormData();
@@ -34,7 +35,9 @@ export default class AuthService {
         if (image) {
             formData.append('img', image);
         }
-        formData.append('endDate', endDate[0].toISOString());
+        if (endDate) {
+            formData.append('endDate', endDate.toISOString());
+        }
         formData.append('token', token);
 
         return await $api.post<AuthResponse>('/createauction', formData);

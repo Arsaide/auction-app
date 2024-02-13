@@ -45,7 +45,7 @@ const BetForm = () => {
                 values.desc,
                 values.minRates,
                 selectedImage,
-                values.endDate
+                value
             );
             if (response && response.status === 200) {
 
