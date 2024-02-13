@@ -15,12 +15,11 @@ import Button from '@mui/material/Button';
 import SideBar from './sideBar/SideBar'
 import useOpenUserMenu from "../../../hooks/useOpenUserMenu/useOpenUserMenu";
 import useDrawerState from "../../../hooks/useDrawerState/useDrawerState";
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
-import LoginForm from "../../pages/auth/loginForm/LoginForm";
 import useOpenModal from "../../../hooks/useOpenModal/useOpenModal";
-import RegistrationForm from "../../pages/auth/regestrationForm/RegistrationForm";
 import {useContext} from "react";
 import {Context} from "../../../index";
+import RegModal from "../modals/regModal/RegModal";
+import LoginModal from "../modals/loginModal/LoginModal";
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
@@ -103,68 +102,16 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                                         onClick={handleRegistrationClickOpen}>
                                         Registration
                                     </Button>
-                                    <Dialog
+
+
+                                    <RegModal
+                                        open={openRegistrationModal}
+                                        onClose={handleClose}
+                                    />
+                                    <LoginModal
                                         open={openLoginModal}
                                         onClose={handleClose}
-                                        aria-labelledby={"form-dialog-title"}
-                                    >
-                                        <DialogTitle
-                                            id={"form-dialog-title"}
-                                            sx={{bgcolor:"#081041", color:"white", pl:3}}>
-                                            Log in
-                                        </DialogTitle>
-                                        <DialogContent sx={{bgcolor:"#081041"}}>
-                                            <DialogContentText sx={{color:"white", ml:0, mb:2}}>
-                                                Enter your account login information
-                                            </DialogContentText>
-                                            <LoginForm/>
-                                        </DialogContent>
-                                        <DialogActions sx={{bgcolor:"#081041"}}>
-                                            <Button
-                                                onClick={handleClose}
-                                                variant="outlined"
-                                                sx={{
-                                                    color:"white",
-                                                    mr:1,
-                                                    mb:1,
-                                                    p:1,
-                                                }}
-                                            >
-                                                Cancel
-                                            </Button>
-                                        </DialogActions>
-                                    </Dialog>
-
-                                    <Dialog open={openRegistrationModal} onClose={handleClose}
-                                            aria-labelledby={"form-dialog-title"}>
-                                        <DialogTitle
-                                            id={"form-dialog-title"}
-                                            sx={{bgcolor:"#081041", color:"white", pl:3}}>
-                                            Registration
-                                        </DialogTitle>
-                                        <DialogContent
-                                            sx={{bgcolor:"#081041"}}
-                                        >
-                                            <DialogContentText sx={{color:"white", ml:0, mb:2}}>
-                                                Enter your details. Everything is confidential!
-                                            </DialogContentText>
-                                            <RegistrationForm/>
-                                        </DialogContent>
-                                        <DialogActions sx={{bgcolor:"#081041"}}>
-                                            <Button
-                                                onClick={handleClose}
-                                                variant="outlined"
-                                                sx={{
-                                                    color:"white",
-                                                    mr:1,
-                                                    mb:1,
-                                                    p:1,
-                                                }}
-                                            >
-                                                Cancel
-                                            </Button>
-                                        </DialogActions>
-                                    </Dialog>
+                                    />
                                 </>
                             )}
 
