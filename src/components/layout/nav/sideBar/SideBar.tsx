@@ -18,32 +18,32 @@ const SideBar = () => {
             <Divider />
             <List>
                 <ListItem disablePadding sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
-                    <ListItemButton href='/' sx={{ color: '#d1d1d1' }}>
-                        <ListItemIcon sx={{ color: '#d1d1d1' }}>
+                    <ListItemButton href='/' sx={{ color: '#fff' }}>
+                        <ListItemIcon sx={{ color: '#fff' }}>
                             <HomeIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Home'} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
-                    <ListItemButton href='/bet' sx={{ color: '#d1d1d1' }}>
-                        <ListItemIcon sx={{ color: '#d1d1d1' }}>
+                    <ListItemButton href='/bet' sx={{ color: '#fff' }}>
+                        <ListItemIcon sx={{ color: '#fff' }}>
                             <CurrencyBitcoinIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Place a bet'} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
-                    <ListItemButton href='/online-chat' sx={{ color: '#d1d1d1' }}>
-                        <ListItemIcon sx={{ color: '#d1d1d1' }}>
+                    <ListItemButton href='/online-chat' sx={{ color: '#fff' }}>
+                        <ListItemIcon sx={{ color: '#fff' }}>
                             <QuestionAnswerIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Online chat'} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
-                    <ListItemButton href='/information' sx={{ color: '#d1d1d1' }}>
-                        <ListItemIcon sx={{ color: '#d1d1d1' }}>
+                    <ListItemButton href='/information' sx={{ color: '#fff' }}>
+                        <ListItemIcon sx={{ color: '#fff' }}>
                             <AssistantIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Information'} />
