@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
 import Typography from "@mui/material/Typography";
 
-interface TimerProps {
+interface AuctionTimerInterface {
     timeEnd: string;
 }
 
-const AuctionTimer: FC<TimerProps> = ({ timeEnd }) => {
+const AuctionTimer: FC<AuctionTimerInterface> = ({ timeEnd }) => {
     const [timeRemaining, setTimeRemaining] = useState<number>(0);
     const [timeExpired, setTimeExpired] = useState<boolean>(false);
 
