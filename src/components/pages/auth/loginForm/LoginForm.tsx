@@ -1,4 +1,4 @@
-import React, {FC, useContext} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import {Form, Formik, FormikHelpers} from "formik";
 import {Context} from "../../../../index";
 import {loginValidationSchema} from "./loginValidation/loginValidationSchema";
@@ -16,6 +16,7 @@ interface LoginFormValues {
 const LoginForm: FC = () => {
     const {store} = useContext(Context);
     const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const initialValues = {
         email: '',
@@ -23,16 +24,17 @@ const LoginForm: FC = () => {
     };
 
     const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
+        setIsSubmitting(true);
         try {
             const response = await store.login(values.email, values.password);
             if(response && response.status === 200) {
                 await store.checkAuth();
-                // toast.success('Authorization successful!');
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);
             }
         } catch (e: any) {
+            setIsSubmitting(false);
             toast.error(e.response?.data?.message);
             setErrorMessage(e.response?.data?.message);
         }
@@ -59,11 +61,10 @@ const LoginForm: FC = () => {
                                 label={'Password'}
                                 name={'password'}
                                 placeholder={'Enter your password'}/>
-                            {/*<p>valid : {isValid.toString()}</p>*/}
                             <Button
                                 variant="contained"
                                 type="submit"
-                                disabled={!isValid}
+                                disabled={!isValid || isSubmitting}
                                 sx={{
                                     bgcolor: '#7dc738',
                                     '&:hover': {
@@ -75,7 +76,7 @@ const LoginForm: FC = () => {
                                     },
                                 }}
                             >
-                                Login
+                                {isSubmitting ? 'Submitting...' : 'Login'}
                             </Button>
                         </Box>
                         {errorMessage && <Typography sx={{color: 'red', maxWidth: '340px'}}>{errorMessage}</Typography>}

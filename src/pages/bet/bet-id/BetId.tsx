@@ -4,7 +4,7 @@ import {Context} from "../../../index";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import {createTheme, ThemeProvider} from "@mui/material";
-import Timer from "../../../components/layout/common/timer/Timer";
+import AuctionTimer from "../../../components/layout/common/ui/timers/auctionTimer/AuctionTimer";
 import Typography from "@mui/material/Typography";
 
 interface AuctionItem {
@@ -74,7 +74,7 @@ const BetId: FC  = () => {
             <Typography>State: {auction && (auction.state).toString()}</Typography>
             <Typography>Owner: {auction && auction.timeStart}</Typography>
             <Typography>timeEnd: {auction && auction.timeEnd}</Typography>
-            <Timer timeEnd={auction.timeEnd}/>
+            <AuctionTimer timeEnd={auction.timeEnd}/>
         </div>
     );
 };

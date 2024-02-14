@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Form, Formik, FormikHelpers} from "formik";
 import {toast} from "react-toastify";
 import {Context} from "../../../../index";
@@ -12,6 +12,7 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, {Dayjs} from 'dayjs';
+import SubmitTimer from '../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 
 interface LoginFormValues {
     title: string;
@@ -23,11 +24,19 @@ interface LoginFormValues {
 
 const BetForm = () => {
     const {store} = useContext(Context);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const lastSubmittedTimeRef = useRef<number | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [value, setValue] = React.useState<Dayjs | null>(dayjs().subtract(-1, 'day'));
+    const today = dayjs();
 
-    const today = dayjs(); // Для датапикера(disabled) что бы он был по умолчанию днем которые сейчас
+    useEffect(() => {
+        const lastSubmittedTime = localStorage.getItem('lastSubmittedTime');
+        if (lastSubmittedTime) {
+            lastSubmittedTimeRef.current = parseInt(lastSubmittedTime);
+        }
+    }, []);
 
     const initialValues = {
         title: '',
@@ -38,6 +47,12 @@ const BetForm = () => {
     };
 
     const handleSubmit = async (values: LoginFormValues) => {
+        if (lastSubmittedTimeRef.current && Date.now() - lastSubmittedTimeRef.current < 300000) {
+            toast.error('Please wait 5 minutes before submitting again.');
+            return;
+        }
+
+        setIsSubmitting(true);
         try {
             const response = await store.createauction(
                 values.title,
@@ -47,12 +62,15 @@ const BetForm = () => {
                 value
             );
             if (response && response.status === 200) {
-
+                lastSubmittedTimeRef.current = Date.now();
+                localStorage.setItem('lastSubmittedTime', lastSubmittedTimeRef.current.toString());
             }
         } catch (e: any) {
+            setIsSubmitting(false);
             toast.error(e.response?.data?.message);
             setErrorMessage(e.response?.data?.message);
         }
+        setIsSubmitting(false);
     };
 
     const handleImageSubmit = (image: File) => {
@@ -139,7 +157,7 @@ const BetForm = () => {
                                     <Button
                                         variant="contained"
                                         type="submit"
-                                        disabled={!isValid}
+                                        disabled={!isValid || isSubmitting}
                                         sx={{
                                             height: 60,
                                             bgcolor: '#7dc738',
@@ -152,10 +170,13 @@ const BetForm = () => {
                                             },
                                         }}
                                     >
-                                        Place a bet
+                                        {isSubmitting ? 'Submitting...' : 'Post an auction'}
                                     </Button>
+                                    {errorMessage && <Typography sx={{color: 'red'}}>{errorMessage}</Typography>}
+                                    {lastSubmittedTimeRef.current && (
+                                        <SubmitTimer nextSubmitTime={lastSubmittedTimeRef.current + 300000} />
+                                    )}
                                 </Box>
-                                {errorMessage && <Typography sx={{color: 'red'}}>{errorMessage}</Typography>}
                             </Form>
                         )}
                     </Formik>

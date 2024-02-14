@@ -5,12 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Timer from "../timer/Timer";
+import AuctionTimer from '../timers/auctionTimer/AuctionTimer'
 import {Link} from "react-router-dom";
 import Divider from "@mui/material/Divider";
-import useOpenModal from "../../../../hooks/useOpenModal/useOpenModal";
-import LoginModal from "../../modals/loginModal/LoginModal";
-import useAuthCheck from "../../../../hooks/useAuthCheck/useAuthCheck";
+import useOpenModal from "../../../../../hooks/useOpenModal/useOpenModal";
+import LoginModal from "../../../modals/loginModal/LoginModal";
+import useAuthCheck from "../../../../../hooks/useAuthCheck/useAuthCheck";
 
 interface AuctionCardProps {
     img: string;
@@ -63,7 +63,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                     Price: <u>{minRates}</u> $
                 </Typography>
                 <Divider sx={{mt: 1.3, mb: 1}}/>
-                <Timer timeEnd={timeEnd}/>
+                <AuctionTimer timeEnd={timeEnd}/>
             </CardContent>
             <CardActions sx={{ ml: 1, mb: 1 }}>
                 {isAuth ? (

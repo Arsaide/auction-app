@@ -1,4 +1,4 @@
-import React, {FC, useContext} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import {Context} from "../../../../index";
 import {Form, Formik, FormikHelpers} from "formik";
 import Box from "@mui/material/Box";
@@ -19,18 +19,21 @@ interface RegCreateFormValues {
 const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
     const {store} = useContext(Context);
     const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const initialValues = {
         code: ''
     };
 
     const handleSubmit = async (values: RegCreateFormValues, actions: FormikHelpers<RegCreateFormValues>) => {
+        setIsSubmitting(true);
         try {
             const response = await store.registercreate(values.code);
             if(response && response.status === 200) {
                 onSubmit();
             }
         } catch (e: any) {
+            setIsSubmitting(false);
             setErrorMessage(e.response?.data?.message);
             toast.error(e.response?.data?.message);
         }
@@ -52,11 +55,10 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                 label={"Your Code"}
                                 name={"code"}
                                 placeholder={"Enter your code"}/>
-                            {/*<p>valid : {isValid.toString()}</p>*/}
                             <Button
                                 variant="contained"
                                 type="submit"
-                                disabled={!isValid}
+                                disabled={!isValid || isSubmitting}
                                 sx={{
                                     bgcolor: '#7dc738',
                                     '&:hover': {
@@ -68,7 +70,7 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                     },
                                 }}
                             >
-                                Access code
+                                {isSubmitting ? 'Submitting code...' : 'Verify code'}
                             </Button>
                         </Box>
                         {errorMessage && <Typography sx={{color: 'red', maxWidth: '340px'}}>{errorMessage}</Typography>}

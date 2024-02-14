@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Grid, Box, Skeleton} from "@mui/material";
-import AuctionCard from "../../../layout/common/auctionCard/AuctionCard";
+import AuctionCard from "../../../layout/common/ui/auctionCard/AuctionCard";
 import {API_URL} from "../../../../api/request";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';

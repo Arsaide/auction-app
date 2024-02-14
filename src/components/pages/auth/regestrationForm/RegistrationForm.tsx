@@ -1,4 +1,4 @@
-import React, {FC, useContext} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import {Context} from "../../../../index";
 import {Form, Formik, FormikHelpers} from "formik";
 import Box from "@mui/material/Box";
@@ -16,11 +16,12 @@ interface RegistrationFormValues {
     password: string;
 }
 
-const RegistrationForm: FC = () => {
+const RegistrationForm:FC = () => {
     const {store} = useContext(Context);
-    const [isRegistered, setIsRegistered] = React.useState(false);
-    const [isSecondStepCompleted, setIsSecondStepCompleted] = React.useState(false);
-    const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+    const [isRegistered, setIsRegistered] = useState(false);
+    const [isSecondStepCompleted, setIsSecondStepCompleted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const initialValues = {
         email: '',
@@ -28,6 +29,7 @@ const RegistrationForm: FC = () => {
     };
 
     const handleSubmit = async (values: RegistrationFormValues, actions: FormikHelpers<RegistrationFormValues>) => {
+        setIsSubmitting(true);
         try {
             const response = await store.registration(values.email, values.password);
             if (response && response.status === 200) {
@@ -36,6 +38,7 @@ const RegistrationForm: FC = () => {
         } catch (e: any) {
             setErrorMessage(e.response?.data?.message);
             toast.error(e.response?.data?.message);
+            setIsSubmitting(false);
         }
     };
 
@@ -70,11 +73,10 @@ const RegistrationForm: FC = () => {
                                     label={"Confirm password"}
                                     name={"confirmPassword"}
                                     placeholder={"Confirm your password"}/>
-                                {/*<p>valid : {isValid.toString()}</p>*/}
                                 <Button
                                     variant="contained"
                                     type="submit"
-                                    disabled={!isValid}
+                                    disabled={!isValid || isSubmitting}
                                     sx={{
                                         bgcolor: '#7dc738',
                                         '&:hover': {
@@ -86,7 +88,7 @@ const RegistrationForm: FC = () => {
                                         },
                                     }}
                                 >
-                                    Registration
+                                    {isSubmitting ? 'Submitting...' : 'Registration'}
                                 </Button>
                             </Box>
                             {errorMessage && <Typography sx={{color: 'red', maxWidth: '340px'}}>{errorMessage}</Typography>}

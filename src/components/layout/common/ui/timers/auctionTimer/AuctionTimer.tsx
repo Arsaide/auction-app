@@ -5,7 +5,7 @@ interface TimerProps {
     timeEnd: string;
 }
 
-const Timer: FC<TimerProps> = ({ timeEnd }) => {
+const AuctionTimer: FC<TimerProps> = ({ timeEnd }) => {
     const [timeRemaining, setTimeRemaining] = useState<number>(0);
     const [timeExpired, setTimeExpired] = useState<boolean>(false);
 
@@ -50,4 +50,4 @@ const Timer: FC<TimerProps> = ({ timeEnd }) => {
     );
 };
 
-export default Timer;
+export default AuctionTimer;
