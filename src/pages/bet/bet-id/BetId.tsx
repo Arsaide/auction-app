@@ -29,13 +29,6 @@ const theme = createTheme({
     },
 });
 
-function Image ({url}: any) {
-    const onLoad = () => {
-        console.log('Loading')
-    }
-    return <img src={url} onLoad={onLoad} style={{ maxWidth: '200px', marginTop: '1rem' }}/>
-}
-
 const BetId: FC  = () => {
     const {store} = useContext(Context);
     const {id} = useParams<{ id: string }>();
@@ -70,10 +63,7 @@ const BetId: FC  = () => {
         <div>
             <Typography variant={'h4'}>ID: {id}</Typography>
 
-
-            {/*<img src={auction.img} alt="Preview" style={{ maxWidth: '200px', marginTop: '1rem' }} />*/}
-            <Image url={auction.img}/>
-
+            <img src={auction.img} alt="Preview" style={{ maxWidth: '200px', marginTop: '1rem' }} />
             <Typography>Image link: {auction && auction.img}</Typography>
             <Typography>Active: {auction && (auction.active).toString()}</Typography>
             <Typography>Title: {auction && auction.title}</Typography>

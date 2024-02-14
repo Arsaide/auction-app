@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {ChangeEvent, FC, useState} from 'react';
 import Box from "@mui/material/Box";
 
 interface ImageFormProps {
@@ -6,10 +6,10 @@ interface ImageFormProps {
     onSubmit: (image: File) => void;
 }
 
-const ImageForm: React.FC<ImageFormProps> = ({ onSubmit, name }) => {
+const ImageForm:FC<ImageFormProps> = ({ onSubmit, name }) => {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (event:ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
         if (file) {
             const reader = new FileReader();

@@ -17,14 +17,11 @@ export const betFormValidationSchema = yup.object().shape({
         .required('Required field'),
 
     image: yup
-        .mixed(),
+        .object(),
 
     endDate: yup
         .array()
         .of(yup.date())
         .min(1, 'Please select a date range')
         .required('Please select a date range')
-    // endDate: yup
-    //     .string()
-    //     .required('Please select a date')
 });
