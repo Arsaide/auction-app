@@ -1,12 +1,12 @@
-import React, {FC, useContext, useState} from 'react';
-import {Context} from "../../../../index";
-import {Form, Formik, FormikHelpers} from "formik";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Input from "../../../layout/common/inputs/input/Input";
-import {regCreateValidationSchema} from "./regCreateValidation/regCreateValidationSchema";
-import Typography from "@mui/material/Typography";
-import {toast} from "react-toastify";
+import React, { FC, useContext, useState } from 'react';
+import { Context } from '../../../../index';
+import { Form, Formik } from 'formik';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Input from '../../../layout/common/inputs/input/Input';
+import { regCreateValidationSchema } from './regCreateValidation/regCreateValidationSchema';
+import Typography from '@mui/material/Typography';
+import { toast } from 'react-toastify';
 
 interface RegCreateFormProps {
     onSubmit: () => void;
@@ -17,19 +17,19 @@ interface RegCreateFormValues {
 }
 
 const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
-    const {store} = useContext(Context);
+    const { store } = useContext(Context);
     const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const initialValues = {
-        code: ''
+        code: '',
     };
 
-    const handleSubmit = async (values: RegCreateFormValues, actions: FormikHelpers<RegCreateFormValues>) => {
+    const handleSubmit = async (values: RegCreateFormValues) => {
         setIsSubmitting(true);
         try {
             const response = await store.registercreate(values.code);
-            if(response && response.status === 200) {
+            if (response && response.status === 200) {
                 onSubmit();
             }
         } catch (e: any) {
@@ -47,14 +47,22 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
             >
-                {({isValid}) => (
+                {({ isValid }) => (
                     <Form>
-                        <Box sx={{display: 'flex', flexDirection: 'column', width: '340px', gap: 2 }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                width: '340px',
+                                gap: 2,
+                            }}
+                        >
                             <Input
-                                id={"code"}
-                                label={"Your Code"}
-                                name={"code"}
-                                placeholder={"Enter your code"}/>
+                                id={'code'}
+                                label={'Your Code'}
+                                name={'code'}
+                                placeholder={'Enter your code'}
+                            />
                             <Button
                                 variant="contained"
                                 type="submit"
@@ -62,7 +70,7 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                 sx={{
                                     bgcolor: '#7dc738',
                                     '&:hover': {
-                                        bgcolor: '#5a8f29'
+                                        bgcolor: '#5a8f29',
                                     },
                                     '&:disabled': {
                                         bgcolor: '#f54242',
@@ -70,10 +78,18 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                     },
                                 }}
                             >
-                                {isSubmitting ? 'Submitting code...' : 'Verify code'}
+                                {isSubmitting
+                                    ? 'Submitting code...'
+                                    : 'Verify code'}
                             </Button>
                         </Box>
-                        {errorMessage && <Typography sx={{color: 'red', maxWidth: '340px'}}>{errorMessage}</Typography>}
+                        {errorMessage && (
+                            <Typography
+                                sx={{ color: 'red', maxWidth: '340px' }}
+                            >
+                                {errorMessage}
+                            </Typography>
+                        )}
                     </Form>
                 )}
             </Formik>

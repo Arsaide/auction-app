@@ -1,43 +1,52 @@
 .input-container {
-  position: relative;
-  margin-bottom: 20px;
-  width: 100%;
-  margin-top: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .input-container label {
-  display: block;
-  padding: 0 0 6px 6px;
+    display: block;
+    padding: 0 0 6px 6px;
 }
 
 .input-container input {
-  position: relative;
-  width: 100%;
-  padding: 10px 0 10px 10px;
-  border: 2px solid #0064fb;
-  border-radius: 5px;
-  font-size: 18px;
-  appearance: none;
-  background: #1b266b;
-  margin-left: -1px;
-  color: white;
+    position: relative;
+    width: 100%;
+    padding: 10px 0 10px 10px;
+    border: 2px solid #0064fb;
+    border-radius: 5px;
+    font-size: 18px;
+    appearance: none;
+    background: #1b266b;
+    margin-left: -1px;
+    color: white;
 }
 
-.betInput{margin-left: 50px;}
+.betInput {
+    margin-left: 50px;
+}
 
-.input-container input::placeholder {color: rgba(255, 255, 255, .2);}
+.input-container input::placeholder {
+    color: rgba(255, 255, 255, .2);
+}
 
-.input-container input:focus{outline: 0;}
-.input-container input::after{background: #1b266b;}
+.input-container input:focus {
+    outline: 0;
+}
 
-label{
-  color: white;
-  margin-left: -7px;
+.input-container input::after {
+    background: #1b266b;
+}
+
+label {
+    color: white;
+    margin-left: -7px;
 }
 
 .input-container span {
-  display: block;
-  position: absolute;
-  top: 100%;
-  color: red;
+    display: block;
+    position: absolute;
+    top: 100%;
+    color: red;
 }

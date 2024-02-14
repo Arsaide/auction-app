@@ -3,4 +3,3 @@ export interface IUser {
     isActivated: boolean;
     id: string;
 }
-

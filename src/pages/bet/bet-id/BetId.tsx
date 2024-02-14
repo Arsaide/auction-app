@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
-import React, {FC, useContext, useEffect, useState} from 'react';
-import {Context} from "../../../index";
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { Context } from '../../../index';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import {createTheme, ThemeProvider} from "@mui/material";
-import AuctionTimer from "../../../components/layout/common/ui/timers/auctionTimer/AuctionTimer";
-import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from '@mui/material';
+import AuctionTimer from '../../../components/layout/common/ui/timers/auctionTimer/AuctionTimer';
+import Typography from '@mui/material/Typography';
 
 interface AuctionItem {
     _id: string;
@@ -29,9 +29,9 @@ const theme = createTheme({
     },
 });
 
-const BetId: FC  = () => {
-    const {store} = useContext(Context);
-    const {id} = useParams<{ id: string }>();
+const BetId: FC = () => {
+    const { store } = useContext(Context);
+    const { id } = useParams<{ id: string }>();
     const [auction, setAuction] = useState<AuctionItem | null>(null);
 
     useEffect(() => {
@@ -46,7 +46,6 @@ const BetId: FC  = () => {
         };
 
         fetchAuction();
-
     }, [id]);
 
     if (!auction) {
@@ -63,18 +62,26 @@ const BetId: FC  = () => {
         <div>
             <Typography variant={'h4'}>ID: {id}</Typography>
 
-            <img src={auction.img} alt="Preview" style={{ maxWidth: '200px', marginTop: '1rem' }} />
+            <img
+                src={auction.img}
+                alt="Preview"
+                style={{ maxWidth: '200px', marginTop: '1rem' }}
+            />
             <Typography>Image link: {auction && auction.img}</Typography>
-            <Typography>Active: {auction && (auction.active).toString()}</Typography>
+            <Typography>
+                Active: {auction && auction.active.toString()}
+            </Typography>
             <Typography>Title: {auction && auction.title}</Typography>
             <Typography>Description: {auction && auction.desct}</Typography>
             <Typography>Min rates: {auction && auction.minRates}</Typography>
             <Typography>Rates: {auction && auction.rates}</Typography>
             <Typography>Owner: {auction && auction.owner}</Typography>
-            <Typography>State: {auction && (auction.state).toString()}</Typography>
+            <Typography>
+                State: {auction && auction.state.toString()}
+            </Typography>
             <Typography>Owner: {auction && auction.timeStart}</Typography>
             <Typography>timeEnd: {auction && auction.timeEnd}</Typography>
-            <AuctionTimer timeEnd={auction.timeEnd}/>
+            <AuctionTimer timeEnd={auction.timeEnd} />
         </div>
     );
 };

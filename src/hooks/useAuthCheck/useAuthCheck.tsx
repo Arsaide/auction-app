@@ -7,7 +7,7 @@ const useAuthCheck = () => {
         const token = localStorage.getItem('token');
         const auth = token !== null;
         setIsAuth(auth);
-    }
+    };
 
     useEffect(() => {
         checkAuth();

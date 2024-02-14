@@ -1,12 +1,12 @@
-import React, {FC, useContext, useState} from 'react';
-import {Form, Formik, FormikHelpers} from "formik";
-import {Context} from "../../../../index";
-import {loginValidationSchema} from "./loginValidation/loginValidationSchema";
+import React, { FC, useContext, useState } from 'react';
+import { Form, Formik } from 'formik';
+import { Context } from '../../../../index';
+import { loginValidationSchema } from './loginValidation/loginValidationSchema';
 import Button from '@mui/material/Button';
-import Box from "@mui/material/Box";
-import Input from "../../../layout/common/inputs/input/Input";
-import Typography from "@mui/material/Typography";
-import {toast} from "react-toastify";
+import Box from '@mui/material/Box';
+import Input from '../../../layout/common/inputs/input/Input';
+import Typography from '@mui/material/Typography';
+import { toast } from 'react-toastify';
 
 interface LoginFormValues {
     email: string;
@@ -14,20 +14,20 @@ interface LoginFormValues {
 }
 
 const LoginForm: FC = () => {
-    const {store} = useContext(Context);
+    const { store } = useContext(Context);
     const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const initialValues = {
         email: '',
-        password: ''
+        password: '',
     };
 
-    const handleSubmit = async (values: LoginFormValues, actions: FormikHelpers<LoginFormValues>) => {
+    const handleSubmit = async (values: LoginFormValues) => {
         setIsSubmitting(true);
         try {
             const response = await store.login(values.email, values.password);
-            if(response && response.status === 200) {
+            if (response && response.status === 200) {
                 await store.checkAuth();
                 setTimeout(() => {
                     window.location.reload();
@@ -48,19 +48,28 @@ const LoginForm: FC = () => {
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
             >
-                {({isValid}) => (
+                {({ isValid }) => (
                     <Form>
-                        <Box sx={{display: 'flex', flexDirection: 'column', width: '340px', gap: 2 }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                width: '340px',
+                                gap: 2,
+                            }}
+                        >
                             <Input
                                 id={'email'}
                                 label={'Email'}
                                 name={'email'}
-                                placeholder={'Enter your email'}/>
+                                placeholder={'Enter your email'}
+                            />
                             <Input
                                 id={'password'}
                                 label={'Password'}
                                 name={'password'}
-                                placeholder={'Enter your password'}/>
+                                placeholder={'Enter your password'}
+                            />
                             <Button
                                 variant="contained"
                                 type="submit"
@@ -68,7 +77,7 @@ const LoginForm: FC = () => {
                                 sx={{
                                     bgcolor: '#7dc738',
                                     '&:hover': {
-                                        bgcolor: '#5a8f29'
+                                        bgcolor: '#5a8f29',
                                     },
                                     '&:disabled': {
                                         bgcolor: '#f54242',
@@ -79,7 +88,13 @@ const LoginForm: FC = () => {
                                 {isSubmitting ? 'Submitting...' : 'Login'}
                             </Button>
                         </Box>
-                        {errorMessage && <Typography sx={{color: 'red', maxWidth: '340px'}}>{errorMessage}</Typography>}
+                        {errorMessage && (
+                            <Typography
+                                sx={{ color: 'red', maxWidth: '340px' }}
+                            >
+                                {errorMessage}
+                            </Typography>
+                        )}
                     </Form>
                 )}
             </Formik>

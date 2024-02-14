@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import Typography from "@mui/material/Typography";
+import Typography from '@mui/material/Typography';
 
 interface SubmitTimerInterface {
     nextSubmitTime: number;
@@ -17,13 +17,13 @@ const SubmitTimer: FC<SubmitTimerInterface> = ({ nextSubmitTime }) => {
             if (timeLeft <= 0) {
                 clearInterval(intervalId);
                 setTimeRemaining(0);
-                setTimerExpired(true); // Устанавливаем флаг времени истекшим, когда таймер завершается
+                setTimerExpired(true);
             } else {
                 setTimeRemaining(timeLeft);
             }
         }, 1000);
 
-        return () => clearInterval(intervalId); // Чистим интервал при размонтировании компонента
+        return () => clearInterval(intervalId);
     }, [nextSubmitTime]);
 
     const formatTime = (time: number): string => {
@@ -33,14 +33,14 @@ const SubmitTimer: FC<SubmitTimerInterface> = ({ nextSubmitTime }) => {
         const seconds = Math.floor((time / 1000) % 60);
 
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
+    };
 
     return (
         <Typography>
             {!timerExpired && (
-                // Отображаем таймер, только если время еще не истекло
                 <>
-                    Please wait until the next request is sent <u>{formatTime(timeRemaining)}</u>
+                    Please wait until the next request is sent{' '}
+                    <u>{formatTime(timeRemaining)}</u>
                 </>
             )}
         </Typography>

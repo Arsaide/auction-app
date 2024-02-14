@@ -1,15 +1,15 @@
-import React, {ChangeEvent, FC, useState} from 'react';
-import Box from "@mui/material/Box";
+import React, { ChangeEvent, FC, useState } from 'react';
+import Box from '@mui/material/Box';
 
 interface ImageFormProps {
     name: string;
     onSubmit: (image: File) => void;
 }
 
-const ImageForm:FC<ImageFormProps> = ({ onSubmit, name }) => {
+const ImageForm: FC<ImageFormProps> = ({ onSubmit, name }) => {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-    const handleImageChange = (event:ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files && event.target.files[0];
         if (file) {
             const reader = new FileReader();
@@ -28,10 +28,14 @@ const ImageForm:FC<ImageFormProps> = ({ onSubmit, name }) => {
                 name={name}
                 accept="image/png, image/jpeg, image/webp"
                 onChange={handleImageChange}
-                style={{color: 'white'}}
+                style={{ color: 'white' }}
             />
             {imagePreview && (
-                <img src={imagePreview} alt="Preview" style={{ maxWidth: '200px', marginTop: '1rem' }} />
+                <img
+                    src={imagePreview}
+                    alt="Preview"
+                    style={{ maxWidth: '200px', marginTop: '1rem' }}
+                />
             )}
         </Box>
     );

@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import {Route, Routes} from "react-router-dom";
-import ResponsiveDrawer from "./components/layout/nav/Aside";
-import HomePage from "./pages/home/page";
-import BetPage from "./pages/bet/page";
-import OnlineChatPage from "./pages/online-chat/page";
-import InformationPage from "./pages/information/page";
-import ToastMessage from "./components/layout/common/alerts/toastMessage/ToastMessage";
-import { BetId } from "./pages/bet/bet-id/BetId";
-import {PersonalAccount} from "./pages/personal-account/page";
+import { Route, Routes } from 'react-router-dom';
+import ResponsiveDrawer from './components/layout/nav/Aside';
+import HomePage from './pages/home/page';
+import BetPage from './pages/bet/page';
+import OnlineChatPage from './pages/online-chat/page';
+import InformationPage from './pages/information/page';
+import ToastMessage from './components/layout/common/alerts/toastMessage/ToastMessage';
+import { BetId } from './pages/bet/bet-id/BetId';
+import { PersonalAccount } from './pages/personal-account/page';
 
 function App() {
     const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -33,12 +33,15 @@ function App() {
                     </div>
                 )}
                 <Routes>
-                    <Route path={"/"} element={<HomePage />} />
-                    <Route path={"bet"} element={<BetPage />} />
-                    <Route path={"bet/:id/"} element={<BetId />} />
-                    <Route path={"online-chat"} element={<OnlineChatPage />} />
-                    <Route path={"information"} element={<InformationPage />} />
-                    <Route path={"personal-account/:id/"} element={<PersonalAccount />} />
+                    <Route path={'/'} element={<HomePage />} />
+                    <Route path={'bet'} element={<BetPage />} />
+                    <Route path={'bet/:id/'} element={<BetId />} />
+                    <Route path={'online-chat'} element={<OnlineChatPage />} />
+                    <Route path={'information'} element={<InformationPage />} />
+                    <Route
+                        path={'personal-account/:id/'}
+                        element={<PersonalAccount />}
+                    />
                 </Routes>
             </ResponsiveDrawer>
             <ToastMessage />

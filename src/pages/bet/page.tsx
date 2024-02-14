@@ -1,9 +1,8 @@
 import React from 'react';
-import BetForm from "../../components/pages/bet/betForm/BetForm";
-import AuctionList from "../../components/pages/bet/auctionList/AuctionList";
-import useAuthCheck from "../../hooks/useAuthCheck/useAuthCheck";
-import InfoAlert from "../../components/layout/common/alerts/infoAlert/InfoAlert";
-
+import BetForm from '../../components/pages/bet/betForm/BetForm';
+import AuctionList from '../../components/pages/bet/auctionList/AuctionList';
+import useAuthCheck from '../../hooks/useAuthCheck/useAuthCheck';
+import InfoAlert from '../../components/layout/common/alerts/infoAlert/InfoAlert';
 
 const BetPage = () => {
     const { isAuth } = useAuthCheck();
@@ -11,14 +10,16 @@ const BetPage = () => {
     return (
         <section>
             {isAuth ? (
-                <BetForm/>
+                <BetForm />
             ) : (
-               <InfoAlert
-                   title={'Why do I see this alert? - Log in, please'}
-                   text={'If you would like to post your auction, read more, or participate in the auction, please log in ✅'}
-               />
+                <InfoAlert
+                    title={'Why do I see this alert? - Log in, please'}
+                    text={
+                        'If you would like to post your auction, read more, or participate in the auction, please log in ✅'
+                    }
+                />
             )}
-            <AuctionList/>
+            <AuctionList />
         </section>
     );
 };

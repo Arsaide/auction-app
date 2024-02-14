@@ -1,8 +1,8 @@
-import {IUser} from "../models/IUser";
-import {makeAutoObservable} from 'mobx'
-import AuthService from "../services/AuthService";
-import {toast} from "react-toastify";
-import {Dayjs} from "dayjs";
+import { IUser } from '../models/IUser';
+import { makeAutoObservable } from 'mobx';
+import AuthService from '../services/AuthService';
+import { toast } from 'react-toastify';
+import { Dayjs } from 'dayjs';
 
 export default class Store {
     user = {} as IUser;
@@ -22,14 +22,11 @@ export default class Store {
 
     async sendemail() {
         try {
-            return await toast.promise(
-                AuthService.sendemail(),
-                {
-                    pending: 'Sending code...',
-                    success: 'Code sent!',
-                    error: 'Sending code error, please try again...'
-                }
-            );
+            return await toast.promise(AuthService.sendemail(), {
+                pending: 'Sending code...',
+                success: 'Code sent!',
+                error: 'Sending code error, please try again...',
+            });
         } catch (e: any) {
             throw e;
         }
@@ -42,8 +39,8 @@ export default class Store {
                 {
                     pending: 'Logging in...',
                     success: 'Logged in successfully!',
-                    error: 'Failed to login, please try again...'
-                }
+                    error: 'Failed to login, please try again...',
+                },
             );
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userEmail', email);
@@ -63,36 +60,49 @@ export default class Store {
                 {
                     pending: 'Registering...',
                     success: 'Registered successfully!',
-                    error: 'Failed to register, please try again...'
-                }
+                    error: 'Failed to register, please try again...',
+                },
             );
             localStorage.setItem('token', response.data.token);
             this.setAuth(true);
             this.setUser(response.data.user);
-            await this.sendemail()
+            await this.sendemail();
             return response;
         } catch (e: any) {
             throw e;
         }
     }
 
-    async createauction(title: string, desc: string, minRates: string, image: File | null, endDate: Dayjs | null){
+    async createauction(
+        title: string,
+        desc: string,
+        minRates: string,
+        image: File | null,
+        endDate: Dayjs | null,
+    ) {
         try {
             const token = localStorage.getItem('token');
 
             if (!token) {
                 toast.error('Token not found in LocalStorage');
-                return
+                return;
             }
 
             const response = await toast.promise(
-                AuthService.createauction(title, desc, minRates, image, endDate, token),
+                AuthService.createauction(
+                    title,
+                    desc,
+                    minRates,
+                    image,
+                    endDate,
+                    token,
+                ),
                 {
                     pending: 'Send request...',
                     success: 'Request successfully!',
-                    error: 'Failed to request, please try again...'
-                }
-            )
+                    error: 'Failed to request, please try again...',
+                },
+            );
 
             console.log(endDate);
             return response;
@@ -103,14 +113,11 @@ export default class Store {
 
     async registercreate(code: string) {
         try {
-            return await toast.promise(
-                AuthService.registercreate(code),
-                {
-                    pending: 'Sending code...',
-                    success: 'Created successfully!',
-                    error: 'Invalid code, please try again...'
-                }
-            );
+            return await toast.promise(AuthService.registercreate(code), {
+                pending: 'Sending code...',
+                success: 'Created successfully!',
+                error: 'Invalid code, please try again...',
+            });
         } catch (e: any) {
             throw e;
         }
@@ -141,7 +148,6 @@ export default class Store {
             console.log(e.response?.data?.message);
         }
     }
-
 
     async getauctionone(id: string | undefined) {
         try {

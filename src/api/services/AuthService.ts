@@ -1,23 +1,31 @@
-import $api from "../request";
-import {AxiosResponse} from 'axios'
-import {AuthResponse} from "../models/response/AuthResponse";
-import {Dayjs} from "dayjs";
+import $api from '../request';
+import { AxiosResponse } from 'axios';
+import { AuthResponse } from '../models/response/AuthResponse';
+import { Dayjs } from 'dayjs';
 
 export default class AuthService {
-    static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>('/login', {email, password});
+    static async login(
+        email: string,
+        password: string,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post<AuthResponse>('/login', { email, password });
     }
 
-    static async registration(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>('/registration', {email, password});
+    static async registration(
+        email: string,
+        password: string,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post<AuthResponse>('/registration', { email, password });
     }
 
     static async sendemail(): Promise<void> {
         return $api.get('/sendemail');
     }
 
-    static async registercreate(code: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>('/registercreate', {code})
+    static async registercreate(
+        code: string,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post<AuthResponse>('/registercreate', { code });
     }
 
     static async createauction(
@@ -26,7 +34,7 @@ export default class AuthService {
         minRates: string,
         image: File | null,
         endDate: Dayjs | null,
-        token: string
+        token: string,
     ): Promise<AxiosResponse<AuthResponse>> {
         const formData = new FormData();
         formData.append('title', title);
@@ -43,7 +51,9 @@ export default class AuthService {
         return await $api.post<AuthResponse>('/createauction', formData);
     }
 
-    static async getauctionone(id: string | undefined): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post('/getauctionone', {id});
+    static async getauctionone(
+        id: string | undefined,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post('/getauctionone', { id });
     }
 }

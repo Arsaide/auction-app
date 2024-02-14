@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import { Alert, AlertTitle, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -19,12 +19,16 @@ const theme = createTheme({
     },
 });
 
-const InfoAlert:FC<AlertInterface> = ({ title, text }) => {
+const InfoAlert: FC<AlertInterface> = ({ title, text }) => {
     return (
         <ThemeProvider theme={theme}>
-            <Alert severity='info' variant='filled'>
-                <AlertTitle sx={{ fontSize: `clamp(27px, 2.3vw, 40px)` }}>{title}</AlertTitle>
-                <Typography sx={{ fontSize: `clamp(0.93rem, 2.3vw, 1rem)` }}>{text}</Typography>
+            <Alert severity="info" variant="filled">
+                <AlertTitle sx={{ fontSize: `clamp(27px, 2.3vw, 40px)` }}>
+                    {title}
+                </AlertTitle>
+                <Typography sx={{ fontSize: `clamp(0.93rem, 2.3vw, 1rem)` }}>
+                    {text}
+                </Typography>
             </Alert>
         </ThemeProvider>
     );

@@ -14,4 +14,4 @@ export const loginValidationSchema = yup.object().shape({
         .min(6, 'Not shorter than 6 characters!')
         .max(32, 'No longer than 32 characters!')
         .matches(regEx, 'At least one Latin letter and one number!'),
-})
+});

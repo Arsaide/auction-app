@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const useOpenUserMenu = () => {
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -14,8 +14,8 @@ const useOpenUserMenu = () => {
     return {
         handleOpenUserMenu,
         anchorElUser,
-        handleCloseUserMenu
-    }
+        handleCloseUserMenu,
+    };
 };
 
 export default useOpenUserMenu;

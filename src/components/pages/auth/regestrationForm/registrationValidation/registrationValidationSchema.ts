@@ -23,4 +23,4 @@ export const registrationValidationSchema = yup.object().shape({
         .matches(regEx, 'At least one Latin letter and one number!')
         .nullable()
         .oneOf([yup.ref('password'), null], 'The passwords arent the same'),
-})
+});

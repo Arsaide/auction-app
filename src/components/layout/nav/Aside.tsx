@@ -5,28 +5,28 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import {drawerWidth} from './index';
-import Drawer from "@mui/material/Drawer";
+import { drawerWidth } from './index';
+import Drawer from '@mui/material/Drawer';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
-import SideBar from './sideBar/SideBar'
-import useOpenUserMenu from "../../../hooks/useOpenUserMenu/useOpenUserMenu";
-import useDrawerState from "../../../hooks/useDrawerState/useDrawerState";
-import useOpenModal from "../../../hooks/useOpenModal/useOpenModal";
-import {useContext} from "react";
-import {Context} from "../../../index";
-import RegModal from "../modals/regModal/RegModal";
-import LoginModal from "../modals/loginModal/LoginModal";
+import SideBar from './sideBar/SideBar';
+import useOpenUserMenu from '../../../hooks/useOpenUserMenu/useOpenUserMenu';
+import useDrawerState from '../../../hooks/useDrawerState/useDrawerState';
+import useOpenModal from '../../../hooks/useOpenModal/useOpenModal';
+import { useContext } from 'react';
+import { Context } from '../../../index';
+import RegModal from '../modals/regModal/RegModal';
+import LoginModal from '../modals/loginModal/LoginModal';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
 }
 
-export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
-    const {store} = useContext(Context);
+export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
+    const { store } = useContext(Context);
     const handleSubmit = () => {
         store.logout();
         window.location.reload();
@@ -34,8 +34,14 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
 
     const isAuth = localStorage.getItem('isAuth') === 'true';
 
-    const {mobileOpen, handleDrawerClose, handleDrawerTransitionEnd, handleDrawerToggle} = useDrawerState();
-    const {handleOpenUserMenu, anchorElUser, handleCloseUserMenu} = useOpenUserMenu();
+    const {
+        mobileOpen,
+        handleDrawerClose,
+        handleDrawerTransitionEnd,
+        handleDrawerToggle,
+    } = useDrawerState();
+    const { handleOpenUserMenu, anchorElUser, handleCloseUserMenu } =
+        useOpenUserMenu();
 
     const {
         openLoginModal,
@@ -46,63 +52,67 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
     } = useOpenModal();
 
     return (
-        <Box sx={{display: 'flex'}}>
+        <Box sx={{ display: 'flex' }}>
             <AppBar
                 position="fixed"
                 sx={{
-                    width: {sm: `calc(100% - ${drawerWidth}px)`},
-                    ml: {sm: `${drawerWidth}px`},
-                    bgcolor: "#040A2F",
-                }}>
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    ml: { sm: `${drawerWidth}px` },
+                    bgcolor: '#040A2F',
+                }}
+            >
                 <Toolbar>
-                    <Box sx={{
-                        display: 'flex',
-                        justifyContent: {
-                            md: 'flex-end',
-                            sm: 'space-between'
-                        },
-                        width: '100%'
-                    }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: {
+                                md: 'flex-end',
+                                sm: 'space-between',
+                            },
+                            width: '100%',
+                        }}
+                    >
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
                             edge="start"
                             onClick={handleDrawerToggle}
-                            sx={{mr: 2, display: {sm: 'none'}}}>
-                            <MenuIcon/>
+                            sx={{ mr: 2, display: { sm: 'none' } }}
+                        >
+                            <MenuIcon />
                         </IconButton>
-                        <Box sx={{flexGrow: 0}}>
-
+                        <Box sx={{ flexGrow: 0 }}>
                             {!isAuth && (
                                 <>
                                     <Button
                                         variant="contained"
-                                        color='inherit'
+                                        color="inherit"
                                         sx={{
                                             color: 'white',
-                                            bgcolor:"#1B266B",
+                                            bgcolor: '#1B266B',
                                             '&:hover': {
                                                 bgcolor: '#2c3f9e',
                                             },
-                                    }}
-                                        onClick={handleLoginClickOpen}>
+                                        }}
+                                        onClick={handleLoginClickOpen}
+                                    >
                                         Log in
                                     </Button>
                                     <Button
                                         variant="contained"
-                                        color='inherit'
+                                        color="inherit"
                                         sx={{
                                             color: 'white',
-                                            bgcolor:"#1B266B",
-                                            ml:2,
+                                            bgcolor: '#1B266B',
+                                            ml: 2,
                                             '&:hover': {
                                                 bgcolor: '#2c3f9e',
                                             },
-                                    }}
-                                        onClick={handleRegistrationClickOpen}>
+                                        }}
+                                        onClick={handleRegistrationClickOpen}
+                                    >
                                         Registration
                                     </Button>
-
 
                                     <RegModal
                                         open={openRegistrationModal}
@@ -118,12 +128,18 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                             {isAuth && (
                                 <>
                                     <Tooltip title="Open settings">
-                                        <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                            <Avatar alt="Monkey King" src="/avatar/avatar.jpg"/>
+                                        <IconButton
+                                            onClick={handleOpenUserMenu}
+                                            sx={{ p: 0 }}
+                                        >
+                                            <Avatar
+                                                alt="Monkey King"
+                                                src="/avatar/avatar.jpg"
+                                            />
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
-                                        sx={{mt: '45px'}}
+                                        sx={{ mt: '45px' }}
                                         id="menu-appbar"
                                         anchorEl={anchorElUser}
                                         anchorOrigin={{
@@ -136,13 +152,17 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                                             horizontal: 'right',
                                         }}
                                         open={Boolean(anchorElUser)}
-                                        onClose={handleCloseUserMenu}>
-
+                                        onClose={handleCloseUserMenu}
+                                    >
                                         <MenuItem onClick={handleCloseUserMenu}>
-                                            <Typography textAlign="center">Account</Typography>
+                                            <Typography textAlign="center">
+                                                Account
+                                            </Typography>
                                         </MenuItem>
                                         <MenuItem onClick={handleCloseUserMenu}>
-                                            <Button onClick={handleSubmit}>Log out</Button>
+                                            <Button onClick={handleSubmit}>
+                                                Log out
+                                            </Button>
                                         </MenuItem>
                                     </Menu>
                                 </>
@@ -150,11 +170,10 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                         </Box>
                     </Box>
                 </Toolbar>
-
             </AppBar>
             <Box
                 component="nav"
-                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
             >
                 <Drawer
                     variant="temporary"
@@ -165,25 +184,40 @@ export default function ResponsiveDrawer({children}: ResponsiveDrawerProps) {
                         keepMounted: true,
                     }}
                     sx={{
-                        display: {xs: 'block', sm: 'none'},
-                        '& .MuiDrawer-paper': {bgcolor: "#040A2F", boxSizing: 'border-box', width: drawerWidth},
-                    }}>
-                    <SideBar/>
+                        display: { xs: 'block', sm: 'none' },
+                        '& .MuiDrawer-paper': {
+                            bgcolor: '#040A2F',
+                            boxSizing: 'border-box',
+                            width: drawerWidth,
+                        },
+                    }}
+                >
+                    <SideBar />
                 </Drawer>
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: {xs: 'none', sm: 'block'},
-                        '& .MuiDrawer-paper': {bgcolor: "#040A2F", boxSizing: 'border-box', width: drawerWidth},
+                        display: { xs: 'none', sm: 'block' },
+                        '& .MuiDrawer-paper': {
+                            bgcolor: '#040A2F',
+                            boxSizing: 'border-box',
+                            width: drawerWidth,
+                        },
                     }}
-                    open>
-                    <SideBar/>
+                    open
+                >
+                    <SideBar />
                 </Drawer>
             </Box>
             <Box
                 component="main"
-                sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}>
-                <Toolbar/>
+                sx={{
+                    flexGrow: 1,
+                    p: 3,
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                }}
+            >
+                <Toolbar />
                 {children}
             </Box>
         </Box>

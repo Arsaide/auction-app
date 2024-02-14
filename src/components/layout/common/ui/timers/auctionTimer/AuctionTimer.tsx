@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import Typography from "@mui/material/Typography";
+import Typography from '@mui/material/Typography';
 
 interface AuctionTimerInterface {
     timeEnd: string;
@@ -26,7 +26,6 @@ const AuctionTimer: FC<AuctionTimerInterface> = ({ timeEnd }) => {
         return () => clearInterval(intervalId);
     }, [timeEnd]);
 
-
     const formatTime = (time: number): string => {
         if (time <= 0) return '00:00:00:00';
 
@@ -36,15 +35,18 @@ const AuctionTimer: FC<AuctionTimerInterface> = ({ timeEnd }) => {
         const seconds = Math.floor((time / 1000) % 60);
 
         return `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-
+    };
 
     return (
         <div>
             {timeExpired ? (
-                <Typography variant={'h5'}>Auction finished: 00:00:00:00</Typography>
+                <Typography variant={'h5'}>
+                    Auction finished: 00:00:00:00
+                </Typography>
             ) : (
-                <Typography variant={'h5'}>Time left: {formatTime(timeRemaining)}</Typography>
+                <Typography variant={'h5'}>
+                    Time left: {formatTime(timeRemaining)}
+                </Typography>
             )}
         </div>
     );

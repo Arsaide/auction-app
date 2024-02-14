@@ -1,13 +1,13 @@
-import React, {FC, useContext, useState} from 'react';
-import {Context} from "../../../../index";
-import {Form, Formik, FormikHelpers} from "formik";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import {registrationValidationSchema} from "./registrationValidation/registrationValidationSchema";
-import Input from "../../../layout/common/inputs/input/Input";
-import RegCreateForm from "../regCreateForm/RegCreateForm";
-import LoginForm from "../loginForm/LoginForm";
-import Typography from "@mui/material/Typography";
+import React, { FC, useContext, useState } from 'react';
+import { Context } from '../../../../index';
+import { Form, Formik } from 'formik';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { registrationValidationSchema } from './registrationValidation/registrationValidationSchema';
+import Input from '../../../layout/common/inputs/input/Input';
+import RegCreateForm from '../regCreateForm/RegCreateForm';
+import LoginForm from '../loginForm/LoginForm';
+import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,8 +16,8 @@ interface RegistrationFormValues {
     password: string;
 }
 
-const RegistrationForm:FC = () => {
-    const {store} = useContext(Context);
+const RegistrationForm: FC = () => {
+    const { store } = useContext(Context);
     const [isRegistered, setIsRegistered] = useState(false);
     const [isSecondStepCompleted, setIsSecondStepCompleted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,10 +28,13 @@ const RegistrationForm:FC = () => {
         password: '',
     };
 
-    const handleSubmit = async (values: RegistrationFormValues, actions: FormikHelpers<RegistrationFormValues>) => {
+    const handleSubmit = async (values: RegistrationFormValues) => {
         setIsSubmitting(true);
         try {
-            const response = await store.registration(values.email, values.password);
+            const response = await store.registration(
+                values.email,
+                values.password,
+            );
             if (response && response.status === 200) {
                 setIsRegistered(true);
             }
@@ -55,24 +58,34 @@ const RegistrationForm:FC = () => {
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
                 >
-                    {({isValid}) => (
+                    {({ isValid }) => (
                         <Form>
-                            <Box sx={{display: 'flex', flexDirection: 'column', width: '340px', gap: 1.5  }}>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    width: '340px',
+                                    gap: 1.5,
+                                }}
+                            >
                                 <Input
-                                    id={"email"}
-                                    label={"Email"}
-                                    name={"email"}
-                                    placeholder={"Enter your email"}/>
+                                    id={'email'}
+                                    label={'Email'}
+                                    name={'email'}
+                                    placeholder={'Enter your email'}
+                                />
                                 <Input
-                                    id={"password"}
-                                    label={"Password"}
-                                    name={"password"}
-                                    placeholder={"Enter your password"}/>
+                                    id={'password'}
+                                    label={'Password'}
+                                    name={'password'}
+                                    placeholder={'Enter your password'}
+                                />
                                 <Input
-                                    id={"confirmPassword"}
-                                    label={"Confirm password"}
-                                    name={"confirmPassword"}
-                                    placeholder={"Confirm your password"}/>
+                                    id={'confirmPassword'}
+                                    label={'Confirm password'}
+                                    name={'confirmPassword'}
+                                    placeholder={'Confirm your password'}
+                                />
                                 <Button
                                     variant="contained"
                                     type="submit"
@@ -80,7 +93,7 @@ const RegistrationForm:FC = () => {
                                     sx={{
                                         bgcolor: '#7dc738',
                                         '&:hover': {
-                                            bgcolor: '#5a8f29'
+                                            bgcolor: '#5a8f29',
                                         },
                                         '&:disabled': {
                                             bgcolor: '#f54242',
@@ -88,17 +101,25 @@ const RegistrationForm:FC = () => {
                                         },
                                     }}
                                 >
-                                    {isSubmitting ? 'Submitting...' : 'Registration'}
+                                    {isSubmitting
+                                        ? 'Submitting...'
+                                        : 'Registration'}
                                 </Button>
                             </Box>
-                            {errorMessage && <Typography sx={{color: 'red', maxWidth: '340px'}}>{errorMessage}</Typography>}
+                            {errorMessage && (
+                                <Typography
+                                    sx={{ color: 'red', maxWidth: '340px' }}
+                                >
+                                    {errorMessage}
+                                </Typography>
+                            )}
                         </Form>
                     )}
                 </Formik>
             ) : !isSecondStepCompleted ? (
                 <RegCreateForm onSubmit={handleSecondStepSubmit} />
             ) : (
-                <LoginForm/>
+                <LoginForm />
             )}
         </>
     );

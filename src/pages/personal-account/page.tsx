@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
-import React, {FC, useContext, useEffect, useState} from 'react';
-import {Context} from "../../index";
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { Context } from '../../index';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import {createTheme, ThemeProvider} from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material';
 
 interface AuctionItem {
     _id: string;
@@ -27,9 +27,9 @@ const theme = createTheme({
     },
 });
 
-const PersonalAccount: FC  = () => {
-    const {store} = useContext(Context);
-    const {id} = useParams<{ id: string }>();
+const PersonalAccount: FC = () => {
+    const { store } = useContext(Context);
+    const { id } = useParams<{ id: string }>();
     const [auction, setAuction] = useState<AuctionItem | null>(null);
 
     useEffect(() => {
@@ -43,10 +43,7 @@ const PersonalAccount: FC  = () => {
         };
 
         fetchAuction();
-
     }, [id]);
-
-    console.log(auction)
 
     if (!auction) {
         return (
@@ -58,11 +55,7 @@ const PersonalAccount: FC  = () => {
         );
     }
 
-    return (
-        <div>
-
-        </div>
-    );
+    return <div></div>;
 };
 
 export { PersonalAccount };

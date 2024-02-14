@@ -1,8 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 
 const useDrawerState = () => {
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [isClosing, setIsClosing] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -23,7 +23,7 @@ const useDrawerState = () => {
         mobileOpen,
         handleDrawerClose,
         handleDrawerTransitionEnd,
-        handleDrawerToggle
+        handleDrawerToggle,
     };
 };
 

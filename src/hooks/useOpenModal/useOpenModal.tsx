@@ -1,8 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 
 const useOpenModal = () => {
-    const [openLoginModal, setOpenLoginModal] = React.useState(false);
-    const [openRegistrationModal, setOpenRegistrationModal] = React.useState(false);
+    const [openLoginModal, setOpenLoginModal] = useState(false);
+    const [openRegistrationModal, setOpenRegistrationModal] = useState(false);
 
     const handleLoginClickOpen = () => {
         setOpenLoginModal(true);
