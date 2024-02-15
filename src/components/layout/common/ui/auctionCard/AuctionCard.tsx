@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 import useOpenModal from '../../../../../hooks/useOpenModal/useOpenModal';
 import LoginModal from '../../../modals/loginModal/LoginModal';
 import useAuthCheck from '../../../../../hooks/useAuthCheck/useAuthCheck';
+import LazyLoadImage from '../../lazyLoadImage/LazyLoadImage';
 
 interface AuctionCardProps {
     img: string;
@@ -43,15 +44,9 @@ const AuctionCard: FC<AuctionCardProps> = ({
 
     return (
         <Card sx={{ height: '100%', flex: '1 1 auto' }}>
-            <CardMedia
-                sx={{
-                    height: '400px',
-                    objectFit: 'cover',
-                    backgroundColor: 'gray',
-                }}
-                image={img}
-                title="green iguana"
-            />
+            <CardMedia>
+                <LazyLoadImage src={img} w={'100%'} h={'450px'} alt={'title'} />
+            </CardMedia>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                     {title}
@@ -59,26 +54,27 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 <Divider sx={{ mb: 1.3 }} />
                 <Typography variant="body2" color="text.secondary">
                     {trimmedString}
-                    {!isAuth ? (
-                        <u>
-                            <span
-                                style={{
-                                    color: 'rgba(0, 0, 0, 0.6)',
-                                    cursor: 'pointer',
-                                }}
-                                onClick={handleLearnMoreClick}
+                    {desc.length > 200 &&
+                        (!isAuth ? (
+                            <u>
+                                <span
+                                    style={{
+                                        color: 'rgba(0, 0, 0, 0.6)',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={handleLearnMoreClick}
+                                >
+                                    read more
+                                </span>
+                            </u>
+                        ) : (
+                            <Link
+                                style={{ color: 'rgba(0, 0, 0, 0.6)' }}
+                                to={`/bet/${id}`}
                             >
                                 read more
-                            </span>
-                        </u>
-                    ) : (
-                        <Link
-                            style={{ color: 'rgba(0, 0, 0, 0.6)' }}
-                            to={`/bet/${id}`}
-                        >
-                            read more
-                        </Link>
-                    )}
+                            </Link>
+                        ))}
                 </Typography>
                 <Typography variant="h6">
                     Price: <u>{minRates}</u> $

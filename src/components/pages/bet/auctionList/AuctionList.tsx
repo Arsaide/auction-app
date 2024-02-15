@@ -49,7 +49,7 @@ const AuctionList = () => {
                                 <Card>
                                     <Skeleton
                                         variant="rectangular"
-                                        sx={{ height: 400 }}
+                                        sx={{ height: 450 }}
                                     />
                                     <CardContent>
                                         <Skeleton
