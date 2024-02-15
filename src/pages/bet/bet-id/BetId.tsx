@@ -81,7 +81,10 @@ const BetId: FC = () => {
             </Typography>
             <Typography>Owner: {auction && auction.timeStart}</Typography>
             <Typography>timeEnd: {auction && auction.timeEnd}</Typography>
-            <AuctionTimer timeEnd={auction.timeEnd} />
+            <AuctionTimer
+                timeEnd={auction.timeEnd}
+                onAuctionEnd={() => console.log('auction ended')}
+            />
         </div>
     );
 };

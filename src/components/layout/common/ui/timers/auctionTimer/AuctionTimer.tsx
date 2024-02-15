@@ -3,9 +3,10 @@ import Typography from '@mui/material/Typography';
 
 interface AuctionTimerInterface {
     timeEnd: string;
+    onAuctionEnd: () => void;
 }
 
-const AuctionTimer: FC<AuctionTimerInterface> = ({ timeEnd }) => {
+const AuctionTimer: FC<AuctionTimerInterface> = ({ timeEnd, onAuctionEnd }) => {
     const [timeRemaining, setTimeRemaining] = useState<number>(0);
     const [timeExpired, setTimeExpired] = useState<boolean>(false);
 
@@ -20,11 +21,12 @@ const AuctionTimer: FC<AuctionTimerInterface> = ({ timeEnd }) => {
             if (timeLeft <= 0) {
                 clearInterval(intervalId);
                 setTimeExpired(true);
+                onAuctionEnd();
             }
         }, 1000);
 
         return () => clearInterval(intervalId);
-    }, [timeEnd]);
+    }, [timeEnd, onAuctionEnd]);
 
     const formatTime = (time: number): string => {
         if (time <= 0) return '00:00:00:00';
