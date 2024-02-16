@@ -20,6 +20,9 @@ import { useContext } from 'react';
 import { Context } from '../../../index';
 import RegModal from '../modals/regModal/RegModal';
 import LoginModal from '../modals/loginModal/LoginModal';
+import BottomNav from './bottomNav/BottomNav';
+import { Hidden } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
@@ -34,12 +37,6 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
 
     const isAuth = localStorage.getItem('isAuth') === 'true';
 
-    const {
-        mobileOpen,
-        handleDrawerClose,
-        handleDrawerTransitionEnd,
-        handleDrawerToggle,
-    } = useDrawerState();
     const { handleOpenUserMenu, anchorElUser, handleCloseUserMenu } =
         useOpenUserMenu();
 
@@ -56,7 +53,7 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
             <AppBar
                 position="fixed"
                 sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    width: { md: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
                     bgcolor: '#040A2F',
                 }}
@@ -72,15 +69,15 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                             width: '100%',
                         }}
                     >
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            edge="start"
-                            onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { sm: 'none' } }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
+                        {/*<IconButton*/}
+                        {/*    color="inherit"*/}
+                        {/*    aria-label="open drawer"*/}
+                        {/*    edge="start"*/}
+                        {/*    onClick={handleDrawerToggle}*/}
+                        {/*    sx={{ mr: 2, display: { sm: 'none' } }}*/}
+                        {/*>*/}
+                        {/*    <MenuIcon />*/}
+                        {/*</IconButton>*/}
                         <Box sx={{ flexGrow: 0 }}>
                             {!isAuth && (
                                 <>
@@ -156,13 +153,24 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                                     >
                                         <MenuItem onClick={handleCloseUserMenu}>
                                             <Typography textAlign="center">
-                                                Account
+                                                <Link
+                                                    to={'/personal-account'}
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: '#000',
+                                                    }}
+                                                >
+                                                    My account
+                                                </Link>
                                             </Typography>
                                         </MenuItem>
                                         <MenuItem onClick={handleCloseUserMenu}>
-                                            <Button onClick={handleSubmit}>
+                                            <Typography
+                                                onClick={handleSubmit}
+                                                textAlign="center"
+                                            >
                                                 Log out
-                                            </Button>
+                                            </Typography>
                                         </MenuItem>
                                     </Menu>
                                 </>
@@ -173,31 +181,31 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
             </AppBar>
             <Box
                 component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
             >
-                <Drawer
-                    variant="temporary"
-                    open={mobileOpen}
-                    onTransitionEnd={handleDrawerTransitionEnd}
-                    onClose={handleDrawerClose}
-                    ModalProps={{
-                        keepMounted: true,
-                    }}
-                    sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': {
-                            bgcolor: '#040A2F',
-                            boxSizing: 'border-box',
-                            width: drawerWidth,
-                        },
-                    }}
-                >
-                    <SideBar />
-                </Drawer>
+                {/*<Drawer*/}
+                {/*    variant="temporary"*/}
+                {/*    open={mobileOpen}*/}
+                {/*    onTransitionEnd={handleDrawerTransitionEnd}*/}
+                {/*    onClose={handleDrawerClose}*/}
+                {/*    ModalProps={{*/}
+                {/*        keepMounted: true,*/}
+                {/*    }}*/}
+                {/*    sx={{*/}
+                {/*        display: { xs: 'block', md: 'none' },*/}
+                {/*        '& .MuiDrawer-paper': {*/}
+                {/*            bgcolor: '#040A2F',*/}
+                {/*            boxSizing: 'border-box',*/}
+                {/*            width: drawerWidth,*/}
+                {/*        },*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    <SideBar />*/}
+                {/*</Drawer>*/}
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: { xs: 'none', sm: 'block' },
+                        display: { xs: 'none', md: 'block' },
                         '& .MuiDrawer-paper': {
                             bgcolor: '#040A2F',
                             boxSizing: 'border-box',
@@ -215,6 +223,7 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                     flexGrow: 1,
                     p: 3,
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    marginBottom: { xs: '57px' },
                 }}
             >
                 <Toolbar />

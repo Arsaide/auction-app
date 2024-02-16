@@ -8,30 +8,14 @@ import OnlineChatPage from './pages/online-chat/page';
 import InformationPage from './pages/information/page';
 import ToastMessage from './components/layout/common/alerts/toastMessage/ToastMessage';
 import { BetId } from './pages/bet/bet-id/BetId';
-import { PersonalAccount } from './pages/personal-account/page';
+import PersonalAccount from './pages/personal-account/page';
+import BottomNav from './components/layout/nav/bottomNav/BottomNav';
+import { Hidden } from '@mui/material';
 
 function App() {
-    const [userEmail, setUserEmail] = useState<string | null>(null);
-    const [userPassword, setUserPassword] = useState<string | null>(null);
-
-    useEffect(() => {
-        const email = localStorage.getItem('userEmail');
-        const password = localStorage.getItem('userPassword');
-        if (email && password) {
-            setUserEmail(email);
-            setUserPassword(password);
-        }
-    }, []);
-
     return (
         <div className="App">
             <ResponsiveDrawer>
-                {userEmail && userPassword && (
-                    <div>
-                        <p>User Email: {userEmail}</p>
-                        <p>User Password: {userPassword}</p>
-                    </div>
-                )}
                 <Routes>
                     <Route path={'/'} element={<HomePage />} />
                     <Route path={'bet'} element={<BetPage />} />
@@ -39,10 +23,13 @@ function App() {
                     <Route path={'online-chat'} element={<OnlineChatPage />} />
                     <Route path={'information'} element={<InformationPage />} />
                     <Route
-                        path={'personal-account/:id/'}
+                        path={'personal-account'}
                         element={<PersonalAccount />}
                     />
                 </Routes>
+                <Hidden mdUp>
+                    <BottomNav />
+                </Hidden>
             </ResponsiveDrawer>
             <ToastMessage />
         </div>

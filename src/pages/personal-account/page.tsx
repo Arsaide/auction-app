@@ -1,61 +1,32 @@
-import { useParams } from 'react-router-dom';
 import React, { FC, useContext, useEffect, useState } from 'react';
+import useAuthCheck from '../../hooks/useAuthCheck/useAuthCheck';
+import PersonalData from '../../components/pages/personalAccount/personalData/PersonalData';
+import LoginForm from '../../components/pages/auth/loginForm/LoginForm';
+import Typography from '@mui/material/Typography';
 import { Context } from '../../index';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@mui/material';
-
-interface AuctionItem {
-    _id: string;
-    img: string;
-    title: string;
-    minRates: string;
-    rates: string;
-    desct: string;
-    active: boolean;
-    state: boolean;
-    owner: string;
-    timeStart: string;
-    timeEnd: string;
-}
-
-const theme = createTheme({
-    palette: {
-        success: {
-            main: '#7dc738',
-        },
-    },
-});
+import Button from '@mui/material/Button';
 
 const PersonalAccount: FC = () => {
     const { store } = useContext(Context);
-    const { id } = useParams<{ id: string }>();
-    const [auction, setAuction] = useState<AuctionItem | null>(null);
+    const { isAuth } = useAuthCheck();
+    const handleSubmit = () => {
+        store.logout();
+        window.location.reload();
+    };
 
-    useEffect(() => {
-        const fetchAuction = async () => {
-            try {
-                // const response = await store.getauctionone(id);
-                // setAuction(response.data.auction as unknown as AuctionItem);
-            } catch (error) {
-                console.error('Error fetching auction:', error);
-            }
-        };
-
-        fetchAuction();
-    }, [id]);
-
-    if (!auction) {
-        return (
-            <ThemeProvider theme={theme}>
-                <Box sx={{ display: 'flex' }}>
-                    <CircularProgress size={120} color="success" />
-                </Box>
-            </ThemeProvider>
-        );
-    }
-
-    return <div></div>;
+    return (
+        <section>
+            <Typography variant={'h3'}>Personal Account</Typography>
+            {isAuth ? (
+                <>
+                    <PersonalData />
+                    <Button onClick={handleSubmit}>Log out</Button>
+                </>
+            ) : (
+                <LoginForm />
+            )}
+        </section>
+    );
 };
 
-export { PersonalAccount };
+export default PersonalAccount;

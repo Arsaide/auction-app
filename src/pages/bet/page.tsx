@@ -1,6 +1,6 @@
 import React from 'react';
-import BetForm from '../../components/pages/bet/betForm/BetForm';
-import AuctionList from '../../components/pages/bet/auctionList/AuctionList';
+import BetForm from '../../components/pages/bet/betMainPage/betForm/BetForm';
+import AuctionList from '../../components/pages/bet/betMainPage/auctionList/AuctionList';
 import useAuthCheck from '../../hooks/useAuthCheck/useAuthCheck';
 import InfoAlert from '../../components/layout/common/alerts/infoAlert/InfoAlert';
 
