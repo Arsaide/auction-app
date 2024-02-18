@@ -22,10 +22,15 @@ const RegistrationForm: FC = () => {
     const [isSecondStepCompleted, setIsSecondStepCompleted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [showLoginForm, setShowLoginForm] = useState(false); // Add state to control login form visibility
 
     const initialValues = {
         email: '',
         password: '',
+    };
+
+    const handleLoginClick = () => {
+        setShowLoginForm(true);
     };
 
     const handleSubmit = async (values: RegistrationFormValues) => {
@@ -51,7 +56,7 @@ const RegistrationForm: FC = () => {
 
     return (
         <>
-            {!isRegistered ? (
+            {!isRegistered && !showLoginForm ? ( // Show registration form if user is not registered and not clicked login button
                 <Formik
                     validationSchema={registrationValidationSchema}
                     validateOnMount
@@ -103,7 +108,14 @@ const RegistrationForm: FC = () => {
                                 >
                                     {isSubmitting
                                         ? 'Submitting...'
-                                        : 'Registration'}
+                                        : 'Register'}
+                                </Button>
+                                <Button
+                                    color="secondary"
+                                    variant="outlined"
+                                    onClick={handleLoginClick}
+                                >
+                                    Log-in
                                 </Button>
                             </Box>
                             {errorMessage && (
@@ -116,6 +128,8 @@ const RegistrationForm: FC = () => {
                         </Form>
                     )}
                 </Formik>
+            ) : !isRegistered ? (
+                <LoginForm />
             ) : !isSecondStepCompleted ? (
                 <RegCreateForm onSubmit={handleSecondStepSubmit} />
             ) : (

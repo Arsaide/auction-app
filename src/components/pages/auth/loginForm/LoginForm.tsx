@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Input from '../../../layout/common/inputs/input/Input';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
+import RegistrationForm from '../regestrationForm/RegistrationForm';
 
 interface LoginFormValues {
     email: string;
@@ -17,6 +18,7 @@ const LoginForm: FC = () => {
     const { store } = useContext(Context);
     const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showRegForm, setShowRegForm] = useState(false);
 
     const initialValues = {
         email: '',
@@ -40,64 +42,79 @@ const LoginForm: FC = () => {
         }
     };
 
+    const handleRegClick = () => {
+        setShowRegForm(true);
+    };
+
     return (
         <>
-            <Formik
-                validationSchema={loginValidationSchema}
-                validateOnMount
-                initialValues={initialValues}
-                onSubmit={handleSubmit}
-            >
-                {({ isValid }) => (
-                    <Form>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                width: '340px',
-                                gap: 2,
-                            }}
-                        >
-                            <Input
-                                id={'email'}
-                                label={'Email'}
-                                name={'email'}
-                                placeholder={'Enter your email'}
-                            />
-                            <Input
-                                id={'password'}
-                                label={'Password'}
-                                name={'password'}
-                                placeholder={'Enter your password'}
-                            />
-                            <Button
-                                variant="contained"
-                                type="submit"
-                                disabled={!isValid || isSubmitting}
+            {!showRegForm ? (
+                <Formik
+                    validationSchema={loginValidationSchema}
+                    validateOnMount
+                    initialValues={initialValues}
+                    onSubmit={handleSubmit}
+                >
+                    {({ isValid }) => (
+                        <Form>
+                            <Box
                                 sx={{
-                                    bgcolor: '#7dc738',
-                                    '&:hover': {
-                                        bgcolor: '#5a8f29',
-                                    },
-                                    '&:disabled': {
-                                        bgcolor: '#f54242',
-                                        color: 'white',
-                                    },
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    width: '340px',
+                                    gap: 2,
                                 }}
                             >
-                                {isSubmitting ? 'Submitting...' : 'Login'}
-                            </Button>
-                        </Box>
-                        {errorMessage && (
-                            <Typography
-                                sx={{ color: 'red', maxWidth: '340px' }}
-                            >
-                                {errorMessage}
-                            </Typography>
-                        )}
-                    </Form>
-                )}
-            </Formik>
+                                <Input
+                                    id={'email'}
+                                    label={'Email'}
+                                    name={'email'}
+                                    placeholder={'Enter your email'}
+                                />
+                                <Input
+                                    id={'password'}
+                                    label={'Password'}
+                                    name={'password'}
+                                    placeholder={'Enter your password'}
+                                />
+                                <Button
+                                    variant="contained"
+                                    type="submit"
+                                    disabled={!isValid || isSubmitting}
+                                    sx={{
+                                        bgcolor: '#7dc738',
+                                        '&:hover': {
+                                            bgcolor: '#5a8f29',
+                                        },
+                                        '&:disabled': {
+                                            bgcolor: '#f54242',
+                                            color: 'white',
+                                        },
+                                    }}
+                                >
+                                    {isSubmitting ? 'Submitting...' : 'Login'}
+                                </Button>
+                                <Button
+                                    color="secondary"
+                                    variant="outlined"
+                                    onClick={handleRegClick}
+                                >
+                                    Registration
+                                </Button>
+                            </Box>
+                            {errorMessage && (
+                                <Typography
+                                    sx={{ color: 'red', maxWidth: '340px' }}
+                                >
+                                    {errorMessage}
+                                </Typography>
+                            )}
+                        </Form>
+                    )}
+                </Formik>
+            ) : (
+                <RegistrationForm />
+            )}
         </>
     );
 };

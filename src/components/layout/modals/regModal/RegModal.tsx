@@ -25,7 +25,7 @@ const RegModal: FC<RegModalInterface> = ({ open, onClose }) => {
                 id={'form-dialog-title'}
                 sx={{ bgcolor: '#081041', color: 'white', pl: 3 }}
             >
-                Registration
+                Authorization
             </DialogTitle>
             <DialogContent sx={{ bgcolor: '#081041' }}>
                 <DialogContentText sx={{ color: 'white', ml: 0, mb: 2 }}>
