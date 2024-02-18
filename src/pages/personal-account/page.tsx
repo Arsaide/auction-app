@@ -32,7 +32,7 @@ const PersonalAccount: FC = () => {
     };
 
     return (
-        <section style={{ height: '100%' }}>
+        <>
             {isAuth ? (
                 <>
                     <Typography sx={{ mb: 3 }} variant={'h4'}>
@@ -66,9 +66,13 @@ const PersonalAccount: FC = () => {
                                     flexDirection: 'column',
                                     justifyContent: 'center',
                                     gap: 3,
-                                    height: '100%',
                                 }}
                             >
+                                <img
+                                    style={{ width: '100%' }}
+                                    src="/flr2.gif"
+                                    alt="Тут будет логотип в будущем"
+                                />
                                 <Typography
                                     variant={'h5'}
                                     sx={{ textAlign: 'center' }}
@@ -98,20 +102,35 @@ const PersonalAccount: FC = () => {
                                     >
                                         Registration
                                     </Button>
-                                    <Toolbar />
                                 </Box>
                             </Box>
                         </>
                     )}
-                    <Toolbar />
-                    <Typography variant={'h5'} sx={{ textAlign: 'center' }}>
-                        To continue please log in.
-                    </Typography>
-                    {showLoginComponent && <LoginForm />}
-                    {showRegComponent && <RegistrationForm />}
+                    {showLoginComponent && (
+                        <>
+                            <Typography
+                                variant={'h5'}
+                                sx={{ textAlign: 'center' }}
+                            >
+                                To continue please log in.
+                            </Typography>
+                            <LoginForm />
+                        </>
+                    )}
+                    {showRegComponent && (
+                        <>
+                            <Typography
+                                variant={'h5'}
+                                sx={{ textAlign: 'center' }}
+                            >
+                                To continue please log in.
+                            </Typography>
+                            <RegistrationForm />
+                        </>
+                    )}
                 </>
             )}
-        </section>
+        </>
     );
 };
 
