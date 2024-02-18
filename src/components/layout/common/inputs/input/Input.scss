@@ -1,16 +1,16 @@
-.input-container {
+.inputContainer {
     position: relative;
     margin-bottom: 20px;
     width: 100%;
     margin-top: 10px;
 }
 
-.input-container label {
+.inputContainer label {
     display: block;
     padding: 0 0 6px 6px;
 }
 
-.input-container input {
+.inputContainer input {
     position: relative;
     width: 100%;
     padding: 10px 0 10px 10px;
@@ -23,19 +23,30 @@
     color: white;
 }
 
+.eyeContainer {
+    display: flex;
+    position: relative;
+}
+
+.inputEye {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
 .betInput {
     margin-left: 50px;
 }
 
-.input-container input::placeholder {
+.inputContainer input::placeholder {
     color: rgba(255, 255, 255, .2);
 }
 
-.input-container input:focus {
+.inputContainer input:focus {
     outline: 0;
 }
 
-.input-container input::after {
+.inputContainer input::after {
     background: #1b266b;
 }
 
@@ -44,7 +55,11 @@ label {
     margin-left: -7px;
 }
 
-.input-container span {
+.inputContainer span {
+    color: white;
+}
+
+.error {
     display: block;
     position: absolute;
     top: 100%;

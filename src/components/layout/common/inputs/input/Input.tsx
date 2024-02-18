@@ -1,6 +1,8 @@
 import './Input.scss';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Field, ErrorMessage as Error } from 'formik';
+import VisibilityIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
 interface InputField {
     id: string;
@@ -11,11 +13,55 @@ interface InputField {
 }
 
 const Input: FC<InputField> = ({ id, label, name, placeholder, type }) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
-        <div className="input-container">
+        <div className={'inputContainer'}>
             <label htmlFor={id}>{label}</label>
-            <Field name={name} id={id} type={type} placeholder={placeholder} />
-            <Error name={name}>{error => <span>{error}</span>}</Error>
+            {type === 'password' ? (
+                <div className={'eyeContainer'}>
+                    <Field
+                        type={
+                            type === 'password' && !showPassword
+                                ? 'password'
+                                : 'text'
+                        }
+                        name={name}
+                        id={id}
+                        placeholder={placeholder}
+                    />
+                    {type === 'password' && (
+                        <span
+                            className={'inputEye'}
+                            onClick={toggleShowPassword}
+                        >
+                            {showPassword ? (
+                                <VisibilityIcon />
+                            ) : (
+                                <VisibilityOffOutlinedIcon />
+                            )}
+                        </span>
+                    )}
+                </div>
+            ) : (
+                <Field
+                    type={
+                        type === 'password' && !showPassword
+                            ? 'password'
+                            : 'text'
+                    }
+                    name={name}
+                    id={id}
+                    placeholder={placeholder}
+                />
+            )}
+            <Error name={name}>
+                {error => <p className={'error'}>{error}</p>}
+            </Error>
         </div>
     );
 };
