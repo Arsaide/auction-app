@@ -11,6 +11,7 @@ import { BetId } from './pages/bet/bet-id/BetId';
 import PersonalAccount from './pages/personal-account/page';
 import BottomNav from './components/layout/nav/bottomNav/BottomNav';
 import { Hidden } from '@mui/material';
+import Toolbar from '@mui/material/Toolbar';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     />
                 </Routes>
                 <Hidden mdUp>
+                    <Toolbar />
                     <BottomNav />
                 </Hidden>
             </ResponsiveDrawer>

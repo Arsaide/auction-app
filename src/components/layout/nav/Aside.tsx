@@ -50,158 +50,139 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <AppBar
-                position="fixed"
-                sx={{
-                    width: { md: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
-                    bgcolor: '#040A2F',
-                }}
-            >
-                <Toolbar>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: {
-                                md: 'flex-end',
-                                sm: 'space-between',
-                            },
-                            width: '100%',
-                        }}
-                    >
-                        {/*<IconButton*/}
-                        {/*    color="inherit"*/}
-                        {/*    aria-label="open drawer"*/}
-                        {/*    edge="start"*/}
-                        {/*    onClick={handleDrawerToggle}*/}
-                        {/*    sx={{ mr: 2, display: { sm: 'none' } }}*/}
-                        {/*>*/}
-                        {/*    <MenuIcon />*/}
-                        {/*</IconButton>*/}
-                        <Box sx={{ flexGrow: 0 }}>
-                            {!isAuth && (
-                                <>
-                                    <Button
-                                        variant="contained"
-                                        color="inherit"
-                                        sx={{
-                                            color: 'white',
-                                            bgcolor: '#1B266B',
-                                            '&:hover': {
-                                                bgcolor: '#2c3f9e',
-                                            },
-                                        }}
-                                        onClick={handleLoginClickOpen}
-                                    >
-                                        Log in
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        color="inherit"
-                                        sx={{
-                                            color: 'white',
-                                            bgcolor: '#1B266B',
-                                            ml: 2,
-                                            '&:hover': {
-                                                bgcolor: '#2c3f9e',
-                                            },
-                                        }}
-                                        onClick={handleRegistrationClickOpen}
-                                    >
-                                        Registration
-                                    </Button>
-
-                                    <RegModal
-                                        open={openRegistrationModal}
-                                        onClose={handleClose}
-                                    />
-                                    <LoginModal
-                                        open={openLoginModal}
-                                        onClose={handleClose}
-                                    />
-                                </>
-                            )}
-
-                            {isAuth && (
-                                <>
-                                    <Tooltip title="Open settings">
-                                        <IconButton
-                                            onClick={handleOpenUserMenu}
-                                            sx={{ p: 0 }}
+            <Hidden mdDown>
+                <AppBar
+                    position="fixed"
+                    sx={{
+                        width: { md: `calc(100% - ${drawerWidth}px)` },
+                        ml: { sm: `${drawerWidth}px` },
+                        bgcolor: '#040A2F',
+                    }}
+                >
+                    <Toolbar>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: {
+                                    md: 'flex-end',
+                                    sm: 'space-between',
+                                },
+                                width: '100%',
+                            }}
+                        >
+                            <Box sx={{ flexGrow: 0 }}>
+                                {!isAuth && (
+                                    <>
+                                        <Button
+                                            variant="contained"
+                                            color="inherit"
+                                            sx={{
+                                                color: 'white',
+                                                bgcolor: '#1B266B',
+                                                '&:hover': {
+                                                    bgcolor: '#2c3f9e',
+                                                },
+                                            }}
+                                            onClick={handleLoginClickOpen}
                                         >
-                                            <Avatar
-                                                alt="Monkey King"
-                                                src="/avatar/avatar.jpg"
-                                            />
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Menu
-                                        sx={{ mt: '45px' }}
-                                        id="menu-appbar"
-                                        anchorEl={anchorElUser}
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        keepMounted
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        open={Boolean(anchorElUser)}
-                                        onClose={handleCloseUserMenu}
-                                    >
-                                        <MenuItem onClick={handleCloseUserMenu}>
-                                            <Typography textAlign="center">
-                                                <Link
-                                                    to={'/personal-account'}
-                                                    style={{
-                                                        textDecoration: 'none',
-                                                        color: '#000',
-                                                    }}
-                                                >
-                                                    My account
-                                                </Link>
-                                            </Typography>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleCloseUserMenu}>
-                                            <Typography
-                                                onClick={handleSubmit}
-                                                textAlign="center"
+                                            Log in
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            color="inherit"
+                                            sx={{
+                                                color: 'white',
+                                                bgcolor: '#1B266B',
+                                                ml: 2,
+                                                '&:hover': {
+                                                    bgcolor: '#2c3f9e',
+                                                },
+                                            }}
+                                            onClick={
+                                                handleRegistrationClickOpen
+                                            }
+                                        >
+                                            Registration
+                                        </Button>
+
+                                        <RegModal
+                                            open={openRegistrationModal}
+                                            onClose={handleClose}
+                                        />
+                                        <LoginModal
+                                            open={openLoginModal}
+                                            onClose={handleClose}
+                                        />
+                                    </>
+                                )}
+
+                                {isAuth && (
+                                    <>
+                                        <Tooltip title="Open settings">
+                                            <IconButton
+                                                onClick={handleOpenUserMenu}
+                                                sx={{ p: 0 }}
                                             >
-                                                Log out
-                                            </Typography>
-                                        </MenuItem>
-                                    </Menu>
-                                </>
-                            )}
+                                                <Avatar
+                                                    alt="Monkey King"
+                                                    src="/avatar/avatar.jpg"
+                                                />
+                                            </IconButton>
+                                        </Tooltip>
+                                        <Menu
+                                            sx={{ mt: '45px' }}
+                                            id="menu-appbar"
+                                            anchorEl={anchorElUser}
+                                            anchorOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            keepMounted
+                                            transformOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}
+                                            open={Boolean(anchorElUser)}
+                                            onClose={handleCloseUserMenu}
+                                        >
+                                            <MenuItem
+                                                onClick={handleCloseUserMenu}
+                                            >
+                                                <Typography textAlign="center">
+                                                    <Link
+                                                        to={'/personal-account'}
+                                                        style={{
+                                                            textDecoration:
+                                                                'none',
+                                                            color: '#000',
+                                                        }}
+                                                    >
+                                                        My account
+                                                    </Link>
+                                                </Typography>
+                                            </MenuItem>
+                                            <MenuItem
+                                                onClick={handleCloseUserMenu}
+                                            >
+                                                <Typography
+                                                    onClick={handleSubmit}
+                                                    textAlign="center"
+                                                >
+                                                    Log out
+                                                </Typography>
+                                            </MenuItem>
+                                        </Menu>
+                                    </>
+                                )}
+                            </Box>
                         </Box>
-                    </Box>
-                </Toolbar>
-            </AppBar>
+                    </Toolbar>
+                </AppBar>
+            </Hidden>
             <Box
                 component="nav"
                 sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
             >
-                {/*<Drawer*/}
-                {/*    variant="temporary"*/}
-                {/*    open={mobileOpen}*/}
-                {/*    onTransitionEnd={handleDrawerTransitionEnd}*/}
-                {/*    onClose={handleDrawerClose}*/}
-                {/*    ModalProps={{*/}
-                {/*        keepMounted: true,*/}
-                {/*    }}*/}
-                {/*    sx={{*/}
-                {/*        display: { xs: 'block', md: 'none' },*/}
-                {/*        '& .MuiDrawer-paper': {*/}
-                {/*            bgcolor: '#040A2F',*/}
-                {/*            boxSizing: 'border-box',*/}
-                {/*            width: drawerWidth,*/}
-                {/*        },*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    <SideBar />*/}
-                {/*</Drawer>*/}
                 <Drawer
                     variant="permanent"
                     sx={{
@@ -223,10 +204,11 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                     flexGrow: 1,
                     p: 3,
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    marginBottom: { xs: '57px' },
                 }}
             >
-                <Toolbar />
+                <Hidden mdDown>
+                    <Toolbar />
+                </Hidden>
                 {children}
             </Box>
         </Box>
