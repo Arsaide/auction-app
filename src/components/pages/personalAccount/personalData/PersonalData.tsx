@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
+import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 
 const PersonalData = () => {
     const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -13,14 +15,22 @@ const PersonalData = () => {
         }
     }, []);
     return (
-        <div>
+        <Box>
             {userEmail && userPassword && (
-                <div>
-                    <p>User Email: {userEmail}</p>
-                    <p>User Password: {userPassword}</p>
-                </div>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        gap: 1,
+                    }}
+                >
+                    <Typography>Nickname: None</Typography>
+                    <Typography>Email: {userEmail}</Typography>
+                    <Typography>Password: {userPassword}</Typography>
+                </Box>
             )}
-        </div>
+        </Box>
     );
 };
 
