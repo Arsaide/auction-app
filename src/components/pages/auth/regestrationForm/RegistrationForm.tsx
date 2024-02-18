@@ -56,7 +56,7 @@ const RegistrationForm: FC = () => {
 
     return (
         <>
-            {!isRegistered && !showLoginForm ? ( // Show registration form if user is not registered and not clicked login button
+            {!isRegistered && !showLoginForm ? (
                 <Formik
                     validationSchema={registrationValidationSchema}
                     validateOnMount
@@ -69,7 +69,7 @@ const RegistrationForm: FC = () => {
                                 sx={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    width: '340px',
+                                    width: '100%',
                                     gap: 1.5,
                                 }}
                             >

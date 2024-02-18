@@ -61,7 +61,7 @@ const LoginForm: FC = () => {
                                 sx={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    width: '340px',
+                                    width: '100%',
                                     gap: 2,
                                 }}
                             >

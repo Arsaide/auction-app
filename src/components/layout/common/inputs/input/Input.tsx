@@ -1,4 +1,4 @@
-import './Input.css';
+import './Input.scss';
 import React, { FC } from 'react';
 import { Field, ErrorMessage as Error } from 'formik';
 

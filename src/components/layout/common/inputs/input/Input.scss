@@ -16,7 +16,7 @@
     padding: 10px 0 10px 10px;
     border: 2px solid #0064fb;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: clamp(15px, 1vw, 18px);
     appearance: none;
     background: #1b266b;
     margin-left: -1px;
