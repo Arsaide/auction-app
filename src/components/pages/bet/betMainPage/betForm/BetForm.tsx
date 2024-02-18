@@ -113,18 +113,21 @@ const BetForm = () => {
                                     label={'Your rate'}
                                     name={'title'}
                                     placeholder={'Enter your rate'}
+                                    type={'text'}
                                 />
                                 <Input
                                     id={'desc'}
                                     label={'Your description'}
                                     name={'desc'}
                                     placeholder={'Enter your description'}
+                                    type={'text'}
                                 />
                                 <Input
                                     id={'minRates'}
                                     label={'Your min rates'}
                                     name={'minRates'}
                                     placeholder={'Enter your min rates'}
+                                    type={'number'}
                                 />
                                 <Box sx={{ display: 'flex', gap: 20 }}>
                                     <DatePicker

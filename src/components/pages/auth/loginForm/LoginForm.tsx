@@ -70,12 +70,14 @@ const LoginForm: FC = () => {
                                     label={'Email'}
                                     name={'email'}
                                     placeholder={'Enter your email'}
+                                    type={'email'}
                                 />
                                 <Input
                                     id={'password'}
                                     label={'Password'}
                                     name={'password'}
                                     placeholder={'Enter your password'}
+                                    type={'password'}
                                 />
                                 <Button
                                     variant="contained"

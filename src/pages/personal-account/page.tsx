@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Context } from '../../index';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import { Box } from '@mui/material';
+import { Box, Hidden } from '@mui/material';
 import RegistrationForm from '../../components/pages/auth/regestrationForm/RegistrationForm';
 import Tooltip from '@mui/material/Tooltip';
 import Toolbar from '@mui/material/Toolbar';
@@ -68,11 +68,13 @@ const PersonalAccount: FC = () => {
                                     gap: 3,
                                 }}
                             >
-                                <img
-                                    style={{ width: '100%' }}
-                                    src="/flr2.gif"
-                                    alt="Тут будет логотип в будущем"
-                                />
+                                <Hidden mdUp>
+                                    <img
+                                        style={{ width: '100%' }}
+                                        src="/flr2.gif"
+                                        alt="Тут будет логотип в будущем"
+                                    />
+                                </Hidden>
                                 <Typography
                                     variant={'h5'}
                                     sx={{ textAlign: 'center' }}

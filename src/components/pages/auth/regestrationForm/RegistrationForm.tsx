@@ -78,18 +78,21 @@ const RegistrationForm: FC = () => {
                                     label={'Email'}
                                     name={'email'}
                                     placeholder={'Enter your email'}
+                                    type={'email'}
                                 />
                                 <Input
                                     id={'password'}
                                     label={'Password'}
                                     name={'password'}
                                     placeholder={'Enter your password'}
+                                    type={'password'}
                                 />
                                 <Input
                                     id={'confirmPassword'}
                                     label={'Confirm password'}
                                     name={'confirmPassword'}
                                     placeholder={'Confirm your password'}
+                                    type={'password'}
                                 />
                                 <Button
                                     variant="contained"

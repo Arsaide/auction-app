@@ -62,6 +62,7 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                 label={'Your Code'}
                                 name={'code'}
                                 placeholder={'Enter your code'}
+                                type={'number'}
                             />
                             <Button
                                 variant="contained"
