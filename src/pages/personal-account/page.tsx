@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { Box } from '@mui/material';
 import RegistrationForm from '../../components/pages/auth/regestrationForm/RegistrationForm';
+import Tooltip from '@mui/material/Tooltip';
+import Toolbar from '@mui/material/Toolbar';
 
 const PersonalAccount: FC = () => {
     const { store } = useContext(Context);
@@ -30,7 +32,7 @@ const PersonalAccount: FC = () => {
     };
 
     return (
-        <section>
+        <section style={{ height: '100%' }}>
             {isAuth ? (
                 <>
                     <Typography sx={{ mb: 3 }} variant={'h4'}>
@@ -58,16 +60,53 @@ const PersonalAccount: FC = () => {
                 <>
                     {showLoginComponent || showRegComponent ? null : (
                         <>
-                            <Box sx={{ display: 'flex' }}>
-                                <Button onClick={handleClickShowLogin}>
-                                    Log-in
-                                </Button>
-                                <Button onClick={handleClickShowReg}>
-                                    Registration
-                                </Button>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    gap: 3,
+                                    height: '100%',
+                                }}
+                            >
+                                <Typography
+                                    variant={'h5'}
+                                    sx={{ textAlign: 'center' }}
+                                >
+                                    To continue please log in.
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 3,
+                                    }}
+                                >
+                                    <Button
+                                        color="success"
+                                        variant="contained"
+                                        size="large"
+                                        onClick={handleClickShowLogin}
+                                    >
+                                        Log-in
+                                    </Button>
+                                    <Button
+                                        color="success"
+                                        variant="contained"
+                                        size="large"
+                                        onClick={handleClickShowReg}
+                                    >
+                                        Registration
+                                    </Button>
+                                    <Toolbar />
+                                </Box>
                             </Box>
                         </>
                     )}
+                    <Toolbar />
+                    <Typography variant={'h5'} sx={{ textAlign: 'center' }}>
+                        To continue please log in.
+                    </Typography>
                     {showLoginComponent && <LoginForm />}
                     {showRegComponent && <RegistrationForm />}
                 </>

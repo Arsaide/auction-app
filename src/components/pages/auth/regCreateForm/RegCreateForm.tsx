@@ -53,7 +53,7 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'column',
-                                width: '340px',
+                                width: '100%',
                                 gap: 2,
                             }}
                         >
