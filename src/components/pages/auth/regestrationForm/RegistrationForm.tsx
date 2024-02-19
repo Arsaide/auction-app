@@ -94,41 +94,32 @@ const RegistrationForm: FC = () => {
                                     placeholder={'Confirm your password'}
                                     type={'password'}
                                 />
-                                <Box
+                                <Button
+                                    variant="contained"
+                                    type="submit"
+                                    disabled={!isValid || isSubmitting}
                                     sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: 1.5,
-                                        mt: 2,
+                                        bgcolor: '#7dc738',
+                                        '&:hover': {
+                                            bgcolor: '#5a8f29',
+                                        },
+                                        '&:disabled': {
+                                            bgcolor: '#f54242',
+                                            color: 'white',
+                                        },
                                     }}
                                 >
-                                    <Button
-                                        variant="contained"
-                                        type="submit"
-                                        disabled={!isValid || isSubmitting}
-                                        sx={{
-                                            bgcolor: '#7dc738',
-                                            '&:hover': {
-                                                bgcolor: '#5a8f29',
-                                            },
-                                            '&:disabled': {
-                                                bgcolor: '#f54242',
-                                                color: 'white',
-                                            },
-                                        }}
-                                    >
-                                        {isSubmitting
-                                            ? 'Submitting...'
-                                            : 'Register'}
-                                    </Button>
-                                    <Button
-                                        color="secondary"
-                                        variant="outlined"
-                                        onClick={handleLoginClick}
-                                    >
-                                        Log-in
-                                    </Button>
-                                </Box>
+                                    {isSubmitting
+                                        ? 'Submitting...'
+                                        : 'Register'}
+                                </Button>
+                                <Button
+                                    color="secondary"
+                                    variant="outlined"
+                                    onClick={handleLoginClick}
+                                >
+                                    Log-in
+                                </Button>
                             </Box>
                             {errorMessage && (
                                 <Typography

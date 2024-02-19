@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './global.scss';
 import { Route, Routes } from 'react-router-dom';
 import ResponsiveDrawer from './components/layout/nav/Aside';
 import HomePage from './pages/home/page';

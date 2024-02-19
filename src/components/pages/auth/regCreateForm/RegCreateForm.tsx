@@ -64,34 +64,26 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                 placeholder={'Enter your code'}
                                 type={'number'}
                             />
-                            <Box
+
+                            <Button
+                                variant="contained"
+                                type="submit"
+                                disabled={!isValid || isSubmitting}
                                 sx={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: 1.5,
-                                    mt: 2,
+                                    bgcolor: '#7dc738',
+                                    '&:hover': {
+                                        bgcolor: '#5a8f29',
+                                    },
+                                    '&:disabled': {
+                                        bgcolor: '#f54242',
+                                        color: 'white',
+                                    },
                                 }}
                             >
-                                <Button
-                                    variant="contained"
-                                    type="submit"
-                                    disabled={!isValid || isSubmitting}
-                                    sx={{
-                                        bgcolor: '#7dc738',
-                                        '&:hover': {
-                                            bgcolor: '#5a8f29',
-                                        },
-                                        '&:disabled': {
-                                            bgcolor: '#f54242',
-                                            color: 'white',
-                                        },
-                                    }}
-                                >
-                                    {isSubmitting
-                                        ? 'Submitting code...'
-                                        : 'Verify code'}
-                                </Button>
-                            </Box>
+                                {isSubmitting
+                                    ? 'Submitting code...'
+                                    : 'Verify code'}
+                            </Button>
                         </Box>
                         {errorMessage && (
                             <Typography
