@@ -1,3 +1,4 @@
+import './ImgInput.scss';
 import React, { ChangeEvent, FC, useState } from 'react';
 import Box from '@mui/material/Box';
 
@@ -28,8 +29,15 @@ const ImageForm: FC<ImageFormProps> = ({ onSubmit, name }) => {
                 name={name}
                 accept="image/png, image/jpeg, image/webp"
                 onChange={handleImageChange}
-                style={{ color: 'white' }}
+                id="image"
+                className={'file-input__input'}
             />
+            <label className="button label" htmlFor="image">
+                <span>Upload your image</span>
+                <span className="ext">
+                    [&quot;jpeg&quot;, &quot;png&quot;, &quot;webp&quot;]
+                </span>
+            </label>
             {imagePreview && (
                 <img
                     src={imagePreview}

@@ -113,7 +113,6 @@ const BetForm = () => {
                                     label={'Your rate'}
                                     name={'title'}
                                     placeholder={'Enter your rate'}
-                                    type={'text'}
                                 />
                                 <Input
                                     id={'desc'}

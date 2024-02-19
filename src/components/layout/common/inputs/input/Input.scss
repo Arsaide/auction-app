@@ -10,7 +10,7 @@
     padding: 0 0 6px 6px;
 }
 
-.inputContainer input {
+.inputContainer input, .inputContainer textarea {
     position: relative;
     width: 100%;
     padding: 10px 0 10px 10px;
@@ -21,6 +21,12 @@
     background: #1b266b;
     margin-left: -1px;
     color: white;
+}
+
+.inputContainer textarea {
+    min-height: 200px;
+    resize: vertical;
+    outline: none;
 }
 
 .eyeContainer {

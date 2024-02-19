@@ -9,7 +9,7 @@ interface InputField {
     label: string;
     name: string;
     placeholder: string;
-    type: string;
+    type?: string;
 }
 
 const Input: FC<InputField> = ({ id, label, name, placeholder, type }) => {
@@ -19,17 +19,24 @@ const Input: FC<InputField> = ({ id, label, name, placeholder, type }) => {
         setShowPassword(!showPassword);
     };
 
+    const fieldType =
+        type === 'password' && !showPassword ? 'password' : 'text';
+
     return (
         <div className={'inputContainer'}>
             <label htmlFor={id}>{label}</label>
-            {type === 'password' ? (
+            {type === 'text' ? (
+                <Field
+                    type={fieldType}
+                    name={name}
+                    id={id}
+                    placeholder={placeholder}
+                    as={type === 'text' ? 'textarea' : 'input'}
+                />
+            ) : (
                 <div className={'eyeContainer'}>
                     <Field
-                        type={
-                            type === 'password' && !showPassword
-                                ? 'password'
-                                : 'text'
-                        }
+                        type={fieldType}
                         name={name}
                         id={id}
                         placeholder={placeholder}
@@ -47,17 +54,6 @@ const Input: FC<InputField> = ({ id, label, name, placeholder, type }) => {
                         </span>
                     )}
                 </div>
-            ) : (
-                <Field
-                    type={
-                        type === 'password' && !showPassword
-                            ? 'password'
-                            : 'text'
-                    }
-                    name={name}
-                    id={id}
-                    placeholder={placeholder}
-                />
             )}
             <Error name={name}>
                 {error => <p className={'error'}>{error}</p>}

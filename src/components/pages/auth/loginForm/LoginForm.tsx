@@ -79,30 +79,41 @@ const LoginForm: FC = () => {
                                     placeholder={'Enter your password'}
                                     type={'password'}
                                 />
-                                <Button
-                                    variant="contained"
-                                    type="submit"
-                                    disabled={!isValid || isSubmitting}
+                                <Box
                                     sx={{
-                                        bgcolor: '#7dc738',
-                                        '&:hover': {
-                                            bgcolor: '#5a8f29',
-                                        },
-                                        '&:disabled': {
-                                            bgcolor: '#f54242',
-                                            color: 'white',
-                                        },
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 1.5,
+                                        mt: 2,
                                     }}
                                 >
-                                    {isSubmitting ? 'Submitting...' : 'Login'}
-                                </Button>
-                                <Button
-                                    color="secondary"
-                                    variant="outlined"
-                                    onClick={handleRegClick}
-                                >
-                                    Registration
-                                </Button>
+                                    <Button
+                                        variant="contained"
+                                        type="submit"
+                                        disabled={!isValid || isSubmitting}
+                                        sx={{
+                                            bgcolor: '#7dc738',
+                                            '&:hover': {
+                                                bgcolor: '#5a8f29',
+                                            },
+                                            '&:disabled': {
+                                                bgcolor: '#f54242',
+                                                color: 'white',
+                                            },
+                                        }}
+                                    >
+                                        {isSubmitting
+                                            ? 'Submitting...'
+                                            : 'Login'}
+                                    </Button>
+                                    <Button
+                                        color="secondary"
+                                        variant="outlined"
+                                        onClick={handleRegClick}
+                                    >
+                                        Registration
+                                    </Button>
+                                </Box>
                             </Box>
                             {errorMessage && (
                                 <Typography
