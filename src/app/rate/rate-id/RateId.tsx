@@ -2,10 +2,12 @@ import { useParams } from 'react-router-dom';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Context } from '../../../index';
 import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import { Box, createTheme, ThemeProvider } from '@mui/material';
 import AuctionTimer from '../../../components/layout/common/ui/timers/auctionTimer/AuctionTimer';
 import Typography from '@mui/material/Typography';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 interface AuctionItem {
     _id: string;
@@ -51,40 +53,91 @@ const RateId: FC = () => {
     if (!auction) {
         return (
             <ThemeProvider theme={theme}>
-                <Box sx={{ display: 'flex' }}>
+                <Grid container justifyContent="center">
                     <CircularProgress size={120} color="success" />
-                </Box>
+                </Grid>
             </ThemeProvider>
         );
     }
 
     return (
         <div>
-            <Typography variant={'h4'}>ID: {id}</Typography>
-
-            <img
-                src={auction.img}
-                alt="Preview"
-                style={{ maxWidth: '200px', marginTop: '1rem' }}
-            />
-            <Typography>Image link: {auction && auction.img}</Typography>
-            <Typography>
-                Active: {auction && auction.active.toString()}
+            <Typography
+                sx={{
+                    textAlign: 'center',
+                    fontSize: '30px',
+                    borderBottom: '1px solid white',
+                    pb: 1,
+                    mb: 2,
+                }}
+            >
+                {auction && auction.title}
             </Typography>
-            <Typography>Title: {auction && auction.title}</Typography>
-            <Typography>Description: {auction && auction.desct}</Typography>
-            <Typography>Min rates: {auction && auction.minRates}</Typography>
-            <Typography>Rates: {auction && auction.rates}</Typography>
-            <Typography>Owner: {auction && auction.owner}</Typography>
-            <Typography>
-                State: {auction && auction.state.toString()}
-            </Typography>
-            <Typography>Owner: {auction && auction.timeStart}</Typography>
-            <Typography>timeEnd: {auction && auction.timeEnd}</Typography>
-            <AuctionTimer
-                timeEnd={auction.timeEnd}
-                onAuctionEnd={() => console.log('auction ended')}
-            />
+            <Grid container justifyContent="flex-start" spacing={2}>
+                <Grid
+                    item
+                    sx={{
+                        width: '100%',
+                        maxWidth: '100%',
+                        position: 'relative',
+                    }}
+                    md={6}
+                >
+                    <img
+                        src={auction.img}
+                        alt="Preview"
+                        style={{ maxWidth: '100%', marginTop: '1rem' }}
+                    />
+                    <Box sx={{ position: 'absolute', top: 0 }}>
+                        {auction &&
+                            (auction.active ? (
+                                <VerifiedIcon
+                                    sx={{ color: '#7dc738', fontSize: 85 }}
+                                />
+                            ) : (
+                                <CancelIcon
+                                    sx={{ color: '#f54242', fontSize: 85 }}
+                                />
+                            ))}
+                    </Box>
+                </Grid>
+                <Grid item sx={{ width: '100%', maxWidth: '100%' }} md={6}>
+                    <Typography
+                        sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}
+                    >
+                        Author @{auction && auction.owner}
+                    </Typography>
+                    <Typography
+                        sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}
+                    >
+                        {auction && auction.desct}
+                    </Typography>
+                    <Typography>
+                        Start rates:{' '}
+                        <span style={{ color: '#ed3b59', fontSize: '20px' }}>
+                            {auction && auction.minRates}
+                        </span>{' '}
+                        $
+                    </Typography>
+                    <Typography
+                        sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}
+                    >
+                        Current rate:{' '}
+                        <span style={{ color: '#7dc738', fontSize: '20px' }}>
+                            {auction && auction.rates}
+                        </span>{' '}
+                        $
+                    </Typography>
+                    <Typography>
+                        Auction start date:
+                        <br /> {auction && auction.timeStart}
+                    </Typography>
+                    <AuctionTimer
+                        timeEnd={auction.timeEnd}
+                        onAuctionEnd={() => console.log('auction ended')}
+                    />
+                </Grid>
+            </Grid>
         </div>
     );
 };
