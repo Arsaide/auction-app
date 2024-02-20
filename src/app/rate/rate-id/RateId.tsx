@@ -29,7 +29,7 @@ const theme = createTheme({
     },
 });
 
-const BetId: FC = () => {
+const RateId: FC = () => {
     const { store } = useContext(Context);
     const { id } = useParams<{ id: string }>();
     const [auction, setAuction] = useState<AuctionItem | null>(null);
@@ -89,4 +89,4 @@ const BetId: FC = () => {
     );
 };
 
-export { BetId };
+export { RateId };

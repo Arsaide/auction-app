@@ -21,7 +21,7 @@ const BottomNav = () => {
         const path = location.pathname;
         const values = [
             '/information',
-            '/bet',
+            '/rate',
             '/',
             '/online-chat',
             '/personal-account',
@@ -47,7 +47,7 @@ const BottomNav = () => {
             />
             <BottomNavigationAction
                 label={'Rate'}
-                to={'bet'}
+                to={'rate'}
                 component={NavLink}
                 icon={<CurrencyBitcoinIcon />}
             />
