@@ -26,8 +26,12 @@ const BottomNav = () => {
             '/online-chat',
             '/personal-account',
         ];
-        const index = values.indexOf(path);
-        setValue(index > -1 ? index : 0);
+        if (path.startsWith('/rate/')) {
+            setValue(1);
+        } else {
+            const index = values.indexOf(path);
+            setValue(index > -1 ? index : 0);
+        }
     }, [location]);
 
     return (
@@ -47,7 +51,7 @@ const BottomNav = () => {
             />
             <BottomNavigationAction
                 label={'Rate'}
-                to={'rate'}
+                to={'/rate'}
                 component={NavLink}
                 icon={<CurrencyBitcoinIcon />}
             />
@@ -59,7 +63,7 @@ const BottomNav = () => {
             />
             <BottomNavigationAction
                 label={'Chat'}
-                to={'online-chat'}
+                to={'/online-chat'}
                 component={NavLink}
                 icon={<QuestionAnswerIcon />}
             />
