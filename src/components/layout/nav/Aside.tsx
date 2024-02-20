@@ -23,6 +23,7 @@ import LoginModal from '../modals/loginModal/LoginModal';
 import BottomNav from './bottomNav/BottomNav';
 import { Hidden } from '@mui/material';
 import { Link } from 'react-router-dom';
+import GoBack from './component/goBack/GoBack';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
@@ -50,16 +51,17 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <Hidden mdDown>
-                <AppBar
-                    position="fixed"
-                    sx={{
-                        width: { md: `calc(100% - ${drawerWidth}px)` },
-                        ml: { sm: `${drawerWidth}px` },
-                        bgcolor: '#040A2F',
-                    }}
-                >
-                    <Toolbar>
+            <AppBar
+                position="fixed"
+                sx={{
+                    width: { md: `calc(100% - ${drawerWidth}px)` },
+                    ml: { sm: `${drawerWidth}px` },
+                    bgcolor: '#040A2F',
+                }}
+            >
+                <Toolbar>
+                    <GoBack />
+                    <Hidden mdDown>
                         <Box
                             sx={{
                                 display: 'flex',
@@ -176,9 +178,9 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                                 )}
                             </Box>
                         </Box>
-                    </Toolbar>
-                </AppBar>
-            </Hidden>
+                    </Hidden>
+                </Toolbar>
+            </AppBar>
             <Box
                 component="nav"
                 sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
@@ -198,6 +200,7 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                     <SideBar />
                 </Drawer>
             </Box>
+            ; ;
             <Box
                 component="main"
                 sx={{
@@ -209,8 +212,12 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                 <Hidden mdDown>
                     <Toolbar />
                 </Hidden>
+                <Hidden mdUp>
+                    <Toolbar />
+                </Hidden>
                 {children}
             </Box>
+            ; ;
         </Box>
     );
 }
