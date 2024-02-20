@@ -12,6 +12,7 @@ import PersonalAccount from './personal-account/page';
 import BottomNav from '../components/layout/nav/bottomNav/BottomNav';
 import { Hidden } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
+import NotFount from './not-fount/page';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                         path={'personal-account'}
                         element={<PersonalAccount />}
                     />
+                    <Route path={'*'} element={<NotFount />} />
                 </Routes>
                 <Hidden mdUp>
                     <Toolbar />

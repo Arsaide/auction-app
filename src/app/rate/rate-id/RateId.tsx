@@ -8,7 +8,6 @@ import AuctionTimer from '../../../components/layout/common/ui/timers/auctionTim
 import Typography from '@mui/material/Typography';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
-import Button from '@mui/material/Button';
 
 interface AuctionItem {
     _id: string;
@@ -37,10 +36,6 @@ const RateId: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [auction, setAuction] = useState<AuctionItem | null>(null);
     const navigate = useNavigate();
-
-    const goBack = () => {
-        navigate(-1);
-    };
 
     useEffect(() => {
         const fetchAuction = async () => {
