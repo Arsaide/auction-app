@@ -8,6 +8,7 @@ import OnlineChatPage from './online-chat/page';
 import InformationPage from './information/page';
 import ToastMessage from '../components/layout/common/alerts/toastMessage/ToastMessage';
 import { RateId } from './rate/rate-id/RateId';
+import { UserId } from './personal-account/user-id/UserId';
 import PersonalAccount from './personal-account/page';
 import BottomNav from '../components/layout/nav/bottomNav/BottomNav';
 import { Hidden } from '@mui/material';
@@ -28,6 +29,7 @@ function App() {
                         path={'personal-account'}
                         element={<PersonalAccount />}
                     />
+                    <Route path={'account/:token'} element={<UserId />} />
                     <Route path={'*'} element={<NotFount />} />
                 </Routes>
                 <Hidden mdUp>

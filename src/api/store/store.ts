@@ -156,4 +156,12 @@ export default class Store {
             throw e;
         }
     }
+
+    async getUser(token: string | undefined) {
+        try {
+            return await AuthService.getUser(token);
+        } catch (e: any) {
+            throw e;
+        }
+    }
 }

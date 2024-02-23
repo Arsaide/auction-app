@@ -35,13 +35,11 @@ const RateId: FC = () => {
     const { store } = useContext(Context);
     const { id } = useParams<{ id: string }>();
     const [auction, setAuction] = useState<AuctionItem | null>(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAuction = async () => {
             try {
                 const response = await store.getauctionone(id);
-                console.log(response);
                 setAuction(response.data.auction as unknown as AuctionItem);
             } catch (error) {
                 console.error('Error fetching auction:', error);

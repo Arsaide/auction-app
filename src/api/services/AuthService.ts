@@ -56,4 +56,10 @@ export default class AuthService {
     ): Promise<AxiosResponse<AuthResponse>> {
         return $api.post('/getauctionone', { id });
     }
+
+    static async getUser(
+        token: string | undefined,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post('/getuser', { token });
+    }
 }
