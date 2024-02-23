@@ -1,25 +1,31 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useState, useEffect } from 'react';
 import LoginForm from '../../components/pages/auth/loginForm/LoginForm';
 import Typography from '@mui/material/Typography';
 import { Context } from '../../index';
 import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
 import { Box, Hidden } from '@mui/material';
 import RegistrationForm from '../../components/pages/auth/regestrationForm/RegistrationForm';
-import Tooltip from '@mui/material/Tooltip';
-import Toolbar from '@mui/material/Toolbar';
+import { useNavigate } from 'react-router-dom';
 
 const PersonalAccount: FC = () => {
     const { store } = useContext(Context);
-    const isAuth = localStorage.getItem('isAuth') === 'true';
     const [showLoginComponent, setShowLoginComponent] =
         useState<boolean>(false);
     const [showRegComponent, setShowRegComponent] = useState<boolean>(false);
 
-    const handleSubmit = () => {
-        store.logout();
-        window.location.reload();
+    const navigate = useNavigate();
+    const isAuth = localStorage.getItem('isAuth') === 'true';
+    const token = localStorage.getItem('token');
+
+    const redirectPage = () => {
+        if (token && isAuth) {
+            navigate(`/personal-account/${token}`);
+        }
     };
+
+    useEffect(() => {
+        redirectPage();
+    }, []);
 
     const handleClickShowLogin = () => {
         setShowLoginComponent(true);

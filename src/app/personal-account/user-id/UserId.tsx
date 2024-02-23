@@ -1,6 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Context } from '../../../index';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -17,6 +17,19 @@ const UserId: FC = () => {
     const { store } = useContext(Context);
     const { token } = useParams<{ token: string }>();
     const [user, setUser] = useState<UserIdInt | null>(null);
+    const navigate = useNavigate();
+    const isAuth = localStorage.getItem('isAuth') === 'true';
+    const userToken = localStorage.getItem('token');
+
+    const redirectPage = () => {
+        if (!userToken || !isAuth) {
+            navigate(`/personal-account`);
+        }
+    };
+
+    useEffect(() => {
+        redirectPage();
+    }, []);
 
     useEffect(() => {
         const fetchAccount = async () => {
