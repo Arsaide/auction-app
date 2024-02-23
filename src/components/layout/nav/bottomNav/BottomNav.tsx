@@ -69,7 +69,7 @@ const BottomNav = () => {
                 component={NavLink}
                 icon={<QuestionAnswerIcon />}
             />
-            {isAuth && token ? (
+            {isAuth ? (
                 <BottomNavigationAction
                     to={`/personal-account/${token}`}
                     component={NavLink}

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 
 const useAuthCheck = () => {
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth, setIsAuth] = useState<boolean>(false);
 
     const checkAuth = () => {
         const isAuth = localStorage.getItem('isAuth') === 'true';
-        setIsAuth(isAuth);
+        const token = localStorage.getItem('token') || '';
+
+        setIsAuth(isAuth && token !== undefined && token !== '');
     };
 
     useEffect(() => {

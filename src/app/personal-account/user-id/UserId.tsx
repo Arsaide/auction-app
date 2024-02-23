@@ -19,10 +19,9 @@ const UserId: FC = () => {
     const [user, setUser] = useState<UserIdInt | null>(null);
     const navigate = useNavigate();
     const isAuth = localStorage.getItem('isAuth') === 'true';
-    const userToken = localStorage.getItem('token');
 
     const redirectPage = () => {
-        if (!userToken || !isAuth) {
+        if (!isAuth) {
             navigate(`/personal-account`);
         }
     };
@@ -60,7 +59,7 @@ const UserId: FC = () => {
     return (
         <div>
             <p>{user && user.email}</p>
-            <p>{user && user.balance}</p>
+            <p>{user && user.balance} $</p>
             <Button variant="contained" onClick={handleSubmit} sx={{ mt: 3 }}>
                 Log out
             </Button>

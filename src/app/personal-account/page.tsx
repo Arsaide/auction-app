@@ -12,13 +12,12 @@ const PersonalAccount: FC = () => {
     const [showLoginComponent, setShowLoginComponent] =
         useState<boolean>(false);
     const [showRegComponent, setShowRegComponent] = useState<boolean>(false);
-
     const navigate = useNavigate();
     const isAuth = localStorage.getItem('isAuth') === 'true';
     const token = localStorage.getItem('token');
 
     const redirectPage = () => {
-        if (token && isAuth) {
+        if (isAuth) {
             navigate(`/personal-account/${token}`);
         }
     };
