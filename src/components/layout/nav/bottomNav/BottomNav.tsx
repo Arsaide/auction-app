@@ -17,6 +17,8 @@ const BottomNav = () => {
     const [value, setValue] = useState(0);
     const location = useLocation();
 
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
         const path = location.pathname;
         const values = [
@@ -67,9 +69,9 @@ const BottomNav = () => {
                 component={NavLink}
                 icon={<QuestionAnswerIcon />}
             />
-            {isAuth ? (
+            {isAuth && token ? (
                 <BottomNavigationAction
-                    to={'/personal-account'}
+                    to={`/personal-account/${token}`}
                     component={NavLink}
                     icon={
                         <IconButton sx={{ p: 0 }}>

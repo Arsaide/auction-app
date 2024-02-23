@@ -1,5 +1,4 @@
 import React, { FC, useContext, useState } from 'react';
-import PersonalData from '../../components/pages/personalAccount/personalData/PersonalData';
 import LoginForm from '../../components/pages/auth/loginForm/LoginForm';
 import Typography from '@mui/material/Typography';
 import { Context } from '../../index';
@@ -33,103 +32,67 @@ const PersonalAccount: FC = () => {
 
     return (
         <>
-            {isAuth ? (
+            {showLoginComponent || showRegComponent ? null : (
                 <>
-                    <Typography sx={{ mb: 3 }} variant={'h4'}>
-                        Personal Account
-                    </Typography>
-                    <Box>
-                        <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                            <Avatar
-                                alt="Monkey King"
-                                src="/avatar/avatar.jpg"
-                                sx={{ width: 106, height: 106 }}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            gap: 3,
+                        }}
+                    >
+                        <Hidden mdUp>
+                            <img
+                                style={{ width: '100%' }}
+                                src="/flr2.gif"
+                                alt="Тут будет логотип в будущем"
                             />
-                            <PersonalData />
-                        </Box>
-                        <Button
-                            variant="contained"
-                            onClick={handleSubmit}
-                            sx={{ mt: 3 }}
+                        </Hidden>
+                        <Typography variant={'h5'} sx={{ textAlign: 'center' }}>
+                            To continue please log in.
+                        </Typography>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 3,
+                            }}
                         >
-                            Log out
-                        </Button>
+                            <Button
+                                color="success"
+                                variant="contained"
+                                size="large"
+                                onClick={handleClickShowLogin}
+                            >
+                                Log-in
+                            </Button>
+                            <Button
+                                color="success"
+                                variant="contained"
+                                size="large"
+                                onClick={handleClickShowReg}
+                            >
+                                Registration
+                            </Button>
+                        </Box>
                     </Box>
                 </>
-            ) : (
+            )}
+            {showLoginComponent && (
                 <>
-                    {showLoginComponent || showRegComponent ? null : (
-                        <>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'center',
-                                    gap: 3,
-                                }}
-                            >
-                                <Hidden mdUp>
-                                    <img
-                                        style={{ width: '100%' }}
-                                        src="/flr2.gif"
-                                        alt="Тут будет логотип в будущем"
-                                    />
-                                </Hidden>
-                                <Typography
-                                    variant={'h5'}
-                                    sx={{ textAlign: 'center' }}
-                                >
-                                    To continue please log in.
-                                </Typography>
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: 3,
-                                    }}
-                                >
-                                    <Button
-                                        color="success"
-                                        variant="contained"
-                                        size="large"
-                                        onClick={handleClickShowLogin}
-                                    >
-                                        Log-in
-                                    </Button>
-                                    <Button
-                                        color="success"
-                                        variant="contained"
-                                        size="large"
-                                        onClick={handleClickShowReg}
-                                    >
-                                        Registration
-                                    </Button>
-                                </Box>
-                            </Box>
-                        </>
-                    )}
-                    {showLoginComponent && (
-                        <>
-                            <Typography
-                                variant={'h5'}
-                                sx={{ textAlign: 'center' }}
-                            >
-                                To continue please log in.
-                            </Typography>
-                            <LoginForm />
-                        </>
-                    )}
-                    {showRegComponent && (
-                        <>
-                            <Typography
-                                variant={'h5'}
-                                sx={{ textAlign: 'center' }}
-                            >
-                                To continue please log in.
-                            </Typography>
-                            <RegistrationForm />
-                        </>
-                    )}
+                    <Typography variant={'h5'} sx={{ textAlign: 'center' }}>
+                        To continue please log in.
+                    </Typography>
+                    <LoginForm />
+                </>
+            )}
+            {showRegComponent && (
+                <>
+                    <Typography variant={'h5'} sx={{ textAlign: 'center' }}>
+                        To continue please log in.
+                    </Typography>
+                    <RegistrationForm />
                 </>
             )}
         </>

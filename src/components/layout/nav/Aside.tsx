@@ -36,6 +36,7 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
         window.location.reload();
     };
 
+    const token = localStorage.getItem('token');
     const isAuth = localStorage.getItem('isAuth') === 'true';
 
     const { handleOpenUserMenu, anchorElUser, handleCloseUserMenu } =
@@ -73,52 +74,53 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                             }}
                         >
                             <Box sx={{ flexGrow: 0 }}>
-                                {!isAuth && (
-                                    <>
-                                        <Button
-                                            variant="contained"
-                                            color="inherit"
-                                            sx={{
-                                                color: 'white',
-                                                bgcolor: '#1B266B',
-                                                '&:hover': {
-                                                    bgcolor: '#2c3f9e',
-                                                },
-                                            }}
-                                            onClick={handleLoginClickOpen}
-                                        >
-                                            Log in
-                                        </Button>
-                                        <Button
-                                            variant="contained"
-                                            color="inherit"
-                                            sx={{
-                                                color: 'white',
-                                                bgcolor: '#1B266B',
-                                                ml: 2,
-                                                '&:hover': {
-                                                    bgcolor: '#2c3f9e',
-                                                },
-                                            }}
-                                            onClick={
-                                                handleRegistrationClickOpen
-                                            }
-                                        >
-                                            Registration
-                                        </Button>
+                                {!isAuth ||
+                                    (!token && (
+                                        <>
+                                            <Button
+                                                variant="contained"
+                                                color="inherit"
+                                                sx={{
+                                                    color: 'white',
+                                                    bgcolor: '#1B266B',
+                                                    '&:hover': {
+                                                        bgcolor: '#2c3f9e',
+                                                    },
+                                                }}
+                                                onClick={handleLoginClickOpen}
+                                            >
+                                                Log in
+                                            </Button>
+                                            <Button
+                                                variant="contained"
+                                                color="inherit"
+                                                sx={{
+                                                    color: 'white',
+                                                    bgcolor: '#1B266B',
+                                                    ml: 2,
+                                                    '&:hover': {
+                                                        bgcolor: '#2c3f9e',
+                                                    },
+                                                }}
+                                                onClick={
+                                                    handleRegistrationClickOpen
+                                                }
+                                            >
+                                                Registration
+                                            </Button>
 
-                                        <RegModal
-                                            open={openRegistrationModal}
-                                            onClose={handleClose}
-                                        />
-                                        <LoginModal
-                                            open={openLoginModal}
-                                            onClose={handleClose}
-                                        />
-                                    </>
-                                )}
+                                            <RegModal
+                                                open={openRegistrationModal}
+                                                onClose={handleClose}
+                                            />
+                                            <LoginModal
+                                                open={openLoginModal}
+                                                onClose={handleClose}
+                                            />
+                                        </>
+                                    ))}
 
-                                {isAuth && (
+                                {isAuth && token && (
                                     <>
                                         <Tooltip title="Open settings">
                                             <IconButton
@@ -152,7 +154,7 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                                             >
                                                 <Typography textAlign="center">
                                                     <Link
-                                                        to={'/personal-account'}
+                                                        to={`/personal-account/${token}`}
                                                         style={{
                                                             textDecoration:
                                                                 'none',

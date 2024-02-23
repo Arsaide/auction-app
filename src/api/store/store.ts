@@ -43,8 +43,6 @@ export default class Store {
                 },
             );
             localStorage.setItem('token', response.data.token);
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userPassword', password);
             this.setAuth(true);
             this.setUser(response.data.user);
             return response;

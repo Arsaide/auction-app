@@ -29,7 +29,10 @@ function App() {
                         path={'personal-account'}
                         element={<PersonalAccount />}
                     />
-                    <Route path={'account/:token'} element={<UserId />} />
+                    <Route
+                        path={'personal-account/:token'}
+                        element={<UserId />}
+                    />
                     <Route path={'*'} element={<NotFount />} />
                 </Routes>
                 <Hidden mdUp>

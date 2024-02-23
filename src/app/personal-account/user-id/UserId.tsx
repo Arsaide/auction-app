@@ -1,6 +1,10 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Context } from '../../../index';
 import { useParams } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 
 interface UserIdInt {
     email: string;
@@ -12,21 +16,41 @@ interface UserIdInt {
 const UserId: FC = () => {
     const { store } = useContext(Context);
     const { token } = useParams<{ token: string }>();
-    const [accoundInfo, setAccoundInfo] = useState<UserIdInt | null>(null);
+    const [user, setUser] = useState<UserIdInt | null>(null);
 
     useEffect(() => {
         const fetchAccount = async () => {
-            const response = await store.getUser(token);
-            console.log(response);
-            setAccoundInfo(response.data.user as unknown as UserIdInt);
+            try {
+                const response = await store.getUser(token);
+                setUser(response.data.user as unknown as UserIdInt);
+            } catch (error) {
+                console.error('Error fetching account:', error);
+            }
         };
+
         fetchAccount();
-    }, [token]);
+    }, [store, token]);
+
+    const handleSubmit = () => {
+        store.logout();
+        window.location.reload();
+    };
+
+    if (!user) {
+        return (
+            <Grid container justifyContent="center">
+                <CircularProgress size={120} color="success" />
+            </Grid>
+        );
+    }
 
     return (
         <div>
-            <p>{accoundInfo && accoundInfo.email}</p>
-            <p>{accoundInfo && accoundInfo.balance}</p>
+            <p>{user && user.email}</p>
+            <p>{user && user.balance}</p>
+            <Button variant="contained" onClick={handleSubmit} sx={{ mt: 3 }}>
+                Log out
+            </Button>
         </div>
     );
 };
