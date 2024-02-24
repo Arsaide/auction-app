@@ -52,10 +52,10 @@ export default class Store {
         }
     }
 
-    async registration(email: string, password: string) {
+    async registration(name: string, email: string, password: string) {
         try {
             const response = await toast.promise(
-                AuthService.registration(email, password),
+                AuthService.registration(name, email, password),
                 {
                     pending: 'Registering...',
                     success: 'Registered successfully!',

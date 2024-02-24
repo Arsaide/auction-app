@@ -3,6 +3,12 @@ import * as yup from 'yup';
 const regEx = /^.*(?=.*\d)(?=.*[a-zA-Z]).*$/;
 
 export const registrationValidationSchema = yup.object().shape({
+    name: yup
+        .string()
+        .required('Required field')
+        .min(6, 'Not shorter than 6 characters!')
+        .max(15, 'Not longer than 15 characters!'),
+
     email: yup
         .string()
         .required(`Required field`)

@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface RegistrationFormValues {
+    name: string;
     email: string;
     password: string;
 }
@@ -25,6 +26,7 @@ const RegistrationForm: FC = () => {
     const [showLoginForm, setShowLoginForm] = useState(false); // Add state to control login form visibility
 
     const initialValues = {
+        name: '',
         email: '',
         password: '',
     };
@@ -37,6 +39,7 @@ const RegistrationForm: FC = () => {
         setIsSubmitting(true);
         try {
             const response = await store.registration(
+                values.name,
                 values.email,
                 values.password,
             );
@@ -73,6 +76,12 @@ const RegistrationForm: FC = () => {
                                     gap: 1.5,
                                 }}
                             >
+                                <Input
+                                    id={'name'}
+                                    label={'Nickname'}
+                                    name={'name'}
+                                    placeholder={'Enter your nickname'}
+                                />
                                 <Input
                                     id={'email'}
                                     label={'Email'}
