@@ -1,17 +1,10 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Context } from '../../../index';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
-
-interface UserIdInt {
-    email: string;
-    balance: string;
-    bidAuction: [string];
-    ownAuction: [string];
-}
+import { UserIdInt } from './UserInterface';
 
 const UserId: FC = () => {
     const { store } = useContext(Context);

@@ -74,53 +74,52 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                             }}
                         >
                             <Box sx={{ flexGrow: 0 }}>
-                                {!isAuth ||
-                                    (!token && (
-                                        <>
-                                            <Button
-                                                variant="contained"
-                                                color="inherit"
-                                                sx={{
-                                                    color: 'white',
-                                                    bgcolor: '#1B266B',
-                                                    '&:hover': {
-                                                        bgcolor: '#2c3f9e',
-                                                    },
-                                                }}
-                                                onClick={handleLoginClickOpen}
-                                            >
-                                                Log in
-                                            </Button>
-                                            <Button
-                                                variant="contained"
-                                                color="inherit"
-                                                sx={{
-                                                    color: 'white',
-                                                    bgcolor: '#1B266B',
-                                                    ml: 2,
-                                                    '&:hover': {
-                                                        bgcolor: '#2c3f9e',
-                                                    },
-                                                }}
-                                                onClick={
-                                                    handleRegistrationClickOpen
-                                                }
-                                            >
-                                                Registration
-                                            </Button>
+                                {!isAuth && (
+                                    <>
+                                        <Button
+                                            variant="contained"
+                                            color="inherit"
+                                            sx={{
+                                                color: 'white',
+                                                bgcolor: '#1B266B',
+                                                '&:hover': {
+                                                    bgcolor: '#2c3f9e',
+                                                },
+                                            }}
+                                            onClick={handleLoginClickOpen}
+                                        >
+                                            Log in
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            color="inherit"
+                                            sx={{
+                                                color: 'white',
+                                                bgcolor: '#1B266B',
+                                                ml: 2,
+                                                '&:hover': {
+                                                    bgcolor: '#2c3f9e',
+                                                },
+                                            }}
+                                            onClick={
+                                                handleRegistrationClickOpen
+                                            }
+                                        >
+                                            Registration
+                                        </Button>
 
-                                            <RegModal
-                                                open={openRegistrationModal}
-                                                onClose={handleClose}
-                                            />
-                                            <LoginModal
-                                                open={openLoginModal}
-                                                onClose={handleClose}
-                                            />
-                                        </>
-                                    ))}
+                                        <RegModal
+                                            open={openRegistrationModal}
+                                            onClose={handleClose}
+                                        />
+                                        <LoginModal
+                                            open={openLoginModal}
+                                            onClose={handleClose}
+                                        />
+                                    </>
+                                )}
 
-                                {isAuth && token && (
+                                {isAuth && (
                                     <>
                                         <Tooltip title="Open settings">
                                             <IconButton
