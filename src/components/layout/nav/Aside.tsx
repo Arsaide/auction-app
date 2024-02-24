@@ -18,7 +18,7 @@ import { useContext } from 'react';
 import { Context } from '../../../index';
 import RegModal from '../modals/regModal/RegModal';
 import LoginModal from '../modals/loginModal/LoginModal';
-import { Hidden } from '@mui/material';
+import { Chip, Hidden } from '@mui/material';
 import { Link } from 'react-router-dom';
 import GoBack from './component/goBack/GoBack';
 
@@ -35,6 +35,7 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
 
     const token = localStorage.getItem('token');
     const isAuth = localStorage.getItem('isAuth') === 'true';
+    const balance = localStorage.getItem('balance');
 
     const { handleOpenUserMenu, anchorElUser, handleCloseUserMenu } =
         useOpenUserMenu();
@@ -57,8 +58,20 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                     bgcolor: '#040A2F',
                 }}
             >
-                <Toolbar>
+                <Toolbar
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}
+                >
                     <GoBack />
+                    <Hidden mdUp>
+                        <Chip
+                            label={`${balance} $`}
+                            color="primary"
+                            sx={{ mr: 2 }}
+                        />
+                    </Hidden>
                     <Hidden mdDown>
                         <Box
                             sx={{
@@ -118,6 +131,11 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
 
                                 {isAuth && (
                                     <>
+                                        <Chip
+                                            label={`${balance} $`}
+                                            color="primary"
+                                            sx={{ mr: 2 }}
+                                        />
                                         <Tooltip title="Open settings">
                                             <IconButton
                                                 onClick={handleOpenUserMenu}

@@ -43,6 +43,7 @@ export default class Store {
                 },
             );
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('balance', response.data.balance);
             this.setAuth(true);
             this.setUser(response.data.user);
             return response;
