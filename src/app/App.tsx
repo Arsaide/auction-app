@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './global.scss';
 import { Route, Routes } from 'react-router-dom';
-import ResponsiveDrawer from '../components/layout/nav/Aside';
+import NavBar from '../components/layout/nav/NavBar';
 import HomePage from './home/page';
 import BetPage from './rate/page';
 import OnlineChatPage from './online-chat/page';
@@ -43,7 +43,7 @@ function App() {
 
     return (
         <div className="App">
-            <ResponsiveDrawer balance={balance}>
+            <NavBar balance={balance}>
                 <Routes>
                     <Route path={'/'} element={<HomePage />} />
                     <Route path={'rate'} element={<BetPage />} />
@@ -64,7 +64,7 @@ function App() {
                     <Toolbar />
                     <BottomNav />
                 </Hidden>
-            </ResponsiveDrawer>
+            </NavBar>
             <ToastMessage />
         </div>
     );
