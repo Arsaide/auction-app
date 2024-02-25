@@ -101,8 +101,6 @@ export default class Store {
                     error: 'Failed to request, please try again...',
                 },
             );
-
-            console.log(endDate);
             return response;
         } catch (e: any) {
             throw e;

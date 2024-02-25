@@ -1,23 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Skeleton, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import AuctionCard from '../../../../layout/common/ui/auctionCard/AuctionCard';
 import { API_URL } from '../../../../../api/request';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import CachedIcon from '@mui/icons-material/Cached';
-import { keyframes } from '@mui/system';
-
-const spin = keyframes({
-    '0%': {
-        transform: 'rotate(0deg)',
-    },
-    '100%': {
-        transform: 'rotate(360deg)',
-    },
-});
+import AuctionListSkeleton from './components/auctionListSkeleton/AuctionListSkeleton';
+import AuctionReloadButton from './components/AuctionReloadButton/AuctionReloadButton';
 
 interface AuctionItem {
     _id: string;
@@ -64,27 +51,11 @@ const AuctionList = () => {
             <Typography variant="h3" sx={{ mb: 2, textAlign: 'center' }}>
                 Auction List
             </Typography>
-            <Button
+            <AuctionReloadButton
                 disabled={isRequesting}
-                variant="contained"
                 onClick={reloadAuctions}
-                sx={{
-                    mb: 1,
-                    '&:disabled': {
-                        bgcolor: '#f54242',
-                        color: 'white',
-                    },
-                }}
-            >
-                <CachedIcon
-                    sx={{
-                        animation: isRequesting
-                            ? `${spin} 0.5s linear infinite`
-                            : 'none',
-                        pointerEvents: isRequesting ? 'none' : 'auto',
-                    }}
-                />
-            </Button>
+                isRequesting={isRequesting}
+            />
             <Grid
                 container
                 spacing={{ xs: 2, md: 3 }}
@@ -92,56 +63,28 @@ const AuctionList = () => {
             >
                 {loading ? (
                     <>
-                        {[1, 2, 3, 4].map(index => (
+                        {[1, 2, 3, 4, 5, 6].map(index => (
                             <Grid item xs={2} sm={4} md={4} key={index}>
-                                <Card>
-                                    <Skeleton
-                                        variant="rectangular"
-                                        sx={{ height: 450 }}
-                                    />
-                                    <CardContent>
-                                        <Skeleton
-                                            sx={{
-                                                height: 32,
-                                                marginBottom: '0.35em',
-                                            }}
-                                        />
-                                        <Skeleton
-                                            width="100%"
-                                            sx={{ height: 100 }}
-                                        />
-                                        <Skeleton
-                                            width="50%"
-                                            sx={{ height: 42 }}
-                                        />
-                                    </CardContent>
-                                    <CardActions sx={{ marginLeft: 1 }}>
-                                        <Skeleton
-                                            width="104px"
-                                            sx={{ height: 52 }}
-                                        />
-                                        <Skeleton
-                                            width="104px"
-                                            sx={{ height: 52 }}
-                                        />
-                                    </CardActions>
-                                </Card>
+                                <AuctionListSkeleton />
                             </Grid>
                         ))}
                     </>
                 ) : (
-                    auction.map((card: AuctionItem) => (
-                        <Grid item xs={2} sm={4} md={4} key={card._id}>
-                            <AuctionCard
-                                img={card.img}
-                                title={card.title}
-                                desc={card.desct}
-                                minRates={card.minRates}
-                                timeEnd={card.timeEnd}
-                                id={card._id}
-                            />
-                        </Grid>
-                    ))
+                    auction
+                        .slice()
+                        .reverse()
+                        .map((card: AuctionItem) => (
+                            <Grid item xs={2} sm={4} md={4} key={card._id}>
+                                <AuctionCard
+                                    img={card.img}
+                                    title={card.title}
+                                    desc={card.desct}
+                                    minRates={card.minRates}
+                                    timeEnd={card.timeEnd}
+                                    id={card._id}
+                                />
+                            </Grid>
+                        ))
                 )}
             </Grid>
         </Box>
