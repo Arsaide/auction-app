@@ -19,7 +19,7 @@ const BetPage = () => {
                     }
                 />
             )}
-            <AuctionList />
+            {/*<AuctionList />*/}
         </section>
     );
 };
