@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import { UserIdInt } from './UserInterface';
+import Typography from '@mui/material/Typography';
 
 const UserId: FC = () => {
     const { store } = useContext(Context);
@@ -51,8 +52,12 @@ const UserId: FC = () => {
 
     return (
         <div>
-            <p>{user && user.email}</p>
-            <p>{user && user.balance} $</p>
+            <Typography>Nickname: {user && user.name}</Typography>
+            <Typography>Email: {user && user.email}</Typography>
+            <Typography>Balance: {user && user.balance} $</Typography>
+
+            <Grid></Grid>
+
             <Button variant="contained" onClick={handleSubmit} sx={{ mt: 3 }}>
                 Log out
             </Button>

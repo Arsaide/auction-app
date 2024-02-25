@@ -24,10 +24,15 @@ import GoBack from './component/goBack/GoBack';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
+    balance: string;
 }
 
-export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
+export default function ResponsiveDrawer({
+    children,
+    balance,
+}: ResponsiveDrawerProps) {
     const { store } = useContext(Context);
+
     const handleSubmit = () => {
         store.logout();
         window.location.reload();
@@ -35,7 +40,6 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
 
     const token = localStorage.getItem('token');
     const isAuth = localStorage.getItem('isAuth') === 'true';
-    const balance = localStorage.getItem('balance');
 
     const { handleOpenUserMenu, anchorElUser, handleCloseUserMenu } =
         useOpenUserMenu();
@@ -65,13 +69,23 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
                     }}
                 >
                     <GoBack />
-                    <Hidden mdUp>
-                        <Chip
-                            label={`${balance} $`}
-                            color="primary"
-                            sx={{ mr: 2 }}
-                        />
-                    </Hidden>
+                    {isAuth && (
+                        <Hidden mdUp>
+                            {balance ? (
+                                <Chip
+                                    label={`${balance} $`}
+                                    color="primary"
+                                    sx={{ mr: 2 }}
+                                />
+                            ) : (
+                                <Chip
+                                    label={`Loading...`}
+                                    color="primary"
+                                    sx={{ mr: 2 }}
+                                />
+                            )}
+                        </Hidden>
+                    )}
                     <Hidden mdDown>
                         <Box
                             sx={{
@@ -131,11 +145,19 @@ export default function ResponsiveDrawer({ children }: ResponsiveDrawerProps) {
 
                                 {isAuth && (
                                     <>
-                                        <Chip
-                                            label={`${balance} $`}
-                                            color="primary"
-                                            sx={{ mr: 2 }}
-                                        />
+                                        {balance ? (
+                                            <Chip
+                                                label={`${balance} $`}
+                                                color="primary"
+                                                sx={{ mr: 2 }}
+                                            />
+                                        ) : (
+                                            <Chip
+                                                label={`Loading...`}
+                                                color="primary"
+                                                sx={{ mr: 2 }}
+                                            />
+                                        )}
                                         <Tooltip title="Open settings">
                                             <IconButton
                                                 onClick={handleOpenUserMenu}
