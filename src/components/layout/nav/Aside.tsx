@@ -238,7 +238,6 @@ export default function ResponsiveDrawer({
                     <SideBar />
                 </Drawer>
             </Box>
-            ; ;
             <Box
                 component="main"
                 sx={{
@@ -255,7 +254,6 @@ export default function ResponsiveDrawer({
                 </Hidden>
                 {children}
             </Box>
-            ; ;
         </Box>
     );
 }
