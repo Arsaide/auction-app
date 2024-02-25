@@ -42,11 +42,11 @@ const AuctionTimer: FC<AuctionTimerInterface> = ({ timeEnd, onAuctionEnd }) => {
     return (
         <div>
             {timeExpired ? (
-                <Typography variant={'h5'}>
+                <Typography sx={{ fontSize: 23 }}>
                     Auction finished: 00:00:00:00
                 </Typography>
             ) : (
-                <Typography variant={'h5'}>
+                <Typography sx={{ fontSize: 23 }}>
                     Time left: {formatTime(timeRemaining)}
                 </Typography>
             )}
