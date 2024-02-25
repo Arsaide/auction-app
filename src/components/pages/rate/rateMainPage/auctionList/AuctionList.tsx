@@ -76,14 +76,14 @@ const AuctionList = () => {
                     },
                 }}
             >
-                <CachedIcon
-                    sx={{
-                        animation: isRequesting
-                            ? `${spin} 0.5s linear infinite`
-                            : 'none',
-                        pointerEvents: isRequesting ? 'none' : 'auto',
-                    }}
-                />
+                {/*<CachedIcon*/}
+                {/*    sx={{*/}
+                {/*        animation: isRequesting*/}
+                {/*            ? `${spin} 0.5s linear infinite`*/}
+                {/*            : 'none',*/}
+                {/*        pointerEvents: isRequesting ? 'none' : 'auto',*/}
+                {/*    }}*/}
+                {/*/>*/}
             </Button>
             <Grid
                 container
