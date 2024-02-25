@@ -64,27 +64,27 @@ const AuctionList = () => {
             <Typography variant="h3" sx={{ mb: 2, textAlign: 'center' }}>
                 Auction List
             </Typography>
-            {/*<Button*/}
-            {/*    disabled={isRequesting}*/}
-            {/*    variant="contained"*/}
-            {/*    onClick={reloadAuctions}*/}
-            {/*    sx={{*/}
-            {/*        mb: 1,*/}
-            {/*        '&:disabled': {*/}
-            {/*            bgcolor: '#f54242',*/}
-            {/*            color: 'white',*/}
-            {/*        },*/}
-            {/*    }}*/}
-            {/*>*/}
-            {/*    <CachedIcon*/}
-            {/*        sx={{*/}
-            {/*            animation: isRequesting*/}
-            {/*                ? `${spin} 0.5s linear infinite`*/}
-            {/*                : 'none',*/}
-            {/*            pointerEvents: isRequesting ? 'none' : 'auto',*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*</Button>*/}
+            <Button
+                disabled={isRequesting}
+                variant="contained"
+                onClick={reloadAuctions}
+                sx={{
+                    mb: 1,
+                    '&:disabled': {
+                        bgcolor: '#f54242',
+                        color: 'white',
+                    },
+                }}
+            >
+                <CachedIcon
+                    sx={{
+                        animation: isRequesting
+                            ? `${spin} 0.5s linear infinite`
+                            : 'none',
+                        pointerEvents: isRequesting ? 'none' : 'auto',
+                    }}
+                />
+            </Button>
             <Grid
                 container
                 spacing={{ xs: 2, md: 3 }}
