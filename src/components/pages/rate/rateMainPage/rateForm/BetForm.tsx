@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import { toast } from 'react-toastify';
 import { Context } from '../../../../../index';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, { Dayjs } from 'dayjs';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 
-interface LoginFormValues {
+interface BetFormInt {
     title: string;
     desc: string;
     minRates: string;
@@ -48,7 +48,10 @@ const BetForm = () => {
         image: '',
     };
 
-    const handleSubmit = async (values: LoginFormValues) => {
+    const handleSubmit = async (
+        values: BetFormInt,
+        actions: FormikHelpers<BetFormInt>,
+    ) => {
         if (
             lastSubmittedTimeRef.current &&
             Date.now() - lastSubmittedTimeRef.current < 300000
@@ -67,6 +70,7 @@ const BetForm = () => {
                 value,
             );
             if (response && response.status === 200) {
+                actions.resetForm();
                 lastSubmittedTimeRef.current = Date.now();
                 localStorage.setItem(
                     'lastSubmittedTime',
