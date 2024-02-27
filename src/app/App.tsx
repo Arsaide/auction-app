@@ -3,7 +3,7 @@ import './global.scss';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from '../components/layout/nav/NavBar';
 import HomePage from './home/page';
-import BetPage from './rate/page';
+import RatePage from './rate/page';
 import OnlineChatPage from './online-chat/page';
 import InformationPage from './information/page';
 import ToastMessage from '../components/layout/common/alerts/toastMessage/ToastMessage';
@@ -46,7 +46,7 @@ function App() {
             <NavBar balance={balance}>
                 <Routes>
                     <Route path={'/'} element={<HomePage />} />
-                    <Route path={'rate'} element={<BetPage />} />
+                    <Route path={'rate'} element={<RatePage />} />
                     <Route path={'rate/:id/'} element={<RateId />} />
                     <Route path={'online-chat'} element={<OnlineChatPage />} />
                     <Route path={'information'} element={<InformationPage />} />

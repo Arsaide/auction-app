@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import AuctionCard from '../../../../layout/common/ui/auctionCard/AuctionCard';
 import { API_URL } from '../../../../../api/request';

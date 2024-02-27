@@ -1,16 +1,15 @@
 import React from 'react';
-import BetForm from '../../components/pages/rate/rateMainPage/rateForm/BetForm';
+import RateForm from '../../components/pages/rate/rateMainPage/rateForm/RateForm';
 import AuctionList from '../../components/pages/rate/rateMainPage/auctionList/AuctionList';
 import useAuthCheck from '../../hooks/useAuthCheck/useAuthCheck';
 import InfoAlert from '../../components/layout/common/alerts/infoAlert/InfoAlert';
 
-const BetPage = () => {
+const RatePage = () => {
     const { isAuth } = useAuthCheck();
-
     return (
         <section>
             {isAuth ? (
-                <BetForm />
+                <RateForm />
             ) : (
                 <InfoAlert
                     title={'Why do I see this alert? - Log in, please'}
@@ -24,4 +23,4 @@ const BetPage = () => {
     );
 };
 
-export default BetPage;
+export default RatePage;

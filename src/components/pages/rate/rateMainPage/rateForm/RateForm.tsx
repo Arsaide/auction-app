@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { toast } from 'react-toastify';
 import { Context } from '../../../../../index';
@@ -14,15 +14,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, { Dayjs } from 'dayjs';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 
-interface BetFormInt {
+interface RateFormInt {
     title: string;
     desc: string;
     minRates: string;
     endDate: Date[];
     image: string;
 }
-
-const BetForm = () => {
+const RateForm = () => {
     const { store } = useContext(Context);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const lastSubmittedTimeRef = useRef<number | null>(null);
@@ -49,8 +48,8 @@ const BetForm = () => {
     };
 
     const handleSubmit = async (
-        values: BetFormInt,
-        actions: FormikHelpers<BetFormInt>,
+        values: RateFormInt,
+        actions: FormikHelpers<RateFormInt>,
     ) => {
         if (
             lastSubmittedTimeRef.current &&
@@ -228,4 +227,4 @@ const BetForm = () => {
     );
 };
 
-export default BetForm;
+export default RateForm;
