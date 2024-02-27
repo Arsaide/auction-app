@@ -5,6 +5,7 @@ import { API_URL } from '../../../../../api/request';
 import Typography from '@mui/material/Typography';
 import AuctionListSkeleton from './components/auctionListSkeleton/AuctionListSkeleton';
 import AuctionReloadButton from './components/AuctionReloadButton/AuctionReloadButton';
+import Button from '@mui/material/Button';
 
 interface AuctionItem {
     _id: string;
@@ -46,16 +47,28 @@ const AuctionList = () => {
             });
     };
 
+    const expiredAuctions = auction.filter(
+        item => new Date(item.timeEnd) < new Date(),
+    );
+    const activeAuctions = auction.filter(
+        item => new Date(item.timeEnd) >= new Date(),
+    );
+
     return (
         <Box justifyContent={'center'}>
             <Typography variant="h3" sx={{ mb: 2, textAlign: 'center' }}>
                 Auction List
             </Typography>
-            <AuctionReloadButton
-                disabled={isRequesting}
-                onClick={reloadAuctions}
-                isRequesting={isRequesting}
-            />
+            <Box sx={{ mb: 1 }}>
+                <AuctionReloadButton
+                    disabled={isRequesting}
+                    onClick={reloadAuctions}
+                    isRequesting={isRequesting}
+                />
+                <Button>1</Button>
+                <Button>1</Button>
+                <Button>1</Button>
+            </Box>
             <Grid
                 container
                 spacing={{ xs: 2, md: 3 }}
@@ -70,21 +83,38 @@ const AuctionList = () => {
                         ))}
                     </>
                 ) : (
-                    auction
-                        .slice()
-                        .reverse()
-                        .map((card: AuctionItem) => (
-                            <Grid item xs={2} sm={4} md={4} key={card._id}>
-                                <AuctionCard
-                                    img={card.img}
-                                    title={card.title}
-                                    desc={card.desct}
-                                    minRates={card.minRates}
-                                    timeEnd={card.timeEnd}
-                                    id={card._id}
-                                />
-                            </Grid>
-                        ))
+                    <>
+                        {activeAuctions
+                            .slice()
+                            .reverse()
+                            .map((card: AuctionItem) => (
+                                <Grid item xs={2} sm={4} md={4} key={card._id}>
+                                    <AuctionCard
+                                        img={card.img}
+                                        title={card.title}
+                                        desc={card.desct}
+                                        minRates={card.minRates}
+                                        timeEnd={card.timeEnd}
+                                        id={card._id}
+                                    />
+                                </Grid>
+                            ))}
+                        {expiredAuctions
+                            .slice()
+                            .reverse()
+                            .map((card: AuctionItem) => (
+                                <Grid item xs={2} sm={4} md={4} key={card._id}>
+                                    <AuctionCard
+                                        img={card.img}
+                                        title={card.title}
+                                        desc={card.desct}
+                                        minRates={card.minRates}
+                                        timeEnd={card.timeEnd}
+                                        id={card._id}
+                                    />
+                                </Grid>
+                            ))}
+                    </>
                 )}
             </Grid>
         </Box>
