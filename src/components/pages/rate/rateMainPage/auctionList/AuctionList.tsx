@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Pagination } from '@mui/material';
 import AuctionCard from '../../../../layout/common/ui/auctionCard/AuctionCard';
 import { API_URL } from '../../../../../api/request';
 import Typography from '@mui/material/Typography';
 import AuctionListSkeleton from './components/auctionListSkeleton/AuctionListSkeleton';
 import AuctionReloadButton from './components/AuctionReloadButton/AuctionReloadButton';
 import Button from '@mui/material/Button';
+import usePagination from '../../../../../hooks/usePagination/usePagination';
 
 interface AuctionItem {
     _id: string;
@@ -17,9 +18,15 @@ interface AuctionItem {
 }
 
 const AuctionList = () => {
+    const { currentPage, setCurrentPage, handlePageChange, auctionsPerPage } =
+        usePagination();
     const [auction, setAuction] = useState<AuctionItem[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [isRequesting, setIsRequesting] = useState<boolean>(false);
+
+    useEffect(() => {
+        fetchData();
+    }, [currentPage]);
 
     const fetchData = () => {
         setLoading(true);
@@ -39,10 +46,6 @@ const AuctionList = () => {
             });
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     const reloadAuctions = () => {
         fetchData();
     };
@@ -50,8 +53,17 @@ const AuctionList = () => {
     const expiredAuctions = auction.filter(
         item => new Date(item.timeEnd) < new Date(),
     );
-    const activeAuctions = auction.filter(
-        item => new Date(item.timeEnd) >= new Date(),
+    const activeAuctions = auction
+        .filter(item => new Date(item.timeEnd) >= new Date())
+        .reverse();
+
+    const sortedAuctions = [...activeAuctions, ...expiredAuctions];
+
+    const indexOfLastAuction = currentPage * auctionsPerPage;
+    const indexOfFirstAuction = indexOfLastAuction - auctionsPerPage;
+    const currentAuctions = sortedAuctions.slice(
+        indexOfFirstAuction,
+        indexOfLastAuction,
     );
 
     return (
@@ -76,7 +88,7 @@ const AuctionList = () => {
             >
                 {loading ? (
                     <>
-                        {[1, 2, 3, 4, 5, 6].map(index => (
+                        {[...Array(auctionsPerPage)].map((_, index) => (
                             <Grid item xs={2} sm={4} md={4} key={index}>
                                 <AuctionListSkeleton />
                             </Grid>
@@ -84,39 +96,28 @@ const AuctionList = () => {
                     </>
                 ) : (
                     <>
-                        {activeAuctions
-                            .slice()
-                            .reverse()
-                            .map((card: AuctionItem) => (
-                                <Grid item xs={2} sm={4} md={4} key={card._id}>
-                                    <AuctionCard
-                                        img={card.img}
-                                        title={card.title}
-                                        desc={card.desct}
-                                        minRates={card.minRates}
-                                        timeEnd={card.timeEnd}
-                                        id={card._id}
-                                    />
-                                </Grid>
-                            ))}
-                        {expiredAuctions
-                            .slice()
-                            .reverse()
-                            .map((card: AuctionItem) => (
-                                <Grid item xs={2} sm={4} md={4} key={card._id}>
-                                    <AuctionCard
-                                        img={card.img}
-                                        title={card.title}
-                                        desc={card.desct}
-                                        minRates={card.minRates}
-                                        timeEnd={card.timeEnd}
-                                        id={card._id}
-                                    />
-                                </Grid>
-                            ))}
+                        {currentAuctions.map((auction: AuctionItem) => (
+                            <Grid item xs={2} sm={4} md={4} key={auction._id}>
+                                <AuctionCard
+                                    img={auction.img}
+                                    title={auction.title}
+                                    desc={auction.desct}
+                                    minRates={auction.minRates}
+                                    timeEnd={auction.timeEnd}
+                                    id={auction._id}
+                                />
+                            </Grid>
+                        ))}
                     </>
                 )}
             </Grid>
+            <Pagination
+                count={Math.ceil(auction.length / auctionsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="secondary"
+                shape="rounded"
+            />
         </Box>
     );
 };
