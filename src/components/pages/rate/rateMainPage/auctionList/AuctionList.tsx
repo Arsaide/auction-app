@@ -21,7 +21,7 @@ const AuctionList = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [isRequesting, setIsRequesting] = useState<boolean>(false);
 
-    useEffect(() => {
+    const fetchData = () => {
         setLoading(true);
         setIsRequesting(true);
 
@@ -31,20 +31,20 @@ const AuctionList = () => {
                 setAuction(data.auction);
                 setLoading(false);
                 setIsRequesting(false);
+            })
+            .catch(error => {
+                console.error('Error fetching auction data:', error);
+                setLoading(false);
+                setIsRequesting(false);
             });
+    };
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
     const reloadAuctions = () => {
-        setLoading(true);
-        setIsRequesting(true);
-
-        fetch(`${API_URL}/getauction`)
-            .then(res => res.json())
-            .then(data => {
-                setAuction(data.auction);
-                setLoading(false);
-                setIsRequesting(false);
-            });
+        fetchData();
     };
 
     const expiredAuctions = auction.filter(
