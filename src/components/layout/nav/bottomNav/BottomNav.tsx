@@ -30,6 +30,8 @@ const BottomNav = () => {
         ];
         if (path.startsWith('/rate/')) {
             setValue(1);
+        } else if (path.startsWith('/personal-account/')) {
+            setValue(4);
         } else {
             const index = values.indexOf(path);
             setValue(index > -1 ? index : 0);
