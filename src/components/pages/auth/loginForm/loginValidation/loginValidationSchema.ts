@@ -3,10 +3,7 @@ import * as yup from 'yup';
 const regEx = /^.*(?=.*\d)(?=.*[a-zA-Z]).*$/;
 
 export const loginValidationSchema = yup.object().shape({
-    email: yup
-        .string()
-        .required(`Required field`)
-        .email('Invalid email format'),
+    email: yup.string().required(`Required field`),
 
     password: yup
         .string()

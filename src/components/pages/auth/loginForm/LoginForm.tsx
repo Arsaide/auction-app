@@ -69,8 +69,7 @@ const LoginForm: FC = () => {
                                     id={'email'}
                                     label={'Email'}
                                     name={'email'}
-                                    placeholder={'Enter your email'}
-                                    type={'email'}
+                                    placeholder={'Enter your nick or email'}
                                 />
                                 <Input
                                     id={'password'}
