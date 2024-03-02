@@ -128,8 +128,11 @@ const RateId: FC = () => {
                         $
                     </Typography>
                     <Typography>
-                        Auction start date:
-                        <br /> {auction && auction.timeStart}
+                        Auction start date:{' '}
+                        {auction &&
+                            new Date(auction.timeStart).toLocaleDateString(
+                                'ua-UA',
+                            )}
                     </Typography>
                     <AuctionTimer
                         timeEnd={auction.timeEnd}
