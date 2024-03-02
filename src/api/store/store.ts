@@ -157,6 +157,7 @@ export default class Store {
         try {
             return await AuthService.getUser(token);
         } catch (e: any) {
+            await this.logout();
             throw e;
         }
     }
