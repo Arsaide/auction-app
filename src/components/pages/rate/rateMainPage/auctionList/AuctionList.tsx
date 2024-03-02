@@ -15,6 +15,7 @@ interface AuctionItem {
     title: string;
     minRates: string;
     desct: string;
+    timeStart: string;
     timeEnd: string;
 }
 
@@ -111,6 +112,7 @@ const AuctionList = () => {
                                         title={auction.title}
                                         desc={auction.desct}
                                         minRates={auction.minRates}
+                                        timeStart={auction.timeStart}
                                         timeEnd={auction.timeEnd}
                                         id={auction._id}
                                     />

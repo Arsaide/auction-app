@@ -18,6 +18,7 @@ interface AuctionCardProps {
     title: string;
     desc: string;
     minRates: string;
+    timeStart: string;
     timeEnd: string;
     id: string;
 }
@@ -27,6 +28,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
     title,
     desc,
     minRates,
+    timeStart,
     timeEnd,
     id,
 }) => {
@@ -40,6 +42,8 @@ const AuctionCard: FC<AuctionCardProps> = ({
             handleLoginClickOpen();
         }
     };
+
+    const formatedTimeStart = new Date(timeStart).toLocaleDateString('ua-UA');
 
     const trimmedString =
         desc.length > 200 ? desc.substring(0, 200) + '...' : desc;
@@ -102,6 +106,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                     Price: <u>{minRates}</u> $
                 </Typography>
                 <Divider sx={{ mt: 1.3, mb: 1 }} />
+                <Typography>Created: {formatedTimeStart}</Typography>
                 <AuctionTimer
                     timeEnd={timeEnd}
                     onAuctionEnd={() => setAuctionEnded(true)}
