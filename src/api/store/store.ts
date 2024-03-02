@@ -20,9 +20,9 @@ export default class Store {
         this.user = user;
     }
 
-    async sendemail() {
+    async sendEmail() {
         try {
-            return await toast.promise(AuthService.sendemail(), {
+            return await toast.promise(AuthService.sendEmail(), {
                 pending: 'Sending code...',
                 success: 'Code sent!',
                 error: 'Sending code error, please try again...',
@@ -64,14 +64,14 @@ export default class Store {
             localStorage.setItem('token', response.data.token);
             this.setAuth(true);
             this.setUser(response.data.user);
-            await this.sendemail();
+            await this.sendEmail();
             return response;
         } catch (e: any) {
             throw e;
         }
     }
 
-    async createauction(
+    async createAuction(
         title: string,
         desc: string,
         minRates: string,
@@ -87,7 +87,7 @@ export default class Store {
             }
 
             const response = await toast.promise(
-                AuthService.createauction(
+                AuthService.createAuction(
                     title,
                     desc,
                     minRates,
@@ -107,9 +107,9 @@ export default class Store {
         }
     }
 
-    async registercreate(code: string) {
+    async registerCreate(code: string) {
         try {
-            return await toast.promise(AuthService.registercreate(code), {
+            return await toast.promise(AuthService.registerCreate(code), {
                 pending: 'Sending code...',
                 success: 'Created successfully!',
                 error: 'Invalid code, please try again...',
@@ -145,9 +145,9 @@ export default class Store {
         }
     }
 
-    async getauctionone(id: string | undefined) {
+    async getOneAuction(id: string | undefined) {
         try {
-            return await AuthService.getauctionone(id);
+            return await AuthService.getOneAuction(id);
         } catch (e: any) {
             throw e;
         }

@@ -28,7 +28,7 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
     const handleSubmit = async (values: RegCreateFormValues) => {
         setIsSubmitting(true);
         try {
-            const response = await store.registercreate(values.code);
+            const response = await store.registerCreate(values.code);
             if (response && response.status === 200) {
                 onSubmit();
             }

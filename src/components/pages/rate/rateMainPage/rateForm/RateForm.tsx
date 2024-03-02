@@ -61,7 +61,7 @@ const RateForm = () => {
 
         setIsSubmitting(true);
         try {
-            const response = await store.createauction(
+            const response = await store.createAuction(
                 values.title,
                 values.desc,
                 values.minRates,

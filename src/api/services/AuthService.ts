@@ -23,17 +23,17 @@ export default class AuthService {
         });
     }
 
-    static async sendemail(): Promise<void> {
+    static async sendEmail(): Promise<void> {
         return $api.get('/sendemail');
     }
 
-    static async registercreate(
+    static async registerCreate(
         code: string,
     ): Promise<AxiosResponse<AuthResponse>> {
         return $api.post<AuthResponse>('/registercreate', { code });
     }
 
-    static async createauction(
+    static async createAuction(
         title: string,
         desc: string,
         minRates: string,
@@ -56,7 +56,7 @@ export default class AuthService {
         return await $api.post<AuthResponse>('/createauction', formData);
     }
 
-    static async getauctionone(
+    static async getOneAuction(
         id: string | undefined,
     ): Promise<AxiosResponse<AuthResponse>> {
         return $api.post('/getauctionone', { id });

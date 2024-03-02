@@ -39,7 +39,7 @@ const RateId: FC = () => {
     useEffect(() => {
         const fetchAuction = async () => {
             try {
-                const response = await store.getauctionone(id);
+                const response = await store.getOneAuction(id);
                 setAuction(response.data.auction as unknown as AuctionItem);
             } catch (error) {
                 console.error('Error fetching auction:', error);
