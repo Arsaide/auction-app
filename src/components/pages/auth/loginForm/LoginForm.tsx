@@ -62,7 +62,7 @@ const LoginForm: FC = () => {
                                     display: 'flex',
                                     flexDirection: 'column',
                                     width: '100%',
-                                    gap: 2,
+                                    gap: 1.5,
                                 }}
                             >
                                 <Input
@@ -86,6 +86,7 @@ const LoginForm: FC = () => {
                                     disabled={!isValid || isSubmitting}
                                     sx={{
                                         bgcolor: '#7dc738',
+                                        mt: 1,
                                         '&:hover': {
                                             bgcolor: '#5a8f29',
                                         },

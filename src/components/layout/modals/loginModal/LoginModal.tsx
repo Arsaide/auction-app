@@ -28,7 +28,7 @@ const LoginModal: FC<LoginModalInterface> = ({ open, onClose }) => {
                 Log in
             </DialogTitle>
             <DialogContent sx={{ bgcolor: '#081041' }}>
-                <DialogContentText sx={{ color: 'white', ml: 0, mb: 2 }}>
+                <DialogContentText sx={{ color: 'white', ml: 0, mb: 1 }}>
                     Enter your account login information
                 </DialogContentText>
                 <LoginForm />
@@ -41,7 +41,7 @@ const LoginModal: FC<LoginModalInterface> = ({ open, onClose }) => {
                         color: 'white',
                         mr: 1,
                         mb: 1,
-                        p: 1,
+                        p: 0.5,
                     }}
                 >
                     Cancel

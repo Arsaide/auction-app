@@ -109,6 +109,7 @@ const RegistrationForm: FC = () => {
                                     disabled={!isValid || isSubmitting}
                                     sx={{
                                         bgcolor: '#7dc738',
+                                        mt: 1,
                                         '&:hover': {
                                             bgcolor: '#5a8f29',
                                         },

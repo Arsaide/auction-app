@@ -41,7 +41,7 @@ const RegModal: FC<RegModalInterface> = ({ open, onClose }) => {
                         color: 'white',
                         mr: 1,
                         mb: 1,
-                        p: 1,
+                        p: 0.5,
                     }}
                 >
                     Cancel
