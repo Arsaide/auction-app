@@ -57,9 +57,10 @@ export default class AuthService {
     }
 
     static async getOneAuction(
-        id: string | undefined,
+        _id: string | undefined,
+        token: string | null,
     ): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post('/getauctionone', { id });
+        return $api.post('/getauctionone', { _id, token });
     }
 
     static async getUser(

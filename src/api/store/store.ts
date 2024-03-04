@@ -145,9 +145,10 @@ export default class Store {
         }
     }
 
-    async getOneAuction(id: string | undefined) {
+    async getOneAuction(_id: string | undefined) {
         try {
-            return await AuthService.getOneAuction(id);
+            const token: string | null = localStorage.getItem('token');
+            return await AuthService.getOneAuction(_id, token);
         } catch (e: any) {
             throw e;
         }
