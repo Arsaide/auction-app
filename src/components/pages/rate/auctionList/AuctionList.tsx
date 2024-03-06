@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Box, Grid, Pagination, ThemeProvider } from '@mui/material';
-import AuctionCard from '../../../../layout/common/ui/auctionCard/AuctionCard';
-import { API_URL } from '../../../../../api/request';
+import AuctionCard from '../../../layout/common/ui/auctionCard/AuctionCard';
+import { API_URL } from '../../../../api/request';
 import Typography from '@mui/material/Typography';
 import AuctionListSkeleton from './components/auctionListSkeleton/AuctionListSkeleton';
 import AuctionReloadButton from './components/AuctionReloadButton/AuctionReloadButton';
 import Button from '@mui/material/Button';
-import usePagination from '../../../../../hooks/usePagination/usePagination';
+import usePagination from '../../../../hooks/usePagination/usePagination';
 import { pagintaionStyles } from './pagination.styles';
 
 interface AuctionItem {

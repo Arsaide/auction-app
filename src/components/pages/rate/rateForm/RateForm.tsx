@@ -1,18 +1,18 @@
 import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { toast } from 'react-toastify';
-import { Context } from '../../../../../index';
+import { Context } from '../../../../index';
 import Box from '@mui/material/Box';
-import Input from '../../../../layout/common/inputs/input/Input';
+import Input from '../../../layout/common/inputs/input/Input';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ImageForm from '../../../../layout/common/inputs/imgInput/ImgInput';
+import ImageForm from '../../../layout/common/inputs/imgInput/ImgInput';
 import { betFormValidationSchema } from './betFormValidation/betFormValidationSchema';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, { Dayjs } from 'dayjs';
-import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
+import SubmitTimer from '../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 
 interface RateFormInt {
     title: string;

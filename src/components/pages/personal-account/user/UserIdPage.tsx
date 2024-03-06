@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { AuctionInt } from '../../../../app/rate/rate-id/AuctionItemInt';
 import { UserIdInt } from '../../../../app/personal-account/user-id/UserInterface';
+import UserDetails from './userDetails/UserDetails';
+import OwnAuctionsList from './ownAuctionsList/OwnAuctionsList';
 
 const UserIdPage: FC = () => {
     const { store } = useContext(Context);
@@ -15,8 +17,6 @@ const UserIdPage: FC = () => {
     const navigate = useNavigate();
     const isAuth = localStorage.getItem('isAuth') === 'true';
     const [auctions, setAuctions] = useState<AuctionInt[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [isRequesting, setIsRequesting] = useState<boolean>(false);
 
     const redirectPage = () => {
         if (!isAuth) {
@@ -59,17 +59,8 @@ const UserIdPage: FC = () => {
 
     return (
         <>
-            <Typography>Nickname: {user && user.name}</Typography>
-            <Typography>Email: {user && user.email}</Typography>
-            <Typography>Balance: {user && user.balance} $</Typography>
-            Own auction:
-            <ul>
-                {auctions.map(item => (
-                    <li key={item._id}>
-                        <a href={`/rate/${item._id}`}>{item.title}</a>
-                    </li>
-                ))}
-            </ul>
+            <UserDetails user={user} />
+            <OwnAuctionsList auctions={auctions} />
             <Button variant="contained" onClick={handleSubmit} sx={{ mt: 3 }}>
                 Log out
             </Button>

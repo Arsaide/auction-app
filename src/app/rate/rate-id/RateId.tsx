@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import RateIdPage from '../../../components/pages/rate/RateIdPage';
+import RateIdPage from '../../../components/pages/rate/rateId/RateIdPage';
 
 const RateId: FC = () => {
     return (

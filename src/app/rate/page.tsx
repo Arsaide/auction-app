@@ -1,6 +1,6 @@
 import React from 'react';
-import RateForm from '../../components/pages/rate/rateMainPage/rateForm/RateForm';
-import AuctionList from '../../components/pages/rate/rateMainPage/auctionList/AuctionList';
+import RateForm from '../../components/pages/rate/rateForm/RateForm';
+import AuctionList from '../../components/pages/rate/auctionList/AuctionList';
 import useAuthCheck from '../../hooks/useAuthCheck/useAuthCheck';
 import InfoAlert from '../../components/layout/common/alerts/infoAlert/InfoAlert';
 
