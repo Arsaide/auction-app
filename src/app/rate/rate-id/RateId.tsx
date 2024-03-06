@@ -8,20 +8,7 @@ import AuctionTimer from '../../../components/layout/common/ui/timers/auctionTim
 import Typography from '@mui/material/Typography';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
-
-interface AuctionItem {
-    _id: string;
-    img: string;
-    title: string;
-    minRates: string;
-    rates: string;
-    desct: string;
-    active: boolean;
-    state: boolean;
-    owner: string;
-    timeStart: string;
-    timeEnd: string;
-}
+import { AuctionInt } from './AuctionItemInt';
 
 const theme = createTheme({
     palette: {
@@ -34,13 +21,13 @@ const theme = createTheme({
 const RateId: FC = () => {
     const { store } = useContext(Context);
     const { id } = useParams<{ id: string }>();
-    const [auction, setAuction] = useState<AuctionItem | null>(null);
+    const [auction, setAuction] = useState<AuctionInt | null>(null);
 
     useEffect(() => {
         const fetchAuction = async () => {
             try {
                 const response = await store.getOneAuction(id);
-                setAuction(response.data.auction as unknown as AuctionItem);
+                setAuction(response.data.auction as unknown as AuctionInt);
             } catch (error) {
                 console.error('Error fetching auction:', error);
             }

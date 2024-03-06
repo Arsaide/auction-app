@@ -2,6 +2,7 @@ import $api from '../request';
 import { AxiosResponse } from 'axios';
 import { AuthResponse } from '../models/response/AuthResponse';
 import { Dayjs } from 'dayjs';
+import { OwnAuctionInt } from '../../app/rate/rate-id/AuctionItemInt';
 
 export default class AuthService {
     static async login(
@@ -64,8 +65,14 @@ export default class AuthService {
     }
 
     static async getUser(
-        token: string | undefined,
+        token: string | null | undefined,
     ): Promise<AxiosResponse<AuthResponse>> {
         return $api.post('/getuser', { token });
+    }
+
+    static async getOwnAuctions(
+        token: string | null | undefined,
+    ): Promise<AxiosResponse<OwnAuctionInt>> {
+        return $api.post('/getownauctions', { token });
     }
 }

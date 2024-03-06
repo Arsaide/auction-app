@@ -154,11 +154,21 @@ export default class Store {
         }
     }
 
-    async getUser(token: string | undefined) {
+    async getUser(token: string | null | undefined) {
         try {
             return await AuthService.getUser(token);
         } catch (e: any) {
             await this.logout();
+            throw e;
+        }
+    }
+
+    async getOwnAuctions(token: string | null | undefined) {
+        try {
+            const response = await AuthService.getOwnAuctions(token);
+            return response;
+            console.log(response);
+        } catch (e: any) {
             throw e;
         }
     }
