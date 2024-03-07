@@ -137,6 +137,7 @@ const CreateAuctionForm = () => {
                                     <DatePicker
                                         value={today}
                                         disabled
+                                        format={'DD/MM/YYYY'}
                                         sx={{
                                             '& input.MuiInputBase-input': {
                                                 color: '#999999 !important',
@@ -162,6 +163,7 @@ const CreateAuctionForm = () => {
                                             setValue(newValue)
                                         }
                                         disablePast
+                                        format={'DD/MM/YYYY'}
                                         sx={{
                                             '& input': {
                                                 color: 'white',

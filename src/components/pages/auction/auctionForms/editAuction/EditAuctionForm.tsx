@@ -130,6 +130,7 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
                                     sx={{
                                         display: 'flex',
                                         justifyContent: 'space-between',
+                                        gap: 4,
                                     }}
                                 >
                                     <DatePicker
