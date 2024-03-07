@@ -57,24 +57,32 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                     />
                 </>
             )}
-            {!visibleForm ? (
-                <Button
-                    variant="contained"
-                    onClick={() => setVisibleForm(true)}
-                >
-                    Edit auction
-                </Button>
-            ) : (
-                <Button
-                    variant="contained"
-                    onClick={() => setVisibleForm(false)}
-                >
-                    Close edit auction
-                </Button>
-            )}
-            {visibleForm && owner && (
-                <EditAuctionForm _id={auction && auction._id} />
-            )}
+            {owner ? (
+                <>
+                    {!visibleForm ? (
+                        <Button
+                            variant="contained"
+                            onClick={() => setVisibleForm(true)}
+                        >
+                            Edit auction
+                        </Button>
+                    ) : (
+                        <Button
+                            variant="contained"
+                            onClick={() => setVisibleForm(false)}
+                        >
+                            Close edit auction
+                        </Button>
+                    )}
+                </>
+            ) : null}
+            {owner ? (
+                <>
+                    {visibleForm && (
+                        <EditAuctionForm _id={auction && auction._id} />
+                    )}
+                </>
+            ) : null}
         </Grid>
     );
 };
