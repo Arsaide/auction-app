@@ -2,7 +2,7 @@ import $api from '../request';
 import { AxiosResponse } from 'axios';
 import { AuthResponse } from '../models/response/AuthResponse';
 import { Dayjs } from 'dayjs';
-import { OwnAuctionInt } from '../../app/rate/rate-id/AuctionItemInt';
+import { OwnAuctionInt } from '../../app/auction/auction-id/AuctionItemProps';
 
 export default class AuthService {
     static async login(
@@ -65,17 +65,18 @@ export default class AuthService {
         endDate: Dayjs | null,
         desct: string,
     ): Promise<AxiosResponse<AuthResponse>> {
-        const formData = new FormData();
-        formData.append('token', token);
-        formData.append('_id', _id);
-        formData.append('title', title);
-        formData.append('minRates', minRates);
-        if (endDate) {
-            formData.append('endDate', endDate.toISOString());
+        let endDateString: string | null = null;
+        if (endDate !== null) {
+            endDateString = endDate.toDate().toISOString();
         }
-        formData.append('desct', desct);
-
-        return $api.post<AuthResponse>('/editfieldauction', formData);
+        return $api.post<AuthResponse>('/editfieldauction', {
+            token,
+            _id,
+            title,
+            minRates,
+            endDate: endDateString,
+            desct,
+        });
     }
 
     static async getOneAuction(
