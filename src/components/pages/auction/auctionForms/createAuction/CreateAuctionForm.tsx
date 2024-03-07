@@ -1,81 +1,80 @@
-import React, { FC, useContext, useEffect, useRef, useState } from 'react';
-import { Context } from '../../../../../index';
-import dayjs, { Dayjs } from 'dayjs';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { toast } from 'react-toastify';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { AuctioFormEditValidationSchema } from './auctionEditFormValidation/AuctionEditFormValidation';
+import { Context } from '../../../../../index';
 import Box from '@mui/material/Box';
 import Input from '../../../../layout/common/inputs/input/Input';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import ImageForm from '../../../../layout/common/inputs/imgInput/ImgInput';
+import { auctioFormValidationSchema } from './auctionFormValidation/AuctioFormValidationSchema';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs, { Dayjs } from 'dayjs';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 
-interface EditAuctionProps {
-    _id: string;
+interface AuctionCreateFormProps {
     title: string;
     desc: string;
     minRates: string;
     endDate: Date[];
+    image: string;
 }
-
-interface EditAuctionsSubmitProps {
-    _id: string;
-}
-
-const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
+const CreateAuctionForm = () => {
     const { store } = useContext(Context);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const lastSubmittedTimeRef = useRef<number | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [value, setValue] = React.useState<Dayjs | null>(
         dayjs().subtract(-1, 'day'),
     );
     const today = dayjs();
 
     useEffect(() => {
-        const lastSubmittedTime = localStorage.getItem('LastEditAuctionTime');
+        const lastSubmittedTime = localStorage.getItem(
+            'LastSubmittedAuctionTime',
+        );
         if (lastSubmittedTime) {
             lastSubmittedTimeRef.current = parseInt(lastSubmittedTime);
         }
     }, []);
 
     const initialValues = {
-        _id: _id,
         title: '',
         desc: '',
         minRates: '',
         endDate: [new Date()],
+        image: '',
     };
 
     const handleSubmit = async (
-        values: EditAuctionProps,
-        actions: FormikHelpers<EditAuctionProps>,
+        values: AuctionCreateFormProps,
+        actions: FormikHelpers<AuctionCreateFormProps>,
     ) => {
         if (
             lastSubmittedTimeRef.current &&
             Date.now() - lastSubmittedTimeRef.current < 300000
         ) {
-            toast.error('Please wait 5 minutes before submitting again');
+            toast.error('Please wait 5 minutes before submitting again.');
             return;
         }
 
         setIsSubmitting(true);
         try {
-            const response = await store.editAuctionFields(
-                _id,
+            const response = await store.createAuction(
                 values.title,
-                values.minRates,
-                value,
                 values.desc,
+                values.minRates,
+                selectedImage,
+                value,
             );
             if (response && response.status === 200) {
                 actions.resetForm();
                 lastSubmittedTimeRef.current = Date.now();
                 localStorage.setItem(
-                    'LastEditAuctionTime',
+                    'LastSubmittedAuctionTime',
                     lastSubmittedTimeRef.current.toString(),
                 );
             }
@@ -87,11 +86,15 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
         setIsSubmitting(false);
     };
 
+    const handleImageSubmit = (image: File) => {
+        setSelectedImage(image);
+    };
+
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Formik
-                    validationSchema={AuctioFormEditValidationSchema}
+                    validationSchema={auctioFormValidationSchema}
                     validateOnMount
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
@@ -106,11 +109,15 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
                                     mb: 6,
                                 }}
                             >
+                                <ImageForm
+                                    name={'image'}
+                                    onSubmit={handleImageSubmit}
+                                />
                                 <Input
                                     id={'title'}
-                                    label={'Your title'}
+                                    label={'Your auction'}
                                     name={'title'}
-                                    placeholder={'Enter your rate'}
+                                    placeholder={'Enter your auction'}
                                 />
                                 <Input
                                     id={'desc'}
@@ -222,4 +229,4 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
     );
 };
 
-export default EditAuctionForm;
+export default CreateAuctionForm;

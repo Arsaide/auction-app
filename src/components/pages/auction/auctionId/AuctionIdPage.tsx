@@ -1,14 +1,14 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Context } from '../../../../index';
 import { useParams } from 'react-router-dom';
-import { AuctionInt } from '../../../../app/rate/rate-id/AuctionItemInt';
+import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
-import AuctionDetails from './rateIdDetails/AuctionDetails';
-import AuctionInformation from './rateIdInformation/AuctionInformation';
-import EditAuctionForm from '../rateForm/editAuction/EditAuctionForm';
+import AuctionDetails from './auctionIdDetails/AuctionDetails';
+import AuctionInformation from './auctionIdInformation/AuctionInformation';
+import EditAuctionForm from '../auctionForms/editAuction/EditAuctionForm';
 
 const theme = createTheme({
     palette: {
@@ -18,7 +18,7 @@ const theme = createTheme({
     },
 });
 
-const RateIdPage: FC = () => {
+const AuctionIdPage: FC = () => {
     const { store } = useContext(Context);
     const { id } = useParams<{ id: string }>();
     const [auction, setAuction] = useState<AuctionInt | null>(null);
@@ -68,4 +68,4 @@ const RateIdPage: FC = () => {
     );
 };
 
-export default RateIdPage;
+export default AuctionIdPage;

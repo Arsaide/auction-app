@@ -23,12 +23,12 @@ const BottomNav = () => {
         const path = location.pathname;
         const values = [
             '/information',
-            '/rate',
+            '/auction',
             '/',
             '/online-chat',
             '/personal-account',
         ];
-        if (path.startsWith('/rate/')) {
+        if (path.startsWith('/auction/')) {
             setValue(1);
         } else if (path.startsWith('/personal-account/')) {
             setValue(4);
@@ -55,7 +55,7 @@ const BottomNav = () => {
             />
             <BottomNavigationAction
                 label={'Rate'}
-                to={'/rate'}
+                to={'/auction'}
                 component={NavLink}
                 icon={<CurrencyBitcoinIcon />}
             />

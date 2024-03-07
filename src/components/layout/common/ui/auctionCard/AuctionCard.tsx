@@ -92,7 +92,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         ) : (
                             <Link
                                 style={{ color: 'rgba(0, 0, 0, 0.6)' }}
-                                to={`/rate/${id}`}
+                                to={`/auction/${id}`}
                             >
                                 read more
                             </Link>
@@ -165,7 +165,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                     >
                         <Link
                             style={{ color: '#fff', textDecoration: 'none' }}
-                            to={`/rate/${id}`}
+                            to={`/auction/${id}`}
                         >
                             Learn More
                         </Link>

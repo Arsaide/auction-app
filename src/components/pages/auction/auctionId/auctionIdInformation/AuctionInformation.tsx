@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { AuctionInt } from '../../../../../app/rate/rate-id/AuctionItemInt';
+import { AuctionInt } from '../../../../../app/auction/auction-id/AuctionItemProps';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import AuctionTimer from '../../../../layout/common/ui/timers/auctionTimer/AuctionTimer';

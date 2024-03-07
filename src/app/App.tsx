@@ -3,11 +3,11 @@ import './global.scss';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from '../components/layout/nav/NavBar';
 import HomePage from './home/page';
-import RatePage from './rate/page';
+import AuctionPage from './auction/page';
 import OnlineChatPage from './online-chat/page';
 import InformationPage from './information/page';
 import ToastMessage from '../components/layout/common/alerts/toastMessage/ToastMessage';
-import { RateId } from './rate/rate-id/RateId';
+import { AuctionId } from './auction/auction-id/AuctionId';
 import { UserId } from './personal-account/user-id/UserId';
 import PersonalAccount from './personal-account/page';
 import BottomNav from '../components/layout/nav/bottomNav/BottomNav';
@@ -46,8 +46,8 @@ function App() {
             <NavBar balance={balance}>
                 <Routes>
                     <Route path={'/'} element={<HomePage />} />
-                    <Route path={'rate'} element={<RatePage />} />
-                    <Route path={'rate/:id/'} element={<RateId />} />
+                    <Route path={'auction'} element={<AuctionPage />} />
+                    <Route path={'auction/:id/'} element={<AuctionId />} />
                     <Route path={'online-chat'} element={<OnlineChatPage />} />
                     <Route path={'information'} element={<InformationPage />} />
                     <Route

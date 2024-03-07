@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { AuctionInt } from '../../../../app/rate/rate-id/AuctionItemInt';
+import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps';
 import { UserIdInt } from '../../../../app/personal-account/user-id/UserInterface';
 import UserDetails from './userDetails/UserDetails';
 import OwnAuctionsList from './ownAuctionsList/OwnAuctionsList';

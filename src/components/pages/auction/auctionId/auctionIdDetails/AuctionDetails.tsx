@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { AuctionInt } from '../../../../../app/rate/rate-id/AuctionItemInt';
+import { AuctionInt } from '../../../../../app/auction/auction-id/AuctionItemProps';
 
 interface AuctionDetailsProps {
     auction: AuctionInt;

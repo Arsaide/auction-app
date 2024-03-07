@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { AuctionInt } from '../../../../../app/rate/rate-id/AuctionItemInt';
+import { AuctionInt } from '../../../../../app/auction/auction-id/AuctionItemProps';
 import Box from '@mui/material/Box';
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import clsx from 'clsx';
@@ -13,10 +13,6 @@ const formatDate = (dateString: string) => {
 };
 
 const OwnAuctionsList: FC<{ auctions: AuctionInt[] }> = ({ auctions }) => {
-    const [responsive, setResponsive] = useState('vertical');
-    const [tableBodyHeight, setTableBodyHeight] = useState('400px');
-    const [tableBodyMaxHeight, setTableBodyMaxHeight] = useState('');
-
     const columns: GridColDef[] = [
         {
             field: '_id',
@@ -24,7 +20,7 @@ const OwnAuctionsList: FC<{ auctions: AuctionInt[] }> = ({ auctions }) => {
             width: 225,
             renderCell: (params: GridCellParams) => (
                 <Link
-                    to={`/rate/${String(params.value)}`}
+                    to={`/auction/${String(params.value)}`}
                     className="white-link"
                 >
                     {String(params.value)}

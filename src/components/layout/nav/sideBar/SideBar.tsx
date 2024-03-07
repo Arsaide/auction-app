@@ -32,11 +32,11 @@ const SideBar = () => {
                     disablePadding
                     sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}
                 >
-                    <ListItemButton href="/rate" sx={{ color: '#fff' }}>
+                    <ListItemButton href="/auction" sx={{ color: '#fff' }}>
                         <ListItemIcon sx={{ color: '#fff' }}>
                             <CurrencyBitcoinIcon />
                         </ListItemIcon>
-                        <ListItemText primary={'Place a rate'} />
+                        <ListItemText primary={'Place an auction'} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem

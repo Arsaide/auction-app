@@ -1,15 +1,15 @@
 import React from 'react';
-import CreateRateForm from '../../components/pages/rate/rateForm/createAuction/CreateRateForm';
-import AuctionList from '../../components/pages/rate/auctionList/AuctionList';
+import CreateAuctionForm from '../../components/pages/auction/auctionForms/createAuction/CreateAuctionForm';
+import AuctionList from '../../components/pages/auction/auctionList/AuctionList';
 import useAuthCheck from '../../hooks/useAuthCheck/useAuthCheck';
 import InfoAlert from '../../components/layout/common/alerts/infoAlert/InfoAlert';
 
-const RatePage = () => {
+const AuctionPage = () => {
     const { isAuth } = useAuthCheck();
     return (
         <section>
             {isAuth ? (
-                <CreateRateForm />
+                <CreateAuctionForm />
             ) : (
                 <InfoAlert
                     title={'Why do I see this alert? - Log in, please'}
@@ -23,4 +23,4 @@ const RatePage = () => {
     );
 };
 
-export default RatePage;
+export default AuctionPage;
