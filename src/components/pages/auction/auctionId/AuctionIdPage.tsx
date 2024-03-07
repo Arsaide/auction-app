@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import AuctionDetails from './auctionIdDetails/AuctionDetails';
 import AuctionInformation from './auctionIdInformation/AuctionInformation';
 import EditAuctionForm from '../auctionForms/editAuction/EditAuctionForm';
+import Button from '@mui/material/Button';
 
 const theme = createTheme({
     palette: {
@@ -22,12 +23,18 @@ const AuctionIdPage: FC = () => {
     const { store } = useContext(Context);
     const { id } = useParams<{ id: string }>();
     const [auction, setAuction] = useState<AuctionInt | null>(null);
+    const [owner, setOwner] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchAuction = async () => {
             try {
                 const response = await store.getOneAuction(id);
                 setAuction(response.data.auction as unknown as AuctionInt);
+                if (response.data.stateOwner) {
+                    setOwner(true);
+                } else {
+                    setOwner(false);
+                }
             } catch (error) {
                 console.error('Error fetching auction:', error);
             }
@@ -61,9 +68,8 @@ const AuctionIdPage: FC = () => {
             </Typography>
             <Grid container justifyContent="flex-start" spacing={2}>
                 <AuctionDetails auction={auction} />
-                <AuctionInformation auction={auction} />
+                <AuctionInformation auction={auction} owner={owner} />
             </Grid>
-            <EditAuctionForm _id={auction && auction._id} />
         </div>
     );
 };

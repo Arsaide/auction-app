@@ -5,7 +5,7 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import { toast } from 'react-toastify';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { AuctioFormEditValidationSchema } from './auctionEditFormValidation/AuctionEditFormValidation';
+import { AuctionFormEditValidationSchema } from './auctionEditFormValidation/AuctionEditFormValidation';
 import Box from '@mui/material/Box';
 import Input from '../../../../layout/common/inputs/input/Input';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -91,7 +91,7 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
         <>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Formik
-                    validationSchema={AuctioFormEditValidationSchema}
+                    validationSchema={AuctionFormEditValidationSchema}
                     validateOnMount
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
@@ -102,7 +102,7 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
                                 sx={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    gap: 2,
+                                    gap: 1,
                                     mb: 6,
                                 }}
                             >
@@ -126,9 +126,15 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
                                     placeholder={'Enter your min rates'}
                                     type={'number'}
                                 />
-                                <Box sx={{ display: 'flex', gap: 20 }}>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
                                     <DatePicker
                                         value={today}
+                                        format={'DD/MM/YYYY'}
                                         disabled
                                         sx={{
                                             '& input.MuiInputBase-input': {
@@ -154,6 +160,7 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
                                         onChange={newValue =>
                                             setValue(newValue)
                                         }
+                                        format={'DD/MM/YYYY'}
                                         disablePast
                                         sx={{
                                             '& input': {

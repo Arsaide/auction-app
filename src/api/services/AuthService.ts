@@ -74,7 +74,7 @@ export default class AuthService {
             _id,
             title,
             minRates,
-            endDate: endDateString,
+            timeEnd: endDateString,
             desct,
         });
     }
