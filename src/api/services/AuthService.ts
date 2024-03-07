@@ -57,6 +57,27 @@ export default class AuthService {
         return await $api.post<AuthResponse>('/createauction', formData);
     }
 
+    static async editAuctionFields(
+        token: string,
+        _id: string,
+        title: string,
+        minRates: string,
+        endDate: Dayjs | null,
+        desct: string,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        const formData = new FormData();
+        formData.append('token', token);
+        formData.append('_id', _id);
+        formData.append('title', title);
+        formData.append('minRates', minRates);
+        if (endDate) {
+            formData.append('endDate', endDate.toISOString());
+        }
+        formData.append('desct', desct);
+
+        return $api.post<AuthResponse>('/editfieldauction', formData);
+    }
+
     static async getOneAuction(
         _id: string | undefined,
         token: string | null,

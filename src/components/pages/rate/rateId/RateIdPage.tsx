@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import AuctionDetails from './rateIdDetails/AuctionDetails';
 import AuctionInformation from './rateIdInformation/AuctionInformation';
+import EditAuctionForm from '../rateForm/editAuction/EditAuctionForm';
 
 const theme = createTheme({
     palette: {
@@ -62,6 +63,7 @@ const RateIdPage: FC = () => {
                 <AuctionDetails auction={auction} />
                 <AuctionInformation auction={auction} />
             </Grid>
+            <EditAuctionForm _id={auction && auction._id} />
         </div>
     );
 };

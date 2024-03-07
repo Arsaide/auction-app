@@ -1,5 +1,5 @@
 import React from 'react';
-import RateForm from '../../components/pages/rate/rateForm/RateForm';
+import CreateRateForm from '../../components/pages/rate/rateForm/createAuction/CreateRateForm';
 import AuctionList from '../../components/pages/rate/auctionList/AuctionList';
 import useAuthCheck from '../../hooks/useAuthCheck/useAuthCheck';
 import InfoAlert from '../../components/layout/common/alerts/infoAlert/InfoAlert';
@@ -9,7 +9,7 @@ const RatePage = () => {
     return (
         <section>
             {isAuth ? (
-                <RateForm />
+                <CreateRateForm />
             ) : (
                 <InfoAlert
                     title={'Why do I see this alert? - Log in, please'}

@@ -86,7 +86,7 @@ export default class Store {
                 return;
             }
 
-            const response = await toast.promise(
+            return await toast.promise(
                 AuthService.createAuction(
                     title,
                     desc,
@@ -101,7 +101,41 @@ export default class Store {
                     error: 'Failed to request, please try again...',
                 },
             );
-            return response;
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async editAuctionFields(
+        _id: string,
+        title: string,
+        minRates: string,
+        endDate: Dayjs | null,
+        desct: string,
+    ) {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                toast.error('Token not found');
+                return;
+            }
+
+            return await toast.promise(
+                AuthService.editAuctionFields(
+                    token,
+                    _id,
+                    title,
+                    minRates,
+                    endDate,
+                    desct,
+                ),
+                {
+                    pending: 'Send request...',
+                    success: 'Request successfully!',
+                    error: 'Failed to request, please try again...',
+                },
+            );
         } catch (e: any) {
             throw e;
         }

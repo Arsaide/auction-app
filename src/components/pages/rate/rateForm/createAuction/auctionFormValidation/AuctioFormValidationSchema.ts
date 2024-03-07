@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const betFormValidationSchema = yup.object().shape({
+export const auctioFormValidationSchema = yup.object().shape({
     title: yup.string().required('Required field'),
 
     desc: yup
