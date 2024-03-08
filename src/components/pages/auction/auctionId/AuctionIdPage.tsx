@@ -4,12 +4,11 @@ import { useParams } from 'react-router-dom';
 import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import CircularProgress from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import AuctionDetails from './auctionIdDetails/AuctionDetails';
 import AuctionInformation from './auctionIdInformation/AuctionInformation';
-import EditAuctionForm from '../auctionForms/editAuction/EditAuctionForm';
-import Button from '@mui/material/Button';
+import AuctionIdPageSkeleton from './auctionIdPageSkeleton/AuctionIdPageSkeleton';
+import WarningAlert from '../../../layout/common/alerts/warningAlert/WarningAlert';
 
 const theme = createTheme({
     palette: {
@@ -24,32 +23,55 @@ const AuctionIdPage: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [auction, setAuction] = useState<AuctionInt | null>(null);
     const [owner, setOwner] = useState<boolean>(false);
+    const [isRequesting, setIsRequesting] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const fetchAuction = async () => {
-            try {
-                const response = await store.getOneAuction(id);
-                setAuction(response.data.auction as unknown as AuctionInt);
-                if (response.data.stateOwner) {
-                    setOwner(true);
-                } else {
-                    setOwner(false);
-                }
-            } catch (error) {
-                console.error('Error fetching auction:', error);
-            }
-        };
-
-        fetchAuction();
+        fetchData();
     }, [id]);
+
+    const fetchData = async () => {
+        setIsRequesting(true);
+        setLoading(true);
+        try {
+            const response = await store.getOneAuction(id);
+            setAuction(response.data.auction as unknown as AuctionInt);
+            setIsRequesting(false);
+            setLoading(false);
+            if (response.data.stateOwner) {
+                setOwner(true);
+            } else {
+                setOwner(false);
+            }
+        } catch (error) {
+            console.error('Error fetching auction:', error);
+            setIsRequesting(true);
+            setLoading(true);
+        }
+        setIsRequesting(false);
+        setLoading(false);
+    };
+
+    const reloadAuction = () => {
+        fetchData();
+    };
+
+    if (loading) {
+        return (
+            <>
+                <AuctionIdPageSkeleton />
+            </>
+        );
+    }
 
     if (!auction) {
         return (
-            <ThemeProvider theme={theme}>
-                <Grid container justifyContent="center">
-                    <CircularProgress size={120} color="success" />
-                </Grid>
-            </ThemeProvider>
+            <>
+                <WarningAlert
+                    text={'There is no such auction'}
+                    title={'404 Not Found'}
+                />
+            </>
         );
     }
 
@@ -66,9 +88,14 @@ const AuctionIdPage: FC = () => {
             >
                 {auction && auction.title}
             </Typography>
-            <Grid container justifyContent="flex-start" spacing={2}>
+            <Grid container justifyContent="flex-start" sx={{ gap: 6 }}>
                 <AuctionDetails auction={auction} />
-                <AuctionInformation auction={auction} owner={owner} />
+                <AuctionInformation
+                    auction={auction}
+                    owner={owner}
+                    reloadAuction={reloadAuction}
+                    isRequesting={isRequesting}
+                />
             </Grid>
         </div>
     );

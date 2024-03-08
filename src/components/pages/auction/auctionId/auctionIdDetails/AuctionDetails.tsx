@@ -15,17 +15,25 @@ const AuctionDetails: FC<AuctionDetailsProps> = ({ auction }) => {
             item
             sx={{
                 width: '100%',
-                maxWidth: '100%',
                 position: 'relative',
+                backgroundColor: 'gray',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
             }}
-            md={6}
+            md={5}
         >
             <img
                 src={auction.img}
                 alt="Preview"
-                style={{ maxWidth: '100%', marginTop: '1rem' }}
+                style={{
+                    maxWidth: '650px',
+                    maxHeight: '750px',
+                    width: '100%',
+                    height: '100%',
+                }}
             />
-            <Box sx={{ position: 'absolute', top: 0 }}>
+            <Box sx={{ position: 'absolute', top: -5, left: 5 }}>
                 {auction.active ? (
                     <VerifiedIcon sx={{ color: '#7dc738', fontSize: 85 }} />
                 ) : (

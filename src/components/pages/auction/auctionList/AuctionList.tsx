@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Box, Grid, Pagination, ThemeProvider } from '@mui/material';
-import AuctionCard from '../../../layout/common/ui/auctionCard/AuctionCard';
+import AuctionCard from './components/auctionCard/AuctionCard';
 import { API_URL } from '../../../../api/request';
 import Typography from '@mui/material/Typography';
 import AuctionListSkeleton from './components/auctionListSkeleton/AuctionListSkeleton';

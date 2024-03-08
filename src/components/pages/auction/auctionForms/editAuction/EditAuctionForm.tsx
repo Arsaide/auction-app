@@ -12,6 +12,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
+import { boolean } from 'yup';
 
 interface EditAuctionProps {
     _id: string;
@@ -23,9 +24,15 @@ interface EditAuctionProps {
 
 interface EditAuctionsSubmitProps {
     _id: string;
+    reloadAuction: () => void;
+    setVisibleForm: (value: boolean) => void;
 }
 
-const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
+const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
+    _id,
+    reloadAuction,
+    setVisibleForm,
+}) => {
     const { store } = useContext(Context);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const lastSubmittedTimeRef = useRef<number | null>(null);
@@ -56,9 +63,9 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
     ) => {
         if (
             lastSubmittedTimeRef.current &&
-            Date.now() - lastSubmittedTimeRef.current < 120000
+            Date.now() - lastSubmittedTimeRef.current < 60000
         ) {
-            toast.error('Please wait 5 minutes before submitting again');
+            toast.error('Please wait 1 minute before submitting again');
             return;
         }
 
@@ -78,6 +85,8 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
                     'LastEditAuctionTime',
                     lastSubmittedTimeRef.current.toString(),
                 );
+                reloadAuction();
+                setVisibleForm(false);
             }
         } catch (e: any) {
             setIsSubmitting(false);
@@ -216,8 +225,7 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({ _id }) => {
                                 {lastSubmittedTimeRef.current && (
                                     <SubmitTimer
                                         nextSubmitTime={
-                                            lastSubmittedTimeRef.current +
-                                            120000
+                                            lastSubmittedTimeRef.current + 60000
                                         }
                                     />
                                 )}

@@ -9,52 +9,84 @@ import EditAuctionForm from '../../auctionForms/editAuction/EditAuctionForm';
 interface AuctionInformationProps {
     auction: AuctionInt;
     owner: boolean;
+    reloadAuction: () => void;
+    isRequesting: boolean;
 }
 
 const AuctionInformation: FC<AuctionInformationProps> = ({
     auction,
     owner,
+    reloadAuction,
+    isRequesting,
 }) => {
     const [visibleForm, setVisibleForm] = useState<boolean>(false);
 
+    const handleReloadAuction = () => {
+        reloadAuction();
+    };
+
     return (
-        <Grid item sx={{ width: '100%', maxWidth: '100%' }} md={6}>
+        <Grid item sx={{ width: '100%', maxWidth: '100%' }} md={5}>
             <Typography sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}>
                 Author @{auction.owner}
             </Typography>
             {!visibleForm && (
                 <>
-                    <Typography
-                        sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}
-                    >
-                        {auction.desct}
-                    </Typography>
-                    <Typography>
-                        Start rates:{' '}
-                        <span style={{ color: '#ed3b59', fontSize: '20px' }}>
-                            {auction.minRates}
-                        </span>{' '}
-                        $
-                    </Typography>
-                    <Typography
-                        sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}
-                    >
-                        Current rate:{' '}
-                        <span style={{ color: '#7dc738', fontSize: '20px' }}>
-                            {auction.rates}
-                        </span>{' '}
-                        $
-                    </Typography>
-                    <Typography>
-                        Auction start date:{' '}
-                        {new Date(auction.timeStart).toLocaleDateString(
-                            'ua-UA',
-                        )}
-                    </Typography>
-                    <AuctionTimer
-                        timeEnd={auction.timeEnd}
-                        onAuctionEnd={() => console.log('auction ended')}
-                    />
+                    {!isRequesting && (
+                        <>
+                            <Typography
+                                sx={{
+                                    borderBottom: '1px solid white',
+                                    mb: 1,
+                                    pb: 1,
+                                }}
+                            >
+                                {auction.desct}
+                            </Typography>
+                            <Typography>
+                                Start rates:{' '}
+                                <span
+                                    style={{
+                                        color: '#ed3b59',
+                                        fontSize: '20px',
+                                    }}
+                                >
+                                    {auction.minRates}
+                                </span>{' '}
+                                $
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    borderBottom: '1px solid white',
+                                    mb: 1,
+                                    pb: 1,
+                                }}
+                            >
+                                Current rate:{' '}
+                                <span
+                                    style={{
+                                        color: '#7dc738',
+                                        fontSize: '20px',
+                                    }}
+                                >
+                                    {auction.rates}
+                                </span>{' '}
+                                $
+                            </Typography>
+                            <Typography>
+                                Auction start date:{' '}
+                                {new Date(auction.timeStart).toLocaleDateString(
+                                    'ua-UA',
+                                )}
+                            </Typography>
+                            <AuctionTimer
+                                timeEnd={auction.timeEnd}
+                                onAuctionEnd={() =>
+                                    console.log('auction ended')
+                                }
+                            />
+                        </>
+                    )}
                 </>
             )}
             {owner ? (
@@ -69,7 +101,9 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                     ) : (
                         <Button
                             variant="contained"
-                            onClick={() => setVisibleForm(false)}
+                            onClick={() => {
+                                setVisibleForm(false);
+                            }}
                         >
                             Close edit auction
                         </Button>
@@ -79,10 +113,30 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
             {owner ? (
                 <>
                     {visibleForm && (
-                        <EditAuctionForm _id={auction && auction._id} />
+                        <EditAuctionForm
+                            _id={auction && auction._id}
+                            reloadAuction={handleReloadAuction}
+                            setVisibleForm={setVisibleForm}
+                        />
                     )}
                 </>
-            ) : null}
+            ) : (
+                <Button
+                    variant="contained"
+                    sx={{
+                        color: 'white',
+                        bgcolor: '#dc3545',
+                        '&:hover': {
+                            bgcolor: '#c82333',
+                        },
+                    }}
+                    onClick={() => {
+                        alert('you cant buy');
+                    }}
+                >
+                    Buy
+                </Button>
+            )}
         </Grid>
     );
 };

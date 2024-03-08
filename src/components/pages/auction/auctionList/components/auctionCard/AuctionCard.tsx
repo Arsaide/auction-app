@@ -5,13 +5,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import AuctionTimer from '../timers/auctionTimer/AuctionTimer';
+import AuctionTimer from '../../../../../layout/common/ui/timers/auctionTimer/AuctionTimer';
 import { Link } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
-import useOpenModal from '../../../../../hooks/useOpenModal/useOpenModal';
-import LoginModal from '../../../modals/loginModal/LoginModal';
-import useAuthCheck from '../../../../../hooks/useAuthCheck/useAuthCheck';
-import LazyLoadImage from '../../lazyLoadImage/LazyLoadImage';
+import useOpenModal from '../../../../../../hooks/useOpenModal/useOpenModal';
+import LoginModal from '../../../../../layout/modals/loginModal/LoginModal';
+import useAuthCheck from '../../../../../../hooks/useAuthCheck/useAuthCheck';
+import LazyLoadImage from '../../../../../layout/common/lazyLoadImage/LazyLoadImage';
 
 interface AuctionCardProps {
     img: string;
@@ -76,7 +76,6 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 >
                     {trimmedString}
                     {desc.length > 200 &&
-                        !auctionEnded &&
                         (!isAuth ? (
                             <u>
                                 <span
@@ -161,7 +160,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                 bgcolor: '#42d469',
                             },
                         }}
-                        disabled={auctionEnded}
+                        // disabled={auctionEnded}
                     >
                         <Link
                             style={{ color: '#fff', textDecoration: 'none' }}
