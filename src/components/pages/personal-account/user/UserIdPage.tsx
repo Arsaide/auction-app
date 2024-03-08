@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps';
 import { UserIdInt } from '../../../../app/personal-account/user-id/UserInterface';
 import UserDetails from './userDetails/UserDetails';
@@ -33,7 +32,6 @@ const UserIdPage: FC = () => {
             try {
                 const response = await store.getUser(token);
                 const auctionResponse = await store.getOwnAuctions(token);
-                console.log(auctionResponse.data.auctions);
                 setUser(response.data.user as unknown as UserIdInt);
                 setAuctions(auctionResponse.data.auctions);
             } catch (error) {

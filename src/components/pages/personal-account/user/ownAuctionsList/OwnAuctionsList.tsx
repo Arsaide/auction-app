@@ -12,7 +12,11 @@ const formatDate = (dateString: string) => {
     return date.format('DD.MM.YYYY');
 };
 
-const OwnAuctionsList: FC<{ auctions: AuctionInt[] }> = ({ auctions }) => {
+interface OwnAuctionsListProps {
+    auctions: AuctionInt[];
+}
+
+const OwnAuctionsList: FC<OwnAuctionsListProps> = ({ auctions }) => {
     const columns: GridColDef[] = [
         {
             field: '_id',

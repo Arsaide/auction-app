@@ -10,14 +10,6 @@ import AuctionInformation from './auctionIdInformation/AuctionInformation';
 import AuctionIdPageSkeleton from './auctionIdPageSkeleton/AuctionIdPageSkeleton';
 import WarningAlert from '../../../layout/common/alerts/warningAlert/WarningAlert';
 
-const theme = createTheme({
-    palette: {
-        success: {
-            main: '#7dc738',
-        },
-    },
-});
-
 const AuctionIdPage: FC = () => {
     const { store } = useContext(Context);
     const { id } = useParams<{ id: string }>();
@@ -38,6 +30,7 @@ const AuctionIdPage: FC = () => {
             setAuction(response.data.auction as unknown as AuctionInt);
             setIsRequesting(false);
             setLoading(false);
+
             if (response.data.stateOwner) {
                 setOwner(true);
             } else {
