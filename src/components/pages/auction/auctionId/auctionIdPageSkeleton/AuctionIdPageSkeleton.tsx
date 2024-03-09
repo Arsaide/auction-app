@@ -20,7 +20,7 @@ const AuctionIdPageSkeleton = () => {
                         bgcolor: 'grey.700',
                     }}
                     height={50}
-                    width={550}
+                    width={200}
                 />
             </div>
             <Grid container justifyContent="flex-start" sx={{ gap: 6 }}>

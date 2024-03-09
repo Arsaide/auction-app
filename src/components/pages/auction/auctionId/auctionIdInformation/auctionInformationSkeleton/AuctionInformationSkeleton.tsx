@@ -3,7 +3,7 @@ import { Grid, Skeleton } from '@mui/material';
 
 const AuctionInformationSkeleton = () => {
     return (
-        <Grid item sx={{}}>
+        <Grid item xs={12} sm={10} md={8} lg={5}>
             <div style={{ borderBottom: '1px solid white' }}>
                 <Skeleton
                     variant="text"
@@ -29,7 +29,6 @@ const AuctionInformationSkeleton = () => {
                         bgcolor: 'grey.700',
                     }}
                     height={46}
-                    width={670}
                 />
                 <Skeleton
                     variant="text"
@@ -37,7 +36,6 @@ const AuctionInformationSkeleton = () => {
                         bgcolor: 'grey.700',
                     }}
                     height={46}
-                    width={670}
                 />
             </div>
             <div style={{ borderBottom: '1px solid white' }}>
@@ -47,7 +45,6 @@ const AuctionInformationSkeleton = () => {
                         bgcolor: 'grey.700',
                     }}
                     height={33}
-                    width={670}
                 />
                 <Skeleton
                     variant="text"
@@ -55,7 +52,6 @@ const AuctionInformationSkeleton = () => {
                         bgcolor: 'grey.700',
                     }}
                     height={46}
-                    width={670}
                 />
             </div>
             <div>
