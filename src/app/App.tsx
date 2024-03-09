@@ -20,17 +20,16 @@ import { UserIdInt } from './personal-account/user-id/UserInterface';
 
 function App() {
     const { store } = useContext(Context);
-    const [balance, setBalance] = useState<string>('');
-    const [updateBalance, setUpdateBalance] = useState(true);
+    const [updateBalance, setUpdateBalance] = useState<boolean>(true);
+    const { balance } = store.user;
 
     useEffect(() => {
         async function checkAuthAndFetchUser() {
             const token = localStorage.getItem('token');
-            if (token && updateBalance) {
+            if (token) {
                 try {
-                    const response = await store.getUser(token);
+                    await store.getUser(token);
                     localStorage.setItem('isAuth', 'true');
-                    setBalance(response.data.user.balance);
                     setUpdateBalance(false);
                 } catch (error) {
                     console.error('Error:', error);

@@ -11,11 +11,12 @@ import OwnAuctionsList from './ownAuctionsList/OwnAuctionsList';
 
 const UserIdPage: FC = () => {
     const { store } = useContext(Context);
+    const { name, email, balance } = store.user;
     const { token } = useParams<{ token: string }>();
-    const [user, setUser] = useState<UserIdInt | null>(null);
     const navigate = useNavigate();
     const isAuth = localStorage.getItem('isAuth') === 'true';
     const [auctions, setAuctions] = useState<AuctionInt[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const redirectPage = () => {
         if (!isAuth) {
@@ -30,12 +31,12 @@ const UserIdPage: FC = () => {
     useEffect(() => {
         const fetchAccount = async () => {
             try {
-                const response = await store.getUser(token);
                 const auctionResponse = await store.getOwnAuctions(token);
-                setUser(response.data.user as unknown as UserIdInt);
                 setAuctions(auctionResponse.data.auctions);
             } catch (error) {
                 console.error('Error fetching account:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -47,7 +48,7 @@ const UserIdPage: FC = () => {
         window.location.reload();
     };
 
-    if (!user) {
+    if (loading) {
         return (
             <Grid container justifyContent="center">
                 <CircularProgress size={120} color="success" />
@@ -57,7 +58,7 @@ const UserIdPage: FC = () => {
 
     return (
         <>
-            <UserDetails user={user} />
+            <UserDetails name={name} email={email} balance={balance} />
             <OwnAuctionsList auctions={auctions} />
             <Button variant="contained" onClick={handleSubmit} sx={{ mt: 3 }}>
                 Log out

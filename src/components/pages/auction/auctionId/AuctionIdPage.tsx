@@ -2,7 +2,6 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { Context } from '../../../../index';
 import { useParams } from 'react-router-dom';
 import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps';
-import { createTheme, ThemeProvider } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import AuctionDetails from './auctionIdDetails/AuctionDetails';

@@ -1,13 +1,18 @@
 import React, { FC } from 'react';
-import { UserIdInt } from '../../../../../app/personal-account/user-id/UserInterface';
 import Typography from '@mui/material/Typography';
 
-const UserDetails: FC<{ user: UserIdInt }> = ({ user }) => {
+interface UserDetailsProps {
+    name: string;
+    email: string;
+    balance: string;
+}
+
+const UserDetails: FC<UserDetailsProps> = ({ name, email, balance }) => {
     return (
         <>
-            <Typography>Nickname: {user && user.name}</Typography>
-            <Typography>Email: {user && user.email}</Typography>
-            <Typography>Balance: {user && user.balance} $</Typography>
+            <Typography>Nickname: {name}</Typography>
+            <Typography>Email: {email}</Typography>
+            <Typography>Balance: {balance} $</Typography>
         </>
     );
 };

@@ -190,7 +190,9 @@ export default class Store {
 
     async getUser(token: string | null | undefined) {
         try {
-            return await AuthService.getUser(token);
+            const response = await AuthService.getUser(token);
+            const userData: IUser = response.data.user;
+            this.setUser(userData);
         } catch (e: any) {
             await this.logout();
             throw e;
@@ -199,9 +201,7 @@ export default class Store {
 
     async getOwnAuctions(token: string | null | undefined) {
         try {
-            const response = await AuthService.getOwnAuctions(token);
-            return response;
-            console.log(response);
+            return await AuthService.getOwnAuctions(token);
         } catch (e: any) {
             throw e;
         }

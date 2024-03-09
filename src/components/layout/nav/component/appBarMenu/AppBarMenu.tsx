@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { drawerWidth } from '../../index';
 import Toolbar from '@mui/material/Toolbar';
 import GoBack from '../goBack/GoBack';
@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
+import { Context } from '../../../../../index';
 
 interface AppBarMenuInt {
     isAuth: boolean;
@@ -45,6 +46,9 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
     handleSubmit,
     token,
 }) => {
+    const { store } = useContext(Context);
+    const { name } = store.user;
+
     return (
         <AppBar
             position="fixed"
@@ -153,10 +157,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                             onClick={handleOpenUserMenu}
                                             sx={{ p: 0 }}
                                         >
-                                            <Avatar
-                                                alt="Monkey King"
-                                                src="/avatar/avatar.jpg"
-                                            />
+                                            <Avatar alt={name} src={name} />
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
