@@ -23,17 +23,17 @@ const RegModal: FC<RegModalInterface> = ({ open, onClose }) => {
         >
             <DialogTitle
                 id={'form-dialog-title'}
-                sx={{ bgcolor: '#081041', color: 'white', pl: 3 }}
+                sx={{ bgcolor: '#595858', color: 'white', pl: 3 }}
             >
                 Authorization
             </DialogTitle>
-            <DialogContent sx={{ bgcolor: '#081041' }}>
+            <DialogContent sx={{ bgcolor: '#595858' }}>
                 <DialogContentText sx={{ color: 'white', ml: 0, mb: 2 }}>
                     Enter your details. Everything is confidential!
                 </DialogContentText>
                 <RegistrationForm />
             </DialogContent>
-            <DialogActions sx={{ bgcolor: '#081041' }}>
+            <DialogActions sx={{ bgcolor: '#595858' }}>
                 <Button
                     onClick={onClose}
                     variant="outlined"

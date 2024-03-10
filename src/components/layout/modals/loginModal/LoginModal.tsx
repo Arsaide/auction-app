@@ -23,17 +23,17 @@ const LoginModal: FC<LoginModalInterface> = ({ open, onClose }) => {
         >
             <DialogTitle
                 id={'form-dialog-title'}
-                sx={{ bgcolor: '#081041', color: 'white', pl: 3 }}
+                sx={{ bgcolor: '#595858', color: 'white', pl: 3 }}
             >
                 Log in
             </DialogTitle>
-            <DialogContent sx={{ bgcolor: '#081041' }}>
+            <DialogContent sx={{ bgcolor: '#595858' }}>
                 <DialogContentText sx={{ color: 'white', ml: 0, mb: 1 }}>
                     Enter your account login information
                 </DialogContentText>
                 <LoginForm />
             </DialogContent>
-            <DialogActions sx={{ bgcolor: '#081041' }}>
+            <DialogActions sx={{ bgcolor: '#595858' }}>
                 <Button
                     onClick={onClose}
                     variant="outlined"

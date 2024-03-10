@@ -5,7 +5,14 @@ export const pagintaionStyles = createTheme({
         MuiPaginationItem: {
             styleOverrides: {
                 root: {
-                    color: 'white', // Цвет текста элементов
+                    marginTop: '20px',
+                    color: 'white',
+                    '&.Mui-selected': {
+                        backgroundColor: '#5a8f29',
+                        '&:hover': {
+                            backgroundColor: '#7dc738',
+                        },
+                    },
                 },
             },
         },

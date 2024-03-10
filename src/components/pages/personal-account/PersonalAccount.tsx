@@ -65,7 +65,13 @@ const PersonalAccountPage: FC = () => {
                             }}
                         >
                             <Button
-                                color="success"
+                                sx={{
+                                    color: 'white',
+                                    bgcolor: '#5a8f29',
+                                    '&:hover': {
+                                        bgcolor: '#7dc738',
+                                    },
+                                }}
                                 variant="contained"
                                 size="large"
                                 onClick={handleClickShowLogin}
@@ -73,7 +79,13 @@ const PersonalAccountPage: FC = () => {
                                 Log-in
                             </Button>
                             <Button
-                                color="success"
+                                sx={{
+                                    color: 'white',
+                                    bgcolor: '#5a8f29',
+                                    '&:hover': {
+                                        bgcolor: '#7dc738',
+                                    },
+                                }}
                                 variant="contained"
                                 size="large"
                                 onClick={handleClickShowReg}

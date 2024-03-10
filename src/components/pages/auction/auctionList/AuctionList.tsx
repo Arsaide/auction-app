@@ -81,9 +81,36 @@ const AuctionList = () => {
                         onClick={reloadAuctions}
                         isRequesting={isRequesting}
                     />
-                    <Button>1</Button>
-                    <Button>1</Button>
-                    <Button>1</Button>
+                    <Button
+                        sx={{
+                            color: '#5a8f29',
+                            '&:hover': {
+                                color: '#7dc738',
+                            },
+                        }}
+                    >
+                        1
+                    </Button>
+                    <Button
+                        sx={{
+                            color: '#5a8f29',
+                            '&:hover': {
+                                color: '#7dc738',
+                            },
+                        }}
+                    >
+                        2
+                    </Button>
+                    <Button
+                        sx={{
+                            color: '#5a8f29',
+                            '&:hover': {
+                                color: '#7dc738',
+                            },
+                        }}
+                    >
+                        3
+                    </Button>
                 </Box>
                 <Grid
                     container

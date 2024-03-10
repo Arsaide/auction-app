@@ -14,7 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 const SideBar = () => {
     return (
         <>
-            <Toolbar sx={{ bgcolor: '#040A2F' }} />
+            <Toolbar sx={{ bgcolor: '#333' }} />
             <Divider />
             <List>
                 <ListItem

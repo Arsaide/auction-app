@@ -14,11 +14,11 @@
     position: relative;
     width: 100%;
     padding: 10px 0 10px 10px;
-    border: 2px solid #0064fb;
+    border: 2px solid #333;
     border-radius: 5px;
     font-size: clamp(15px, 1vw, 18px);
     appearance: none;
-    background: #1b266b;
+    background: #565656;
     margin-left: -1px;
     color: white;
 }
@@ -53,7 +53,7 @@
 }
 
 .inputContainer input::after {
-    background: #1b266b;
+    background: #454545;
 }
 
 label {

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -138,9 +138,9 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         variant="contained"
                         sx={{
                             color: 'white',
-                            bgcolor: '#32a852',
+                            bgcolor: '#5a8f29',
                             '&:hover': {
-                                bgcolor: '#42d469',
+                                bgcolor: '#7dc738',
                             },
                         }}
                         onClick={handleLearnMoreClick}
@@ -155,9 +155,9 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         variant="contained"
                         sx={{
                             color: 'white',
-                            bgcolor: '#32a852',
+                            bgcolor: '#5a8f29',
                             '&:hover': {
-                                bgcolor: '#42d469',
+                                bgcolor: '#7dc738',
                             },
                         }}
                     >

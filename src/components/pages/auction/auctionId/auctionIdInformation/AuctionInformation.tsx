@@ -89,6 +89,12 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                     {!visibleForm ? (
                         <Button
                             variant="contained"
+                            sx={{
+                                bgcolor: '#649f2d',
+                                '&:hover': {
+                                    bgcolor: '#5a8f29',
+                                },
+                            }}
                             onClick={() => setVisibleForm(true)}
                         >
                             Edit auction
@@ -96,6 +102,12 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                     ) : (
                         <Button
                             variant="contained"
+                            sx={{
+                                bgcolor: '#649f2d',
+                                '&:hover': {
+                                    bgcolor: '#5a8f29',
+                                },
+                            }}
                             onClick={() => {
                                 setVisibleForm(false);
                             }}

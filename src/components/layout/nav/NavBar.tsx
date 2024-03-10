@@ -63,7 +63,7 @@ export default function NavBar({ children, balance }: ResponsiveDrawerProps) {
                     sx={{
                         display: { xs: 'none', md: 'block' },
                         '& .MuiDrawer-paper': {
-                            bgcolor: '#040A2F',
+                            bgcolor: '#333',
                             boxSizing: 'border-box',
                             width: drawerWidth,
                         },

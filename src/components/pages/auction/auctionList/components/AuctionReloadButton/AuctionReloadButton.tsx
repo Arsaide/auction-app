@@ -29,6 +29,10 @@ const AuctionReloadButton: FC<ReloadButtonInt> = ({
             variant="contained"
             onClick={onClick}
             sx={{
+                bgcolor: '#5a8f29',
+                '&:hover': {
+                    bgcolor: '#7dc738',
+                },
                 '&:disabled': {
                     bgcolor: '#f54242',
                     color: 'white',

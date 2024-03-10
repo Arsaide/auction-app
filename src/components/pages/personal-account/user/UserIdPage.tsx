@@ -51,7 +51,7 @@ const UserIdPage: FC = () => {
     if (loading) {
         return (
             <Grid container justifyContent="center">
-                <CircularProgress size={120} color="success" />
+                <CircularProgress size={120} color="inherit" />
             </Grid>
         );
     }
@@ -60,7 +60,17 @@ const UserIdPage: FC = () => {
         <>
             <UserDetails name={name} email={email} balance={balance} />
             <OwnAuctionsList auctions={auctions} />
-            <Button variant="contained" onClick={handleSubmit} sx={{ mt: 3 }}>
+            <Button
+                variant="contained"
+                onClick={handleSubmit}
+                sx={{
+                    mt: 3,
+                    bgcolor: '#649f2d',
+                    '&:hover': {
+                        bgcolor: '#5a8f29',
+                    },
+                }}
+            >
                 Log out
             </Button>
         </>

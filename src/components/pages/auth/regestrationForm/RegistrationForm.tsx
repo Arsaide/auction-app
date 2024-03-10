@@ -124,8 +124,12 @@ const RegistrationForm: FC = () => {
                                         : 'Register'}
                                 </Button>
                                 <Button
-                                    color="secondary"
-                                    variant="outlined"
+                                    sx={{
+                                        color: '#fff',
+                                        '&:hover': {
+                                            color: '#b6b6b6',
+                                        },
+                                    }}
                                     onClick={handleLoginClick}
                                 >
                                     Log-in

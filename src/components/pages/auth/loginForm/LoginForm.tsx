@@ -98,9 +98,13 @@ const LoginForm: FC = () => {
                                     {isSubmitting ? 'Submitting...' : 'Login'}
                                 </Button>
                                 <Button
-                                    color="secondary"
-                                    variant="outlined"
                                     onClick={handleRegClick}
+                                    sx={{
+                                        color: '#fff',
+                                        '&:hover': {
+                                            color: '#b6b6b6',
+                                        },
+                                    }}
                                 >
                                     Registration
                                 </Button>

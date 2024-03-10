@@ -55,7 +55,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
             sx={{
                 width: { md: `calc(100% - ${drawerWidth}px)` },
                 ml: { sm: `${drawerWidth}px` },
-                bgcolor: '#040A2F',
+                bgcolor: '#333',
             }}
         >
             <Toolbar
@@ -70,14 +70,14 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                         {balance ? (
                             <Chip
                                 label={`${balance} $`}
-                                color="primary"
-                                sx={{ mr: 2 }}
+                                color="default"
+                                sx={{ mr: 2, bgcolor: 'white' }}
                             />
                         ) : (
                             <Chip
                                 label={`Loading...`}
-                                color="primary"
-                                sx={{ mr: 2 }}
+                                color="default"
+                                sx={{ mr: 2, bgcolor: 'white' }}
                             />
                         )}
                     </Hidden>
@@ -101,9 +101,9 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         color="inherit"
                                         sx={{
                                             color: 'white',
-                                            bgcolor: '#1B266B',
+                                            bgcolor: '#5a8f29',
                                             '&:hover': {
-                                                bgcolor: '#2c3f9e',
+                                                bgcolor: '#7dc738',
                                             },
                                         }}
                                         onClick={handleLoginClickOpen}
@@ -115,10 +115,10 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         color="inherit"
                                         sx={{
                                             color: 'white',
-                                            bgcolor: '#1B266B',
                                             ml: 2,
+                                            bgcolor: '#5a8f29',
                                             '&:hover': {
-                                                bgcolor: '#2c3f9e',
+                                                bgcolor: '#7dc738',
                                             },
                                         }}
                                         onClick={handleRegistrationClickOpen}
@@ -142,14 +142,14 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                     {balance ? (
                                         <Chip
                                             label={`${balance} $`}
-                                            color="primary"
-                                            sx={{ mr: 2 }}
+                                            color="default"
+                                            sx={{ mr: 2, bgcolor: 'white' }}
                                         />
                                     ) : (
                                         <Chip
                                             label={`Loading...`}
-                                            color="primary"
-                                            sx={{ mr: 2 }}
+                                            color="default"
+                                            sx={{ mr: 2, bgcolor: 'white' }}
                                         />
                                     )}
                                     <Tooltip title="Open settings">
