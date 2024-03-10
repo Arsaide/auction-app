@@ -6,9 +6,10 @@ interface LazyLoadImageInt {
     w: string;
     h: string;
     alt: string;
+    active?: boolean;
 }
 
-const LazyLoadImage: FC<LazyLoadImageInt> = ({ src, w, h, alt }) => {
+const LazyLoadImage: FC<LazyLoadImageInt> = ({ src, w, h, alt, active }) => {
     const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
     useEffect(() => {
@@ -42,6 +43,7 @@ const LazyLoadImage: FC<LazyLoadImageInt> = ({ src, w, h, alt }) => {
                         width: w,
                         height: h,
                         objectFit: 'cover',
+                        filter: !active ? 'grayscale(100%)' : 'none',
                     }}
                 />
             )}

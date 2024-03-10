@@ -17,6 +17,7 @@ interface AuctionItem {
     desct: string;
     timeStart: string;
     timeEnd: string;
+    active: boolean;
 }
 
 const AuctionList = () => {
@@ -114,6 +115,7 @@ const AuctionList = () => {
                                         minRates={auction.minRates}
                                         timeStart={auction.timeStart}
                                         timeEnd={auction.timeEnd}
+                                        active={auction.active}
                                         id={auction._id}
                                     />
                                 </Grid>

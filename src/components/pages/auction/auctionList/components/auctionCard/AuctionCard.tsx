@@ -12,6 +12,9 @@ import useOpenModal from '../../../../../../hooks/useOpenModal/useOpenModal';
 import LoginModal from '../../../../../layout/modals/loginModal/LoginModal';
 import useAuthCheck from '../../../../../../hooks/useAuthCheck/useAuthCheck';
 import LazyLoadImage from '../../../../../layout/common/lazyLoadImage/LazyLoadImage';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { Box } from '@mui/material';
 
 interface AuctionCardProps {
     img: string;
@@ -21,6 +24,7 @@ interface AuctionCardProps {
     timeStart: string;
     timeEnd: string;
     id: string;
+    active: boolean;
 }
 
 const AuctionCard: FC<AuctionCardProps> = ({
@@ -31,12 +35,11 @@ const AuctionCard: FC<AuctionCardProps> = ({
     timeStart,
     timeEnd,
     id,
+    active,
 }) => {
     const { openLoginModal, handleLoginClickOpen, handleClose } =
         useOpenModal();
     const { isAuth } = useAuthCheck();
-    const [auctionEnded, setAuctionEnded] = useState<boolean>(false);
-
     const handleLearnMoreClick = () => {
         if (!isAuth) {
             handleLoginClickOpen();
@@ -53,27 +56,30 @@ const AuctionCard: FC<AuctionCardProps> = ({
             sx={{
                 height: '100%',
                 flex: '1 1 auto',
-                opacity: auctionEnded ? 0.5 : 1,
             }}
         >
-            <CardMedia>
-                <LazyLoadImage src={img} w={'100%'} h={'450px'} alt={'title'} />
+            <CardMedia sx={{ position: 'relative' }}>
+                <Box sx={{ position: 'absolute', top: 5, left: 5, zIndex: 5 }}>
+                    {active ? (
+                        <VerifiedIcon sx={{ color: '#7dc738', fontSize: 45 }} />
+                    ) : (
+                        <CancelIcon sx={{ color: '#f54242', fontSize: 45 }} />
+                    )}
+                </Box>
+                <LazyLoadImage
+                    src={img}
+                    active={active}
+                    w={'100%'}
+                    h={'450px'}
+                    alt={'title'}
+                />
             </CardMedia>
             <CardContent>
-                <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    sx={{ filter: auctionEnded ? 'blur(0.1rem)' : 'none' }}
-                >
+                <Typography gutterBottom variant="h5" component="div">
                     {title}
                 </Typography>
                 <Divider sx={{ mb: 1.3 }} />
-                <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ filter: auctionEnded ? 'blur(0.1rem)' : 'none' }}
-                >
+                <Typography variant="body2" color="text.secondary">
                     {trimmedString}
                     {desc.length > 200 &&
                         (!isAuth ? (
@@ -98,18 +104,12 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         ))}
                 </Typography>
 
-                <Typography
-                    variant="h6"
-                    sx={{ filter: auctionEnded ? 'blur(0.1rem)' : 'none' }}
-                >
+                <Typography variant="h6">
                     Price: <u>{minRates}</u> $
                 </Typography>
                 <Divider sx={{ mt: 1.3, mb: 1 }} />
                 <Typography>Created: {formatedTimeStart}</Typography>
-                <AuctionTimer
-                    timeEnd={timeEnd}
-                    onAuctionEnd={() => setAuctionEnded(true)}
-                />
+                <AuctionTimer timeEnd={timeEnd} />
             </CardContent>
             <CardActions sx={{ ml: 1, mb: 1 }}>
                 {isAuth ? (
@@ -123,7 +123,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                 bgcolor: '#c82333',
                             },
                         }}
-                        disabled={auctionEnded}
+                        disabled={!active}
                     >
                         Buy
                     </Button>
@@ -144,7 +144,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                             },
                         }}
                         onClick={handleLearnMoreClick}
-                        disabled={auctionEnded}
+                        disabled={!active}
                     >
                         Learn More
                     </Button>
@@ -160,7 +160,6 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                 bgcolor: '#42d469',
                             },
                         }}
-                        // disabled={auctionEnded}
                     >
                         <Link
                             style={{ color: '#fff', textDecoration: 'none' }}

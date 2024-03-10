@@ -79,12 +79,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                     'ua-UA',
                                 )}
                             </Typography>
-                            <AuctionTimer
-                                timeEnd={auction.timeEnd}
-                                onAuctionEnd={() =>
-                                    console.log('auction ended')
-                                }
-                            />
+                            <AuctionTimer timeEnd={auction.timeEnd} />
                         </>
                     )}
                 </>
