@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
 
 interface UserDetailsProps {
     name: string;
@@ -9,11 +10,21 @@ interface UserDetailsProps {
 
 const UserDetails: FC<UserDetailsProps> = ({ name, email, balance }) => {
     return (
-        <>
-            <Typography>Nickname: {name}</Typography>
-            <Typography>Email: {email}</Typography>
-            <Typography>Balance: {balance} $</Typography>
-        </>
+        <div
+            style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '25px',
+                alignItems: 'center',
+            }}
+        >
+            <Avatar alt={name} src={name} sx={{ width: 86, height: 86 }} />
+            <div>
+                <Typography>Nickname: {name}</Typography>
+                <Typography>Email: {email}</Typography>
+                <Typography>Balance: {balance} $</Typography>
+            </div>
+        </div>
     );
 };
 

@@ -14,9 +14,7 @@ import BottomNav from '../components/layout/nav/bottomNav/BottomNav';
 import { Hidden } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import NotFount from './not-fount/page';
-import Store from '../api/store/store';
 import { Context } from '../index';
-import { UserIdInt } from './personal-account/user-id/UserInterface';
 
 function App() {
     const { store } = useContext(Context);

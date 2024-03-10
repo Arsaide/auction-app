@@ -37,7 +37,7 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const lastSubmittedTimeRef = useRef<number | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [value, setValue] = React.useState<Dayjs | null>(
+    const [value, setValue] = useState<Dayjs | null>(
         dayjs().subtract(-1, 'day'),
     );
     const today = dayjs();
