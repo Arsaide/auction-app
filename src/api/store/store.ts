@@ -82,7 +82,7 @@ export default class Store {
             const token = localStorage.getItem('token');
 
             if (!token) {
-                toast.error('Token not found in LocalStorage');
+                toast.error('Token is not valid');
                 return;
             }
 
@@ -117,7 +117,7 @@ export default class Store {
             const token = localStorage.getItem('token');
 
             if (!token) {
-                toast.error('Token not found');
+                toast.error('Token is not valid');
                 return;
             }
 
@@ -202,6 +202,50 @@ export default class Store {
     async getOwnAuctions(token: string | null | undefined) {
         try {
             return await AuthService.getOwnAuctions(token);
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async addProfileImage(token: string, image: File | null) {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                toast.error('Token is not valid');
+                return;
+            }
+
+            return await toast.promise(
+                AuthService.addProfileImage(token, image),
+                {
+                    pending: 'Send request...',
+                    success: 'Request successfully!',
+                    error: 'Failed to request, please try again...',
+                },
+            );
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async editProfileImage(token: string, image: File | null) {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                toast.error('Token is not valid');
+                return;
+            }
+
+            return await toast.promise(
+                AuthService.addProfileImage(token, image),
+                {
+                    pending: 'Send request...',
+                    success: 'Request successfully!',
+                    error: 'Failed to request, please try again...',
+                },
+            );
         } catch (e: any) {
             throw e;
         }

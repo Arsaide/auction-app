@@ -97,4 +97,30 @@ export default class AuthService {
     ): Promise<AxiosResponse<OwnAuctionInt>> {
         return $api.post('/getownauctions', { token });
     }
+
+    static async addProfileImage(
+        token: string,
+        image: File | null,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        const formData = new FormData();
+        if (image) {
+            formData.append('img', image);
+        }
+        formData.append('token', token);
+
+        return await $api.post<AuthResponse>('/addprofileimage', formData);
+    }
+
+    static async editProfileImage(
+        token: string,
+        image: File | null,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        const formData = new FormData();
+        if (image) {
+            formData.append('img', image);
+        }
+        formData.append('token', token);
+
+        return await $api.post<AuthResponse>('/editprofileimage', formData);
+    }
 }
