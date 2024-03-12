@@ -6,7 +6,7 @@ import Drawer from '@mui/material/Drawer';
 import SideBar from './sideBar/SideBar';
 import useOpenUserMenu from '../../../hooks/useOpenUserMenu/useOpenUserMenu';
 import useOpenModal from '../../../hooks/useOpenModal/useOpenModal';
-import { useContext } from 'react';
+import { memo, useContext } from 'react';
 import { Context } from '../../../index';
 import { Hidden } from '@mui/material';
 import AppBarMenu from './component/appBarMenu/AppBarMenu';
@@ -16,7 +16,7 @@ interface ResponsiveDrawerProps {
     balance: string;
 }
 
-export default function NavBar({ children, balance }: ResponsiveDrawerProps) {
+function NavBar({ children, balance }: ResponsiveDrawerProps) {
     const { store } = useContext(Context);
 
     const handleSubmit = () => {
@@ -92,3 +92,5 @@ export default function NavBar({ children, balance }: ResponsiveDrawerProps) {
         </Box>
     );
 }
+
+export default NavBar;

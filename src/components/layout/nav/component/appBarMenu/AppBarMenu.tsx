@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, memo, useContext } from 'react';
 import { drawerWidth } from '../../index';
 import Toolbar from '@mui/material/Toolbar';
 import GoBack from '../goBack/GoBack';
@@ -208,4 +208,4 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
     );
 };
 
-export default AppBarMenu;
+export default memo(AppBarMenu);
