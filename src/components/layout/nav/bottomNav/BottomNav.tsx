@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
@@ -40,37 +40,89 @@ const BottomNav = () => {
 
     return (
         <BottomNavigation
-            showLabels
             value={value}
             onChange={(event, newValue) => {
                 setValue(newValue);
             }}
-            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+            sx={{
+                position: 'fixed',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                zIndex: 10,
+                backgroundColor: '#333',
+            }}
         >
             <BottomNavigationAction
                 label={'Info'}
                 to={'/information'}
                 component={NavLink}
-                icon={<AssistantIcon />}
-            />
+                icon={
+                    <AssistantIcon
+                        sx={{ color: value === 0 ? 'white' : 'grey' }}
+                    />
+                }
+                sx={{
+                    color: value === 3 ? 'grey' : 'white',
+                    '& .MuiBottomNavigationAction-label': {
+                        color: value === 3 ? 'grey' : 'white',
+                    },
+                }}
+            >
+                <span>Info</span>
+            </BottomNavigationAction>
             <BottomNavigationAction
-                label={'Rate'}
+                label={'Auctions'}
                 to={'/auction'}
                 component={NavLink}
-                icon={<CurrencyBitcoinIcon />}
-            />
+                icon={
+                    <CurrencyBitcoinIcon
+                        sx={{ color: value === 1 ? 'white' : 'grey' }}
+                    />
+                }
+                sx={{
+                    color: value === 3 ? 'grey' : 'white',
+                    '& .MuiBottomNavigationAction-label': {
+                        color: value === 3 ? 'grey' : 'white',
+                    },
+                }}
+            >
+                <span>Rate</span>
+            </BottomNavigationAction>
             <BottomNavigationAction
                 label={'Home'}
                 to={'/'}
                 component={NavLink}
-                icon={<HomeIcon />}
-            />
+                icon={
+                    <HomeIcon sx={{ color: value === 2 ? 'white' : 'grey' }} />
+                }
+                sx={{
+                    color: value === 3 ? 'grey' : 'white',
+                    '& .MuiBottomNavigationAction-label': {
+                        color: value === 3 ? 'grey' : 'white',
+                    },
+                }}
+            >
+                <span>Home</span>
+            </BottomNavigationAction>
             <BottomNavigationAction
                 label={'Chat'}
                 to={'/online-chat'}
                 component={NavLink}
-                icon={<QuestionAnswerIcon />}
-            />
+                icon={
+                    <QuestionAnswerIcon
+                        sx={{ color: value === 3 ? 'white' : 'grey' }}
+                    />
+                }
+                sx={{
+                    color: value === 3 ? 'grey' : 'white',
+                    '& .MuiBottomNavigationAction-label': {
+                        color: value === 3 ? 'grey' : 'white',
+                    },
+                }}
+            >
+                <span>Chat</span>
+            </BottomNavigationAction>
             {isAuth ? (
                 <BottomNavigationAction
                     to={`/personal-account/${token}`}
@@ -83,17 +135,31 @@ const BottomNav = () => {
                             />
                         </IconButton>
                     }
-                />
+                >
+                    <span>Profile</span>
+                </BottomNavigationAction>
             ) : (
                 <BottomNavigationAction
                     label={'Login'}
                     to={'/personal-account'}
                     component={NavLink}
-                    icon={<AccountCircleIcon />}
-                />
+                    icon={
+                        <AccountCircleIcon
+                            sx={{ color: value === 4 ? 'white' : 'grey' }}
+                        />
+                    }
+                    sx={{
+                        color: value === 3 ? 'grey' : 'white',
+                        '& .MuiBottomNavigationAction-label': {
+                            color: value === 3 ? 'grey' : 'white',
+                        },
+                    }}
+                >
+                    <span>Login</span>
+                </BottomNavigationAction>
             )}
         </BottomNavigation>
     );
 };
 
-export default BottomNav;
+export default memo(BottomNav);
