@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AddUserAvatarForm from '../userForms/addUserAvatarForm/AddUserAvatarForm';
 import Box from '@mui/material/Box';
+import { Dialog, DialogContent, DialogTitle, Modal } from '@mui/material';
 
 interface UserDetailsProps {
     name: string;
@@ -57,26 +58,23 @@ const UserDetails: FC<UserDetailsProps> = ({ name, email, balance }) => {
                     Edit
                 </Box>
             </Box>
-            <Menu
-                sx={{ mt: '25px' }}
+            <Dialog
+                sx={{}}
                 id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
+                aria-labelledby={'form-dialog-title'}
             >
-                <MenuItem>
+                <DialogTitle
+                    id={'form-dialog-title'}
+                    sx={{ bgcolor: '#595858', color: 'white', pl: 3 }}
+                >
+                    Form
+                </DialogTitle>
+                <DialogContent sx={{ bgcolor: '#595858' }}>
                     <AddUserAvatarForm />
-                </MenuItem>
-            </Menu>
+                </DialogContent>
+            </Dialog>
 
             <div>
                 <Typography>Nickname: {name}</Typography>

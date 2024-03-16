@@ -207,7 +207,7 @@ export default class Store {
         }
     }
 
-    async addProfileImage(token: string, image: File | null) {
+    async addProfileImage(image: File | null) {
         try {
             const token = localStorage.getItem('token');
 
@@ -217,7 +217,7 @@ export default class Store {
             }
 
             return await toast.promise(
-                AuthService.addProfileImage(token, image),
+                AuthService.editProfileImage(token, image),
                 {
                     pending: 'Send request...',
                     success: 'Request successfully!',
@@ -229,7 +229,7 @@ export default class Store {
         }
     }
 
-    async editProfileImage(token: string, image: File | null) {
+    async editProfileImage(image: File | null) {
         try {
             const token = localStorage.getItem('token');
 
