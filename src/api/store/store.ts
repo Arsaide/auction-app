@@ -188,6 +188,24 @@ export default class Store {
         }
     }
 
+    async sendDeleteAuction(id: string | undefined) {
+        try {
+            const token: string | null = localStorage.getItem('token');
+            return await AuthService.sendDeleteAuction(id, token);
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async deleteAuction(password: string) {
+        try {
+            const token: string | null = localStorage.getItem('token');
+            return await AuthService.deleteAuction(token, password);
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
     async getUser(token: string | null | undefined) {
         try {
             const response = await AuthService.getUser(token);

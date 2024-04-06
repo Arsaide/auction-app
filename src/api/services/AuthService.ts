@@ -123,4 +123,24 @@ export default class AuthService {
 
         return await $api.post<AuthResponse>('/editprofileimage', formData);
     }
+
+    static async sendDeleteAuction(
+        _id: string | undefined,
+        token: string | null,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return await $api.post<AuthResponse>('/deleteauctionsend', {
+            _id,
+            token,
+        });
+    }
+
+    static async deleteAuction(
+        token: string | null,
+        password: string,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return await $api.post<AuthResponse>('/deleteauction', {
+            password,
+            token,
+        });
+    }
 }
