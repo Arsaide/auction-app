@@ -5,12 +5,14 @@ import Typography from '@mui/material/Typography';
 import AuctionTimer from '../../../../layout/common/ui/timers/auctionTimer/AuctionTimer';
 import Button from '@mui/material/Button';
 import EditAuctionForm from '../../auctionForms/editAuction/EditAuctionForm';
+import DeleteSection from '../../auctionForms/deleteSection/DeleteSection';
 
 interface AuctionInformationProps {
     auction: AuctionInt;
     owner: boolean;
     reloadAuction: () => void;
     isRequesting: boolean;
+    id: string | undefined;
 }
 
 const AuctionInformation: FC<AuctionInformationProps> = ({
@@ -18,6 +20,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
     owner,
     reloadAuction,
     isRequesting,
+    id,
 }) => {
     const [visibleForm, setVisibleForm] = useState<boolean>(false);
 
@@ -117,6 +120,9 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                     )}
                 </>
             ) : null}
+
+            {owner ? <DeleteSection id={id} /> : null}
+
             {owner ? (
                 <>
                     {visibleForm && (

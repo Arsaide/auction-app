@@ -87,6 +87,7 @@ const AuctionIdPage: FC = () => {
                     owner={owner}
                     reloadAuction={reloadAuction}
                     isRequesting={isRequesting}
+                    id={id}
                 />
             </Grid>
         </div>
