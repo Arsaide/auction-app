@@ -6,6 +6,7 @@ import AuctionTimer from '../../../../layout/common/ui/timers/auctionTimer/Aucti
 import Button from '@mui/material/Button';
 import EditAuctionForm from '../../auctionForms/editAuction/EditAuctionForm';
 import DeleteSection from '../../auctionForms/deleteSection/DeleteSection';
+import Box from '@mui/material/Box';
 
 interface AuctionInformationProps {
     auction: AuctionInt;
@@ -88,20 +89,30 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                 </>
             )}
             {owner ? (
-                <>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 1.5,
+                        maxWidth: 'max-content',
+                    }}
+                >
                     {!visibleForm ? (
-                        <Button
-                            variant="contained"
-                            sx={{
-                                bgcolor: '#649f2d',
-                                '&:hover': {
-                                    bgcolor: '#5a8f29',
-                                },
-                            }}
-                            onClick={() => setVisibleForm(true)}
-                        >
-                            Edit auction
-                        </Button>
+                        <>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    bgcolor: '#649f2d',
+                                    '&:hover': {
+                                        bgcolor: '#5a8f29',
+                                    },
+                                }}
+                                onClick={() => setVisibleForm(true)}
+                            >
+                                Edit auction
+                            </Button>
+                            <DeleteSection id={id} />
+                        </>
                     ) : (
                         <Button
                             variant="contained"
@@ -118,10 +129,8 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                             Close edit auction
                         </Button>
                     )}
-                </>
+                </Box>
             ) : null}
-
-            {owner ? <DeleteSection id={id} /> : null}
 
             {owner ? (
                 <>

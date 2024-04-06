@@ -191,7 +191,15 @@ export default class Store {
     async sendDeleteAuction(id: string | undefined) {
         try {
             const token: string | null = localStorage.getItem('token');
-            return await AuthService.sendDeleteAuction(id, token);
+
+            return await toast.promise(
+                AuthService.sendDeleteAuction(id, token),
+                {
+                    pending: 'Sending code...',
+                    success: 'Created successfully!',
+                    error: 'Invalid code, please try again...',
+                },
+            );
         } catch (e: any) {
             throw e;
         }

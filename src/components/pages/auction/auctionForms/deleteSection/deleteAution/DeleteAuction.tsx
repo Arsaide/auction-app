@@ -27,6 +27,7 @@ const DeleteAuction: FC = () => {
             const response = await store.deleteAuction(values.code);
             if (response && response.status === 200) {
                 setIsSubmitting(false);
+                window.location.href = '/auction';
             }
         } catch (e: any) {
             setIsSubmitting(false);
