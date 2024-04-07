@@ -1,64 +1,79 @@
-import React, { FC, useContext, useRef, useState } from 'react';
+import React, { ChangeEvent, FC, useContext, useRef, useState } from 'react';
 import { Context } from '../../../../../../index';
 import { toast } from 'react-toastify';
 import { FormControl, FormHelperText, InputLabel } from '@mui/material';
 import Button from '@mui/material/Button';
-import Cropper from 'react-easy-crop';
+import ReactCrop, { centerCrop, Crop, makeAspectCrop } from 'react-image-crop';
+import 'react-image-crop/src/ReactCrop.scss';
 
 interface IAddUserAvatar {
     file: File | null;
-    crop: { x: number; y: number };
-    zoom: number;
-    croppedImage: string | null;
 }
+
+const ASPECT_RATIO = 1;
+const MIN_DIMENSION = 150;
 
 const AddUserAvatarForm: FC = () => {
     const { store } = useContext(Context);
-    const [formData, setFormData] = useState<IAddUserAvatar>({
-        file: null,
-        crop: { x: 0, y: 0 },
-        zoom: 1,
-        croppedImage: null,
-    });
     const [errorMessage, setErrorMessage] = useState<string>('');
-
+    const [crop, setCrop] = useState<Crop>();
+    const [imgSrc, setImgSrc] = useState<string>('');
     const imageRef = useRef<HTMLInputElement>(null);
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files ? event.target.files[0] : null;
-        if (formData.file) {
-            URL.revokeObjectURL(formData.file as unknown as string);
+    const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+            const imageElement = new Image();
+            const imageUrl = reader.result?.toString() || '';
+            imageElement.src = imageUrl;
+
+            imageElement.addEventListener('load', (e: Event) => {
+                if (errorMessage) setErrorMessage('');
+                const target = e.target as HTMLImageElement;
+                const { naturalWidth, naturalHeight } = target;
+                if (
+                    naturalWidth < MIN_DIMENSION ||
+                    naturalHeight < MIN_DIMENSION
+                ) {
+                    setErrorMessage('Image must be at least 150 x 150 pixels');
+                    return setImgSrc('');
+                }
+            });
+
+            setImgSrc(imageUrl);
+        });
+        reader.readAsDataURL(file);
+    };
+
+    const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+        const { width, height, naturalWidth, naturalHeight } = e.currentTarget;
+        const cropWidthInPercent = (MIN_DIMENSION / width) * 100;
+
+        if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
+            setErrorMessage('Image must be at least 150 x 150 pixels');
+            setImgSrc('');
+            return;
         }
-        setFormData({ ...formData, file });
-    };
+        const crop = makeAspectCrop(
+            {
+                unit: '%',
+                width: cropWidthInPercent,
+            },
+            ASPECT_RATIO,
+            width,
+            height,
+        );
 
-    const handleCropChange = (crop: { x: number; y: number }) => {
-        setFormData({ ...formData, crop });
-    };
-
-    const handleZoomChange = (zoom: number) => {
-        setFormData({ ...formData, zoom });
+        const centeredCrop = centerCrop(crop, width, height);
+        setCrop(centeredCrop);
     };
 
     const handleSubmit = async () => {
         try {
-            if (!formData.file) {
-                setErrorMessage('Please select a file.');
-                return;
-            }
-
-            if (!formData.croppedImage) {
-                setErrorMessage('Please crop the image.');
-                return;
-            }
-
-            const response = await store.addProfileImage(formData.file);
-            setFormData({
-                file: null,
-                crop: { x: 0, y: 0 },
-                zoom: 1,
-                croppedImage: null,
-            });
+            // const response = await store.addProfileImage();
         } catch (e: any) {
             toast.error(e.response?.data?.message);
             setErrorMessage(e.response?.data?.message);
@@ -72,31 +87,31 @@ const AddUserAvatarForm: FC = () => {
                     <InputLabel htmlFor="file">Choose your avatar</InputLabel>
                     <input
                         ref={imageRef}
+                        onChange={onSelectFile}
                         type="file"
                         id="file"
                         accept="image/*"
-                        onChange={handleFileChange}
                         style={{ display: 'block' }}
                     />
                 </FormControl>
-                {formData.file && (
-                    <div
-                        style={{
-                            width: '320px',
-                            height: '320px',
-                            overflow: 'hidden',
-                            position: 'relative',
-                        }}
+                {imgSrc && (
+                    <ReactCrop
+                        crop={crop}
+                        onChange={(pixelCrop, percentCrop) =>
+                            setCrop(pixelCrop)
+                        }
+                        circularCrop
+                        keepSelection
+                        aspect={ASPECT_RATIO}
+                        minWidth={MIN_DIMENSION}
                     >
-                        <Cropper
-                            onCropChange={handleCropChange}
-                            onZoomChange={handleZoomChange}
-                            aspect={1}
-                            crop={formData.crop}
-                            zoom={formData.zoom}
-                            image={URL.createObjectURL(formData.file)}
+                        <img
+                            src={imgSrc}
+                            alt={'Crop image'}
+                            style={{ maxHeight: '60vh' }}
+                            onLoad={onImageLoad}
                         />
-                    </div>
+                    </ReactCrop>
                 )}
                 {errorMessage && (
                     <FormHelperText style={{ color: 'red ' }}>
