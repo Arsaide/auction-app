@@ -6,5 +6,6 @@ export interface AuthResponse {
     message: string;
     auction: [];
     user: IUser;
+    avatar: string; // avatar
     stateOwner: boolean;
 }

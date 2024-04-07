@@ -12,9 +12,15 @@ interface UserDetailsProps {
     name: string;
     email: string;
     balance: string;
+    avatar: string;
 }
 
-const UserDetails: FC<UserDetailsProps> = ({ name, email, balance }) => {
+const UserDetails: FC<UserDetailsProps> = ({
+    name,
+    email,
+    balance,
+    avatar,
+}) => {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -41,7 +47,11 @@ const UserDetails: FC<UserDetailsProps> = ({ name, email, balance }) => {
                     overflow: 'hidden',
                 }}
             >
-                <Avatar alt={name} src={name} sx={{ width: 86, height: 86 }} />
+                <Avatar
+                    alt={name}
+                    src={avatar || name}
+                    sx={{ width: 86, height: 86 }}
+                />
                 <Box
                     sx={{
                         position: 'absolute',

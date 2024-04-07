@@ -11,7 +11,7 @@ import OwnAuctionsList from './ownAuctionsList/OwnAuctionsList';
 
 const UserIdPage: FC = () => {
     const { store } = useContext(Context);
-    const { name, email, balance } = store.user;
+    const { name, email, balance, avatar } = store.user;
     const { token } = useParams<{ token: string }>();
     const navigate = useNavigate();
     const isAuth = localStorage.getItem('isAuth') === 'true';
@@ -58,7 +58,12 @@ const UserIdPage: FC = () => {
 
     return (
         <>
-            <UserDetails name={name} email={email} balance={balance} />
+            <UserDetails
+                name={name}
+                email={email}
+                balance={balance}
+                avatar={avatar}
+            />
             <OwnAuctionsList auctions={auctions} />
             <Button
                 variant="contained"

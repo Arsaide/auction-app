@@ -18,9 +18,11 @@ const MIN_DIMENSION = 150;
 
 const AddUserAvatarForm: FC = () => {
     const { store } = useContext(Context);
+    const { name } = store.user;
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [crop, setCrop] = useState<Crop>();
     const [imgSrc, setImgSrc] = useState<string>('');
+    const [croppedImage, setCroppedImage] = useState<File | null>(null);
     const imageRef = useRef<HTMLImageElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -77,14 +79,50 @@ const AddUserAvatarForm: FC = () => {
         setCrop(centeredCrop);
     };
 
+    const handleCrop = () => {
+        if (imageRef.current && canvasRef.current && crop) {
+            setCanvasPreview({
+                image: imageRef.current,
+                canvas: canvasRef.current,
+                crop: crop as PixelCrop,
+            });
+
+            const croppedImageDataUrl = canvasRef.current.toDataURL();
+
+            const croppedImageFile = dataURLtoFile(
+                croppedImageDataUrl,
+                `${name}-avatar.jpg`,
+            );
+            setCroppedImage(croppedImageFile);
+        }
+    };
+
+    const dataURLtoFile = (dataURL: string, filename: string): File => {
+        const arr = dataURL.split(',');
+        const mime = arr[0].match(/:(.*?);/)![1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+    };
+
     const handleSubmit = async () => {
         try {
-            // const response = await store.addProfileImage();
+            if (croppedImage) {
+                const response = await store.addProfileImage(croppedImage);
+            } else {
+                toast.error('Please crop the image before uploading.');
+            }
         } catch (e: any) {
             toast.error(e.response?.data?.message);
             setErrorMessage(e.response?.data?.message);
         }
     };
+
+    console.log(croppedImage);
 
     return (
         <>
@@ -126,15 +164,16 @@ const AddUserAvatarForm: FC = () => {
                 )}
                 <Button
                     variant={'contained'}
-                    onClick={() => {
-                        if (imageRef.current && canvasRef.current && crop) {
-                            setCanvasPreview({
-                                image: imageRef.current,
-                                canvas: canvasRef.current,
-                                crop: crop as PixelCrop,
-                            });
-                        }
-                    }}
+                    // onClick={() => {
+                    //     if (imageRef.current && canvasRef.current && crop) {
+                    //         setCanvasPreview({
+                    //             image: imageRef.current,
+                    //             canvas: canvasRef.current,
+                    //             crop: crop as PixelCrop,
+                    //         });
+                    //     }
+                    // }}
+                    onClick={handleCrop}
                 >
                     Crop
                 </Button>
