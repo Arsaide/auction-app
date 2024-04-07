@@ -3,12 +3,15 @@ import { Context } from '../../../../../../index';
 import { toast } from 'react-toastify';
 import { FormControl, FormHelperText, InputLabel } from '@mui/material';
 import Button from '@mui/material/Button';
-import ReactCrop, { centerCrop, Crop, makeAspectCrop } from 'react-image-crop';
+import ReactCrop, {
+    centerCrop,
+    convertToPixelCrop,
+    Crop,
+    makeAspectCrop,
+    PixelCrop,
+} from 'react-image-crop';
 import 'react-image-crop/src/ReactCrop.scss';
-
-interface IAddUserAvatar {
-    file: File | null;
-}
+import { setCanvasPreview } from './setCanvasPreview';
 
 const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 150;
@@ -18,7 +21,8 @@ const AddUserAvatarForm: FC = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [crop, setCrop] = useState<Crop>();
     const [imgSrc, setImgSrc] = useState<string>('');
-    const imageRef = useRef<HTMLInputElement>(null);
+    const imageRef = useRef<HTMLImageElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -29,6 +33,8 @@ const AddUserAvatarForm: FC = () => {
             const imageElement = new Image();
             const imageUrl = reader.result?.toString() || '';
             imageElement.src = imageUrl;
+
+            console.log(imageUrl);
 
             imageElement.addEventListener('load', (e: Event) => {
                 if (errorMessage) setErrorMessage('');
@@ -86,7 +92,6 @@ const AddUserAvatarForm: FC = () => {
                 <FormControl>
                     <InputLabel htmlFor="file">Choose your avatar</InputLabel>
                     <input
-                        ref={imageRef}
                         onChange={onSelectFile}
                         type="file"
                         id="file"
@@ -106,6 +111,7 @@ const AddUserAvatarForm: FC = () => {
                         minWidth={MIN_DIMENSION}
                     >
                         <img
+                            ref={imageRef}
                             src={imgSrc}
                             alt={'Crop image'}
                             style={{ maxHeight: '60vh' }}
@@ -118,9 +124,36 @@ const AddUserAvatarForm: FC = () => {
                         {errorMessage}
                     </FormHelperText>
                 )}
+                <Button
+                    variant={'contained'}
+                    onClick={() => {
+                        if (imageRef.current && canvasRef.current && crop) {
+                            setCanvasPreview({
+                                image: imageRef.current,
+                                canvas: canvasRef.current,
+                                crop: crop as PixelCrop,
+                            });
+                        }
+                    }}
+                >
+                    Crop
+                </Button>
                 <Button variant={'contained'} onClick={handleSubmit}>
                     Upload
                 </Button>
+
+                {crop && (
+                    <canvas
+                        ref={canvasRef}
+                        style={{
+                            border: '1px solid black',
+                            objectFit: 'contain',
+                            width: '250px',
+                            height: '250px',
+                            borderRadius: '50%',
+                        }}
+                    />
+                )}
             </form>
         </>
     );
