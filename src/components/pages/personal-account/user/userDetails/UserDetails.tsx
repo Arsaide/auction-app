@@ -6,13 +6,19 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AddUserAvatarForm from '../userForms/addUserAvatarForm/AddUserAvatarForm';
 import Box from '@mui/material/Box';
-import { Dialog, DialogContent, DialogTitle, Modal } from '@mui/material';
+import {
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Modal,
+    Skeleton,
+} from '@mui/material';
 
 interface UserDetailsProps {
-    name: string;
-    email: string;
-    balance: string;
-    avatar: string;
+    name: string | null;
+    email: string | null;
+    balance: string | null;
+    avatar: string | null;
 }
 
 const UserDetails: FC<UserDetailsProps> = ({
@@ -47,26 +53,32 @@ const UserDetails: FC<UserDetailsProps> = ({
                     overflow: 'hidden',
                 }}
             >
-                <Avatar
-                    alt={name}
-                    src={avatar || name}
-                    sx={{ width: 86, height: 86 }}
-                />
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        textAlign: 'center',
-                        width: '100%',
-                        height: '25px',
-                        fontSize: 16,
-                        backgroundColor: 'rgba(51, 51, 51, 0.7)',
-                    }}
-                    onClick={handleOpenUserMenu}
-                >
-                    Edit
-                </Box>
+                {avatar ? (
+                    <>
+                        <Avatar
+                            alt={name || 'Loading'}
+                            src={avatar || name || 'Loading'}
+                            sx={{ width: 150, height: 150 }}
+                        />
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                textAlign: 'center',
+                                width: '100%',
+                                height: '25px',
+                                fontSize: 16,
+                                backgroundColor: 'rgba(51, 51, 51, 0.7)',
+                            }}
+                            onClick={handleOpenUserMenu}
+                        >
+                            Edit
+                        </Box>
+                    </>
+                ) : (
+                    <Skeleton variant={'circular'} width={150} height={150} />
+                )}
             </Box>
             <Dialog
                 sx={{}}
@@ -86,10 +98,28 @@ const UserDetails: FC<UserDetailsProps> = ({
                 </DialogContent>
             </Dialog>
 
-            <div>
-                <Typography>Nickname: {name}</Typography>
-                <Typography>Email: {email}</Typography>
-                <Typography>Balance: {balance} $</Typography>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '5px',
+                }}
+            >
+                {name ? (
+                    <Typography>Nickname: {name}</Typography>
+                ) : (
+                    <Skeleton width={160} height={25} />
+                )}
+                {email ? (
+                    <Typography>Email: {email}</Typography>
+                ) : (
+                    <Skeleton width={160} height={25} />
+                )}
+                {balance ? (
+                    <Typography>Balance: {balance} $</Typography>
+                ) : (
+                    <Skeleton width={160} height={25} />
+                )}
             </div>
         </div>
     );

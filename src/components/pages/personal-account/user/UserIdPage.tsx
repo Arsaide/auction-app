@@ -48,13 +48,13 @@ const UserIdPage: FC = () => {
         window.location.reload();
     };
 
-    if (loading) {
-        return (
-            <Grid container justifyContent="center">
-                <CircularProgress size={120} color="inherit" />
-            </Grid>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <Grid container justifyContent="center">
+    //             <CircularProgress size={120} color="inherit" />
+    //         </Grid>
+    //     );
+    // }
 
     return (
         <>
