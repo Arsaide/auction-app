@@ -13,6 +13,7 @@ import {
     Modal,
     Skeleton,
 } from '@mui/material';
+import { MainColors } from '../../../../../lib/Colors/MainColors';
 
 interface UserDetailsProps {
     name: string | null;
@@ -89,11 +90,15 @@ const UserDetails: FC<UserDetailsProps> = ({
             >
                 <DialogTitle
                     id={'form-dialog-title'}
-                    sx={{ bgcolor: '#595858', color: 'white', pl: 3 }}
+                    sx={{
+                        bgcolor: MainColors.GRAY595,
+                        color: MainColors.WHITE,
+                        pl: 3,
+                    }}
                 >
                     Form
                 </DialogTitle>
-                <DialogContent sx={{ bgcolor: '#595858' }}>
+                <DialogContent sx={{ bgcolor: MainColors.GRAY595 }}>
                     <AddUserAvatarForm />
                 </DialogContent>
             </Dialog>

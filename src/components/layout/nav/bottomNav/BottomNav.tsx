@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
@@ -11,8 +11,12 @@ import Avatar from '@mui/material/Avatar';
 import useAuthCheck from '../../../../hooks/useAuthCheck/useAuthCheck';
 import { Link } from 'react-router-dom';
 import { useLocation, NavLink } from 'react-router-dom';
+import { Context } from '../../../../index';
+import { MainColors } from '../../../../lib/Colors/MainColors';
 
 const BottomNav = () => {
+    const { store } = useContext(Context);
+    const { name, avatar } = store.user;
     const { isAuth } = useAuthCheck();
     const [value, setValue] = useState(0);
     const location = useLocation();
@@ -50,7 +54,7 @@ const BottomNav = () => {
                 left: 0,
                 right: 0,
                 zIndex: 10,
-                backgroundColor: '#333',
+                backgroundColor: MainColors.GRAY333,
             }}
         >
             <BottomNavigationAction
@@ -59,13 +63,19 @@ const BottomNav = () => {
                 component={NavLink}
                 icon={
                     <AssistantIcon
-                        sx={{ color: value === 0 ? 'white' : 'grey' }}
+                        sx={{
+                            color:
+                                value === 0
+                                    ? MainColors.WHITE
+                                    : MainColors.GRAY808,
+                        }}
                     />
                 }
                 sx={{
-                    color: value === 3 ? 'grey' : 'white',
+                    color: value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                     '& .MuiBottomNavigationAction-label': {
-                        color: value === 3 ? 'grey' : 'white',
+                        color:
+                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                     },
                 }}
             >
@@ -77,13 +87,19 @@ const BottomNav = () => {
                 component={NavLink}
                 icon={
                     <CurrencyBitcoinIcon
-                        sx={{ color: value === 1 ? 'white' : 'grey' }}
+                        sx={{
+                            color:
+                                value === 1
+                                    ? MainColors.WHITE
+                                    : MainColors.GRAY808,
+                        }}
                     />
                 }
                 sx={{
-                    color: value === 3 ? 'grey' : 'white',
+                    color: value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                     '& .MuiBottomNavigationAction-label': {
-                        color: value === 3 ? 'grey' : 'white',
+                        color:
+                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                     },
                 }}
             >
@@ -94,12 +110,20 @@ const BottomNav = () => {
                 to={'/'}
                 component={NavLink}
                 icon={
-                    <HomeIcon sx={{ color: value === 2 ? 'white' : 'grey' }} />
+                    <HomeIcon
+                        sx={{
+                            color:
+                                value === 2
+                                    ? MainColors.WHITE
+                                    : MainColors.GRAY808,
+                        }}
+                    />
                 }
                 sx={{
-                    color: value === 3 ? 'grey' : 'white',
+                    color: value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                     '& .MuiBottomNavigationAction-label': {
-                        color: value === 3 ? 'grey' : 'white',
+                        color:
+                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                     },
                 }}
             >
@@ -111,13 +135,19 @@ const BottomNav = () => {
                 component={NavLink}
                 icon={
                     <QuestionAnswerIcon
-                        sx={{ color: value === 3 ? 'white' : 'grey' }}
+                        sx={{
+                            color:
+                                value === 3
+                                    ? MainColors.WHITE
+                                    : MainColors.GRAY808,
+                        }}
                     />
                 }
                 sx={{
-                    color: value === 3 ? 'grey' : 'white',
+                    color: value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                     '& .MuiBottomNavigationAction-label': {
-                        color: value === 3 ? 'grey' : 'white',
+                        color:
+                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                     },
                 }}
             >
@@ -129,10 +159,7 @@ const BottomNav = () => {
                     component={NavLink}
                     icon={
                         <IconButton sx={{ p: 0 }}>
-                            <Avatar
-                                alt="Monkey King"
-                                src="/avatar/avatar.jpg"
-                            />
+                            <Avatar alt={name} src={avatar} />
                         </IconButton>
                     }
                 >
@@ -145,13 +172,22 @@ const BottomNav = () => {
                     component={NavLink}
                     icon={
                         <AccountCircleIcon
-                            sx={{ color: value === 4 ? 'white' : 'grey' }}
+                            sx={{
+                                color:
+                                    value === 4
+                                        ? MainColors.WHITE
+                                        : MainColors.GRAY808,
+                            }}
                         />
                     }
                     sx={{
-                        color: value === 3 ? 'grey' : 'white',
+                        color:
+                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
                         '& .MuiBottomNavigationAction-label': {
-                            color: value === 3 ? 'grey' : 'white',
+                            color:
+                                value === 3
+                                    ? MainColors.GRAY808
+                                    : MainColors.WHITE,
                         },
                     }}
                 >

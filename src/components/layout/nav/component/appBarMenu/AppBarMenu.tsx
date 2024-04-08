@@ -16,6 +16,8 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import { Context } from '../../../../../index';
+import { MainColors } from '../../../../../lib/Colors/MainColors';
+import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
 
 interface AppBarMenuInt {
     isAuth: boolean;
@@ -47,7 +49,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
     token,
 }) => {
     const { store } = useContext(Context);
-    const { name } = store.user;
+    const { name, avatar } = store.user;
 
     return (
         <AppBar
@@ -55,7 +57,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
             sx={{
                 width: { md: `calc(100% - ${drawerWidth}px)` },
                 ml: { sm: `${drawerWidth}px` },
-                bgcolor: '#333',
+                bgcolor: MainColors.GRAY333,
             }}
         >
             <Toolbar
@@ -71,13 +73,13 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                             <Chip
                                 label={`${balance} $`}
                                 color="default"
-                                sx={{ mr: 2, bgcolor: 'white' }}
+                                sx={{ mr: 2, bgcolor: MainColors.WHITE }}
                             />
                         ) : (
                             <Chip
                                 label={`Loading...`}
                                 color="default"
-                                sx={{ mr: 2, bgcolor: 'white' }}
+                                sx={{ mr: 2, bgcolor: MainColors.WHITE }}
                             />
                         )}
                     </Hidden>
@@ -101,9 +103,9 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         color="inherit"
                                         sx={{
                                             color: 'white',
-                                            bgcolor: '#5a8f29',
+                                            bgcolor: ButtonColors.DGREEN,
                                             '&:hover': {
-                                                bgcolor: '#7dc738',
+                                                bgcolor: ButtonColors.LGREEN,
                                             },
                                         }}
                                         onClick={handleLoginClickOpen}
@@ -116,9 +118,9 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         sx={{
                                             color: 'white',
                                             ml: 2,
-                                            bgcolor: '#5a8f29',
+                                            bgcolor: ButtonColors.DGREEN,
                                             '&:hover': {
-                                                bgcolor: '#7dc738',
+                                                bgcolor: ButtonColors.LGREEN,
                                             },
                                         }}
                                         onClick={handleRegistrationClickOpen}
@@ -143,13 +145,19 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         <Chip
                                             label={`${balance} $`}
                                             color="default"
-                                            sx={{ mr: 2, bgcolor: 'white' }}
+                                            sx={{
+                                                mr: 2,
+                                                bgcolor: MainColors.WHITE,
+                                            }}
                                         />
                                     ) : (
                                         <Chip
                                             label={`Loading...`}
                                             color="default"
-                                            sx={{ mr: 2, bgcolor: 'white' }}
+                                            sx={{
+                                                mr: 2,
+                                                bgcolor: MainColors.WHITE,
+                                            }}
                                         />
                                     )}
                                     <Tooltip title="Open settings">
@@ -157,7 +165,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                             onClick={handleOpenUserMenu}
                                             sx={{ p: 0 }}
                                         >
-                                            <Avatar alt={name} src={name} />
+                                            <Avatar alt={name} src={avatar} />
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
@@ -177,12 +185,15 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         onClose={handleCloseUserMenu}
                                     >
                                         <MenuItem onClick={handleCloseUserMenu}>
-                                            <Typography textAlign="center">
+                                            <Typography
+                                                textAlign="center"
+                                                sx={{ p: 1 }}
+                                            >
                                                 <Link
                                                     to={`/personal-account/${token}`}
                                                     style={{
                                                         textDecoration: 'none',
-                                                        color: '#000',
+                                                        color: MainColors.BLACK,
                                                     }}
                                                 >
                                                     My account
@@ -192,6 +203,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         <MenuItem onClick={handleCloseUserMenu}>
                                             <Typography
                                                 onClick={handleSubmit}
+                                                sx={{ p: 1 }}
                                                 textAlign="center"
                                             >
                                                 Log out
