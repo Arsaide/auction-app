@@ -10,6 +10,8 @@ import {
     DialogContentText,
     DialogTitle,
 } from '@mui/material';
+import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
+import { MainColors } from '../../../../../lib/Colors/MainColors';
 
 interface IDeleteSection {
     id: string | undefined;
@@ -38,10 +40,10 @@ const DeleteSection: FC<IDeleteSection> = ({ id }) => {
                 variant={'contained'}
                 onClick={handleSubmit}
                 sx={{
-                    color: 'white',
-                    bgcolor: '#dc3545',
+                    color: MainColors.WHITE,
+                    bgcolor: ButtonColors.LRED,
                     '&:hover': {
-                        bgcolor: '#c82333',
+                        bgcolor: ButtonColors.DRED,
                     },
                 }}
             >
@@ -51,20 +53,24 @@ const DeleteSection: FC<IDeleteSection> = ({ id }) => {
             <Dialog open={isOpen} aria-labelledby={'form-dialog-title'}>
                 <DialogTitle
                     id={'form-dialog-title'}
-                    sx={{ bgcolor: '#595858', color: 'white', pl: 3 }}
+                    sx={{
+                        bgcolor: MainColors.GRAY595,
+                        color: MainColors.WHITE,
+                        pl: 3,
+                    }}
                 >
                     Delete Auction
                 </DialogTitle>
 
-                <DialogContent sx={{ bgcolor: '#595858' }}>
+                <DialogContent sx={{ bgcolor: MainColors.GRAY595 }}>
                     <DeleteAuction />
                 </DialogContent>
-                <DialogActions sx={{ bgcolor: '#595858' }}>
+                <DialogActions sx={{ bgcolor: MainColors.GRAY595 }}>
                     <Button
                         onClick={() => setIsOpen(false)}
                         variant="outlined"
                         sx={{
-                            color: 'white',
+                            color: MainColors.WHITE,
                             mr: 1,
                             mb: 1,
                             p: 0.5,

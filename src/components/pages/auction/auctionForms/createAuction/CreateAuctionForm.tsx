@@ -200,7 +200,7 @@ const CreateAuctionForm = () => {
                                             bgcolor: ButtonColors.DGREEN,
                                         },
                                         '&:disabled': {
-                                            bgcolor: ButtonColors.DISABLED,
+                                            bgcolor: ButtonColors.LRED,
                                             color: MainColors.WHITE,
                                         },
                                     }}

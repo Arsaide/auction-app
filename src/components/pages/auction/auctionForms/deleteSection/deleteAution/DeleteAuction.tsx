@@ -7,6 +7,8 @@ import Input from '../../../../../layout/common/inputs/input/Input';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import { deleteAuctionValidationSchema } from './deleteAutctionValidation/deleteAuctionValidationSchema';
+import { ButtonColors } from '../../../../../../lib/Colors/ButtonColors';
+import { MainColors } from '../../../../../../lib/Colors/MainColors';
 
 interface DeleteAuctionFormValues {
     code: string;
@@ -67,13 +69,13 @@ const DeleteAuction: FC = () => {
                                 type={'submit'}
                                 disabled={!isValid || isSubmitting}
                                 sx={{
-                                    bgcolor: '#7dc738',
+                                    bgcolor: ButtonColors.LGREEN,
                                     '&:hover': {
-                                        bgcolor: '#5a8f29',
+                                        bgcolor: ButtonColors.DGREEN,
                                     },
                                     '&:disabled': {
-                                        bgcolor: '#f54242',
-                                        color: 'white',
+                                        bgcolor: ButtonColors.LRED,
+                                        color: MainColors.WHITE,
                                     },
                                 }}
                             >
@@ -84,7 +86,10 @@ const DeleteAuction: FC = () => {
                         </Box>
                         {errorMessage && (
                             <Typography
-                                sx={{ color: 'red', maxWidth: '340px' }}
+                                sx={{
+                                    color: MainColors.RED,
+                                    maxWidth: '340px',
+                                }}
                             >
                                 {errorMessage}
                             </Typography>

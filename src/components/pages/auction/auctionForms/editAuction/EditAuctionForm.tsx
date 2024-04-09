@@ -13,6 +13,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 import { boolean } from 'yup';
+import { MainColors } from '../../../../../lib/Colors/MainColors';
+import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
 
 interface EditAuctionProps {
     _id: string;
@@ -148,19 +150,18 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                         disabled
                                         sx={{
                                             '& input.MuiInputBase-input': {
-                                                color: '#999999 !important',
+                                                color: `${MainColors.GRAY999} !important`,
                                             },
                                             '& fieldset': {
-                                                borderColor:
-                                                    '#999999 !important',
+                                                borderColor: `${MainColors.GRAY999} !important`,
                                             },
                                             '& .MuiSvgIcon-root': {
-                                                color: '#999999 !important',
+                                                color: `${MainColors.GRAY999} !important`,
                                             },
                                             '& .MuiInputBase-input.Mui-disabled':
                                                 {
                                                     WebkitTextFillColor:
-                                                        '#999999',
+                                                        MainColors.GRAY999,
                                                 },
                                         }}
                                     />
@@ -174,24 +175,23 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                         disablePast
                                         sx={{
                                             '& input': {
-                                                color: 'white',
+                                                color: MainColors.WHITE,
                                             },
                                             '& fieldset': {
-                                                borderColor: 'white',
+                                                borderColor: MainColors.WHITE,
                                             },
                                             '& .MuiSvgIcon-root': {
-                                                color: 'white',
+                                                color: MainColors.WHITE,
                                             },
                                             '&:hover': {
                                                 '& input': {
-                                                    color: '#a3a3a3',
+                                                    color: MainColors.GRAY999,
                                                 },
                                                 '& fieldset': {
-                                                    borderColor:
-                                                        '#a3a3a3 !important',
+                                                    borderColor: `${MainColors.GRAY999} !important`,
                                                 },
                                                 '& .MuiSvgIcon-root': {
-                                                    color: '#a3a3a3',
+                                                    color: MainColors.GRAY999,
                                                 },
                                             },
                                         }}
@@ -203,13 +203,13 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                     disabled={!isValid || isSubmitting}
                                     sx={{
                                         height: 60,
-                                        bgcolor: '#7dc738',
+                                        bgcolor: ButtonColors.LGREEN,
                                         '&:hover': {
-                                            bgcolor: '#5a8f29',
+                                            bgcolor: ButtonColors.DGREEN,
                                         },
                                         '&:disabled': {
-                                            bgcolor: '#f54242',
-                                            color: 'white',
+                                            bgcolor: ButtonColors.LRED,
+                                            color: MainColors.WHITE,
                                         },
                                     }}
                                 >
@@ -218,7 +218,7 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                         : 'Edit your auction'}
                                 </Button>
                                 {errorMessage && (
-                                    <Typography sx={{ color: 'red' }}>
+                                    <Typography sx={{ color: MainColors.RED }}>
                                         {errorMessage}
                                     </Typography>
                                 )}
