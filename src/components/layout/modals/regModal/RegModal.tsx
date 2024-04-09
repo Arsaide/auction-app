@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import RegistrationForm from '../../../pages/auth/regestrationForm/RegistrationForm';
 import Button from '@mui/material/Button';
+import { MainColors } from '../../../../lib/Colors/MainColors';
 
 interface RegModalInterface {
     open: boolean;
@@ -23,22 +24,28 @@ const RegModal: FC<RegModalInterface> = ({ open, onClose }) => {
         >
             <DialogTitle
                 id={'form-dialog-title'}
-                sx={{ bgcolor: '#595858', color: 'white', pl: 3 }}
+                sx={{
+                    bgcolor: MainColors.GRAY595,
+                    color: MainColors.WHITE,
+                    pl: 3,
+                }}
             >
                 Authorization
             </DialogTitle>
-            <DialogContent sx={{ bgcolor: '#595858' }}>
-                <DialogContentText sx={{ color: 'white', ml: 0, mb: 2 }}>
+            <DialogContent sx={{ bgcolor: MainColors.GRAY595 }}>
+                <DialogContentText
+                    sx={{ color: MainColors.WHITE, ml: 0, mb: 2 }}
+                >
                     Enter your details. Everything is confidential!
                 </DialogContentText>
                 <RegistrationForm />
             </DialogContent>
-            <DialogActions sx={{ bgcolor: '#595858' }}>
+            <DialogActions sx={{ bgcolor: MainColors.GRAY595 }}>
                 <Button
                     onClick={onClose}
                     variant="outlined"
                     sx={{
-                        color: 'white',
+                        color: MainColors.WHITE,
                         mr: 1,
                         mb: 1,
                         p: 0.5,
