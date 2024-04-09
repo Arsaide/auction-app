@@ -10,19 +10,20 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
+import { MainColors } from '../../../../lib/Colors/MainColors';
 
 const SideBar = () => {
     return (
         <>
-            <Toolbar sx={{ bgcolor: '#333' }} />
+            <Toolbar sx={{ bgcolor: MainColors.GRAY333 }} />
             <Divider />
             <List>
                 <ListItem
                     disablePadding
-                    sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}
+                    sx={{ '&:hover': { bgcolor: MainColors.GRAY333_01 } }}
                 >
-                    <ListItemButton href="/" sx={{ color: '#fff' }}>
-                        <ListItemIcon sx={{ color: '#fff' }}>
+                    <ListItemButton href="/" sx={{ color: MainColors.WHITE }}>
+                        <ListItemIcon sx={{ color: MainColors.WHITE }}>
                             <HomeIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Home'} />
@@ -30,10 +31,13 @@ const SideBar = () => {
                 </ListItem>
                 <ListItem
                     disablePadding
-                    sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}
+                    sx={{ '&:hover': { bgcolor: MainColors.GRAY333_01 } }}
                 >
-                    <ListItemButton href="/auction" sx={{ color: '#fff' }}>
-                        <ListItemIcon sx={{ color: '#fff' }}>
+                    <ListItemButton
+                        href="/auction"
+                        sx={{ color: MainColors.WHITE }}
+                    >
+                        <ListItemIcon sx={{ color: MainColors.WHITE }}>
                             <CurrencyBitcoinIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Place an auction'} />
@@ -41,10 +45,13 @@ const SideBar = () => {
                 </ListItem>
                 <ListItem
                     disablePadding
-                    sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}
+                    sx={{ '&:hover': { bgcolor: MainColors.GRAY333_01 } }}
                 >
-                    <ListItemButton href="/online-chat" sx={{ color: '#fff' }}>
-                        <ListItemIcon sx={{ color: '#fff' }}>
+                    <ListItemButton
+                        href="/online-chat"
+                        sx={{ color: MainColors.WHITE }}
+                    >
+                        <ListItemIcon sx={{ color: MainColors.WHITE }}>
                             <QuestionAnswerIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Online chat'} />
@@ -52,10 +59,13 @@ const SideBar = () => {
                 </ListItem>
                 <ListItem
                     disablePadding
-                    sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}
+                    sx={{ '&:hover': { bgcolor: MainColors.GRAY333_01 } }}
                 >
-                    <ListItemButton href="/information" sx={{ color: '#fff' }}>
-                        <ListItemIcon sx={{ color: '#fff' }}>
+                    <ListItemButton
+                        href="/information"
+                        sx={{ color: MainColors.WHITE }}
+                    >
+                        <ListItemIcon sx={{ color: MainColors.WHITE }}>
                             <AssistantIcon />
                         </ListItemIcon>
                         <ListItemText primary={'Information'} />

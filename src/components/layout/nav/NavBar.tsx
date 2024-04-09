@@ -10,6 +10,7 @@ import { memo, useContext } from 'react';
 import { Context } from '../../../index';
 import { Hidden } from '@mui/material';
 import AppBarMenu from './component/appBarMenu/AppBarMenu';
+import { MainColors } from '../../../lib/Colors/MainColors';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
@@ -63,7 +64,7 @@ function NavBar({ children, balance }: ResponsiveDrawerProps) {
                     sx={{
                         display: { xs: 'none', md: 'block' },
                         '& .MuiDrawer-paper': {
-                            bgcolor: '#333',
+                            bgcolor: MainColors.GRAY333,
                             boxSizing: 'border-box',
                             width: drawerWidth,
                         },
