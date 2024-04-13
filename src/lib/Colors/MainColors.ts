@@ -8,6 +8,8 @@ export enum MainColors {
     WHITE = '#fff',
 
     BLACK = '#000',
+    BLACK_06 = 'rgba(0, 0, 0, 0.6)',
 
     RED = '#f54242',
+    GREEN = '#7dc738',
 }

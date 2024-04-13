@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import EditAuctionForm from '../../auctionForms/editAuction/EditAuctionForm';
 import DeleteSection from '../../auctionForms/deleteSection/DeleteSection';
 import Box from '@mui/material/Box';
+import { MainColors } from '../../../../../lib/Colors/MainColors';
+import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
 
 interface AuctionInformationProps {
     auction: AuctionInt;
@@ -51,7 +53,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                 Start rates:{' '}
                                 <span
                                     style={{
-                                        color: '#ed3b59',
+                                        color: MainColors.RED,
                                         fontSize: '20px',
                                     }}
                                 >
@@ -69,7 +71,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                 Current rate:{' '}
                                 <span
                                     style={{
-                                        color: '#7dc738',
+                                        color: MainColors.GREEN,
                                         fontSize: '20px',
                                     }}
                                 >
@@ -102,9 +104,9 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                             <Button
                                 variant="contained"
                                 sx={{
-                                    bgcolor: '#649f2d',
+                                    bgcolor: ButtonColors.LGREEN,
                                     '&:hover': {
-                                        bgcolor: '#5a8f29',
+                                        bgcolor: ButtonColors.DGREEN,
                                     },
                                 }}
                                 onClick={() => setVisibleForm(true)}
@@ -117,9 +119,9 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                         <Button
                             variant="contained"
                             sx={{
-                                bgcolor: '#649f2d',
+                                bgcolor: ButtonColors.LGREEN,
                                 '&:hover': {
-                                    bgcolor: '#5a8f29',
+                                    bgcolor: ButtonColors.DGREEN,
                                 },
                             }}
                             onClick={() => {
@@ -147,9 +149,9 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                     variant="contained"
                     sx={{
                         color: 'white',
-                        bgcolor: '#dc3545',
+                        bgcolor: ButtonColors.LRED,
                         '&:hover': {
-                            bgcolor: '#c82333',
+                            bgcolor: ButtonColors.DRED,
                         },
                     }}
                     onClick={() => {

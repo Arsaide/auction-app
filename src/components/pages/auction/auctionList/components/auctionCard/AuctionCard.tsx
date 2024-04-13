@@ -15,6 +15,8 @@ import LazyLoadImage from '../../../../../layout/common/lazyLoadImage/LazyLoadIm
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Box } from '@mui/material';
+import { ButtonColors } from '../../../../../../lib/Colors/ButtonColors';
+import { MainColors } from '../../../../../../lib/Colors/MainColors';
 
 interface AuctionCardProps {
     img: string;
@@ -61,9 +63,13 @@ const AuctionCard: FC<AuctionCardProps> = ({
             <CardMedia sx={{ position: 'relative' }}>
                 <Box sx={{ position: 'absolute', top: 5, left: 5, zIndex: 5 }}>
                     {active ? (
-                        <VerifiedIcon sx={{ color: '#7dc738', fontSize: 45 }} />
+                        <VerifiedIcon
+                            sx={{ color: ButtonColors.LGREEN, fontSize: 45 }}
+                        />
                     ) : (
-                        <CancelIcon sx={{ color: '#f54242', fontSize: 45 }} />
+                        <CancelIcon
+                            sx={{ color: ButtonColors.LRED, fontSize: 45 }}
+                        />
                     )}
                 </Box>
                 <LazyLoadImage
@@ -86,7 +92,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                             <u>
                                 <span
                                     style={{
-                                        color: 'rgba(0, 0, 0, 0.6)',
+                                        color: MainColors.BLACK_06,
                                         cursor: 'pointer',
                                     }}
                                     onClick={handleLearnMoreClick}
@@ -96,7 +102,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                             </u>
                         ) : (
                             <Link
-                                style={{ color: 'rgba(0, 0, 0, 0.6)' }}
+                                style={{ color: MainColors.BLACK_06 }}
                                 to={`/auction/${id}`}
                             >
                                 read more
@@ -117,10 +123,10 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         size="small"
                         variant="contained"
                         sx={{
-                            color: 'white',
-                            bgcolor: '#dc3545',
+                            color: MainColors.WHITE,
+                            bgcolor: ButtonColors.LRED,
                             '&:hover': {
-                                bgcolor: '#c82333',
+                                bgcolor: ButtonColors.DRED,
                             },
                         }}
                         disabled={!active}
@@ -137,10 +143,10 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         size="small"
                         variant="contained"
                         sx={{
-                            color: 'white',
-                            bgcolor: '#5a8f29',
+                            color: MainColors.WHITE,
+                            bgcolor: ButtonColors.DGREEN,
                             '&:hover': {
-                                bgcolor: '#7dc738',
+                                bgcolor: ButtonColors.LGREEN,
                             },
                         }}
                         onClick={handleLearnMoreClick}
@@ -154,15 +160,18 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         size="small"
                         variant="contained"
                         sx={{
-                            color: 'white',
-                            bgcolor: '#5a8f29',
+                            color: MainColors.WHITE,
+                            bgcolor: ButtonColors.DGREEN,
                             '&:hover': {
-                                bgcolor: '#7dc738',
+                                bgcolor: ButtonColors.LGREEN,
                             },
                         }}
                     >
                         <Link
-                            style={{ color: '#fff', textDecoration: 'none' }}
+                            style={{
+                                color: MainColors.WHITE,
+                                textDecoration: 'none',
+                            }}
                             to={`/auction/${id}`}
                         >
                             Learn More
