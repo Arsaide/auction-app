@@ -54,7 +54,7 @@ const UserDetails: FC<UserDetailsProps> = ({
                     overflow: 'hidden',
                 }}
             >
-                {avatar ? (
+                {name ? (
                     <>
                         <Avatar
                             alt={name || 'Loading'}
