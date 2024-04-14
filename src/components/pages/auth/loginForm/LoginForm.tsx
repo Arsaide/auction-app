@@ -7,7 +7,8 @@ import Box from '@mui/material/Box';
 import Input from '../../../layout/common/inputs/input/Input';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
-import RegistrationForm from '../regestrationForm/RegistrationForm';
+import RegistrationForm from '../registrationForm/RegistrationForm';
+import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
 
 interface LoginFormValues {
     email: string;
@@ -84,14 +85,14 @@ const LoginForm: FC = () => {
                                     type="submit"
                                     disabled={!isValid || isSubmitting}
                                     sx={{
-                                        bgcolor: '#7dc738',
+                                        bgcolor: ButtonColors.LGREEN,
                                         mt: 1,
                                         '&:hover': {
-                                            bgcolor: '#5a8f29',
+                                            bgcolor: ButtonColors.DGREEN,
                                         },
                                         '&:disabled': {
-                                            bgcolor: '#f54242',
-                                            color: 'white',
+                                            bgcolor: ButtonColors.LRED,
+                                            color: ButtonColors.WHITE,
                                         },
                                     }}
                                 >
@@ -100,9 +101,9 @@ const LoginForm: FC = () => {
                                 <Button
                                     onClick={handleRegClick}
                                     sx={{
-                                        color: '#fff',
+                                        color: ButtonColors.WHITE,
                                         '&:hover': {
-                                            color: '#b6b6b6',
+                                            color: ButtonColors.GRAY,
                                         },
                                     }}
                                 >
@@ -111,7 +112,10 @@ const LoginForm: FC = () => {
                             </Box>
                             {errorMessage && (
                                 <Typography
-                                    sx={{ color: 'red', maxWidth: '340px' }}
+                                    sx={{
+                                        color: ButtonColors.LRED,
+                                        maxWidth: '340px',
+                                    }}
                                 >
                                     {errorMessage}
                                 </Typography>

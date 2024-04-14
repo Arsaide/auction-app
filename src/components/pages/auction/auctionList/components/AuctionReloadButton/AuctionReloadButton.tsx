@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import Button from '@mui/material/Button';
 import CachedIcon from '@mui/icons-material/Cached';
 import { keyframes } from '@mui/system';
+import { ButtonColors } from '../../../../../../lib/Colors/ButtonColors';
 
 interface ReloadButtonInt {
     disabled: boolean;
@@ -29,13 +30,13 @@ const AuctionReloadButton: FC<ReloadButtonInt> = ({
             variant="contained"
             onClick={onClick}
             sx={{
-                bgcolor: '#5a8f29',
+                bgcolor: ButtonColors.DGREEN,
                 '&:hover': {
-                    bgcolor: '#7dc738',
+                    bgcolor: ButtonColors.LGREEN,
                 },
                 '&:disabled': {
-                    bgcolor: '#f54242',
-                    color: 'white',
+                    bgcolor: ButtonColors.LRED,
+                    color: ButtonColors.WHITE,
                 },
             }}
         >

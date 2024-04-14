@@ -10,6 +10,7 @@ import LoginForm from '../loginForm/LoginForm';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
 
 interface RegistrationFormValues {
     name: string;
@@ -108,14 +109,14 @@ const RegistrationForm: FC = () => {
                                     type="submit"
                                     disabled={!isValid || isSubmitting}
                                     sx={{
-                                        bgcolor: '#7dc738',
+                                        bgcolor: ButtonColors.LGREEN,
                                         mt: 1,
                                         '&:hover': {
-                                            bgcolor: '#5a8f29',
+                                            bgcolor: ButtonColors.DGREEN,
                                         },
                                         '&:disabled': {
-                                            bgcolor: '#f54242',
-                                            color: 'white',
+                                            bgcolor: ButtonColors.LRED,
+                                            color: ButtonColors.WHITE,
                                         },
                                     }}
                                 >
@@ -125,9 +126,9 @@ const RegistrationForm: FC = () => {
                                 </Button>
                                 <Button
                                     sx={{
-                                        color: '#fff',
+                                        color: ButtonColors.WHITE,
                                         '&:hover': {
-                                            color: '#b6b6b6',
+                                            color: ButtonColors.GRAY,
                                         },
                                     }}
                                     onClick={handleLoginClick}
@@ -137,7 +138,7 @@ const RegistrationForm: FC = () => {
                             </Box>
                             {errorMessage && (
                                 <Typography
-                                    sx={{ color: 'red', maxWidth: '340px' }}
+                                    sx={{ color: ButtonColors.LRED, maxWidth: '340px' }}
                                 >
                                     {errorMessage}
                                 </Typography>

@@ -7,6 +7,7 @@ import Input from '../../../layout/common/inputs/input/Input';
 import { regCreateValidationSchema } from './regCreateValidation/regCreateValidationSchema';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
+import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
 
 interface RegCreateFormProps {
     onSubmit: () => void;
@@ -70,13 +71,13 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                 type="submit"
                                 disabled={!isValid || isSubmitting}
                                 sx={{
-                                    bgcolor: '#7dc738',
+                                    bgcolor: ButtonColors.LGREEN,
                                     '&:hover': {
-                                        bgcolor: '#5a8f29',
+                                        bgcolor: ButtonColors.DGREEN,
                                     },
                                     '&:disabled': {
-                                        bgcolor: '#f54242',
-                                        color: 'white',
+                                        bgcolor: ButtonColors.LRED,
+                                        color: ButtonColors.WHITE,
                                     },
                                 }}
                             >
@@ -87,7 +88,7 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                         </Box>
                         {errorMessage && (
                             <Typography
-                                sx={{ color: 'red', maxWidth: '340px' }}
+                                sx={{ color: ButtonColors.LRED, maxWidth: '340px' }}
                             >
                                 {errorMessage}
                             </Typography>

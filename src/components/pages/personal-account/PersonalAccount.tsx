@@ -5,7 +5,7 @@ import { Box, Hidden } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LoginForm from '../auth/loginForm/LoginForm';
-import RegistrationForm from '../auth/regestrationForm/RegistrationForm';
+import RegistrationForm from '../auth/registrationForm/RegistrationForm';
 
 const PersonalAccountPage: FC = () => {
     const { store } = useContext(Context);

@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
 
 export const pagintaionStyles = createTheme({
     components: {
@@ -6,11 +7,11 @@ export const pagintaionStyles = createTheme({
             styleOverrides: {
                 root: {
                     marginTop: '20px',
-                    color: 'white',
+                    color: ButtonColors.WHITE,
                     '&.Mui-selected': {
-                        backgroundColor: '#5a8f29',
+                        backgroundColor: ButtonColors.DGREEN,
                         '&:hover': {
-                            backgroundColor: '#7dc738',
+                            backgroundColor: ButtonColors.LGREEN,
                         },
                     },
                 },

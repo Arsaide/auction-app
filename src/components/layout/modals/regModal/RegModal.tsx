@@ -6,7 +6,7 @@ import {
     DialogContentText,
     DialogTitle,
 } from '@mui/material';
-import RegistrationForm from '../../../pages/auth/regestrationForm/RegistrationForm';
+import RegistrationForm from '../../../pages/auth/registrationForm/RegistrationForm';
 import Button from '@mui/material/Button';
 import { MainColors } from '../../../../lib/Colors/MainColors';
 
