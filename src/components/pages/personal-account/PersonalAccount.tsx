@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LoginForm from '../auth/loginForm/LoginForm';
 import RegistrationForm from '../auth/registrationForm/RegistrationForm';
+import { MainColors } from '../../../lib/Colors/MainColors';
+import { ButtonColors } from '../../../lib/Colors/ButtonColors';
 
 const PersonalAccountPage: FC = () => {
     const { store } = useContext(Context);
@@ -66,10 +68,10 @@ const PersonalAccountPage: FC = () => {
                         >
                             <Button
                                 sx={{
-                                    color: 'white',
-                                    bgcolor: '#5a8f29',
+                                    color: ButtonColors.WHITE,
+                                    bgcolor: ButtonColors.DGREEN,
                                     '&:hover': {
-                                        bgcolor: '#7dc738',
+                                        bgcolor: ButtonColors.LGREEN,
                                     },
                                 }}
                                 variant="contained"
@@ -80,10 +82,10 @@ const PersonalAccountPage: FC = () => {
                             </Button>
                             <Button
                                 sx={{
-                                    color: 'white',
-                                    bgcolor: '#5a8f29',
+                                    color: ButtonColors.WHITE,
+                                    bgcolor: ButtonColors.DGREEN,
                                     '&:hover': {
-                                        bgcolor: '#7dc738',
+                                        bgcolor: ButtonColors.LGREEN,
                                     },
                                 }}
                                 variant="contained"

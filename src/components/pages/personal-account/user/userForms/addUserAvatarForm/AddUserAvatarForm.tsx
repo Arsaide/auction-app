@@ -15,6 +15,7 @@ import { setCanvasPreview } from './setCanvasPreview';
 
 const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 150;
+const MAX_DIMENSION = 1500;
 
 const AddUserAvatarForm: FC = () => {
     const { store } = useContext(Context);
@@ -47,6 +48,16 @@ const AddUserAvatarForm: FC = () => {
                     naturalHeight < MIN_DIMENSION
                 ) {
                     setErrorMessage('Image must be at least 150 x 150 pixels');
+                    return setImgSrc('');
+                }
+
+                if (
+                    naturalWidth > MAX_DIMENSION ||
+                    naturalHeight > MAX_DIMENSION
+                ) {
+                    setErrorMessage(
+                        'Image must be at least 1500 x 1500 pixels',
+                    );
                     return setImgSrc('');
                 }
             });
