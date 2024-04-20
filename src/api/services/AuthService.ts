@@ -143,4 +143,16 @@ export default class AuthService {
             token,
         });
     }
+
+    static async placeABet(
+        token: string | null,
+        idAuction: string,
+        sum: string,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return await $api.post<AuthResponse>('/makebidauctionone', {
+            token,
+            idAuction,
+            sum,
+        });
+    }
 }

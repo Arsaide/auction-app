@@ -214,6 +214,15 @@ export default class Store {
         }
     }
 
+    async placeABet(bet: string, auctionId: string) {
+        try {
+            const token: string | null = localStorage.getItem('token');
+            return await AuthService.placeABet(token, auctionId, bet);
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
     async getUser(token: string | null | undefined) {
         try {
             const response = await AuthService.getUser(token);
