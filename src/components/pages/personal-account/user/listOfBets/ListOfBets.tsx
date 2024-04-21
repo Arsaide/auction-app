@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import { AuctionInt } from '../../../../../app/auction/auction-id/AuctionItemProps';
-import Box from '@mui/material/Box';
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
-import clsx from 'clsx';
-import '../PersonalIdGrid.css';
 import { Link } from 'react-router-dom';
+import '../PersonalIdGrid.css';
 import { formatDate } from '../formatDate';
+import Box from '@mui/material/Box';
+import clsx from 'clsx';
 
-interface OwnAuctionsListProps {
+interface ListOfBetsProps {
     auctions: AuctionInt[];
 }
 
-const OwnAuctionsList: FC<OwnAuctionsListProps> = ({ auctions }) => {
+const ListOfBets: FC<ListOfBetsProps> = ({ auctions }) => {
     const columns: GridColDef[] = [
         {
             field: '_id',
@@ -27,21 +27,12 @@ const OwnAuctionsList: FC<OwnAuctionsListProps> = ({ auctions }) => {
             ),
         },
         { field: 'title', headerName: 'Title', width: 250 },
-        { field: 'minRates', headerName: 'Minimum Rate', width: 200 },
-        { field: 'rates', headerName: 'Actual Rate', width: 200 },
+        { field: 'rates', headerName: 'My Rate', width: 200 },
         { field: 'desct', headerName: 'Description', width: 200 },
         { field: 'active', headerName: 'Active', width: 100 },
         {
-            field: 'timeStart',
-            headerName: 'Time Start',
-            width: 150,
-            renderCell: (params: GridCellParams) => (
-                <div>{formatDate(String(params.value))}</div>
-            ),
-        },
-        {
-            field: 'timeEnd',
-            headerName: 'End Time',
+            field: 'time',
+            headerName: 'Time',
             width: 150,
             renderCell: (params: GridCellParams) => (
                 <div>{formatDate(String(params.value))}</div>
@@ -86,4 +77,4 @@ const OwnAuctionsList: FC<OwnAuctionsListProps> = ({ auctions }) => {
     );
 };
 
-export default OwnAuctionsList;
+export default ListOfBets;

@@ -6,6 +6,8 @@ import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps'
 import UserDetails from './userDetails/UserDetails';
 import OwnAuctionsList from './ownAuctionsList/OwnAuctionsList';
 import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
+import ListOfBets from './listOfBets/ListOfBets';
+import { Typography } from '@mui/material';
 
 const UserIdPage: FC = () => {
     const { store } = useContext(Context);
@@ -51,7 +53,14 @@ const UserIdPage: FC = () => {
                 balance={balance}
                 avatar={avatar}
             />
+            <Typography variant={'h5'} sx={{ mb: 2, mt: 2 }}>
+                Own auctions list:
+            </Typography>
             <OwnAuctionsList auctions={auctions} />
+            <Typography variant={'h5'} sx={{ mb: 2, mt: 2 }}>
+                My bet history:
+            </Typography>
+            <ListOfBets auctions={auctions} />
             <Button
                 variant="contained"
                 onClick={handleSubmit}
