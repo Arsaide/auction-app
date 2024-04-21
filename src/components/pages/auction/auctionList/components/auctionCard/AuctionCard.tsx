@@ -23,6 +23,7 @@ interface AuctionCardProps {
     title: string;
     desc: string;
     minRates: string;
+    rates: string;
     timeStart: string;
     timeEnd: string;
     id: string;
@@ -34,6 +35,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
     title,
     desc,
     minRates,
+    rates,
     timeStart,
     timeEnd,
     id,
@@ -111,7 +113,50 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 </Typography>
 
                 <Typography variant="h6">
-                    Price: <u>{minRates}</u> $
+                    Price:{' '}
+                    {active ? (
+                        minRates === rates ? (
+                            <>
+                                <u>{minRates}</u>$
+                                <span
+                                    style={{
+                                        color: MainColors.GREEN,
+                                        fontSize: '14px',
+                                        fontWeight: '700',
+                                        paddingLeft: '10px',
+                                    }}
+                                >
+                                    no bids yet!
+                                </span>
+                            </>
+                        ) : (
+                            <>
+                                <u>{rates}</u>$
+                                <span
+                                    style={{
+                                        color: MainColors.RED,
+                                        fontSize: '14px',
+                                        fontWeight: '700',
+                                        paddingLeft: '10px',
+                                    }}
+                                >
+                                    initial bid - <u>{minRates}</u>$
+                                </span>
+                            </>
+                        )
+                    ) : minRates === rates ? (
+                        <>
+                            <span>Auction not sold</span>
+                        </>
+                    ) : (
+                        <>
+                            <span>
+                                Auction sold for -{' '}
+                                <u style={{ color: MainColors.RED }}>{rates}</u>
+                                $
+                            </span>
+                        </>
+                    )}
                 </Typography>
                 <Divider sx={{ mt: 1.3, mb: 1 }} />
                 <Typography>Created: {formatedTimeStart}</Typography>
