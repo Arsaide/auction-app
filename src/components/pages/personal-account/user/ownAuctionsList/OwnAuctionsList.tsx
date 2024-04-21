@@ -33,6 +33,7 @@ const OwnAuctionsList: FC<OwnAuctionsListProps> = ({ auctions }) => {
         },
         { field: 'title', headerName: 'Title', width: 250 },
         { field: 'minRates', headerName: 'Minimum Rate', width: 200 },
+        { field: 'rates', headerName: 'Actual Rate', width: 200 },
         { field: 'desct', headerName: 'Description', width: 200 },
         { field: 'active', headerName: 'Active', width: 100 },
         {
