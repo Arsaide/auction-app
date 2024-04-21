@@ -93,17 +93,32 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                     )}
                 </>
             )}
-            {owner ? (
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 1.5,
-                        maxWidth: 'max-content',
-                    }}
-                >
-                    {!isVisibleEditForm ? (
-                        <>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 1.5,
+                    maxWidth: 'max-content',
+                }}
+            >
+                {owner && auction.minRates === auction.rates ? (
+                    <>
+                        {!isVisibleEditForm ? (
+                            <>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        bgcolor: ButtonColors.LGREEN,
+                                        '&:hover': {
+                                            bgcolor: ButtonColors.DGREEN,
+                                        },
+                                    }}
+                                    onClick={() => setIsVisibleEditForm(true)}
+                                >
+                                    Edit auction
+                                </Button>
+                            </>
+                        ) : (
                             <Button
                                 variant="contained"
                                 sx={{
@@ -112,41 +127,29 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                         bgcolor: ButtonColors.DGREEN,
                                     },
                                 }}
-                                onClick={() => setIsVisibleEditForm(true)}
+                                onClick={() => {
+                                    setIsVisibleEditForm(false);
+                                }}
                             >
-                                Edit auction
+                                Close edit auction
                             </Button>
-                            <DeleteSection id={id} />
-                        </>
-                    ) : (
-                        <Button
-                            variant="contained"
-                            sx={{
-                                bgcolor: ButtonColors.LGREEN,
-                                '&:hover': {
-                                    bgcolor: ButtonColors.DGREEN,
-                                },
-                            }}
-                            onClick={() => {
-                                setIsVisibleEditForm(false);
-                            }}
-                        >
-                            Close edit auction
-                        </Button>
-                    )}
-                </Box>
-            ) : null}
-
+                        )}
+                    </>
+                ) : null}
+                {owner && !isVisibleEditForm && <DeleteSection id={id} />}
+            </Box>
             {owner ? (
-                <>
-                    {isVisibleEditForm && (
-                        <EditAuctionForm
-                            _id={auction && auction._id}
-                            reloadAuction={handleReloadAuction}
-                            setVisibleForm={setIsVisibleEditForm}
-                        />
-                    )}
-                </>
+                auction.minRates === auction.rates ? (
+                    <>
+                        {isVisibleEditForm && (
+                            <EditAuctionForm
+                                _id={auction && auction._id}
+                                reloadAuction={handleReloadAuction}
+                                setVisibleForm={setIsVisibleEditForm}
+                            />
+                        )}
+                    </>
+                ) : null
             ) : (
                 <>
                     {isVisibleBetForm ? (
