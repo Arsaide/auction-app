@@ -163,26 +163,6 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 <AuctionTimer timeEnd={timeEnd} />
             </CardContent>
             <CardActions sx={{ ml: 1, mb: 1 }}>
-                {isAuth ? (
-                    <Button
-                        size="small"
-                        variant="contained"
-                        sx={{
-                            color: MainColors.WHITE,
-                            bgcolor: ButtonColors.LRED,
-                            '&:hover': {
-                                bgcolor: ButtonColors.DRED,
-                            },
-                        }}
-                        disabled={!active}
-                    >
-                        Buy
-                    </Button>
-                ) : (
-                    <Button disabled size="small" variant="contained">
-                        Buy
-                    </Button>
-                )}
                 {!isAuth && (
                     <Button
                         size="small"
