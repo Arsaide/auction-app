@@ -12,10 +12,7 @@ import ReactCrop, {
 } from 'react-image-crop';
 import 'react-image-crop/src/ReactCrop.scss';
 import { setCanvasPreview } from './setCanvasPreview';
-
-const ASPECT_RATIO = 1;
-const MIN_DIMENSION = 150;
-const MAX_DIMENSION = 1500;
+import { CanvasProps } from './canvasProps';
 
 const AddUserAvatarForm: FC = () => {
     const { store } = useContext(Context);
@@ -44,16 +41,16 @@ const AddUserAvatarForm: FC = () => {
                 const target = e.target as HTMLImageElement;
                 const { naturalWidth, naturalHeight } = target;
                 if (
-                    naturalWidth < MIN_DIMENSION ||
-                    naturalHeight < MIN_DIMENSION
+                    naturalWidth < CanvasProps.MIN_DIMENSION ||
+                    naturalHeight < CanvasProps.MIN_DIMENSION
                 ) {
                     setErrorMessage('Image must be at least 150 x 150 pixels');
                     return setImgSrc('');
                 }
 
                 if (
-                    naturalWidth > MAX_DIMENSION ||
-                    naturalHeight > MAX_DIMENSION
+                    naturalWidth > CanvasProps.MAX_DIMENSION ||
+                    naturalHeight > CanvasProps.MAX_DIMENSION
                 ) {
                     setErrorMessage(
                         'Image must be at least 1500 x 1500 pixels',
@@ -69,9 +66,12 @@ const AddUserAvatarForm: FC = () => {
 
     const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
         const { width, height, naturalWidth, naturalHeight } = e.currentTarget;
-        const cropWidthInPercent = (MIN_DIMENSION / width) * 100;
+        const cropWidthInPercent = (CanvasProps.MIN_DIMENSION / width) * 100;
 
-        if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
+        if (
+            naturalWidth < CanvasProps.MIN_DIMENSION ||
+            naturalHeight < CanvasProps.MIN_DIMENSION
+        ) {
             setErrorMessage('Image must be at least 150 x 150 pixels');
             setImgSrc('');
             return;
@@ -81,7 +81,7 @@ const AddUserAvatarForm: FC = () => {
                 unit: '%',
                 width: cropWidthInPercent,
             },
-            ASPECT_RATIO,
+            CanvasProps.ASPECT_RATIO,
             width,
             height,
         );
@@ -156,8 +156,8 @@ const AddUserAvatarForm: FC = () => {
                         }
                         circularCrop
                         keepSelection
-                        aspect={ASPECT_RATIO}
-                        minWidth={MIN_DIMENSION}
+                        aspect={CanvasProps.ASPECT_RATIO}
+                        minWidth={CanvasProps.MIN_DIMENSION}
                     >
                         <img
                             ref={imageRef}
@@ -173,19 +173,7 @@ const AddUserAvatarForm: FC = () => {
                         {errorMessage}
                     </FormHelperText>
                 )}
-                <Button
-                    variant={'contained'}
-                    // onClick={() => {
-                    //     if (imageRef.current && canvasRef.current && crop) {
-                    //         setCanvasPreview({
-                    //             image: imageRef.current,
-                    //             canvas: canvasRef.current,
-                    //             crop: crop as PixelCrop,
-                    //         });
-                    //     }
-                    // }}
-                    onClick={handleCrop}
-                >
+                <Button variant={'contained'} onClick={handleCrop}>
                     Crop
                 </Button>
                 <Button variant={'contained'} onClick={handleSubmit}>

@@ -15,3 +15,7 @@ export interface AuctionInt {
 export interface OwnAuctionInt {
     auctions: AuctionInt[];
 }
+
+export interface ListOfBets {
+    auctions: AuctionInt[];
+}
