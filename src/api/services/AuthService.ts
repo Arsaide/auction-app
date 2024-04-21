@@ -146,7 +146,7 @@ export default class AuthService {
 
     static async placeABet(
         token: string | null,
-        idAuction: string,
+        idAuction: string | undefined,
         sum: string,
     ): Promise<AxiosResponse<AuthResponse>> {
         return await $api.post<AuthResponse>('/makebidauctionone', {

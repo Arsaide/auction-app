@@ -214,10 +214,17 @@ export default class Store {
         }
     }
 
-    async placeABet(bet: string, auctionId: string) {
+    async placeABet(bet: string, auctionId: string | undefined) {
         try {
             const token: string | null = localStorage.getItem('token');
-            return await AuthService.placeABet(token, auctionId, bet);
+            return await toast.promise(
+                AuthService.placeABet(token, auctionId, bet),
+                {
+                    pending: 'Placing a bet...',
+                    success: 'Place a bet successfully!',
+                    error: 'Invalid request, please try again...',
+                },
+            );
         } catch (e: any) {
             throw e;
         }
