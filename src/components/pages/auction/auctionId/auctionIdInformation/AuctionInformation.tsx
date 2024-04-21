@@ -9,6 +9,8 @@ import DeleteSection from '../../auctionForms/deleteSection/DeleteSection';
 import Box from '@mui/material/Box';
 import { MainColors } from '../../../../../lib/Colors/MainColors';
 import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
+import PlaceABet from '../../auctionForms/placeABet/PlaceABet';
+import { Close } from '@mui/icons-material';
 
 interface AuctionInformationProps {
     auction: AuctionInt;
@@ -25,7 +27,8 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
     isRequesting,
     id,
 }) => {
-    const [visibleForm, setVisibleForm] = useState<boolean>(false);
+    const [isVisibleEditForm, setIsVisibleEditForm] = useState<boolean>(false);
+    const [isVisibleBetForm, setIsVisibleBetForm] = useState<boolean>(false);
 
     const handleReloadAuction = () => {
         reloadAuction();
@@ -36,7 +39,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
             <Typography sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}>
                 Author @{auction.owner}
             </Typography>
-            {!visibleForm && (
+            {!isVisibleEditForm && (
                 <>
                     {!isRequesting && (
                         <>
@@ -99,7 +102,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                         maxWidth: 'max-content',
                     }}
                 >
-                    {!visibleForm ? (
+                    {!isVisibleEditForm ? (
                         <>
                             <Button
                                 variant="contained"
@@ -109,7 +112,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                         bgcolor: ButtonColors.DGREEN,
                                     },
                                 }}
-                                onClick={() => setVisibleForm(true)}
+                                onClick={() => setIsVisibleEditForm(true)}
                             >
                                 Edit auction
                             </Button>
@@ -125,7 +128,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                 },
                             }}
                             onClick={() => {
-                                setVisibleForm(false);
+                                setIsVisibleEditForm(false);
                             }}
                         >
                             Close edit auction
@@ -136,30 +139,53 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
 
             {owner ? (
                 <>
-                    {visibleForm && (
+                    {isVisibleEditForm && (
                         <EditAuctionForm
                             _id={auction && auction._id}
                             reloadAuction={handleReloadAuction}
-                            setVisibleForm={setVisibleForm}
+                            setVisibleForm={setIsVisibleEditForm}
                         />
                     )}
                 </>
             ) : (
-                <Button
-                    variant="contained"
-                    sx={{
-                        color: 'white',
-                        bgcolor: ButtonColors.LRED,
-                        '&:hover': {
-                            bgcolor: ButtonColors.DRED,
-                        },
-                    }}
-                    onClick={() => {
-                        alert('you cant buy');
-                    }}
-                >
-                    Buy
-                </Button>
+                <>
+                    {isVisibleBetForm ? (
+                        <>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    color: MainColors.WHITE,
+                                    bgcolor: ButtonColors.LRED,
+                                    '&:hover': {
+                                        bgcolor: ButtonColors.DRED,
+                                    },
+                                }}
+                                onClick={() => {
+                                    setIsVisibleBetForm(false);
+                                }}
+                            >
+                                <Close />
+                            </Button>
+                            <PlaceABet auctionId={id} />
+                        </>
+                    ) : (
+                        <Button
+                            variant="contained"
+                            sx={{
+                                color: MainColors.WHITE,
+                                bgcolor: ButtonColors.LRED,
+                                '&:hover': {
+                                    bgcolor: ButtonColors.DRED,
+                                },
+                            }}
+                            onClick={() => {
+                                setIsVisibleBetForm(true);
+                            }}
+                        >
+                            Place a bet
+                        </Button>
+                    )}
+                </>
             )}
         </Grid>
     );
