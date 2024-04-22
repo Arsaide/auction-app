@@ -21,6 +21,7 @@ const AddUserAvatarForm: FC = () => {
     const [crop, setCrop] = useState<Crop>();
     const [imgSrc, setImgSrc] = useState<string>('');
     const [croppedImage, setCroppedImage] = useState<File | null>(null);
+    const [fileName, setFileName] = useState<string>('avatar');
     const imageRef = useRef<HTMLImageElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -60,6 +61,7 @@ const AddUserAvatarForm: FC = () => {
             });
 
             setImgSrc(imageUrl);
+            setFileName(file.name);
         });
         reader.readAsDataURL(file);
     };
@@ -102,7 +104,7 @@ const AddUserAvatarForm: FC = () => {
 
             const croppedImageFile = dataURLtoFile(
                 croppedImageDataUrl,
-                `${name}-avatar.jpg`,
+                `${name}-${fileName}-avatar.jpg`,
             );
             setCroppedImage(croppedImageFile);
         }
