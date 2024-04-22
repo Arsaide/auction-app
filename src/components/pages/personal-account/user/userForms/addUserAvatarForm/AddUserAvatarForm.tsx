@@ -22,6 +22,7 @@ const AddUserAvatarForm: FC = () => {
     const [imgSrc, setImgSrc] = useState<string>('');
     const [croppedImage, setCroppedImage] = useState<File | null>(null);
     const [fileName, setFileName] = useState<string>('avatar');
+    const [isCropClicked, setIsCropClicked] = useState<boolean>(false);
     const imageRef = useRef<HTMLImageElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -81,7 +82,7 @@ const AddUserAvatarForm: FC = () => {
         const crop = makeAspectCrop(
             {
                 unit: '%',
-                width: cropWidthInPercent,
+                width: 100,
             },
             CanvasProps.ASPECT_RATIO,
             width,
@@ -106,6 +107,7 @@ const AddUserAvatarForm: FC = () => {
                 croppedImageDataUrl,
                 `${name}-${fileName}-avatar.jpg`,
             );
+            setIsCropClicked(true);
             setCroppedImage(croppedImageFile);
         }
     };
@@ -134,8 +136,6 @@ const AddUserAvatarForm: FC = () => {
             setErrorMessage(e.response?.data?.message);
         }
     };
-
-    console.log(croppedImage);
 
     return (
         <>
@@ -175,24 +175,29 @@ const AddUserAvatarForm: FC = () => {
                         {errorMessage}
                     </FormHelperText>
                 )}
-                <Button variant={'contained'} onClick={handleCrop}>
-                    Crop
-                </Button>
-                <Button variant={'contained'} onClick={handleSubmit}>
-                    Upload
-                </Button>
-
+                {imgSrc && (
+                    <Button variant={'contained'} onClick={handleCrop}>
+                        Crop
+                    </Button>
+                )}
+                {isCropClicked && (
+                    <Button variant={'contained'} onClick={handleSubmit}>
+                        Upload
+                    </Button>
+                )}
                 {crop && (
-                    <canvas
-                        ref={canvasRef}
-                        style={{
-                            border: '1px solid black',
-                            objectFit: 'contain',
-                            width: '250px',
-                            height: '250px',
-                            borderRadius: '50%',
-                        }}
-                    />
+                    <>
+                        <canvas
+                            ref={canvasRef}
+                            style={{
+                                border: '1px solid black',
+                                objectFit: 'contain',
+                                width: '250px',
+                                height: '250px',
+                                borderRadius: '50%',
+                            }}
+                        />
+                    </>
                 )}
             </form>
         </>
