@@ -13,6 +13,9 @@ import ReactCrop, {
 import 'react-image-crop/src/ReactCrop.scss';
 import { setCanvasPreview } from './setCanvasPreview';
 import { CanvasProps } from './canvasProps';
+import './AddUserAvatarForm.css';
+import Box from '@mui/material/Box';
+import { MainColors } from '../../../../../../lib/Colors/MainColors';
 
 const AddUserAvatarForm: FC = () => {
     const { store } = useContext(Context);
@@ -21,6 +24,7 @@ const AddUserAvatarForm: FC = () => {
     const [crop, setCrop] = useState<Crop>();
     const [imgSrc, setImgSrc] = useState<string>('');
     const [croppedImage, setCroppedImage] = useState<File | null>(null);
+    const [isCroppedImage, setIsCroppedImage] = useState<boolean>(false);
     const [fileName, setFileName] = useState<string>('avatar');
     const [isCropClicked, setIsCropClicked] = useState<boolean>(false);
     const imageRef = useRef<HTMLImageElement>(null);
@@ -82,7 +86,7 @@ const AddUserAvatarForm: FC = () => {
         const crop = makeAspectCrop(
             {
                 unit: '%',
-                width: 100,
+                width: cropWidthInPercent,
             },
             CanvasProps.ASPECT_RATIO,
             width,
@@ -108,6 +112,7 @@ const AddUserAvatarForm: FC = () => {
                 `${name}-${fileName}-avatar.jpg`,
             );
             setIsCropClicked(true);
+            setIsCroppedImage(true);
             setCroppedImage(croppedImageFile);
         }
     };
@@ -140,64 +145,93 @@ const AddUserAvatarForm: FC = () => {
     return (
         <>
             <form>
-                <FormControl>
-                    <InputLabel htmlFor="file">Choose your avatar</InputLabel>
+                <FormControl sx={{ pb: 1 }}>
                     <input
                         onChange={onSelectFile}
                         type="file"
                         id="file"
                         accept="image/*"
-                        style={{ display: 'block' }}
+                        className={'file-input__input'}
                     />
+                    <label className="button label" htmlFor="file">
+                        <span>Upload your image</span>
+                        <span className="ext">
+                            [&quot;jpeg&quot;, &quot;png&quot;,
+                            &quot;webp&quot;]
+                        </span>
+                    </label>
                 </FormControl>
-                {imgSrc && (
-                    <ReactCrop
-                        crop={crop}
-                        onChange={(pixelCrop, percentCrop) =>
-                            setCrop(pixelCrop)
-                        }
-                        circularCrop
-                        keepSelection
-                        aspect={CanvasProps.ASPECT_RATIO}
-                        minWidth={CanvasProps.MIN_DIMENSION}
-                    >
-                        <img
-                            ref={imageRef}
-                            src={imgSrc}
-                            alt={'Crop image'}
-                            style={{ maxHeight: '60vh' }}
-                            onLoad={onImageLoad}
-                        />
-                    </ReactCrop>
-                )}
+                <Box
+                    sx={{
+                        backgroundColor: MainColors.GRAY808,
+                    }}
+                >
+                    {imgSrc && (
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                paddingBottom: '10px',
+                            }}
+                        >
+                            <ReactCrop
+                                crop={crop}
+                                onChange={(pixelCrop, percentCrop) =>
+                                    setCrop(pixelCrop)
+                                }
+                                circularCrop
+                                keepSelection
+                                aspect={CanvasProps.ASPECT_RATIO}
+                                minWidth={CanvasProps.MIN_DIMENSION}
+                            >
+                                <img
+                                    ref={imageRef}
+                                    src={imgSrc}
+                                    alt={'Crop image'}
+                                    onLoad={onImageLoad}
+                                    style={{
+                                        maxHeight: 'clamp(35vh, 50vw, 45vh)',
+                                    }}
+                                />
+                            </ReactCrop>
+                        </div>
+                    )}
+                    {crop && (
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <canvas
+                                ref={canvasRef}
+                                style={{
+                                    border: '1px solid black',
+                                    objectFit: 'contain',
+                                    width: '250px',
+                                    height: '250px',
+                                    borderRadius: '50%',
+                                }}
+                            />
+                        </div>
+                    )}
+                </Box>
+                <Box sx={{ display: 'flex', gap: 3 }}>
+                    {imgSrc && (
+                        <Button variant={'contained'} onClick={handleCrop}>
+                            Crop
+                        </Button>
+                    )}
+                    {isCropClicked && (
+                        <Button variant={'contained'} onClick={handleSubmit}>
+                            Upload photo
+                        </Button>
+                    )}
+                </Box>
                 {errorMessage && (
                     <FormHelperText style={{ color: 'red ' }}>
                         {errorMessage}
                     </FormHelperText>
-                )}
-                {imgSrc && (
-                    <Button variant={'contained'} onClick={handleCrop}>
-                        Crop
-                    </Button>
-                )}
-                {isCropClicked && (
-                    <Button variant={'contained'} onClick={handleSubmit}>
-                        Upload
-                    </Button>
-                )}
-                {crop && (
-                    <>
-                        <canvas
-                            ref={canvasRef}
-                            style={{
-                                border: '1px solid black',
-                                objectFit: 'contain',
-                                width: '250px',
-                                height: '250px',
-                                borderRadius: '50%',
-                            }}
-                        />
-                    </>
                 )}
             </form>
         </>

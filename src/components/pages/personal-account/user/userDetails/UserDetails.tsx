@@ -82,7 +82,6 @@ const UserDetails: FC<UserDetailsProps> = ({
                 )}
             </Box>
             <Dialog
-                sx={{}}
                 id="menu-appbar"
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
@@ -96,7 +95,7 @@ const UserDetails: FC<UserDetailsProps> = ({
                         pl: 3,
                     }}
                 >
-                    Form
+                    Upload image
                 </DialogTitle>
                 <DialogContent sx={{ bgcolor: MainColors.GRAY595 }}>
                     <AddUserAvatarForm />
