@@ -48,20 +48,25 @@ const AddUserAvatarForm: FC = () => {
                 const { naturalWidth, naturalHeight } = target;
                 if (
                     naturalWidth < CanvasProps.MIN_DIMENSION ||
-                    naturalHeight < CanvasProps.MIN_DIMENSION
-                ) {
-                    setErrorMessage('Image must be at least 150 x 150 pixels');
-                    return setImgSrc('');
-                }
-
-                if (
+                    naturalHeight < CanvasProps.MIN_DIMENSION ||
                     naturalWidth > CanvasProps.MAX_DIMENSION ||
                     naturalHeight > CanvasProps.MAX_DIMENSION
                 ) {
-                    setErrorMessage(
-                        'Image must be at least 1500 x 1500 pixels',
-                    );
-                    return setImgSrc('');
+                    if (
+                        naturalWidth < CanvasProps.MIN_DIMENSION ||
+                        naturalHeight < CanvasProps.MIN_DIMENSION
+                    ) {
+                        setErrorMessage(
+                            'Image must be at least 150 x 150 pixels',
+                        );
+                    } else {
+                        setErrorMessage(
+                            'Image must be at least 1500 x 1500 pixels',
+                        );
+                    }
+                    setImgSrc('');
+                } else {
+                    setIsCroppedImage(true);
                 }
             });
 
@@ -112,7 +117,6 @@ const AddUserAvatarForm: FC = () => {
                 `${name}-${fileName}-avatar.jpg`,
             );
             setIsCropClicked(true);
-            setIsCroppedImage(true);
             setCroppedImage(croppedImageFile);
         }
     };
@@ -196,7 +200,7 @@ const AddUserAvatarForm: FC = () => {
                             </ReactCrop>
                         </div>
                     )}
-                    {crop && (
+                    {isCroppedImage ? (
                         <div
                             style={{
                                 display: 'flex',
@@ -214,7 +218,7 @@ const AddUserAvatarForm: FC = () => {
                                 }}
                             />
                         </div>
-                    )}
+                    ) : null}
                 </Box>
                 <Box sx={{ display: 'flex', gap: 3 }}>
                     {imgSrc && (
