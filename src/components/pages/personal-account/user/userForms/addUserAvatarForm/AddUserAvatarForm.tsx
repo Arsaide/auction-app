@@ -132,7 +132,7 @@ const AddUserAvatarForm: FC = () => {
     const handleSubmit = async () => {
         try {
             if (croppedImage) {
-                const response = await store.addProfileImage(croppedImage);
+                const response = await store.editProfileImage(croppedImage);
             } else {
                 toast.error('Please crop the image before uploading.');
             }

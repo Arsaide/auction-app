@@ -249,28 +249,6 @@ export default class Store {
         }
     }
 
-    async addProfileImage(image: File | null) {
-        try {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                toast.error('Token is not valid');
-                return;
-            }
-
-            return await toast.promise(
-                AuthService.editProfileImage(token, image),
-                {
-                    pending: 'Send request...',
-                    success: 'Request successfully!',
-                    error: 'Failed to request, please try again...',
-                },
-            );
-        } catch (e: any) {
-            throw e;
-        }
-    }
-
     async editProfileImage(image: File | null) {
         try {
             const token = localStorage.getItem('token');
@@ -281,7 +259,7 @@ export default class Store {
             }
 
             return await toast.promise(
-                AuthService.addProfileImage(token, image),
+                AuthService.editProfileImage(token, image),
                 {
                     pending: 'Send request...',
                     success: 'Request successfully!',
