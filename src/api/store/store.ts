@@ -270,26 +270,4 @@ export default class Store {
             throw e;
         }
     }
-
-    async editProfileImage(image: File | null) {
-        try {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                toast.error('Token is not valid');
-                return;
-            }
-
-            return await toast.promise(
-                AuthService.addProfileImage(token, image),
-                {
-                    pending: 'Send request...',
-                    success: 'Request successfully!',
-                    error: 'Failed to request, please try again...',
-                },
-            );
-        } catch (e: any) {
-            throw e;
-        }
-    }
 }
