@@ -111,6 +111,19 @@ export default class AuthService {
         return await $api.post<AuthResponse>('/addprofileimage', formData);
     }
 
+    static async editProfileImage(
+        token: string,
+        image: File | null,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        const formData = new FormData();
+        if (image) {
+            formData.append('img', image);
+        }
+        formData.append('token', token);
+
+        return await $api.post<AuthResponse>('/editprofileimage', formData);
+    }
+
     static async sendDeleteAuction(
         _id: string | undefined,
         token: string | null,
