@@ -10,6 +10,8 @@ import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
 import { MainColors } from '../../../../../lib/Colors/MainColors';
 import Typography from '@mui/material/Typography';
 import { calculateMinBet } from './CalculateMinBet';
+import './PlaceABet.css';
+import { Link } from 'react-router-dom';
 
 interface IPlaceABet {
     auctionId: string | undefined;
@@ -40,7 +42,7 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, minBet, maxBet }) => {
             const minBet = calculateMinBet(currentBet);
 
             if (userBet < minBet) {
-                setErrorMessage(`Minimum bet is ${minBet}`);
+                setErrorMessage(`Minimum bet is ${minBet}$`);
                 setIsSubmitting(false);
                 return;
             }
@@ -66,6 +68,18 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, minBet, maxBet }) => {
             >
                 {({ isValid }) => (
                     <Form>
+                        <Typography variant={'subtitle2'} sx={{ mt: 2 }}>
+                            Minimum amount you can bet{' '}
+                            <span style={{ color: MainColors.RED }}>
+                                {calculateMinBet(parseFloat(maxBet))}$
+                            </span>
+                        </Typography>
+                        <Typography variant={'subtitle2'}>
+                            You can read more about the conditions on the{' '}
+                            <Link to={'/information'} className={'link'}>
+                                Information page
+                            </Link>
+                        </Typography>
                         <Box>
                             <Input
                                 id={'bet'}

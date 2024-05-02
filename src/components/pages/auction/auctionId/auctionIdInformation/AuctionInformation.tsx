@@ -157,6 +157,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                             <Button
                                 variant="contained"
                                 sx={{
+                                    mt: 2,
                                     color: MainColors.WHITE,
                                     bgcolor: ButtonColors.LRED,
                                     '&:hover': {
@@ -179,6 +180,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                         <Button
                             variant="contained"
                             sx={{
+                                mt: 2,
                                 color: MainColors.WHITE,
                                 bgcolor: ButtonColors.LRED,
                                 '&:hover': {

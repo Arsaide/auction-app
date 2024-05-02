@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import './Page.css';
+import '../../components/pages/auction/AuctionPage.css';
 import AuctionsPage from '../../components/pages/auction/AuctionsPage';
 
 const AuctionPage = () => {
