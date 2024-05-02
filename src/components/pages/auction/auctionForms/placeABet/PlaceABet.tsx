@@ -9,16 +9,19 @@ import Button from '@mui/material/Button';
 import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
 import { MainColors } from '../../../../../lib/Colors/MainColors';
 import Typography from '@mui/material/Typography';
+import { calculateMinBet } from './CalculateMinBet';
 
 interface IPlaceABet {
     auctionId: string | undefined;
+    minBet: string;
+    maxBet: string;
 }
 
 interface PlaceBetValues {
     bet: string;
 }
 
-const PlaceABet: FC<IPlaceABet> = ({ auctionId }) => {
+const PlaceABet: FC<IPlaceABet> = ({ auctionId, minBet, maxBet }) => {
     const { store } = useContext(Context);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -30,7 +33,21 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId }) => {
     const handleSubmit = async (values: PlaceBetValues) => {
         setIsSubmitting(true);
         try {
-            const response = await store.placeABet(values.bet, auctionId);
+            const userBet = parseFloat(values.bet);
+
+            const currentBet = parseFloat(maxBet);
+
+            const minBet = calculateMinBet(currentBet);
+
+            if (userBet < minBet) {
+                setErrorMessage(`Minimum bet is ${minBet}`);
+                setIsSubmitting(false);
+                return;
+            }
+            const response = await store.placeABet(
+                minBet.toString(),
+                auctionId,
+            );
         } catch (e: any) {
             setIsSubmitting(false);
             toast.error(e.response?.data?.message);

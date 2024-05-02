@@ -169,7 +169,11 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                             >
                                 <Close />
                             </Button>
-                            <PlaceABet auctionId={id} />
+                            <PlaceABet
+                                auctionId={id}
+                                minBet={auction.minRates}
+                                maxBet={auction.rates}
+                            />
                         </>
                     ) : (
                         <Button
