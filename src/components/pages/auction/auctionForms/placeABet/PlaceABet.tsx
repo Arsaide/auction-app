@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import Box from '@mui/material/Box';
 import Input from '../../../../layout/common/inputs/input/Input';
@@ -23,37 +23,58 @@ interface PlaceBetValues {
     bet: string;
 }
 
-const PlaceABet: FC<IPlaceABet> = ({ auctionId, minBet, maxBet }) => {
+interface IError {
+    server: string;
+    client: string;
+}
+
+const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
     const { store } = useContext(Context);
-    const [errorMessage, setErrorMessage] = useState<string>('');
+    const { balance } = store.user;
+    const [errorMessage, setErrorMessage] = useState<IError>({
+        server: '',
+        client: '',
+    });
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     const initialValues = {
         bet: '',
     };
 
+    useEffect(() => {
+        if (parseFloat(balance) < calculateMinBet(parseFloat(maxBet))) {
+            setErrorMessage(prevState => ({
+                ...prevState,
+                client: "You don't have enough money",
+            }));
+        }
+    }, []);
+
     const handleSubmit = async (values: PlaceBetValues) => {
         setIsSubmitting(true);
         try {
-            const userBet = parseFloat(values.bet);
+            // const userBet = parseFloat(values.bet);
 
-            const currentBet = parseFloat(maxBet);
+            // const currentBet = parseFloat(maxBet);
 
-            const minBet = calculateMinBet(currentBet);
+            // const minBet = calculateMinBet(currentBet);
 
-            if (userBet < minBet) {
-                setErrorMessage(`Minimum bet is ${minBet}$`);
-                setIsSubmitting(false);
-                return;
-            }
-            const response = await store.placeABet(
-                minBet.toString(),
-                auctionId,
-            );
+            // if (userBet < minBet) {
+            //     setErrorMessage(prevState => ({
+            //         ...prevState,
+            //         client: `Minimum bet is ${minBet}$`,
+            //     }));
+            //     setIsSubmitting(false);
+            //     return;
+            // }
+            const response = await store.placeABet(values.bet, auctionId);
         } catch (e: any) {
             setIsSubmitting(false);
             toast.error(e.response?.data?.message);
-            setErrorMessage(e.response?.data?.message);
+            setErrorMessage(prevState => ({
+                ...prevState,
+                server: e.response?.data?.message,
+            }));
         }
         setIsSubmitting(false);
     };
@@ -88,27 +109,44 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, minBet, maxBet }) => {
                                 placeholder={'Enter your bet'}
                             />
                         </Box>
-                        <Button
-                            variant="contained"
-                            type="submit"
-                            disabled={!isValid || isSubmitting}
-                            sx={{
-                                mt: 2,
-                                bgcolor: ButtonColors.LGREEN,
-                                '&:hover': {
-                                    bgcolor: ButtonColors.DGREEN,
-                                },
-                                '&:disabled': {
-                                    bgcolor: ButtonColors.LRED,
-                                    color: MainColors.WHITE,
-                                },
-                            }}
-                        >
-                            {isSubmitting ? 'Submitting...' : 'Place a bet'}
-                        </Button>
-                        {errorMessage && (
+                        {errorMessage.client ? (
+                            <Button
+                                variant="contained"
+                                type="submit"
+                                disabled={true}
+                                sx={{
+                                    mt: 2,
+                                    '&:disabled': {
+                                        bgcolor: ButtonColors.LRED,
+                                        color: MainColors.WHITE,
+                                    },
+                                }}
+                            >
+                                {errorMessage.client}
+                            </Button>
+                        ) : (
+                            <Button
+                                variant="contained"
+                                type="submit"
+                                disabled={!isValid || isSubmitting}
+                                sx={{
+                                    mt: 2,
+                                    bgcolor: ButtonColors.LGREEN,
+                                    '&:hover': {
+                                        bgcolor: ButtonColors.DGREEN,
+                                    },
+                                    '&:disabled': {
+                                        bgcolor: ButtonColors.LRED,
+                                        color: MainColors.WHITE,
+                                    },
+                                }}
+                            >
+                                {isSubmitting ? 'Submitting...' : 'Place a bet'}
+                            </Button>
+                        )}
+                        {errorMessage.server && (
                             <Typography sx={{ color: MainColors.RED }}>
-                                {errorMessage}
+                                {errorMessage.server}
                             </Typography>
                         )}
                     </Form>

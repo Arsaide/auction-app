@@ -153,7 +153,12 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
             ) : (
                 <>
                     {isVisibleBetForm ? (
-                        <>
+                        <Box
+                            sx={{
+                                borderTop: '1px solid white',
+                                mt: 1,
+                            }}
+                        >
                             <Button
                                 variant="contained"
                                 sx={{
@@ -175,7 +180,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                 minBet={auction.minRates}
                                 maxBet={auction.rates}
                             />
-                        </>
+                        </Box>
                     ) : (
                         <Button
                             variant="contained"

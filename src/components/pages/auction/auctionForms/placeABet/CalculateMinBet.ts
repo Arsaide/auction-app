@@ -6,6 +6,6 @@ export const calculateMinBet = (initialBet: number): number => {
     } else if (initialBet >= 10000 && initialBet < 100000) {
         return parseFloat((initialBet + initialBet * 0.03).toFixed(2));
     } else {
-        return parseFloat((initialBet * initialBet * 0.015).toFixed(2));
+        return parseFloat((initialBet + initialBet * 0.015).toFixed(2));
     }
 };

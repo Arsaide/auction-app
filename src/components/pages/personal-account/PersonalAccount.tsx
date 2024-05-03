@@ -10,7 +10,6 @@ import { MainColors } from '../../../lib/Colors/MainColors';
 import { ButtonColors } from '../../../lib/Colors/ButtonColors';
 
 const PersonalAccountPage: FC = () => {
-    const { store } = useContext(Context);
     const [showLoginComponent, setShowLoginComponent] =
         useState<boolean>(false);
     const [showRegComponent, setShowRegComponent] = useState<boolean>(false);
