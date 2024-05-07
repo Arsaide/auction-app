@@ -283,15 +283,8 @@ export default class Store {
         }
     }
 
-    async recoveryPassword() {
+    async recoveryPassword(token: string | null) {
         try {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                toast.error('Token is not valid');
-                return;
-            }
-
             return AuthService.recoveryPassword(token);
         } catch (e: any) {
             throw e;
