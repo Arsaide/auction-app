@@ -7,8 +7,8 @@ import Box from '@mui/material/Box';
 import Input from '../../../layout/common/inputs/input/Input';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
-import RegistrationForm from '../registrationForm/RegistrationForm';
-import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
+import RegistrationForm from '../registration/registrationForm/RegistrationForm';
+import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 
 interface LoginFormValues {
     email: string;
@@ -120,6 +120,12 @@ const LoginForm: FC = () => {
                                     {errorMessage}
                                 </Typography>
                             )}
+                            <Typography
+                                onClick={() => console.log('hello')}
+                                sx={{ cursor: 'pointer' }}
+                            >
+                                Forget password?
+                            </Typography>
                         </Form>
                     )}
                 </Formik>

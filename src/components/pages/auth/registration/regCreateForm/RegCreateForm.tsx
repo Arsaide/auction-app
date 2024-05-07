@@ -1,13 +1,13 @@
 import React, { FC, useContext, useState } from 'react';
-import { Context } from '../../../../index';
+import { Context } from '../../../../../index';
 import { Form, Formik } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Input from '../../../layout/common/inputs/input/Input';
+import Input from '../../../../layout/common/inputs/input/Input';
 import { regCreateValidationSchema } from './regCreateValidation/regCreateValidationSchema';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
-import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
+import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 
 interface RegCreateFormProps {
     onSubmit: () => void;
@@ -88,7 +88,10 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                         </Box>
                         {errorMessage && (
                             <Typography
-                                sx={{ color: ButtonColors.LRED, maxWidth: '340px' }}
+                                sx={{
+                                    color: ButtonColors.LRED,
+                                    maxWidth: '340px',
+                                }}
                             >
                                 {errorMessage}
                             </Typography>

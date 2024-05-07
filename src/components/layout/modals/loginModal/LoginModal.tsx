@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import LoginForm from '../../../pages/auth/loginForm/LoginForm';
 import Button from '@mui/material/Button';
-import { MainColors } from '../../../../lib/Colors/MainColors';
+import { MainColors } from '../../../../lib/colors/MainColors';
 
 interface LoginModalInterface {
     open: boolean;

@@ -6,9 +6,9 @@ import {
     DialogContentText,
     DialogTitle,
 } from '@mui/material';
-import RegistrationForm from '../../../pages/auth/registrationForm/RegistrationForm';
+import RegistrationForm from '../../../pages/auth/registration/registrationForm/RegistrationForm';
 import Button from '@mui/material/Button';
-import { MainColors } from '../../../../lib/Colors/MainColors';
+import { MainColors } from '../../../../lib/colors/MainColors';
 
 interface RegModalInterface {
     open: boolean;

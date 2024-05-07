@@ -1,16 +1,16 @@
 import React, { FC, useContext, useState } from 'react';
-import { Context } from '../../../../index';
+import { Context } from '../../../../../index';
 import { Form, Formik } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { registrationValidationSchema } from './registrationValidation/registrationValidationSchema';
-import Input from '../../../layout/common/inputs/input/Input';
+import Input from '../../../../layout/common/inputs/input/Input';
 import RegCreateForm from '../regCreateForm/RegCreateForm';
-import LoginForm from '../loginForm/LoginForm';
+import LoginForm from '../../loginForm/LoginForm';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
+import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 
 interface RegistrationFormValues {
     name: string;
@@ -138,7 +138,10 @@ const RegistrationForm: FC = () => {
                             </Box>
                             {errorMessage && (
                                 <Typography
-                                    sx={{ color: ButtonColors.LRED, maxWidth: '340px' }}
+                                    sx={{
+                                        color: ButtonColors.LRED,
+                                        maxWidth: '340px',
+                                    }}
                                 >
                                     {errorMessage}
                                 </Typography>
