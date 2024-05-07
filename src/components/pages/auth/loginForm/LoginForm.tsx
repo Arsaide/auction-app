@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import RegistrationForm from '../registration/registrationForm/RegistrationForm';
 import { ButtonColors } from '../../../../lib/colors/ButtonColors';
+import ForgotPasswordForm from '../recoveryPassword/forgotPassword/ForgotPasswordForm';
 
 interface LoginFormValues {
     email: string;
@@ -17,9 +18,12 @@ interface LoginFormValues {
 
 const LoginForm: FC = () => {
     const { store } = useContext(Context);
-    const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [showRegForm, setShowRegForm] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const [isShowRegistrationForm, setIsShowRegistrationForm] =
+        useState<boolean>(false);
+    const [isShowForgotPasswordForm, setIsShowForgotPasswordForm] =
+        useState<boolean>(false);
 
     const initialValues = {
         email: '',
@@ -43,13 +47,21 @@ const LoginForm: FC = () => {
         }
     };
 
-    const handleRegClick = () => {
-        setShowRegForm(true);
+    const handleRegistrationClick = () => {
+        setIsShowRegistrationForm(true);
+        setIsShowForgotPasswordForm(false);
+    };
+
+    const handleForgotPasswordClick = () => {
+        setIsShowForgotPasswordForm(true);
+        setIsShowRegistrationForm(false);
     };
 
     return (
         <>
-            {!showRegForm ? (
+            {isShowRegistrationForm && <RegistrationForm />}
+            {isShowForgotPasswordForm && <ForgotPasswordForm />}
+            {!isShowRegistrationForm && !isShowForgotPasswordForm && (
                 <Formik
                     validationSchema={loginValidationSchema}
                     validateOnMount
@@ -99,7 +111,7 @@ const LoginForm: FC = () => {
                                     {isSubmitting ? 'Submitting...' : 'Login'}
                                 </Button>
                                 <Button
-                                    onClick={handleRegClick}
+                                    onClick={handleRegistrationClick}
                                     sx={{
                                         color: ButtonColors.WHITE,
                                         '&:hover': {
@@ -108,6 +120,17 @@ const LoginForm: FC = () => {
                                     }}
                                 >
                                     Registration
+                                </Button>
+                                <Button
+                                    onClick={handleForgotPasswordClick}
+                                    sx={{
+                                        color: ButtonColors.WHITE,
+                                        '&:hover': {
+                                            color: ButtonColors.GRAY,
+                                        },
+                                    }}
+                                >
+                                    Forgot password?
                                 </Button>
                             </Box>
                             {errorMessage && (
@@ -120,17 +143,9 @@ const LoginForm: FC = () => {
                                     {errorMessage}
                                 </Typography>
                             )}
-                            <Typography
-                                onClick={() => console.log('hello')}
-                                sx={{ cursor: 'pointer' }}
-                            >
-                                Forget password?
-                            </Typography>
                         </Form>
                     )}
                 </Formik>
-            ) : (
-                <RegistrationForm />
             )}
         </>
     );
