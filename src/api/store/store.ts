@@ -291,15 +291,8 @@ export default class Store {
         }
     }
 
-    async changePassword(password: string) {
+    async changePassword(token: string | null, password: string) {
         try {
-            const token = localStorage.getItem('token');
-
-            if (!token) {
-                toast.error('Token is not valid');
-                return;
-            }
-
             return await toast.promise(
                 AuthService.changePassword(token, password),
                 {

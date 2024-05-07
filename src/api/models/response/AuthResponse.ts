@@ -8,4 +8,5 @@ export interface AuthResponse {
     user: IUser;
     avatar: string; // avatar
     stateOwner: boolean;
+    status: boolean; // recovery password
 }
