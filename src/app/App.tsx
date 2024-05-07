@@ -13,8 +13,9 @@ import PersonalAccount from './personal-account/page';
 import BottomNav from '../components/layout/nav/bottomNav/BottomNav';
 import { Hidden } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
-import NotFount from './not-found/page';
+import NotFound from './not-found/page';
 import { Context } from '../index';
+import ChangePasswordPage from './change-password/page';
 
 function App() {
     const { store } = useContext(Context);
@@ -55,7 +56,11 @@ function App() {
                         path={'personal-account/:token'}
                         element={<UserId />}
                     />
-                    <Route path={'*'} element={<NotFount />} />
+                    <Route
+                        path={'/change/password'}
+                        element={<ChangePasswordPage />}
+                    />
+                    <Route path={'*'} element={<NotFound />} />
                 </Routes>
                 <Hidden mdUp>
                     <Toolbar />
