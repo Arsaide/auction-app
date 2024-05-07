@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Context } from '../../../../../index';
 import { Form, Formik } from 'formik';
 import { forgotPasswordFormValidationSchema } from './forgotPasswordValidation/forgotPasswordFormValidationSchema';
@@ -8,6 +8,9 @@ import Button from '@mui/material/Button';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import Typography from '@mui/material/Typography';
 import LoginForm from '../../loginForm/LoginForm';
+import { MainColors } from '../../../../../lib/colors/MainColors';
+import { toast } from 'react-toastify';
+import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 
 interface ForgotFormValues {
     email: string;
@@ -16,17 +19,48 @@ interface ForgotFormValues {
 const ForgotPasswordForm = () => {
     const { store } = useContext(Context);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isShowLoginForm, setIsShowLoginForm] = useState<boolean>(false);
+    const [isMessageVisible, setIsMessageVisible] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>('');
+    const lastSubmittedTimeRef = useRef<number | null>(null);
 
     const initialValues = {
         email: '',
     };
 
+    useEffect(() => {
+        const lastSubmittedTime = localStorage.getItem(
+            'LastForgotPasswordTime',
+        );
+        if (lastSubmittedTime) {
+            lastSubmittedTimeRef.current = parseInt(lastSubmittedTime);
+        }
+    }, []);
+
     const handleSubmit = async (values: ForgotFormValues) => {
+        if (
+            lastSubmittedTimeRef.current &&
+            Date.now() - lastSubmittedTimeRef.current < 300000
+        ) {
+            toast.error('Please wait 5 minute before submitting again');
+            return;
+        }
+
         setIsSubmitting(true);
         try {
             const response = await store.forgotPassword(values.email);
+            if (response && response.status === 200) {
+                lastSubmittedTimeRef.current = Date.now();
+                localStorage.setItem(
+                    'LastForgotPasswordTime',
+                    lastSubmittedTimeRef.current.toString(),
+                );
+                setIsMessageVisible(true);
+                setMessage(
+                    'An email has been sent to you. Follow the link and recover your password. The link is valid for 5 minutes',
+                );
+            }
         } catch (e: any) {
             setIsSubmitting(false);
             setErrorMessage(e.response?.data?.message);
@@ -57,33 +91,50 @@ const ForgotPasswordForm = () => {
                                     gap: 2,
                                 }}
                             >
-                                <Input
-                                    id={'email'}
-                                    label={'Your Email'}
-                                    name={'email'}
-                                    placeholder={'Enter your email'}
-                                    type={'email'}
-                                />
+                                {!isMessageVisible ? (
+                                    <>
+                                        <Input
+                                            id={'email'}
+                                            label={'Your Email'}
+                                            name={'email'}
+                                            placeholder={'Enter your email'}
+                                            type={'email'}
+                                        />
 
-                                <Button
-                                    variant="contained"
-                                    type="submit"
-                                    disabled={!isValid || isSubmitting}
-                                    sx={{
-                                        bgcolor: ButtonColors.LGREEN,
-                                        '&:hover': {
-                                            bgcolor: ButtonColors.DGREEN,
-                                        },
-                                        '&:disabled': {
-                                            bgcolor: ButtonColors.LRED,
-                                            color: ButtonColors.WHITE,
-                                        },
-                                    }}
-                                >
-                                    {isSubmitting
-                                        ? 'Submitting...'
-                                        : 'Send message'}
-                                </Button>
+                                        <Button
+                                            variant="contained"
+                                            type="submit"
+                                            disabled={!isValid || isSubmitting}
+                                            sx={{
+                                                bgcolor: ButtonColors.LGREEN,
+                                                '&:hover': {
+                                                    bgcolor:
+                                                        ButtonColors.DGREEN,
+                                                },
+                                                '&:disabled': {
+                                                    bgcolor: ButtonColors.LRED,
+                                                    color: ButtonColors.WHITE,
+                                                },
+                                            }}
+                                        >
+                                            {isSubmitting
+                                                ? 'Submitting...'
+                                                : 'Send message'}
+                                        </Button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Typography
+                                            sx={{
+                                                color: MainColors.GREEN,
+                                                maxWidth: '261px',
+                                            }}
+                                        >
+                                            {message}
+                                        </Typography>
+                                    </>
+                                )}
+
                                 <Button
                                     onClick={handleLoginClick}
                                     sx={{
@@ -105,6 +156,14 @@ const ForgotPasswordForm = () => {
                                 >
                                     {errorMessage}
                                 </Typography>
+                            )}
+                            {lastSubmittedTimeRef.current && (
+                                <SubmitTimer
+                                    text={'Please wait '}
+                                    nextSubmitTime={
+                                        lastSubmittedTimeRef.current + 300000
+                                    }
+                                />
                             )}
                         </Form>
                     )}

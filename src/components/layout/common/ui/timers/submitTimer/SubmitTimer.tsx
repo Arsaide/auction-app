@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
+import { MainColors } from '../../../../../../lib/colors/MainColors';
 
 interface SubmitTimerInterface {
     nextSubmitTime: number;
+    text?: string;
 }
 
-const SubmitTimer: FC<SubmitTimerInterface> = ({ nextSubmitTime }) => {
+const SubmitTimer: FC<SubmitTimerInterface> = ({ nextSubmitTime, text }) => {
     const [timeRemaining, setTimeRemaining] = useState<number>(0);
     const [timerExpired, setTimerExpired] = useState<boolean>(false);
 
@@ -36,10 +38,11 @@ const SubmitTimer: FC<SubmitTimerInterface> = ({ nextSubmitTime }) => {
     };
 
     return (
-        <Typography>
+        <Typography sx={{ color: MainColors.RED }}>
             {!timerExpired && (
                 <>
-                    Please wait until the next request is sent{' '}
+                    {text}
+                    {!text && <>Please wait until the next request is sent </>}
                     <u>{formatTime(timeRemaining)}</u>
                 </>
             )}
