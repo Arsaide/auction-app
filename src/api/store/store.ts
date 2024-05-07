@@ -270,4 +270,53 @@ export default class Store {
             throw e;
         }
     }
+
+    async forgotPassword(email: string) {
+        try {
+            return await toast.promise(AuthService.forgotPassword(email), {
+                pending: 'Send request...',
+                success: 'Request successfully!',
+                error: 'Failed to request, please try again...',
+            });
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async recoveryPassword() {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                toast.error('Token is not valid');
+                return;
+            }
+
+            return AuthService.recoveryPassword(token);
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async changePassword(password: string) {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                toast.error('Token is not valid');
+                return;
+            }
+
+            return await toast.promise(
+                AuthService.changePassword(token, password),
+                {
+                    pending: 'Send request...',
+                    success: 'Request successfully!',
+                    error: 'Failed to request, please try again...',
+                },
+            );
+        } catch (e: any) {
+            throw e;
+        }
+    }
 }

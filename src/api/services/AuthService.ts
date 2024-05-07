@@ -142,4 +142,26 @@ export default class AuthService {
             sum,
         });
     }
+
+    static async forgotPassword(
+        email: string,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return await $api.post<AuthResponse>('/recoverypassword', { email });
+    }
+
+    static async recoveryPassword(
+        token: string | null,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return await $api.post<AuthResponse>('/checktoken', { token });
+    }
+
+    static async changePassword(
+        token: string | null,
+        password: string,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return await $api.post<AuthResponse>('/changepassword', {
+            token,
+            password,
+        });
+    }
 }
