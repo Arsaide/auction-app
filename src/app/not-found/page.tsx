@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 const NotFount = () => {
     return (
         <>
-            <WarningAlert text={'Page not fount'} title={'404'} />
+            <WarningAlert text={'Page not found'} title={'404'} />
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <img
                     src="/flr2.gif"

@@ -13,7 +13,7 @@ import PersonalAccount from './personal-account/page';
 import BottomNav from '../components/layout/nav/bottomNav/BottomNav';
 import { Hidden } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
-import NotFount from './not-fount/page';
+import NotFount from './not-found/page';
 import { Context } from '../index';
 
 function App() {
