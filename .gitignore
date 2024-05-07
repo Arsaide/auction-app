@@ -34,3 +34,4 @@ yarn-error.log*
 /.idea/jsLinters/eslint.xml
 /.idea/dictionaries/kirill.xml
 /.idea/watcherTasks.xml
+/.idea/auction-app.iml
