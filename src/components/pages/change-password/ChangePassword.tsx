@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Context } from '../../../index';
 import { Typography } from '@mui/material';
+import ChangePasswordForm from './changePasswordForm/ChangePasswordForm';
 
 const ChangePassword = () => {
     const { store } = useContext(Context);
-    const [isValidToken, setIsValidToken] = useState<boolean>(true);
+    const [isValidToken, setIsValidToken] = useState<boolean>(false);
     const [isRequest, setIsRequest] = useState<boolean>(false);
 
     const location = useLocation();
@@ -15,10 +16,13 @@ const ChangePassword = () => {
         async function recoveryPassword() {
             setIsRequest(true);
             try {
-                await store.recoveryPassword(token);
+                const response = await store.recoveryPassword(token);
+
+                if (response && response.data.status === true) {
+                    setIsValidToken(true);
+                }
             } catch (e: any) {
-                setIsValidToken(false);
-                setIsRequest(false);
+                console.log('Error');
             }
             setIsRequest(false);
         }
@@ -28,8 +32,10 @@ const ChangePassword = () => {
 
     return (
         <>
-            {isValidToken ? (
-                <Typography>Token valid</Typography>
+            {isRequest ? (
+                <>Requesting...</>
+            ) : isValidToken ? (
+                <ChangePasswordForm token={token} />
             ) : (
                 <Typography>Token is not valid</Typography>
             )}
