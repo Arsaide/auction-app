@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import Button from '@mui/material/Button';
 import CachedIcon from '@mui/icons-material/Cached';
 import { keyframes } from '@mui/system';
-import { ButtonColors } from '../../../../../../lib/Colors/ButtonColors';
+import { ButtonColors } from '../../../../../../lib/colors/ButtonColors';
 
 interface ReloadButtonInt {
     disabled: boolean;

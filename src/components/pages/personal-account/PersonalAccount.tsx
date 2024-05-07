@@ -5,9 +5,8 @@ import { Box, Hidden } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LoginForm from '../auth/loginForm/LoginForm';
-import RegistrationForm from '../auth/registrationForm/RegistrationForm';
-import { MainColors } from '../../../lib/Colors/MainColors';
-import { ButtonColors } from '../../../lib/Colors/ButtonColors';
+import RegistrationForm from '../auth/registration/registrationForm/RegistrationForm';
+import { ButtonColors } from '../../../lib/colors/ButtonColors';
 
 const PersonalAccountPage: FC = () => {
     const [showLoginComponent, setShowLoginComponent] =

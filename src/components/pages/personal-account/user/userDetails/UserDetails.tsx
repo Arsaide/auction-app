@@ -13,7 +13,7 @@ import {
     Modal,
     Skeleton,
 } from '@mui/material';
-import { MainColors } from '../../../../../lib/Colors/MainColors';
+import { MainColors } from '../../../../../lib/colors/MainColors';
 
 interface UserDetailsProps {
     name: string | null;

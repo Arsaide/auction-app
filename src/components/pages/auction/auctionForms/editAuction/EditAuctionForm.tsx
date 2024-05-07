@@ -13,8 +13,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 import { boolean } from 'yup';
-import { MainColors } from '../../../../../lib/Colors/MainColors';
-import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
+import { MainColors } from '../../../../../lib/colors/MainColors';
+import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 
 interface EditAuctionProps {
     _id: string;

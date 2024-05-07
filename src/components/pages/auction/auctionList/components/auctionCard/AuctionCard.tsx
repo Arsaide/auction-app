@@ -15,8 +15,8 @@ import LazyLoadImage from '../../../../../layout/common/lazyLoadImage/LazyLoadIm
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Box } from '@mui/material';
-import { ButtonColors } from '../../../../../../lib/Colors/ButtonColors';
-import { MainColors } from '../../../../../../lib/Colors/MainColors';
+import { ButtonColors } from '../../../../../../lib/colors/ButtonColors';
+import { MainColors } from '../../../../../../lib/colors/MainColors';
 
 interface AuctionCardProps {
     img: string;

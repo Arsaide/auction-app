@@ -12,7 +12,7 @@ import useAuthCheck from '../../../../hooks/useAuthCheck/useAuthCheck';
 import { Link } from 'react-router-dom';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Context } from '../../../../index';
-import { MainColors } from '../../../../lib/Colors/MainColors';
+import { MainColors } from '../../../../lib/colors/MainColors';
 
 const BottomNav = () => {
     const { store } = useContext(Context);

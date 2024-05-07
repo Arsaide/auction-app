@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useAuthCheck from '../../../hooks/useAuthCheck/useAuthCheck';
 import Button from '@mui/material/Button';
-import { ButtonColors } from '../../../lib/Colors/ButtonColors';
+import { ButtonColors } from '../../../lib/colors/ButtonColors';
 import { Close } from '@mui/icons-material';
 import CreateAuctionForm from './auctionForms/createAuction/CreateAuctionForm';
 import { Typography } from '@mui/material';

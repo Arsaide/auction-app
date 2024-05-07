@@ -7,8 +7,8 @@ import Button from '@mui/material/Button';
 import EditAuctionForm from '../../auctionForms/editAuction/EditAuctionForm';
 import DeleteSection from '../../auctionForms/deleteSection/DeleteSection';
 import Box from '@mui/material/Box';
-import { MainColors } from '../../../../../lib/Colors/MainColors';
-import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
+import { MainColors } from '../../../../../lib/colors/MainColors';
+import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import PlaceABet from '../../auctionForms/placeABet/PlaceABet';
 import { Close } from '@mui/icons-material';
 

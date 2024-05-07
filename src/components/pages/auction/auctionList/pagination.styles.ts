@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
+import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 
 export const pagintaionStyles = createTheme({
     components: {

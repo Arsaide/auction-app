@@ -10,7 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import { MainColors } from '../../../../lib/Colors/MainColors';
+import { MainColors } from '../../../../lib/colors/MainColors';
 
 const SideBar = () => {
     return (

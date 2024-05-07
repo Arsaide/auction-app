@@ -15,7 +15,7 @@ import { setCanvasPreview } from './setCanvasPreview';
 import { CanvasProps } from './canvasProps';
 import './AddUserAvatarForm.css';
 import Box from '@mui/material/Box';
-import { MainColors } from '../../../../../../lib/Colors/MainColors';
+import { MainColors } from '../../../../../../lib/colors/MainColors';
 
 const AddUserAvatarForm: FC = () => {
     const { store } = useContext(Context);

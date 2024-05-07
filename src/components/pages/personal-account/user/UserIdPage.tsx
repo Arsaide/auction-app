@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps';
 import UserDetails from './userDetails/UserDetails';
 import OwnAuctionsList from './ownAuctionsList/OwnAuctionsList';
-import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
+import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 import ListOfBets from './listOfBets/ListOfBets';
 import { Typography } from '@mui/material';
 

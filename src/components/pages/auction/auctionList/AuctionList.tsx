@@ -8,7 +8,7 @@ import AuctionReloadButton from './components/AuctionReloadButton/AuctionReloadB
 import Button from '@mui/material/Button';
 import usePagination from '../../../../hooks/usePagination/usePagination';
 import { pagintaionStyles } from './pagination.styles';
-import { ButtonColors } from '../../../../lib/Colors/ButtonColors';
+import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 
 interface AuctionItem {
     _id: string;

@@ -13,8 +13,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, { Dayjs } from 'dayjs';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
-import { MainColors } from '../../../../../lib/Colors/MainColors';
-import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
+import { MainColors } from '../../../../../lib/colors/MainColors';
+import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 
 interface AuctionCreateFormProps {
     title: string;

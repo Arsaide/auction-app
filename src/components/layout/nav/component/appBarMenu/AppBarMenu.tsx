@@ -16,8 +16,8 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import { Context } from '../../../../../index';
-import { MainColors } from '../../../../../lib/Colors/MainColors';
-import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
+import { MainColors } from '../../../../../lib/colors/MainColors';
+import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 
 interface AppBarMenuInt {
     isAuth: boolean;

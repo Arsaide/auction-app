@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { AuctionInt } from '../../../../../app/auction/auction-id/AuctionItemProps';
-import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
+import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 
 interface AuctionDetailsProps {
     auction: AuctionInt;

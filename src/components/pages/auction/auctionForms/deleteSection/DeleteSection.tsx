@@ -10,8 +10,8 @@ import {
     DialogContentText,
     DialogTitle,
 } from '@mui/material';
-import { ButtonColors } from '../../../../../lib/Colors/ButtonColors';
-import { MainColors } from '../../../../../lib/Colors/MainColors';
+import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { MainColors } from '../../../../../lib/colors/MainColors';
 
 interface IDeleteSection {
     id: string | undefined;

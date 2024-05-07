@@ -10,7 +10,7 @@ import { memo, useContext } from 'react';
 import { Context } from '../../../index';
 import { Hidden } from '@mui/material';
 import AppBarMenu from './component/appBarMenu/AppBarMenu';
-import { MainColors } from '../../../lib/Colors/MainColors';
+import { MainColors } from '../../../lib/colors/MainColors';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;

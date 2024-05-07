@@ -7,8 +7,8 @@ import Input from '../../../../../layout/common/inputs/input/Input';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import { deleteAuctionValidationSchema } from './deleteAutctionValidation/deleteAuctionValidationSchema';
-import { ButtonColors } from '../../../../../../lib/Colors/ButtonColors';
-import { MainColors } from '../../../../../../lib/Colors/MainColors';
+import { ButtonColors } from '../../../../../../lib/colors/ButtonColors';
+import { MainColors } from '../../../../../../lib/colors/MainColors';
 
 interface DeleteAuctionFormValues {
     code: string;
