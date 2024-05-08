@@ -32,7 +32,7 @@ const ChangePasswordForm: FC<IChangePasswordForm> = ({ token }) => {
         try {
             const response = await store.changePassword(token, values.password);
             if (response && response.status === 200) {
-                navigate(-1);
+                navigate('/');
             }
         } catch (e: any) {
             setIsSubmitting(false);
@@ -58,7 +58,7 @@ const ChangePasswordForm: FC<IChangePasswordForm> = ({ token }) => {
                     >
                         <Input
                             id={'password'}
-                            label={'Password'}
+                            label={'New password'}
                             name={'password'}
                             placeholder={'Enter your password'}
                             type={'password'}
