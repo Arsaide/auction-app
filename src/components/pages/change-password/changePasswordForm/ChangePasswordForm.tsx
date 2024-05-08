@@ -6,8 +6,8 @@ import Button from '@mui/material/Button';
 import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 import Typography from '@mui/material/Typography';
 import { Context } from '../../../../index';
-import { Navigate } from 'react-router-dom';
 import { changePasswordFormValidationSchema } from './changePasswordFormValidation/changePasswordFormValidationSchema';
+import { useNavigate } from 'react-router-dom';
 
 interface ChangePasswordFormValues {
     password: string;
@@ -21,6 +21,7 @@ const ChangePasswordForm: FC<IChangePasswordForm> = ({ token }) => {
     const { store } = useContext(Context);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const navigate = useNavigate();
 
     const initialValues = {
         password: '',
@@ -31,7 +32,7 @@ const ChangePasswordForm: FC<IChangePasswordForm> = ({ token }) => {
         try {
             const response = await store.changePassword(token, values.password);
             if (response && response.status === 200) {
-                return <Navigate to={'/'} />;
+                navigate(-1);
             }
         } catch (e: any) {
             setIsSubmitting(false);
