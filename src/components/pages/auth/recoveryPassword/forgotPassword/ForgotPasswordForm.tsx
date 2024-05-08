@@ -11,6 +11,7 @@ import LoginForm from '../../loginForm/LoginForm';
 import { MainColors } from '../../../../../lib/colors/MainColors';
 import { toast } from 'react-toastify';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
+import Cookies from 'js-cookie';
 
 interface ForgotFormValues {
     email: string;
@@ -30,9 +31,7 @@ const ForgotPasswordForm = () => {
     };
 
     useEffect(() => {
-        const lastSubmittedTime = localStorage.getItem(
-            'LastForgotPasswordTime',
-        );
+        const lastSubmittedTime = Cookies.get('LastForgotPasswordTime');
         if (lastSubmittedTime) {
             lastSubmittedTimeRef.current = parseInt(lastSubmittedTime);
         }
@@ -52,10 +51,12 @@ const ForgotPasswordForm = () => {
             const response = await store.forgotPassword(values.email);
             if (response && response.status === 200) {
                 lastSubmittedTimeRef.current = Date.now();
-                localStorage.setItem(
+                Cookies.set(
                     'LastForgotPasswordTime',
                     lastSubmittedTimeRef.current.toString(),
+                    { expires: 1 / 288 },
                 );
+                setIsMessageVisible(true);
                 setIsMessageVisible(true);
                 setMessage(
                     'An email has been sent to you. Follow the link and recover your password. The link is valid for 5 minutes',
@@ -131,6 +132,14 @@ const ForgotPasswordForm = () => {
                                             }}
                                         >
                                             {message}
+                                            <img
+                                                src="/gifs/letter.gif"
+                                                alt="Error"
+                                                style={{
+                                                    width: '100%',
+                                                    marginTop: '20px',
+                                                }}
+                                            />
                                         </Typography>
                                     </>
                                 )}
