@@ -3,6 +3,8 @@ import { makeAutoObservable } from 'mobx';
 import AuthService from '../services/AuthService';
 import { toast } from 'react-toastify';
 import { Dayjs } from 'dayjs';
+import AuctionService from '../services/AuctionService';
+import AccountService from '../services/AccountService';
 
 export default class Store {
     user = {} as IUser;
@@ -87,7 +89,7 @@ export default class Store {
             }
 
             return await toast.promise(
-                AuthService.createAuction(
+                AuctionService.createAuction(
                     title,
                     desc,
                     minRates,
@@ -122,7 +124,7 @@ export default class Store {
             }
 
             return await toast.promise(
-                AuthService.editAuctionFields(
+                AuctionService.editAuctionFields(
                     token,
                     _id,
                     title,
@@ -182,7 +184,7 @@ export default class Store {
     async getOneAuction(_id: string | undefined) {
         try {
             const token: string | null = localStorage.getItem('token');
-            return await AuthService.getOneAuction(_id, token);
+            return await AuctionService.getOneAuction(_id, token);
         } catch (e: any) {
             throw e;
         }
@@ -193,7 +195,7 @@ export default class Store {
             const token: string | null = localStorage.getItem('token');
 
             return await toast.promise(
-                AuthService.sendDeleteAuction(id, token),
+                AuctionService.sendDeleteAuction(id, token),
                 {
                     pending: 'Sending code...',
                     success: 'Created successfully!',
@@ -208,7 +210,7 @@ export default class Store {
     async deleteAuction(password: string) {
         try {
             const token: string | null = localStorage.getItem('token');
-            return await AuthService.deleteAuction(token, password);
+            return await AuctionService.deleteAuction(token, password);
         } catch (e: any) {
             throw e;
         }
@@ -218,7 +220,7 @@ export default class Store {
         try {
             const token: string | null = localStorage.getItem('token');
             return await toast.promise(
-                AuthService.placeABet(token, auctionId, bet),
+                AuctionService.placeABet(token, auctionId, bet),
                 {
                     pending: 'Placing a bet...',
                     success: 'Place a bet successfully!',
@@ -232,7 +234,7 @@ export default class Store {
 
     async getUser(token: string | null | undefined) {
         try {
-            const response = await AuthService.getUser(token);
+            const response = await AccountService.getUser(token);
             const userData: IUser = response.data.user;
             this.setUser(userData);
         } catch (e: any) {
@@ -243,7 +245,7 @@ export default class Store {
 
     async getOwnAuctions(token: string | null | undefined) {
         try {
-            return await AuthService.getOwnAuctions(token);
+            return await AuctionService.getOwnAuctions(token);
         } catch (e: any) {
             throw e;
         }
@@ -259,7 +261,7 @@ export default class Store {
             }
 
             return await toast.promise(
-                AuthService.editProfileImage(token, image),
+                AccountService.editProfileImage(token, image),
                 {
                     pending: 'Send request...',
                     success: 'Request successfully!',
