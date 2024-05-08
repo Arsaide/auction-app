@@ -50,7 +50,7 @@ const PersonalAccountPage: FC = () => {
                         <Hidden mdUp>
                             <img
                                 style={{ width: '100%' }}
-                                src="/flr2.gif"
+                                src="/gifs/fail.gif"
                                 alt="Тут будет логотип в будущем"
                             />
                         </Hidden>

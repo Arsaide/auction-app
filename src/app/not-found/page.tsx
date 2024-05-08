@@ -8,7 +8,7 @@ const NotFount = () => {
             <WarningAlert text={'Page not found'} title={'404'} />
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <img
-                    src="/flr2.gif"
+                    src="/gifs/fail.gif"
                     alt="Error"
                     style={{
                         width: '100%',
