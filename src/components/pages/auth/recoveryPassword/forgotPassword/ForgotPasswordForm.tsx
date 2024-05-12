@@ -12,6 +12,7 @@ import { MainColors } from '../../../../../lib/colors/MainColors';
 import { toast } from 'react-toastify';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 import Cookies from 'js-cookie';
+import { DialogContentText } from '@mui/material';
 
 interface ForgotFormValues {
     email: string;
@@ -84,6 +85,21 @@ const ForgotPasswordForm = () => {
                 >
                     {({ isValid }) => (
                         <Form>
+                            <Typography
+                                variant={'h6'}
+                                sx={{
+                                    bgcolor: MainColors.GRAY595,
+                                    color: MainColors.WHITE,
+                                    pb: 3,
+                                }}
+                            >
+                                Forgot password?
+                            </Typography>
+                            <DialogContentText
+                                sx={{ color: MainColors.WHITE, ml: 0, mb: 1 }}
+                            >
+                                Enter your email to reset your password
+                            </DialogContentText>
                             <Box
                                 sx={{
                                     display: 'flex',
