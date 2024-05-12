@@ -14,10 +14,9 @@ import { MainColors } from '../../../lib/colors/MainColors';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
-    balance: string;
 }
 
-function NavBar({ children, balance }: ResponsiveDrawerProps) {
+function NavBar({ children }: ResponsiveDrawerProps) {
     const { store } = useContext(Context);
 
     const handleSubmit = () => {
@@ -45,7 +44,6 @@ function NavBar({ children, balance }: ResponsiveDrawerProps) {
                 isAuth={isAuth}
                 openRegistrationModal={openRegistrationModal}
                 openLoginModal={openLoginModal}
-                balance={balance}
                 token={token}
                 handleClose={handleClose}
                 handleLoginClickOpen={handleLoginClickOpen}

@@ -23,7 +23,6 @@ interface AppBarMenuInt {
     isAuth: boolean;
     openRegistrationModal: boolean;
     openLoginModal: boolean;
-    balance: string | null;
     token: string | null;
     handleClose: () => void;
     handleLoginClickOpen: () => void;
@@ -36,7 +35,6 @@ interface AppBarMenuInt {
 
 const AppBarMenu: FC<AppBarMenuInt> = ({
     isAuth,
-    balance,
     handleClose,
     openRegistrationModal,
     openLoginModal,
@@ -49,7 +47,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
     token,
 }) => {
     const { store } = useContext(Context);
-    const { name, avatar } = store.user;
+    const { name, avatar, balance } = store.user;
 
     return (
         <AppBar

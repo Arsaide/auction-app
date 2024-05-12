@@ -20,7 +20,6 @@ import ChangePasswordPage from './change-password/page';
 function App() {
     const { store } = useContext(Context);
     const [updateBalance, setUpdateBalance] = useState<boolean>(true);
-    const { balance } = store.user;
 
     useEffect(() => {
         async function checkAuthAndFetchUser() {
@@ -41,7 +40,7 @@ function App() {
 
     return (
         <div className="App">
-            <NavBar balance={balance}>
+            <NavBar>
                 <Routes>
                     <Route path={'/'} element={<HomePage />} />
                     <Route path={'auction'} element={<AuctionPage />} />
