@@ -47,7 +47,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
     token,
 }) => {
     const { store } = useContext(Context);
-    const { name, avatar, balance } = store.user;
+    const { name, avatar, balance } = store.user || {};
 
     return (
         <AppBar
