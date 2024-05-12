@@ -8,6 +8,8 @@ import { regCreateValidationSchema } from './regCreateValidation/regCreateValida
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { MainColors } from '../../../../../lib/colors/MainColors';
+import { DialogContentText } from '@mui/material';
 
 interface RegCreateFormProps {
     onSubmit: () => void;
@@ -50,6 +52,21 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
             >
                 {({ isValid }) => (
                     <Form>
+                        <Typography
+                            variant={'h6'}
+                            sx={{
+                                bgcolor: MainColors.GRAY595,
+                                color: MainColors.WHITE,
+                                pb: 3,
+                            }}
+                        >
+                            Email confirmation
+                        </Typography>
+                        <DialogContentText
+                            sx={{ color: MainColors.WHITE, ml: 0, mb: 1 }}
+                        >
+                            Enter the code that came to your email
+                        </DialogContentText>
                         <Box
                             sx={{
                                 display: 'flex',

@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import RegistrationForm from '../registration/registrationForm/RegistrationForm';
 import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 import ForgotPasswordForm from '../recoveryPassword/forgotPassword/ForgotPasswordForm';
+import { DialogContentText, DialogTitle } from '@mui/material';
+import { MainColors } from '../../../../lib/colors/MainColors';
 
 interface LoginFormValues {
     email: string;
@@ -70,6 +72,21 @@ const LoginForm: FC = () => {
                 >
                     {({ isValid }) => (
                         <Form>
+                            <Typography
+                                variant={'h6'}
+                                sx={{
+                                    bgcolor: MainColors.GRAY595,
+                                    color: MainColors.WHITE,
+                                    pb: 3,
+                                }}
+                            >
+                                Log in
+                            </Typography>
+                            <DialogContentText
+                                sx={{ color: MainColors.WHITE, ml: 0, mb: 1 }}
+                            >
+                                Enter your account login information
+                            </DialogContentText>
                             <Box
                                 sx={{
                                     display: 'flex',

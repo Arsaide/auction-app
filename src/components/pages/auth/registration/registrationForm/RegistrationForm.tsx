@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { MainColors } from '../../../../../lib/colors/MainColors';
+import { DialogContentText } from '@mui/material';
 
 interface RegistrationFormValues {
     name: string;
@@ -69,6 +71,21 @@ const RegistrationForm: FC = () => {
                 >
                     {({ isValid }) => (
                         <Form>
+                            <Typography
+                                variant={'h6'}
+                                sx={{
+                                    bgcolor: MainColors.GRAY595,
+                                    color: MainColors.WHITE,
+                                    pb: 3,
+                                }}
+                            >
+                                Registration
+                            </Typography>
+                            <DialogContentText
+                                sx={{ color: MainColors.WHITE, ml: 0, mb: 2 }}
+                            >
+                                Enter your details. Everything is confidential!
+                            </DialogContentText>
                             <Box
                                 sx={{
                                     display: 'flex',

@@ -22,22 +22,7 @@ const RegModal: FC<RegModalInterface> = ({ open, onClose }) => {
             onClose={onClose}
             aria-labelledby={'form-dialog-title'}
         >
-            <DialogTitle
-                id={'form-dialog-title'}
-                sx={{
-                    bgcolor: MainColors.GRAY595,
-                    color: MainColors.WHITE,
-                    pl: 3,
-                }}
-            >
-                Authorization
-            </DialogTitle>
             <DialogContent sx={{ bgcolor: MainColors.GRAY595 }}>
-                <DialogContentText
-                    sx={{ color: MainColors.WHITE, ml: 0, mb: 2 }}
-                >
-                    Enter your details. Everything is confidential!
-                </DialogContentText>
                 <RegistrationForm />
             </DialogContent>
             <DialogActions sx={{ bgcolor: MainColors.GRAY595 }}>
