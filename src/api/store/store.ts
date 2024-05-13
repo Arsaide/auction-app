@@ -232,8 +232,9 @@ export default class Store {
         }
     }
 
-    async getUser(token: string | null | undefined) {
+    async getUser() {
         try {
+            const token = localStorage.getItem('token');
             const response = await AccountService.getUser(token);
             const userData: IUser = response.data.user;
             this.setUser(userData);

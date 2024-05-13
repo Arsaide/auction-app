@@ -26,7 +26,7 @@ function App() {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    await store.getUser(token);
+                    await store.getUser();
                     localStorage.setItem('isAuth', 'true');
                     setUpdateBalance(false);
                 } catch (error) {
