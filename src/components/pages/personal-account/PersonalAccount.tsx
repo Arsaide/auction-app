@@ -1,30 +1,17 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
-import { Context } from '../../../index';
-import { useNavigate } from 'react-router-dom';
+import React, { FC, useContext, useState } from 'react';
 import { Box, Hidden } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LoginForm from '../auth/loginForm/LoginForm';
 import RegistrationForm from '../auth/registration/registrationForm/RegistrationForm';
 import { ButtonColors } from '../../../lib/colors/ButtonColors';
+import { AuthContext } from '../../../lib/providers/AuthContext';
 
 const PersonalAccountPage: FC = () => {
+    const { isLoggedIn } = useContext(AuthContext);
     const [showLoginComponent, setShowLoginComponent] =
         useState<boolean>(false);
     const [showRegComponent, setShowRegComponent] = useState<boolean>(false);
-    const navigate = useNavigate();
-    const isAuth = localStorage.getItem('isAuth') === 'true';
-    const token = localStorage.getItem('token');
-
-    const redirectPage = () => {
-        if (isAuth) {
-            navigate(`/personal-account/${token}`);
-        }
-    };
-
-    useEffect(() => {
-        redirectPage();
-    }, []);
 
     const handleClickShowLogin = () => {
         setShowLoginComponent(true);
@@ -101,7 +88,7 @@ const PersonalAccountPage: FC = () => {
                     <Typography variant={'h5'} sx={{ textAlign: 'center' }}>
                         To continue please log in.
                     </Typography>
-                    <LoginForm />
+                    <LoginForm redirect toRedirect={`pa`} />
                 </>
             )}
             {showRegComponent && (

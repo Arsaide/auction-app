@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,13 +10,13 @@ import { Link } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import useOpenModal from '../../../../../../hooks/useOpenModal/useOpenModal';
 import LoginModal from '../../../../../layout/modals/loginModal/LoginModal';
-import useAuthCheck from '../../../../../../hooks/useAuthCheck/useAuthCheck';
 import LazyLoadImage from '../../../../../layout/common/lazyLoadImage/LazyLoadImage';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Box } from '@mui/material';
 import { ButtonColors } from '../../../../../../lib/colors/ButtonColors';
 import { MainColors } from '../../../../../../lib/colors/MainColors';
+import { AuthContext } from '../../../../../../lib/providers/AuthContext';
 
 interface AuctionCardProps {
     img: string;
@@ -43,9 +43,9 @@ const AuctionCard: FC<AuctionCardProps> = ({
 }) => {
     const { openLoginModal, handleLoginClickOpen, handleClose } =
         useOpenModal();
-    const { isAuth } = useAuthCheck();
+    const { isLoggedIn } = useContext(AuthContext);
     const handleLearnMoreClick = () => {
-        if (!isAuth) {
+        if (!isLoggedIn) {
             handleLoginClickOpen();
         }
     };
@@ -90,7 +90,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 <Typography variant="body2" color="text.secondary">
                     {trimmedString}
                     {desc.length > 200 &&
-                        (!isAuth ? (
+                        (!isLoggedIn ? (
                             <u>
                                 <span
                                     style={{
@@ -163,7 +163,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 <AuctionTimer timeEnd={timeEnd} />
             </CardContent>
             <CardActions sx={{ ml: 1, mb: 1 }}>
-                {!isAuth && (
+                {!isLoggedIn && (
                     <Button
                         size="small"
                         variant="contained"
@@ -180,7 +180,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         Learn More
                     </Button>
                 )}
-                {isAuth && (
+                {isLoggedIn && (
                     <Button
                         size="small"
                         variant="contained"

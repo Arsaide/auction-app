@@ -10,22 +10,31 @@ import { toast } from 'react-toastify';
 import RegistrationForm from '../registration/registrationForm/RegistrationForm';
 import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 import ForgotPasswordForm from '../recoveryPassword/forgotPassword/ForgotPasswordForm';
-import { DialogContentText, DialogTitle } from '@mui/material';
+import { DialogContentText } from '@mui/material';
 import { MainColors } from '../../../../lib/colors/MainColors';
+import { AuthContext } from '../../../../lib/providers/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormValues {
     email: string;
     password: string;
 }
 
-const LoginForm: FC = () => {
+interface ILoginForm {
+    redirect?: boolean;
+    toRedirect?: 'pa';
+}
+
+const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
     const { store } = useContext(Context);
+    const { setIsLoggedIn } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isShowRegistrationForm, setIsShowRegistrationForm] =
         useState<boolean>(false);
     const [isShowForgotPasswordForm, setIsShowForgotPasswordForm] =
         useState<boolean>(false);
+    const navigate = useNavigate();
 
     const initialValues = {
         email: '',
@@ -35,14 +44,30 @@ const LoginForm: FC = () => {
     const handleSubmit = async (values: LoginFormValues) => {
         setIsSubmitting(true);
         try {
-            const response = await store.login(values.email, values.password);
-            if (response && response.status === 200) {
-                await store.checkAuth();
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
-            }
+            const response = await store
+                .login(values.email, values.password)
+                .then(() => {
+                    return store.getUser();
+                })
+                .then(() => {
+                    if (redirect) {
+                        const token = localStorage.getItem('token');
+                        navigate(
+                            toRedirect === 'pa'
+                                ? `/personal-account/${token}`
+                                : '/personal-account',
+                        );
+                    }
+                    setIsLoggedIn(true);
+                })
+                .catch(error => {
+                    setIsLoggedIn(false);
+                    setIsSubmitting(false);
+                    toast.error(error.response?.data?.message);
+                    setErrorMessage(error.response?.data?.message);
+                });
         } catch (e: any) {
+            setIsLoggedIn(false);
             setIsSubmitting(false);
             toast.error(e.response?.data?.message);
             setErrorMessage(e.response?.data?.message);
@@ -127,6 +152,16 @@ const LoginForm: FC = () => {
                                 >
                                     {isSubmitting ? 'Submitting...' : 'Login'}
                                 </Button>
+                                {errorMessage && (
+                                    <Typography
+                                        sx={{
+                                            color: ButtonColors.LRED,
+                                            maxWidth: '340px',
+                                        }}
+                                    >
+                                        {errorMessage}
+                                    </Typography>
+                                )}
                                 <Button
                                     onClick={handleRegistrationClick}
                                     sx={{
@@ -150,16 +185,6 @@ const LoginForm: FC = () => {
                                     Forgot password?
                                 </Button>
                             </Box>
-                            {errorMessage && (
-                                <Typography
-                                    sx={{
-                                        color: ButtonColors.LRED,
-                                        maxWidth: '340px',
-                                    }}
-                                >
-                                    {errorMessage}
-                                </Typography>
-                            )}
                         </Form>
                     )}
                 </Formik>

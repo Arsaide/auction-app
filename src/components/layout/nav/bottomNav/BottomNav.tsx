@@ -8,16 +8,15 @@ import AssistantIcon from '@mui/icons-material/Assistant';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import useAuthCheck from '../../../../hooks/useAuthCheck/useAuthCheck';
-import { Link } from 'react-router-dom';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Context } from '../../../../index';
 import { MainColors } from '../../../../lib/colors/MainColors';
+import { AuthContext } from '../../../../lib/providers/AuthContext';
 
 const BottomNav = () => {
     const { store } = useContext(Context);
     const { name, avatar } = store.user;
-    const { isAuth } = useAuthCheck();
+    const { isLoggedIn } = useContext(AuthContext);
     const [value, setValue] = useState(0);
     const location = useLocation();
 
@@ -153,7 +152,7 @@ const BottomNav = () => {
             >
                 <span>Chat</span>
             </BottomNavigationAction>
-            {isAuth ? (
+            {isLoggedIn ? (
                 <BottomNavigationAction
                     to={`/personal-account/${token}`}
                     component={NavLink}

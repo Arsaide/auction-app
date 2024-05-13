@@ -18,23 +18,20 @@ import AppBar from '@mui/material/AppBar';
 import { Context } from '../../../../../index';
 import { MainColors } from '../../../../../lib/colors/MainColors';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { AuthContext } from '../../../../../lib/providers/AuthContext';
 
 interface AppBarMenuInt {
-    isAuth: boolean;
     openRegistrationModal: boolean;
     openLoginModal: boolean;
-    token: string | null;
     handleClose: () => void;
     handleLoginClickOpen: () => void;
     handleRegistrationClickOpen: () => void;
     handleOpenUserMenu: (event: React.MouseEvent<HTMLElement>) => void;
     handleCloseUserMenu: () => void;
-    handleSubmit: () => void;
     anchorElUser: HTMLElement | null;
 }
 
 const AppBarMenu: FC<AppBarMenuInt> = ({
-    isAuth,
     handleClose,
     openRegistrationModal,
     openLoginModal,
@@ -43,11 +40,15 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
     handleOpenUserMenu,
     anchorElUser,
     handleCloseUserMenu,
-    handleSubmit,
-    token,
 }) => {
     const { store } = useContext(Context);
+    const { setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
     const { name, avatar, balance } = store.user || {};
+    const token = localStorage.getItem('token');
+
+    const handleLogOutSubmit = () => {
+        store.logout().then(() => setIsLoggedIn(false));
+    };
 
     return (
         <AppBar
@@ -65,7 +66,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                 }}
             >
                 <GoBack />
-                {isAuth && (
+                {isLoggedIn && (
                     <Hidden mdUp>
                         {balance ? (
                             <Chip
@@ -94,7 +95,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                         }}
                     >
                         <Box sx={{ flexGrow: 0 }}>
-                            {!isAuth && (
+                            {!isLoggedIn && (
                                 <>
                                     <Button
                                         variant="contained"
@@ -137,7 +138,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                 </>
                             )}
 
-                            {isAuth && (
+                            {isLoggedIn && (
                                 <>
                                     {balance ? (
                                         <Chip
@@ -200,7 +201,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         </MenuItem>
                                         <MenuItem onClick={handleCloseUserMenu}>
                                             <Typography
-                                                onClick={handleSubmit}
+                                                onClick={handleLogOutSubmit}
                                                 sx={{ p: 1 }}
                                                 textAlign="center"
                                             >

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import useAuthCheck from '../../../hooks/useAuthCheck/useAuthCheck';
+import React, { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import { ButtonColors } from '../../../lib/colors/ButtonColors';
 import { Close } from '@mui/icons-material';
@@ -8,14 +7,15 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import WarningAlert from '../../layout/common/alerts/warningAlert/WarningAlert';
 import AuctionList from './auctionList/AuctionList';
+import { AuthContext } from '../../../lib/providers/AuthContext';
 
 const AuctionsPage = () => {
-    const { isAuth } = useAuthCheck();
+    const { isLoggedIn } = useContext(AuthContext);
     const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
 
     return (
         <section>
-            {isAuth ? (
+            {isLoggedIn ? (
                 <>
                     {isFormVisible ? (
                         <>

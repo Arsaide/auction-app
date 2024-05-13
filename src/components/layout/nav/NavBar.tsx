@@ -6,8 +6,6 @@ import Drawer from '@mui/material/Drawer';
 import SideBar from './sideBar/SideBar';
 import useOpenUserMenu from '../../../hooks/useOpenUserMenu/useOpenUserMenu';
 import useOpenModal from '../../../hooks/useOpenModal/useOpenModal';
-import { memo, useContext } from 'react';
-import { Context } from '../../../index';
 import { Hidden } from '@mui/material';
 import AppBarMenu from './component/appBarMenu/AppBarMenu';
 import { MainColors } from '../../../lib/colors/MainColors';
@@ -17,16 +15,6 @@ interface ResponsiveDrawerProps {
 }
 
 function NavBar({ children }: ResponsiveDrawerProps) {
-    const { store } = useContext(Context);
-
-    const handleSubmit = () => {
-        store.logout();
-        window.location.reload();
-    };
-
-    const token = localStorage.getItem('token');
-    const isAuth = localStorage.getItem('isAuth') === 'true';
-
     const { handleOpenUserMenu, anchorElUser, handleCloseUserMenu } =
         useOpenUserMenu();
 
@@ -41,16 +29,13 @@ function NavBar({ children }: ResponsiveDrawerProps) {
     return (
         <Box sx={{ display: 'flex' }}>
             <AppBarMenu
-                isAuth={isAuth}
                 openRegistrationModal={openRegistrationModal}
                 openLoginModal={openLoginModal}
-                token={token}
                 handleClose={handleClose}
                 handleLoginClickOpen={handleLoginClickOpen}
                 handleRegistrationClickOpen={handleRegistrationClickOpen}
                 handleOpenUserMenu={handleOpenUserMenu}
                 handleCloseUserMenu={handleCloseUserMenu}
-                handleSubmit={handleSubmit}
                 anchorElUser={anchorElUser}
             />
             <Box

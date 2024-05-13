@@ -8,17 +8,21 @@ import OwnAuctionsList from './ownAuctionsList/OwnAuctionsList';
 import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 import ListOfBets from './listOfBets/ListOfBets';
 import { Typography } from '@mui/material';
+import { AuthContext } from '../../../../lib/providers/AuthContext';
 
 const UserIdPage: FC = () => {
     const { store } = useContext(Context);
+    const { setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
     const { name, email, balance, avatar } = store.user;
     const { token } = useParams<{ token: string }>();
     const navigate = useNavigate();
-    const isAuth = localStorage.getItem('isAuth') === 'true';
     const [auctions, setAuctions] = useState<AuctionInt[]>([]);
+    const [auctionsBetHistory, setAuctionsBetHistory] = useState<AuctionInt[]>(
+        [],
+    );
 
     const redirectPage = () => {
-        if (!isAuth) {
+        if (!isLoggedIn) {
             navigate(`/personal-account`);
         }
     };
@@ -41,8 +45,10 @@ const UserIdPage: FC = () => {
     }, [store, token]);
 
     const handleSubmit = () => {
-        store.logout();
-        window.location.reload();
+        store
+            .logout()
+            .then(() => setIsLoggedIn(false))
+            .then(() => navigate(`/personal-account`));
     };
 
     return (
