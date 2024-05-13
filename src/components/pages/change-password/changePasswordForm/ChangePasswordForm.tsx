@@ -36,6 +36,7 @@ const ChangePasswordForm: FC<IChangePasswordForm> = ({ token }) => {
             }
         } catch (e: any) {
             setIsSubmitting(false);
+            setErrorMessage('Failed to change password. Try again!');
         }
     };
 

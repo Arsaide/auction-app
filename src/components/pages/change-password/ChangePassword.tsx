@@ -3,8 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { Context } from '../../../index';
 import { CircularProgress, Typography } from '@mui/material';
 import ChangePasswordForm from './changePasswordForm/ChangePasswordForm';
-import { toast } from 'react-toastify';
-import success = toast.success;
 import { MainColors } from '../../../lib/colors/MainColors';
 import Box from '@mui/material/Box';
 import ChangePasswordWindow from './changePasswordWindow/ChangePasswordWindow';
@@ -23,7 +21,7 @@ const ChangePassword = () => {
             try {
                 const response = await store.recoveryPassword(token);
 
-                if (response && response.data.status === true) {
+                if (response && response.data.status) {
                     setIsValidToken(true);
                 }
             } catch (e: any) {

@@ -1,11 +1,10 @@
 import React, { ChangeEvent, FC, useContext, useRef, useState } from 'react';
 import { Context } from '../../../../../../index';
 import { toast } from 'react-toastify';
-import { FormControl, FormHelperText, InputLabel } from '@mui/material';
+import { FormControl, FormHelperText } from '@mui/material';
 import Button from '@mui/material/Button';
 import ReactCrop, {
     centerCrop,
-    convertToPixelCrop,
     Crop,
     makeAspectCrop,
     PixelCrop,
@@ -24,7 +23,6 @@ const AddUserAvatarForm: FC = () => {
     const [crop, setCrop] = useState<Crop>();
     const [imgSrc, setImgSrc] = useState<string>('');
     const [croppedImage, setCroppedImage] = useState<File | null>(null);
-    const [isCroppedImage, setIsCroppedImage] = useState<boolean>(false);
     const [fileName, setFileName] = useState<string>('avatar');
     const [isCropClicked, setIsCropClicked] = useState<boolean>(false);
     const imageRef = useRef<HTMLImageElement>(null);
@@ -112,7 +110,6 @@ const AddUserAvatarForm: FC = () => {
                 `${name}-${fileName}-avatar.jpg`,
             );
             setIsCropClicked(true);
-            setIsCroppedImage(true);
             setCroppedImage(croppedImageFile);
         }
     };
@@ -176,9 +173,9 @@ const AddUserAvatarForm: FC = () => {
                         >
                             <ReactCrop
                                 crop={crop}
-                                onChange={(pixelCrop, percentCrop) =>
-                                    setCrop(pixelCrop)
-                                }
+                                onChange={(
+                                    pixelCrop, //(pixelCrop, percentCrop)
+                                ) => setCrop(pixelCrop)}
                                 circularCrop
                                 keepSelection
                                 aspect={CanvasProps.ASPECT_RATIO}

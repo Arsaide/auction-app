@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
 
-interface AuctionItem {
-    _id: string;
-    img: string;
-    title: string;
-    minRates: string;
-    desct: string;
-    timeEnd: string;
-}
-
 interface PaginationHook {
     currentPage: number;
     auctionsPerPage: number;

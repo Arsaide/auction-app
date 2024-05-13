@@ -1,11 +1,5 @@
 import React, { FC } from 'react';
-import {
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-} from '@mui/material';
+import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import LoginForm from '../../../pages/auth/loginForm/LoginForm';
 import Button from '@mui/material/Button';
 import { MainColors } from '../../../../lib/colors/MainColors';

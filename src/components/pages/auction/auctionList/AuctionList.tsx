@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Grid, Pagination, ThemeProvider } from '@mui/material';
 import AuctionCard from './components/auctionCard/AuctionCard';
 import { API_URL } from '../../../../api/request';
@@ -23,8 +23,7 @@ interface AuctionItem {
 }
 
 const AuctionList = () => {
-    const { currentPage, setCurrentPage, handlePageChange, auctionsPerPage } =
-        usePagination();
+    const { currentPage, handlePageChange, auctionsPerPage } = usePagination();
     const [auction, setAuction] = useState<AuctionItem[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [isRequesting, setIsRequesting] = useState<boolean>(false);

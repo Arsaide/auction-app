@@ -1,14 +1,12 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Box, Hidden } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LoginForm from '../auth/loginForm/LoginForm';
 import RegistrationForm from '../auth/registration/registrationForm/RegistrationForm';
 import { ButtonColors } from '../../../lib/colors/ButtonColors';
-import { AuthContext } from '../../../lib/providers/AuthContext';
 
 const PersonalAccountPage: FC = () => {
-    const { isLoggedIn } = useContext(AuthContext);
     const [showLoginComponent, setShowLoginComponent] =
         useState<boolean>(false);
     const [showRegComponent, setShowRegComponent] = useState<boolean>(false);

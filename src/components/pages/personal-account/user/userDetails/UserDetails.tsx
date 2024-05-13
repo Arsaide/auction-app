@@ -1,18 +1,9 @@
 import React, { FC, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import AddUserAvatarForm from '../userForms/addUserAvatarForm/AddUserAvatarForm';
 import Box from '@mui/material/Box';
-import {
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    Modal,
-    Skeleton,
-} from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, Skeleton } from '@mui/material';
 import { MainColors } from '../../../../../lib/colors/MainColors';
 
 interface UserDetailsProps {

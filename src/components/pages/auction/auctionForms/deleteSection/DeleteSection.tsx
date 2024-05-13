@@ -7,7 +7,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
 } from '@mui/material';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
@@ -19,18 +18,15 @@ interface IDeleteSection {
 
 const DeleteSection: FC<IDeleteSection> = ({ id }) => {
     const { store } = useContext(Context);
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const handleSubmit = async () => {
         try {
             const response = await store.sendDeleteAuction(id);
             if (response && response.status === 200) {
                 setIsOpen(true);
-                setIsSubmitting(true);
             }
         } catch (e: any) {
             toast.error(e.response?.data?.message);
-            setIsSubmitting(false);
         }
     };
 

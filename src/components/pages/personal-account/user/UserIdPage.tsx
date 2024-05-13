@@ -17,9 +17,9 @@ const UserIdPage: FC = () => {
     const { token } = useParams<{ token: string }>();
     const navigate = useNavigate();
     const [auctions, setAuctions] = useState<AuctionInt[]>([]);
-    const [auctionsBetHistory, setAuctionsBetHistory] = useState<AuctionInt[]>(
-        [],
-    );
+    // const [auctionsBetHistory, setAuctionsBetHistory] = useState<AuctionInt[]>(
+    //     [],
+    // );
 
     const redirectPage = () => {
         if (!isLoggedIn) {
