@@ -48,7 +48,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier": "prettier src"
+    "prettier": "prettier src",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": [
