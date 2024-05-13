@@ -5,6 +5,7 @@ import App from './app/App';
 import reportWebVitals from './app/reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Store from './api/store/store';
+import { AuthProvider } from './lib/providers/AuthContext';
 
 interface State {
     store: Store;
@@ -21,9 +22,11 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <Context.Provider value={{ store }}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
+            <AuthProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </AuthProvider>
         </Context.Provider>
     </React.StrictMode>,
 );
