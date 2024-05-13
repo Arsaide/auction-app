@@ -4,9 +4,9 @@ import { AuthResponse } from '../models/response/AuthResponse';
 
 export default class AccountService {
     static async getUser(
-        token: string | null | undefined,
+        token: string | null,
     ): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post('/getuser', { token });
+        return $api.post<AuthResponse>('/getuser', { token });
     }
 
     static async editProfileImage(
