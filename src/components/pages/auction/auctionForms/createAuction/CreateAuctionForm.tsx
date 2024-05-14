@@ -15,6 +15,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 import { MainColors } from '../../../../../lib/colors/MainColors';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import Cookies from 'js-cookie';
 
 interface AuctionCreateFormProps {
     title: string;
@@ -35,9 +36,7 @@ const CreateAuctionForm = () => {
     const today = dayjs();
 
     useEffect(() => {
-        const lastSubmittedTime = localStorage.getItem(
-            'LastSubmittedAuctionTime',
-        );
+        const lastSubmittedTime = Cookies.get('LastSubmittedAuctionTime');
         if (lastSubmittedTime) {
             lastSubmittedTimeRef.current = parseInt(lastSubmittedTime);
         }
@@ -75,9 +74,10 @@ const CreateAuctionForm = () => {
             if (response && response.status === 200) {
                 actions.resetForm();
                 lastSubmittedTimeRef.current = Date.now();
-                localStorage.setItem(
+                Cookies.set(
                     'LastSubmittedAuctionTime',
                     lastSubmittedTimeRef.current.toString(),
+                    { expires: 1 / 288 },
                 );
             }
         } catch (e: any) {

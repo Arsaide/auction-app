@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 import { MainColors } from '../../../../../lib/colors/MainColors';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import Cookies from 'js-cookie';
 
 interface EditAuctionProps {
     _id: string;
@@ -44,7 +45,7 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
     const today = dayjs();
 
     useEffect(() => {
-        const lastSubmittedTime = localStorage.getItem('LastEditAuctionTime');
+        const lastSubmittedTime = Cookies.get('LastEditAuctionTime');
         if (lastSubmittedTime) {
             lastSubmittedTimeRef.current = parseInt(lastSubmittedTime);
         }
@@ -82,9 +83,10 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
             if (response && response.status === 200) {
                 actions.resetForm();
                 lastSubmittedTimeRef.current = Date.now();
-                localStorage.setItem(
+                Cookies.set(
                     'LastEditAuctionTime',
                     lastSubmittedTimeRef.current.toString(),
+                    { expires: 1 / 288 },
                 );
                 reloadAuction();
                 setVisibleForm(false);
