@@ -1,7 +1,12 @@
 import React from 'react';
+import InformationPage from '../../components/information/InformationPage';
 
-const InformationPage = () => {
-    return <div>Information Page</div>;
+const Information = () => {
+    return (
+        <>
+            <InformationPage />
+        </>
+    );
 };
 
-export default InformationPage;
+export default Information;

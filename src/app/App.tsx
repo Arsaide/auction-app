@@ -5,7 +5,7 @@ import NavBar from '../components/layout/nav/NavBar';
 import HomePage from './home/page';
 import AuctionPage from './auction/page';
 import OnlineChatPage from './online-chat/page';
-import InformationPage from './information/page';
+import Information from './information/page';
 import ToastMessage from '../components/layout/common/alerts/toastMessage/ToastMessage';
 import { AuctionId } from './auction/auction-id/AuctionId';
 import { UserId } from './personal-account/user-id/UserId';
@@ -46,7 +46,7 @@ function App() {
                     <Route path={'auction'} element={<AuctionPage />} />
                     <Route path={'auction/:id/'} element={<AuctionId />} />
                     <Route path={'online-chat'} element={<OnlineChatPage />} />
-                    <Route path={'information'} element={<InformationPage />} />
+                    <Route path={'information'} element={<Information />} />
                     <Route
                         path={'personal-account'}
                         element={<PersonalAccount />}
