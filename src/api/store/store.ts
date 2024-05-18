@@ -24,7 +24,8 @@ export default class Store {
 
     async sendEmail() {
         try {
-            return await toast.promise(AuthService.sendEmail(), {
+            const regToken = localStorage.getItem('REGTOKEN');
+            return await toast.promise(AuthService.sendEmail(regToken), {
                 pending: 'Sending code...',
                 success: 'Code sent!',
                 error: 'Sending code error, please try again...',

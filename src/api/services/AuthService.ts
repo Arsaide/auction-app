@@ -22,8 +22,8 @@ export default class AuthService {
         });
     }
 
-    static async sendEmail(): Promise<void> {
-        return $api.get('/sendemail');
+    static async sendEmail(regToken: string | null): Promise<void> {
+        return $api.get(`/sendemail?token=${regToken}`);
     }
 
     static async registerCreate(
