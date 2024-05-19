@@ -17,6 +17,8 @@ import { Box } from '@mui/material';
 import { ButtonColors } from '../../../../../../lib/colors/ButtonColors';
 import { MainColors } from '../../../../../../lib/colors/MainColors';
 import { AuthContext } from '../../../../../../lib/providers/AuthContext';
+import { textParserOptions } from '../../../../../../lib/parserOptions/textParserOptions/textParserOptions';
+import parse from 'html-react-parser';
 
 interface AuctionCardProps {
     img: string;
@@ -88,7 +90,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 </Typography>
                 <Divider sx={{ mb: 1.3 }} />
                 <Typography variant="body2" color="text.secondary">
-                    {trimmedString}
+                    {parse(trimmedString, textParserOptions)}
                     {desc.length > 200 &&
                         (!isLoggedIn ? (
                             <u>
@@ -99,7 +101,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                     }}
                                     onClick={handleLearnMoreClick}
                                 >
-                                    read more
+                                    ...read more
                                 </span>
                             </u>
                         ) : (
@@ -107,7 +109,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                 style={{ color: MainColors.BLACK_06 }}
                                 to={`/auction/${id}`}
                             >
-                                read more
+                                ...read more
                             </Link>
                         ))}
                 </Typography>
