@@ -46,8 +46,10 @@ const RegistrationForm: FC = () => {
                 values.email,
                 values.password,
             );
+
+            localStorage.setItem('REGTOKEN', response.data.token);
+
             if (response && response.status === 200) {
-                localStorage.setItem('REGTOKEN', response.data.token);
                 setIsRegistered(true);
             }
         } catch (e: any) {
