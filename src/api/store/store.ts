@@ -99,7 +99,7 @@ export default class Store {
             const token = localStorage.getItem('token');
 
             if (!token) {
-                toast.error('Token is not valid');
+                toast.error('Token is not valid!');
                 return;
             }
 
