@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import parse from 'html-react-parser';
 import { Field, ErrorMessage as Error, useFormikContext } from 'formik';
+import { textParserOptions } from '../../../../../lib/parserOptions/textParserOptions/textParserOptions';
 
 interface ITextEditInput {
     id: string;
@@ -37,7 +38,9 @@ const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
             {text && (
                 <>
                     <span>Preview</span>
-                    <div className={'preview'}>{parse(text)}</div>
+                    <div className={'preview'}>
+                        {parse(text, textParserOptions)}
+                    </div>
                 </>
             )}
             <div className={'card'}>
