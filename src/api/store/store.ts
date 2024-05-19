@@ -64,7 +64,6 @@ export default class Store {
                     error: 'Failed to register, please try again...',
                 },
             );
-            localStorage.setItem('token', response.data.token);
             this.setAuth(true);
             this.setUser(response.data.user);
             await this.sendEmail();
