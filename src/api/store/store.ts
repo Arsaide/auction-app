@@ -22,9 +22,8 @@ export default class Store {
         this.user = user;
     }
 
-    async sendEmail() {
+    async sendEmail(regToken: string) {
         try {
-            const regToken = localStorage.getItem('REGTOKEN');
             return await toast.promise(AuthService.sendEmail(regToken), {
                 pending: 'Sending code...',
                 success: 'Code sent!',
@@ -66,7 +65,7 @@ export default class Store {
             );
             this.setAuth(true);
             this.setUser(response.data.user);
-            await this.sendEmail();
+            // await this.sendEmail();
             return response;
         } catch (e: any) {
             throw e;

@@ -22,7 +22,7 @@ export default class AuthService {
         });
     }
 
-    static async sendEmail(regToken: string | null): Promise<void> {
+    static async sendEmail(regToken: string): Promise<void> {
         return $api.get(`/sendemail?token=${regToken}`);
     }
 
