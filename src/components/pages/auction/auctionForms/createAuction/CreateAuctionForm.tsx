@@ -16,6 +16,7 @@ import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitT
 import { MainColors } from '../../../../../lib/colors/MainColors';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import Cookies from 'js-cookie';
+import TextEditInput from '../../../../layout/common/inputs/textEditInput/TextEditInput';
 
 interface AuctionCreateFormProps {
     title: string;
@@ -121,12 +122,17 @@ const CreateAuctionForm = () => {
                                     name={'title'}
                                     placeholder={'Enter your auction'}
                                 />
-                                <Input
+                                {/*<Input*/}
+                                {/*    id={'desc'}*/}
+                                {/*    label={'Your description'}*/}
+                                {/*    name={'desc'}*/}
+                                {/*    placeholder={'Enter your description'}*/}
+                                {/*    type={'text'}*/}
+                                {/*/>*/}
+                                <TextEditInput
                                     id={'desc'}
-                                    label={'Your description'}
                                     name={'desc'}
                                     placeholder={'Enter your description'}
-                                    type={'text'}
                                 />
                                 <Input
                                     id={'minRates'}
