@@ -15,6 +15,8 @@ import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitT
 import { MainColors } from '../../../../../lib/colors/MainColors';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import Cookies from 'js-cookie';
+import TextEditInput from '../../../../layout/common/inputs/textEditInput/TextEditInput';
+import { requestParserOptions } from '../../../../../lib/parserOptions/requestParserOptions/requestParserOptions';
 
 interface EditAuctionProps {
     _id: string;
@@ -71,6 +73,12 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
             return;
         }
 
+        const textValidationResult = requestParserOptions(values.desc);
+        if (textValidationResult) {
+            toast.error(textValidationResult);
+            return;
+        }
+
         setIsSubmitting(true);
         try {
             const response = await store.editAuctionFields(
@@ -95,8 +103,9 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
             setIsSubmitting(false);
             toast.error(e.response?.data?.message);
             setErrorMessage(e.response?.data?.message);
+        } finally {
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     return (
@@ -124,12 +133,10 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                     name={'title'}
                                     placeholder={'Enter your auction'}
                                 />
-                                <Input
+                                <TextEditInput
                                     id={'desc'}
-                                    label={'Your description'}
                                     name={'desc'}
                                     placeholder={'Enter your description'}
-                                    type={'text'}
                                 />
                                 <Input
                                     id={'minRates'}

@@ -17,6 +17,7 @@ import { MainColors } from '../../../../../lib/colors/MainColors';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import Cookies from 'js-cookie';
 import TextEditInput from '../../../../layout/common/inputs/textEditInput/TextEditInput';
+import { requestParserOptions } from '../../../../../lib/parserOptions/requestParserOptions/requestParserOptions';
 
 interface AuctionCreateFormProps {
     title: string;
@@ -63,6 +64,12 @@ const CreateAuctionForm = () => {
             return;
         }
 
+        const textValidationResult = requestParserOptions(values.desc);
+        if (textValidationResult) {
+            toast.error(textValidationResult);
+            return;
+        }
+
         setIsSubmitting(true);
         try {
             const response = await store.createAuction(
@@ -72,6 +79,7 @@ const CreateAuctionForm = () => {
                 selectedImage,
                 value,
             );
+
             if (response && response.status === 200) {
                 actions.resetForm();
                 lastSubmittedTimeRef.current = Date.now();
@@ -85,8 +93,9 @@ const CreateAuctionForm = () => {
             setIsSubmitting(false);
             toast.error(e.response?.data?.message);
             setErrorMessage(e.response?.data?.message);
+        } finally {
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     const handleImageSubmit = (image: File) => {
@@ -122,13 +131,6 @@ const CreateAuctionForm = () => {
                                     name={'title'}
                                     placeholder={'Enter your auction'}
                                 />
-                                {/*<Input*/}
-                                {/*    id={'desc'}*/}
-                                {/*    label={'Your description'}*/}
-                                {/*    name={'desc'}*/}
-                                {/*    placeholder={'Enter your description'}*/}
-                                {/*    type={'text'}*/}
-                                {/*/>*/}
                                 <TextEditInput
                                     id={'desc'}
                                     name={'desc'}

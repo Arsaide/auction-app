@@ -11,6 +11,7 @@ import { MainColors } from '../../../../../lib/colors/MainColors';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import PlaceABet from '../../auctionForms/placeABet/PlaceABet';
 import { Close } from '@mui/icons-material';
+import parse from 'html-react-parser';
 
 interface AuctionInformationProps {
     auction: AuctionInt;
@@ -50,7 +51,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                     pb: 1,
                                 }}
                             >
-                                {auction.desct}
+                                {parse(auction.desct)}
                             </Typography>
                             <Typography>
                                 Start rates:{' '}
