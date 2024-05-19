@@ -4,6 +4,7 @@ import FormatClearIcon from '@mui/icons-material/FormatClear';
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
 import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import WrapTextIcon from '@mui/icons-material/WrapText';
 import './TextEditInput.css';
 import Button from '@mui/material/Button';
 import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
@@ -18,7 +19,7 @@ interface ITextEditInput {
 }
 
 const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
-    const { applyFormat, text, updateSelection, setText, textRef } =
+    const { applyFormat, text, updateSelection, setText, textRef, lineBreak } =
         useEditorText();
 
     const { setFieldValue, values } = useFormikContext<{
@@ -110,6 +111,19 @@ const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
                             onClick={() => applyFormat('underline')}
                         >
                             <FormatUnderlinedIcon />
+                        </Button>
+                        <Button
+                            className={'toolsBtn'}
+                            sx={{
+                                color: ButtonColors.WHITE,
+                                mt: 1,
+                                '&:hover': {
+                                    color: ButtonColors.GRAY,
+                                },
+                            }}
+                            onClick={() => lineBreak()}
+                        >
+                            <WrapTextIcon />
                         </Button>
                     </div>
                 </div>

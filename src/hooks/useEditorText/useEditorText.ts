@@ -23,11 +23,27 @@ export function useEditorText() {
         if (!selectedText) return;
 
         const before = text.substring(0, selectionStart);
-
         const after = text.substring(selectionEnd);
 
-        setText(before + applyStyle(type, selectedText) + after);
+        const formattedText = applyStyle(type, selectedText);
+
+        setText(before + formattedText + after);
     };
 
-    return { text, applyFormat, updateSelection, setText, textRef };
+    const lineBreak = () => {
+        const beforeCursor = text.substring(0, selectionStart);
+        const afterCursor = text.substring(selectionStart);
+        setText(beforeCursor + '<br/>' + afterCursor);
+        setSelectionStart(selectionStart + 6);
+        setSelectionEnd(selectionStart + 6);
+    };
+
+    return {
+        text,
+        applyFormat,
+        updateSelection,
+        setText,
+        textRef,
+        lineBreak,
+    };
 }
