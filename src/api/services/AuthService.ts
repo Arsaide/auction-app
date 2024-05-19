@@ -22,14 +22,17 @@ export default class AuthService {
         });
     }
 
-    static async sendEmail(regToken: string | null): Promise<void> {
+    static async sendEmail(regToken: string): Promise<void> {
         return $api.get(`/sendemail?token=${regToken}`);
     }
 
     static async registerCreate(
         code: string,
+        regToken: string,
     ): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>('/registercreate', { code });
+        return $api.post<AuthResponse>(`/registercreate?token=${regToken}`, {
+            code,
+        });
     }
 
     static async forgotPassword(

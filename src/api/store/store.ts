@@ -7,6 +7,7 @@ import AuctionService from '../services/AuctionService';
 import AccountService from '../services/AccountService';
 
 export default class Store {
+    private regToken: string = '';
     user = {} as IUser;
     isAuth = false;
 
@@ -22,14 +23,47 @@ export default class Store {
         this.user = user;
     }
 
-    async sendEmail() {
+    async registration(name: string, email: string, password: string) {
         try {
-            const regToken = localStorage.getItem('REGTOKEN');
+            const response = await toast.promise(
+                AuthService.registration(name, email, password),
+                {
+                    pending: 'Registering...',
+                    success: 'Registered successfully!',
+                    error: 'Failed to register, please try again...',
+                },
+            );
+            this.setAuth(true);
+            this.setUser(response.data.user);
+            this.regToken = response.data.token;
+            return response;
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async sendEmail(regToken: string) {
+        try {
             return await toast.promise(AuthService.sendEmail(regToken), {
                 pending: 'Sending code...',
                 success: 'Code sent!',
                 error: 'Sending code error, please try again...',
             });
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async registerCreate(code: string) {
+        try {
+            return await toast.promise(
+                AuthService.registerCreate(code, this.regToken),
+                {
+                    pending: 'Sending code...',
+                    success: 'Created successfully!',
+                    error: 'Invalid code, please try again...',
+                },
+            );
         } catch (e: any) {
             throw e;
         }
@@ -48,25 +82,6 @@ export default class Store {
             localStorage.setItem('token', response.data.token);
             this.setAuth(true);
             this.setUser(response.data.user);
-            return response;
-        } catch (e: any) {
-            throw e;
-        }
-    }
-
-    async registration(name: string, email: string, password: string) {
-        try {
-            const response = await toast.promise(
-                AuthService.registration(name, email, password),
-                {
-                    pending: 'Registering...',
-                    success: 'Registered successfully!',
-                    error: 'Failed to register, please try again...',
-                },
-            );
-            this.setAuth(true);
-            this.setUser(response.data.user);
-            await this.sendEmail();
             return response;
         } catch (e: any) {
             throw e;
@@ -138,18 +153,6 @@ export default class Store {
                     error: 'Failed to request, please try again...',
                 },
             );
-        } catch (e: any) {
-            throw e;
-        }
-    }
-
-    async registerCreate(code: string) {
-        try {
-            return await toast.promise(AuthService.registerCreate(code), {
-                pending: 'Sending code...',
-                success: 'Created successfully!',
-                error: 'Invalid code, please try again...',
-            });
         } catch (e: any) {
             throw e;
         }

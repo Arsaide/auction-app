@@ -46,15 +46,23 @@ const RegistrationForm: FC = () => {
                 values.email,
                 values.password,
             );
+            const regToken = response.data.token;
 
-            localStorage.setItem('REGTOKEN', response.data.token);
+            if (regToken) {
+                await store.sendEmail(regToken);
+            }
 
-            if (response && response.status === 200) {
+            if (response && response.status === 200 && regToken) {
                 setIsRegistered(true);
+            } else {
+                toast.error('Something went wrong');
             }
         } catch (e: any) {
-            setErrorMessage(e.response?.data?.message);
-            toast.error(e.response?.data?.message);
+            const errorMessage =
+                e.response?.data?.message || 'An error occurred';
+            setErrorMessage(errorMessage);
+            toast.error(errorMessage);
+        } finally {
             setIsSubmitting(false);
         }
     };
