@@ -1,0 +1,73 @@
+.preview {
+    margin-bottom: 1.5rem;
+    border: 2px solid #333;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.card {
+    background-color: #565656;
+    border-radius: 5px;
+    position: relative;
+    border: 2px solid #333;
+}
+
+.editor {
+    padding: 0.8rem 0.8rem 1.5rem;
+    display: block;
+    width: calc(100% - 2.4rem);
+    font-size: clamp(15px, 1vw, 18px);
+    min-height: 160px;
+    border: none;
+    outline: none;
+    background: transparent;
+    resize: none;
+    color: white;
+}
+
+.actions {
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem ;
+
+    .tools {
+    }
+
+    > button {
+        border-radius: 8px;
+        border: 1px solid transparent;
+        padding: 0.6em 1.2em;
+        font-size: 1em;
+        font-weight: 500;
+        font-family: inherit;
+        background-color: #1a1a1a;
+        cursor: pointer;
+        transition: border-color 0.4s;
+        &:hover {
+            border-color: #646cff;
+        }
+        &:focus,
+        &:focus-visible {
+            outline: 4px auto -webkit-focus-ring-color;
+        }
+    }
+}
+
+.toolsBtn {
+    margin-right: 0.4rem;
+    background-color: transparent;
+    border: none;
+}
+
+.read-the-docs {
+    color: #888;
+}
+
+.error {
+    display: block;
+    position: absolute;
+    top: 100%;
+    color: red;
+}
