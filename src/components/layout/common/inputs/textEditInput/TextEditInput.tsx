@@ -11,6 +11,7 @@ import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import parse from 'html-react-parser';
 import { Field, ErrorMessage as Error, useFormikContext } from 'formik';
 import { textParserOptions } from '../../../../../lib/parserOptions/textParserOptions/textParserOptions';
+import { CustomTooltip } from '../../ui/customTooltip/CustomTooltip';
 
 interface ITextEditInput {
     id: string;
@@ -60,71 +61,84 @@ const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
                 />
                 <div className={'actions'}>
                     <div className={'tools'}>
-                        <Button
-                            className={'toolsBtn'}
-                            sx={{
-                                color: ButtonColors.WHITE,
-                                mt: 1,
-                                '&:hover': {
-                                    color: ButtonColors.LRED,
-                                },
-                            }}
-                            onClick={() => setText('')}
+                        <CustomTooltip title="Clear all Text" placement="top">
+                            <Button
+                                className={'toolsBtn'}
+                                sx={{
+                                    color: ButtonColors.WHITE,
+                                    mt: 1,
+                                    '&:hover': {
+                                        color: ButtonColors.LRED,
+                                    },
+                                }}
+                                onClick={() => setText('')}
+                            >
+                                <FormatClearIcon />
+                            </Button>
+                        </CustomTooltip>
+                        <CustomTooltip title="Bold Text" placement="top">
+                            <Button
+                                className={'toolsBtn'}
+                                sx={{
+                                    color: ButtonColors.WHITE,
+                                    mt: 1,
+                                    '&:hover': {
+                                        color: ButtonColors.GRAY,
+                                    },
+                                }}
+                                onClick={() => applyFormat('bold')}
+                            >
+                                <FormatBoldIcon />
+                            </Button>
+                        </CustomTooltip>
+                        <CustomTooltip title="Italic Text" placement="top">
+                            <Button
+                                className={'toolsBtn'}
+                                sx={{
+                                    color: ButtonColors.WHITE,
+                                    mt: 1,
+                                    '&:hover': {
+                                        color: ButtonColors.GRAY,
+                                    },
+                                }}
+                                onClick={() => applyFormat('italic')}
+                            >
+                                <FormatItalicIcon />
+                            </Button>
+                        </CustomTooltip>
+                        <CustomTooltip title="Underline Text" placement="top">
+                            <Button
+                                className={'toolsBtn'}
+                                sx={{
+                                    color: ButtonColors.WHITE,
+                                    mt: 1,
+                                    '&:hover': {
+                                        color: ButtonColors.GRAY,
+                                    },
+                                }}
+                                onClick={() => applyFormat('underline')}
+                            >
+                                <FormatUnderlinedIcon />
+                            </Button>
+                        </CustomTooltip>
+                        <CustomTooltip
+                            title="Insert Line Break"
+                            placement="top"
                         >
-                            <FormatClearIcon />
-                        </Button>
-                        <Button
-                            className={'toolsBtn'}
-                            sx={{
-                                color: ButtonColors.WHITE,
-                                mt: 1,
-                                '&:hover': {
-                                    color: ButtonColors.GRAY,
-                                },
-                            }}
-                            onClick={() => applyFormat('bold')}
-                        >
-                            <FormatBoldIcon />
-                        </Button>
-                        <Button
-                            className={'toolsBtn'}
-                            sx={{
-                                color: ButtonColors.WHITE,
-                                mt: 1,
-                                '&:hover': {
-                                    color: ButtonColors.GRAY,
-                                },
-                            }}
-                            onClick={() => applyFormat('italic')}
-                        >
-                            <FormatItalicIcon />
-                        </Button>
-                        <Button
-                            className={'toolsBtn'}
-                            sx={{
-                                color: ButtonColors.WHITE,
-                                mt: 1,
-                                '&:hover': {
-                                    color: ButtonColors.GRAY,
-                                },
-                            }}
-                            onClick={() => applyFormat('underline')}
-                        >
-                            <FormatUnderlinedIcon />
-                        </Button>
-                        <Button
-                            className={'toolsBtn'}
-                            sx={{
-                                color: ButtonColors.WHITE,
-                                mt: 1,
-                                '&:hover': {
-                                    color: ButtonColors.GRAY,
-                                },
-                            }}
-                            onClick={() => lineBreak()}
-                        >
-                            <WrapTextIcon />
-                        </Button>
+                            <Button
+                                className={'toolsBtn'}
+                                sx={{
+                                    color: ButtonColors.WHITE,
+                                    mt: 1,
+                                    '&:hover': {
+                                        color: ButtonColors.GRAY,
+                                    },
+                                }}
+                                onClick={() => lineBreak()}
+                            >
+                                <WrapTextIcon />
+                            </Button>
+                        </CustomTooltip>
                     </div>
                 </div>
             </div>
