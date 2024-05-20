@@ -12,6 +12,7 @@ import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
 import PlaceABet from '../../auctionForms/placeABet/PlaceABet';
 import { Close } from '@mui/icons-material';
 import parse from 'html-react-parser';
+import Link from '@mui/material/Link';
 
 interface AuctionInformationProps {
     auction: AuctionInt;
@@ -38,7 +39,15 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
     return (
         <Grid item sx={{ width: '100%', maxWidth: '100%' }} md={5}>
             <Typography sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}>
-                Author @{auction.owner}
+                Author -{' '}
+                <Link
+                    underline="hover"
+                    href={`/personal-account/${auction.ownerId}`}
+                    variant="body1"
+                    color="inherit"
+                >
+                    @{auction.owner}
+                </Link>
             </Typography>
             {!isVisibleEditForm && (
                 <>

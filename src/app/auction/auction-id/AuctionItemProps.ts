@@ -8,6 +8,7 @@ export interface AuctionInt {
     active: boolean;
     state: boolean;
     owner: string;
+    ownerId: string;
     timeStart: string;
     timeEnd: string;
 }
