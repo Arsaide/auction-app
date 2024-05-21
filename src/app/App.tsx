@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import './global.scss';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from '../components/layout/nav/NavBar';
@@ -14,30 +14,9 @@ import BottomNav from '../components/layout/nav/bottomNav/BottomNav';
 import { Hidden } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import NotFound from './not-found/page';
-import { Context } from '../index';
 import ChangePasswordPage from './change-password/page';
 
 function App() {
-    const { store } = useContext(Context);
-    const [updateBalance, setUpdateBalance] = useState<boolean>(true);
-
-    useEffect(() => {
-        async function checkAuthAndFetchUser() {
-            const token = localStorage.getItem('token');
-            if (token) {
-                try {
-                    await store.getUser();
-                    localStorage.setItem('isAuth', 'true');
-                    setUpdateBalance(false);
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            }
-        }
-
-        checkAuthAndFetchUser();
-    }, [updateBalance]);
-
     return (
         <div className="App">
             <NavBar>
@@ -51,10 +30,7 @@ function App() {
                         path={'personal-account'}
                         element={<PersonalAccount />}
                     />
-                    <Route
-                        path={'personal-account/:token'}
-                        element={<UserId />}
-                    />
+                    <Route path={'personal-account/:id'} element={<UserId />} />
                     <Route
                         path={'/change/password'}
                         element={<ChangePasswordPage />}
