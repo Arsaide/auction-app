@@ -13,6 +13,8 @@ import PlaceABet from '../../auctionForms/placeABet/PlaceABet';
 import { Close } from '@mui/icons-material';
 import parse from 'html-react-parser';
 import Link from '@mui/material/Link';
+import { Chip } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 
 interface AuctionInformationProps {
     auction: AuctionInt;
@@ -20,6 +22,7 @@ interface AuctionInformationProps {
     reloadAuction: () => void;
     isRequesting: boolean;
     id: string | undefined;
+    avatar: string | null;
 }
 
 const AuctionInformation: FC<AuctionInformationProps> = ({
@@ -28,6 +31,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
     reloadAuction,
     isRequesting,
     id,
+    avatar,
 }) => {
     const [isVisibleEditForm, setIsVisibleEditForm] = useState<boolean>(false);
     const [isVisibleBetForm, setIsVisibleBetForm] = useState<boolean>(false);
@@ -46,7 +50,18 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                     variant="body1"
                     color="inherit"
                 >
-                    @{auction.owner}
+                    {/*@{auction.owner}*/}
+                    <Chip
+                        avatar={
+                            <Avatar
+                                alt={`${auction.owner} avatar`}
+                                src={`${avatar}`}
+                            />
+                        }
+                        label={auction.owner}
+                        variant="outlined"
+                        sx={{ color: MainColors.WHITE }}
+                    />
                 </Link>
             </Typography>
             {!isVisibleEditForm && (

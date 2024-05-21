@@ -16,6 +16,7 @@ const AuctionIdPage: FC = () => {
     const [owner, setOwner] = useState<boolean>(false);
     const [isRequesting, setIsRequesting] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
+    const [avatar, setAvatar] = useState<string>('');
 
     useEffect(() => {
         fetchData();
@@ -27,6 +28,7 @@ const AuctionIdPage: FC = () => {
         try {
             const response = await store.getOneAuction(id);
             setAuction(response.data.auction as unknown as AuctionInt);
+            setAvatar(response.data.avatar);
             setIsRequesting(false);
             setLoading(false);
 
@@ -88,6 +90,7 @@ const AuctionIdPage: FC = () => {
                     reloadAuction={reloadAuction}
                     isRequesting={isRequesting}
                     id={id}
+                    avatar={avatar}
                 />
             </Grid>
         </div>
