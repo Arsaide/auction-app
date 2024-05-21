@@ -43,8 +43,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
 }) => {
     const { store } = useContext(Context);
     const { setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
-    const { name, avatar, balance } = store.user || {};
-    const token = localStorage.getItem('token');
+    const { name, avatar, balance, id } = store.user || {};
 
     const handleLogOutSubmit = () => {
         store.logout().then(() => setIsLoggedIn(false));
@@ -189,7 +188,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                                 sx={{ p: 1 }}
                                             >
                                                 <Link
-                                                    to={`/personal-account/${token}`}
+                                                    to={`/personal-account/${id}`}
                                                     style={{
                                                         textDecoration: 'none',
                                                         color: MainColors.BLACK,
