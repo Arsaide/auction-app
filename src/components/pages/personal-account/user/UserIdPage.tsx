@@ -59,6 +59,7 @@ const UserIdPage: FC = () => {
                     {isOwner && (
                         <>
                             <OwnerVariantPA
+                                id={id}
                                 name={name}
                                 email={email}
                                 avatar={avatar}
@@ -68,6 +69,7 @@ const UserIdPage: FC = () => {
                     )}
                     {!isOwner && (
                         <UserVariantPA
+                            id={id}
                             name={name}
                             email={email}
                             avatar={avatar}

@@ -252,9 +252,10 @@ export default class Store {
         }
     }
 
-    async getOwnAuctions(token: string | null | undefined) {
+    async getOwnAuctions(id: string | undefined) {
         try {
-            return await AuctionService.getOwnAuctions(token);
+            const token = localStorage.getItem('token');
+            return await AuctionService.getOwnAuctions(token, id);
         } catch (e: any) {
             throw e;
         }

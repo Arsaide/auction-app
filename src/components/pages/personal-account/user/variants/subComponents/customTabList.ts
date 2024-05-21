@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import TabList from '@mui/lab/TabList';
-import { MainColors } from '../../../../../lib/colors/MainColors';
+import { MainColors } from '../../../../../../lib/colors/MainColors';
 
 export const CustomTabList = styled(TabList)`
     gap: 10px;
