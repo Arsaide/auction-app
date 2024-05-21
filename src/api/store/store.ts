@@ -5,10 +5,12 @@ import { toast } from 'react-toastify';
 import { Dayjs } from 'dayjs';
 import AuctionService from '../services/AuctionService';
 import AccountService from '../services/AccountService';
+import { IPersonalAccount } from '../models/IPersonalAccount';
 
 export default class Store {
     private regToken: string = '';
     user = {} as IUser;
+    personalAccount = {} as IPersonalAccount;
     isAuth = false;
 
     constructor() {
@@ -21,6 +23,10 @@ export default class Store {
 
     setUser(user: IUser) {
         this.user = user;
+    }
+
+    setPersonalAccount(user: IPersonalAccount) {
+        this.personalAccount = user;
     }
 
     async registration(name: string, email: string, password: string) {
@@ -171,19 +177,6 @@ export default class Store {
         }
     }
 
-    async checkAuth() {
-        try {
-            const token = localStorage.getItem('token');
-            if (token !== undefined && token !== null) {
-                localStorage.setItem('isAuth', 'true');
-            } else {
-                localStorage.setItem('isAuth', 'false');
-            }
-        } catch (e: any) {
-            console.log(e.response?.data?.message);
-        }
-    }
-
     async getOneAuction(_id: string | undefined) {
         try {
             const token: string | null = localStorage.getItem('token');
@@ -243,6 +236,18 @@ export default class Store {
             this.setUser(userData);
         } catch (e: any) {
             await this.logout();
+            throw e;
+        }
+    }
+
+    async getPersonalAccount(id: string | undefined) {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await AccountService.getPersonalAccount(token, id);
+            const userData: IPersonalAccount = response.data.info;
+            console.log(userData);
+            this.setPersonalAccount(userData);
+        } catch (e: any) {
             throw e;
         }
     }

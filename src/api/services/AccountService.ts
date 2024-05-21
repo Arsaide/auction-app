@@ -9,6 +9,13 @@ export default class AccountService {
         return $api.post<AuthResponse>('/getuser', { token });
     }
 
+    static async getPersonalAccount(
+        token: string | null,
+        id: string | undefined,
+    ): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post<AuthResponse>('/getpersonalaccount', { token, id });
+    }
+
     static async editProfileImage(
         token: string,
         image: File | null,
