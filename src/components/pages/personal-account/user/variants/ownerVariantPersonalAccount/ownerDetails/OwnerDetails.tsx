@@ -1,19 +1,20 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import AddUserAvatarForm from '../userForms/addUserAvatarForm/AddUserAvatarForm';
+
 import Box from '@mui/material/Box';
 import { Dialog, DialogContent, DialogTitle, Skeleton } from '@mui/material';
-import { MainColors } from '../../../../../lib/colors/MainColors';
+import { MainColors } from '../../../../../../../lib/colors/MainColors';
+import AddUserAvatarForm from '../../../userForms/addUserAvatarForm/AddUserAvatarForm';
 
-interface UserDetailsProps {
+interface OwnerDetailsProps {
     name: string | null;
     email: string | null;
     balance: string | null;
     avatar: string | null;
 }
 
-const UserDetails: FC<UserDetailsProps> = ({
+const OwnerDetails: FC<OwnerDetailsProps> = ({
     name,
     email,
     balance,
@@ -120,4 +121,4 @@ const UserDetails: FC<UserDetailsProps> = ({
     );
 };
 
-export default UserDetails;
+export default OwnerDetails;

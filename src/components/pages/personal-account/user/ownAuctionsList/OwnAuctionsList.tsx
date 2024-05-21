@@ -12,6 +12,20 @@ interface OwnAuctionsListProps {
 }
 
 const OwnAuctionsList: FC<OwnAuctionsListProps> = ({ auctions }) => {
+    // const [auctions, setAuctions] = useState<AuctionInt[]>([]);
+    // useEffect(() => {
+    //     const fetchAccount = async () => {
+    //         try {
+    //             const auctionResponse = await store.getOwnAuctions(token);
+    //             setAuctions(auctionResponse.data.auctions);
+    //         } catch (error) {
+    //             console.error('Error fetching account:', error);
+    //         }
+    //     };
+    //
+    //     fetchAccount();
+    // }, [store, token]);
+
     const columns: GridColDef[] = [
         {
             field: '_id',
