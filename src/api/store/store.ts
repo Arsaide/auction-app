@@ -245,8 +245,8 @@ export default class Store {
             const token = localStorage.getItem('token');
             const response = await AccountService.getPersonalAccount(token, id);
             const userData: IPersonalAccount = response.data.info;
-            console.log(userData);
             this.setPersonalAccount(userData);
+            return response;
         } catch (e: any) {
             throw e;
         }
