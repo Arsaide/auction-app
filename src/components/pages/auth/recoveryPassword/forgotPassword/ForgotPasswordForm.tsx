@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Context } from '../../../../../index';
 import { Form, Formik } from 'formik';
 import { forgotPasswordFormValidationSchema } from './forgotPasswordValidation/forgotPasswordFormValidationSchema';
@@ -18,7 +18,13 @@ interface ForgotFormValues {
     email: string;
 }
 
-const ForgotPasswordForm = () => {
+interface IForgotPasswordForm {
+    isVisionLoginButton?: boolean;
+}
+
+const ForgotPasswordForm: FC<IForgotPasswordForm> = ({
+    isVisionLoginButton,
+}) => {
     const { store } = useContext(Context);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -160,17 +166,19 @@ const ForgotPasswordForm = () => {
                                     </>
                                 )}
 
-                                <Button
-                                    onClick={handleLoginClick}
-                                    sx={{
-                                        color: ButtonColors.WHITE,
-                                        '&:hover': {
-                                            color: ButtonColors.GRAY,
-                                        },
-                                    }}
-                                >
-                                    Login
-                                </Button>
+                                {isVisionLoginButton && (
+                                    <Button
+                                        onClick={handleLoginClick}
+                                        sx={{
+                                            color: ButtonColors.WHITE,
+                                            '&:hover': {
+                                                color: ButtonColors.GRAY,
+                                            },
+                                        }}
+                                    >
+                                        Login
+                                    </Button>
+                                )}
                             </Box>
                             {errorMessage && (
                                 <Typography

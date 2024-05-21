@@ -87,7 +87,9 @@ const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
     return (
         <>
             {isShowRegistrationForm && <RegistrationForm />}
-            {isShowForgotPasswordForm && <ForgotPasswordForm />}
+            {isShowForgotPasswordForm && (
+                <ForgotPasswordForm isVisionLoginButton={true} />
+            )}
             {!isShowRegistrationForm && !isShowForgotPasswordForm && (
                 <Formik
                     validationSchema={loginValidationSchema}

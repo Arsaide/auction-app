@@ -7,7 +7,7 @@ interface IUserVariantPersonalAccount {
     avatar: string;
 }
 
-const UserVariantPersonalAccount: FC<IUserVariantPersonalAccount> = ({
+const UserVariantPA: FC<IUserVariantPersonalAccount> = ({
     name,
     email,
     avatar,
@@ -19,4 +19,4 @@ const UserVariantPersonalAccount: FC<IUserVariantPersonalAccount> = ({
     );
 };
 
-export default UserVariantPersonalAccount;
+export default UserVariantPA;
