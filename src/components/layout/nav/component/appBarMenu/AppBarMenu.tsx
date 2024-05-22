@@ -2,7 +2,7 @@ import React, { FC, memo, useContext } from 'react';
 import { drawerWidth } from '../../index';
 import Toolbar from '@mui/material/Toolbar';
 import GoBack from '../goBack/GoBack';
-import { Chip, Hidden } from '@mui/material';
+import { Chip, Hidden, LinearProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import RegModal from '../../../modals/regModal/RegModal';
@@ -42,7 +42,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
     handleCloseUserMenu,
 }) => {
     const { store } = useContext(Context);
-    const { setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
+    const { setIsLoggedIn, isLoggedIn, isLoading } = useContext(AuthContext);
     const { name, avatar, balance, id } = store.user || {};
 
     const handleLogOutSubmit = () => {
@@ -188,7 +188,11 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                                 sx={{ p: 1 }}
                                             >
                                                 <Link
-                                                    to={`/personal-account/${id}`}
+                                                    to={
+                                                        isLoading
+                                                            ? `/personal-account`
+                                                            : `/personal-account/${id}`
+                                                    }
                                                     style={{
                                                         textDecoration: 'none',
                                                         color: MainColors.BLACK,
@@ -214,6 +218,16 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                     </Box>
                 </Hidden>
             </Toolbar>
+            {isLoading && (
+                <LinearProgress
+                    sx={{
+                        bgcolor: 'white',
+                        '& .MuiLinearProgress-bar': {
+                            backgroundColor: MainColors.GREEN,
+                        },
+                    }}
+                />
+            )}
         </AppBar>
     );
 };
