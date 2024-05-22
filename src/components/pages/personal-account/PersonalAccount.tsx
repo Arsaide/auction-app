@@ -1,15 +1,26 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Box, Hidden } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LoginForm from '../auth/loginForm/LoginForm';
 import RegistrationForm from '../auth/registration/registrationForm/RegistrationForm';
 import { ButtonColors } from '../../../lib/colors/ButtonColors';
+import { AuthContext } from '../../../lib/providers/AuthContext';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const PersonalAccountPage: FC = () => {
     const [showLoginComponent, setShowLoginComponent] =
         useState<boolean>(false);
     const [showRegComponent, setShowRegComponent] = useState<boolean>(false);
+    const { isLoggedIn } = useContext(AuthContext);
+    const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate(-1);
+        }
+    }, [isLoggedIn]);
 
     const handleClickShowLogin = () => {
         setShowLoginComponent(true);
@@ -24,61 +35,66 @@ const PersonalAccountPage: FC = () => {
         <>
             {showLoginComponent || showRegComponent ? null : (
                 <>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            gap: 3,
-                        }}
-                    >
-                        <Hidden mdUp>
-                            <img
-                                style={{ width: '100%' }}
-                                src="/gifs/fail.gif"
-                                alt="Тут будет логотип в будущем"
-                            />
-                        </Hidden>
-                        <Typography variant={'h5'} sx={{ textAlign: 'center' }}>
-                            To continue please log in.
-                        </Typography>
+                    {isLoggedIn && (
                         <Box
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'column',
+                                justifyContent: 'center',
                                 gap: 3,
                             }}
                         >
-                            <Button
-                                sx={{
-                                    color: ButtonColors.WHITE,
-                                    bgcolor: ButtonColors.DGREEN,
-                                    '&:hover': {
-                                        bgcolor: ButtonColors.LGREEN,
-                                    },
-                                }}
-                                variant="contained"
-                                size="large"
-                                onClick={handleClickShowLogin}
+                            <Hidden mdUp>
+                                <img
+                                    style={{ width: '100%' }}
+                                    src="/gifs/fail.gif"
+                                    alt="Тут будет логотип в будущем"
+                                />
+                            </Hidden>
+                            <Typography
+                                variant={'h5'}
+                                sx={{ textAlign: 'center' }}
                             >
-                                Log-in
-                            </Button>
-                            <Button
+                                To continue please log in.
+                            </Typography>
+                            <Box
                                 sx={{
-                                    color: ButtonColors.WHITE,
-                                    bgcolor: ButtonColors.DGREEN,
-                                    '&:hover': {
-                                        bgcolor: ButtonColors.LGREEN,
-                                    },
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 3,
                                 }}
-                                variant="contained"
-                                size="large"
-                                onClick={handleClickShowReg}
                             >
-                                Registration
-                            </Button>
+                                <Button
+                                    sx={{
+                                        color: ButtonColors.WHITE,
+                                        bgcolor: ButtonColors.DGREEN,
+                                        '&:hover': {
+                                            bgcolor: ButtonColors.LGREEN,
+                                        },
+                                    }}
+                                    variant="contained"
+                                    size="large"
+                                    onClick={handleClickShowLogin}
+                                >
+                                    Log-in
+                                </Button>
+                                <Button
+                                    sx={{
+                                        color: ButtonColors.WHITE,
+                                        bgcolor: ButtonColors.DGREEN,
+                                        '&:hover': {
+                                            bgcolor: ButtonColors.LGREEN,
+                                        },
+                                    }}
+                                    variant="contained"
+                                    size="large"
+                                    onClick={handleClickShowReg}
+                                >
+                                    Registration
+                                </Button>
+                            </Box>
                         </Box>
-                    </Box>
+                    )}
                 </>
             )}
             {showLoginComponent && (

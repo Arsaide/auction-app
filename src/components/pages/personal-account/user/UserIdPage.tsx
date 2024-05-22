@@ -1,19 +1,17 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Context } from '../../../../index';
 import { useNavigate, useParams } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import { ButtonColors } from '../../../../lib/colors/ButtonColors';
 import { AuthContext } from '../../../../lib/providers/AuthContext';
 import { toast } from 'react-toastify';
 import UserVariantPA from './variants/userVariantPA/UserVariantPA';
 import OwnerVariantPA from './variants/ownerVariantPA/OwnerVariantPA';
-import { CircularProgress, LinearProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import { MainColors } from '../../../../lib/colors/MainColors';
 import Box from '@mui/material/Box';
 
 const UserIdPage: FC = () => {
     const { store } = useContext(Context);
-    const { setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
+    const { isLoggedIn } = useContext(AuthContext);
     const { name, avatar, email, balance } = store.personalAccount || {};
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const { id } = useParams<{ id: string }>();
