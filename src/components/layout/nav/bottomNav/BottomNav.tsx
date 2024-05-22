@@ -15,12 +15,10 @@ import { AuthContext } from '../../../../lib/providers/AuthContext';
 
 const BottomNav = () => {
     const { store } = useContext(Context);
-    const { name, avatar } = store.user;
+    const { name, avatar, id } = store.user;
     const { isLoggedIn } = useContext(AuthContext);
     const [value, setValue] = useState(0);
     const location = useLocation();
-
-    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const path = location.pathname;
@@ -154,7 +152,7 @@ const BottomNav = () => {
             </BottomNavigationAction>
             {isLoggedIn ? (
                 <BottomNavigationAction
-                    to={`/personal-account/${token}`}
+                    to={`/personal-account/${id}`}
                     component={NavLink}
                     icon={
                         <IconButton sx={{ p: 0 }}>
