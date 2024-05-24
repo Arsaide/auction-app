@@ -158,7 +158,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                             }}
                                         />
                                     )}
-                                    <Tooltip title="Open settings">
+                                    <Tooltip title="Open menu">
                                         <IconButton
                                             onClick={handleOpenUserMenu}
                                             sx={{ p: 0 }}
@@ -218,16 +218,18 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                     </Box>
                 </Hidden>
             </Toolbar>
-            {isLoading && (
-                <LinearProgress
-                    sx={{
-                        bgcolor: 'white',
-                        '& .MuiLinearProgress-bar': {
-                            backgroundColor: MainColors.GREEN,
-                        },
-                    }}
-                />
-            )}
+            {isLoggedIn
+                ? isLoading && (
+                      <LinearProgress
+                          sx={{
+                              bgcolor: 'white',
+                              '& .MuiLinearProgress-bar': {
+                                  backgroundColor: MainColors.GREEN,
+                              },
+                          }}
+                      />
+                  )
+                : null}
         </AppBar>
     );
 };

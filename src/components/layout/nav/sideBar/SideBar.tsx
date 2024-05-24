@@ -86,39 +86,44 @@ const SideBar = () => {
                         </ListItemButton>
                     </NavLink>
                 </ListItem>
-                {isLoggedIn && (
-                    <ListItem
-                        disablePadding
-                        sx={{
-                            '&:hover': { bgcolor: MainColors.GRAY333_01 },
-                            borderTop: 1,
-                            borderColor: 'divider',
-                            mt: 4,
-                        }}
-                    >
-                        <NavLink
-                            to={
-                                isLoading
-                                    ? `/personal-account`
-                                    : `/personal-account/${id}`
-                            }
-                            style={{ width: '100%' }}
+                {isLoggedIn &&
+                    (!isLoading ? (
+                        <ListItem
+                            disablePadding
+                            sx={{
+                                '&:hover': { bgcolor: MainColors.GRAY333_01 },
+                                borderTop: 1,
+                                borderColor: 'divider',
+                                mt: 4,
+                            }}
                         >
-                            <ListItemButton sx={{ color: MainColors.WHITE }}>
-                                <ListItemIcon sx={{ color: MainColors.WHITE }}>
-                                    <Avatar
-                                        sx={{ width: 24, height: 24 }}
-                                        alt={name}
-                                        src={`${avatar}`}
+                            <NavLink
+                                to={
+                                    isLoading
+                                        ? `/personal-account`
+                                        : `/personal-account/${id}`
+                                }
+                                style={{ width: '100%' }}
+                            >
+                                <ListItemButton
+                                    sx={{ color: MainColors.WHITE }}
+                                >
+                                    <ListItemIcon
+                                        sx={{ color: MainColors.WHITE }}
+                                    >
+                                        <Avatar
+                                            sx={{ width: 24, height: 24 }}
+                                            alt={name}
+                                            src={`${avatar}`}
+                                        />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={`${name || 'Personal'} account`}
                                     />
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={`${name || 'Personal'} account`}
-                                />
-                            </ListItemButton>
-                        </NavLink>
-                    </ListItem>
-                )}
+                                </ListItemButton>
+                            </NavLink>
+                        </ListItem>
+                    ) : null)}
             </List>
         </>
     );
