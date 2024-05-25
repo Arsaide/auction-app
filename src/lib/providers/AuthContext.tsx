@@ -58,7 +58,7 @@ export const AuthProvider: FC<IAuthProvider> = observer(({ children }) => {
     const token = localStorage.getItem('token');
 
     useEffect(() => {
-        checkAuthAndFetchUser();
+        isLoggedIn ? checkAuthAndFetchUser() : null;
     }, [token]);
 
     useEffect(() => {
