@@ -15,27 +15,48 @@ import { Hidden } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import NotFound from './not-found/page';
 import ChangePasswordPage from './change-password/page';
+import useOnlineStatus from '../hooks/useOnlineStatus/useOnlineStatus';
 
 function App() {
+    const isOnline = useOnlineStatus();
+
     return (
         <div className="App">
             <NavBar>
                 <Routes>
-                    <Route path={'/'} element={<HomePage />} />
-                    <Route path={'auction'} element={<AuctionPage />} />
-                    <Route path={'auction/:id/'} element={<AuctionId />} />
-                    <Route path={'online-chat'} element={<OnlineChatPage />} />
-                    <Route path={'information'} element={<Information />} />
-                    <Route
-                        path={'personal-account'}
-                        element={<PersonalAccount />}
-                    />
-                    <Route path={'personal-account/:id'} element={<UserId />} />
-                    <Route
-                        path={'/change/password'}
-                        element={<ChangePasswordPage />}
-                    />
-                    <Route path={'*'} element={<NotFound />} />
+                    {isOnline ? (
+                        <>
+                            <Route path={'/'} element={<HomePage />} />
+                            <Route path={'auction'} element={<AuctionPage />} />
+                            <Route
+                                path={'auction/:id/'}
+                                element={<AuctionId />}
+                            />
+                            <Route
+                                path={'online-chat'}
+                                element={<OnlineChatPage />}
+                            />
+                            <Route
+                                path={'information'}
+                                element={<Information />}
+                            />
+                            <Route
+                                path={'personal-account'}
+                                element={<PersonalAccount />}
+                            />
+                            <Route
+                                path={'personal-account/:id'}
+                                element={<UserId />}
+                            />
+                            <Route
+                                path={'/change/password'}
+                                element={<ChangePasswordPage />}
+                            />
+                            <Route path={'*'} element={<NotFound />} />
+                        </>
+                    ) : (
+                        <NotFound />
+                    )}
                 </Routes>
                 <Hidden mdUp>
                     <Toolbar />
