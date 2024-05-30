@@ -255,7 +255,15 @@ export default class Store {
     async getOwnAuctions(id: string | undefined) {
         try {
             const token = localStorage.getItem('token');
-            return await AuctionService.getOwnAuctions(token, id);
+            return await AccountService.getOwnAuctions(token, id);
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async getHistoryAuctionBets(id: string | undefined) {
+        try {
+            return await AccountService.getHistoryAuctionBets(id);
         } catch (e: any) {
             throw e;
         }

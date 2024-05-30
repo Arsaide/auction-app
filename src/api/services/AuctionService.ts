@@ -57,13 +57,6 @@ export default class AuctionService {
         return $api.post('/getauctionone', { _id, token });
     }
 
-    static async getOwnAuctions(
-        token: string | null | undefined,
-        id: string | undefined,
-    ): Promise<AxiosResponse<OwnAuctionInt>> {
-        return $api.post('/getownauctions', { token, id });
-    }
-
     static async sendDeleteAuction(
         _id: string | undefined,
         token: string | null,

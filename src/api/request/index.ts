@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API_URL = `https://ilineirosbecktesttask.onrender.com/api`;
-// export const API_URL = `http://localhost:7000/auth`
+// export const API_URL = `http://localhost:8000/api`
 
 const $api = axios.create({
     withCredentials: true,
