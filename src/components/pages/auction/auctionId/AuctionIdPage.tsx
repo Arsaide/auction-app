@@ -8,6 +8,7 @@ import AuctionDetails from './auctionIdDetails/AuctionDetails';
 import AuctionInformation from './auctionIdInformation/AuctionInformation';
 import AuctionIdPageSkeleton from './auctionIdPageSkeleton/AuctionIdPageSkeleton';
 import WarningAlert from '../../../layout/common/alerts/warningAlert/WarningAlert';
+import AuctionBetHistory from './auctionBetHistory/AuctionBetHistory';
 
 const AuctionIdPage: FC = () => {
     const { store } = useContext(Context);
@@ -93,6 +94,7 @@ const AuctionIdPage: FC = () => {
                     avatar={avatar}
                 />
             </Grid>
+            <AuctionBetHistory id={id} />
         </div>
     );
 };
