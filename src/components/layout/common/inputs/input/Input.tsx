@@ -3,14 +3,7 @@ import React, { FC, useState } from 'react';
 import { Field, ErrorMessage as Error } from 'formik';
 import VisibilityIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-
-interface InputField {
-    id: string;
-    label: string;
-    name: string;
-    placeholder: string;
-    type?: string;
-}
+import { InputField } from '../inputField';
 
 const Input: FC<InputField> = ({ id, label, name, placeholder, type }) => {
     const [showPassword, setShowPassword] = useState(false);

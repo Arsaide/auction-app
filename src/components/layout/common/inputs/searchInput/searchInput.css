@@ -1,0 +1,82 @@
+.searchContainer {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 10px;
+}
+
+.searchContainer input {
+    position: relative;
+    width: 100%;
+    padding: 10px 0 10px 10px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 16px;
+    appearance: none;
+    background: #565656;
+    margin-left: -1px;
+    color: white;
+}
+
+.searchContent {
+    display: flex;
+    gap: 5px;
+}
+
+.searchContainer label {
+    display: block;
+    padding: 0 0 6px 6px;
+}
+
+.searchContainer input::placeholder {
+    color: rgba(255, 255, 255, .2);
+}
+
+.searchContainer input:focus {
+    outline: 0;
+}
+
+.searchContainer input::after {
+    background: #454545;
+}
+
+label {
+    color: white;
+    margin-left: -7px;
+}
+
+.searchHippies {
+    position: absolute;
+    z-index: 50;
+    background-color: #F5F5F5;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.searchList {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchItem {
+    display: flex;
+    transition: background-color .2s ease-out 0s;
+    border-bottom: 1px solid rgba(51, 51, 51, .2);
+}
+
+.searchItem:hover {
+    background-color: rgba(51, 51, 51, .2);
+}
+
+.searchTag {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.searchAuthor {
+    color: rgba(51, 51, 51, .5);
+}
