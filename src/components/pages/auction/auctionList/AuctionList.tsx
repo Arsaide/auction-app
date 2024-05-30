@@ -5,26 +5,15 @@ import { API_URL } from '../../../../api/request';
 import Typography from '@mui/material/Typography';
 import AuctionListSkeleton from './components/auctionListSkeleton/AuctionListSkeleton';
 import AuctionReloadButton from './components/AuctionReloadButton/AuctionReloadButton';
-import Button from '@mui/material/Button';
 import usePagination from '../../../../hooks/usePagination/usePagination';
 import { pagintaionStyles } from './pagination.styles';
-import { ButtonColorsEnum } from '../../../../lib/colors/ButtonColors.enum';
-
-interface AuctionItem {
-    _id: string;
-    img: string;
-    title: string;
-    minRates: string;
-    rates: string;
-    desct: string;
-    timeStart: string;
-    timeEnd: string;
-    active: boolean;
-}
+import AuctionSearch from './components/auctionSearch/AuctionSearch';
+import { sortAuctions } from './sortAuctions';
+import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps';
 
 const AuctionList = () => {
     const { currentPage, handlePageChange, auctionsPerPage } = usePagination();
-    const [auction, setAuction] = useState<AuctionItem[]>([]);
+    const [auction, setAuction] = useState<AuctionInt[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [isRequesting, setIsRequesting] = useState<boolean>(false);
 
@@ -54,14 +43,7 @@ const AuctionList = () => {
         fetchData();
     };
 
-    const expiredAuctions = auction.filter(
-        item => new Date(item.timeEnd) < new Date(),
-    );
-    const activeAuctions = auction
-        .filter(item => new Date(item.timeEnd) >= new Date())
-        .reverse();
-
-    const sortedAuctions = [...activeAuctions, ...expiredAuctions];
+    const sortedAuctions = sortAuctions(auction);
 
     const indexOfLastAuction = currentPage * auctionsPerPage;
     const indexOfFirstAuction = indexOfLastAuction - auctionsPerPage;
@@ -77,41 +59,12 @@ const AuctionList = () => {
                     Auction List
                 </Typography>
                 <Box sx={{ mb: 1 }}>
+                    <AuctionSearch />
                     <AuctionReloadButton
                         disabled={isRequesting}
                         onClick={reloadAuctions}
                         isRequesting={isRequesting}
                     />
-                    <Button
-                        sx={{
-                            color: ButtonColorsEnum.LGREEN,
-                            '&:hover': {
-                                color: ButtonColorsEnum.DGREEN,
-                            },
-                        }}
-                    >
-                        1
-                    </Button>
-                    <Button
-                        sx={{
-                            color: ButtonColorsEnum.LGREEN,
-                            '&:hover': {
-                                color: ButtonColorsEnum.DGREEN,
-                            },
-                        }}
-                    >
-                        2
-                    </Button>
-                    <Button
-                        sx={{
-                            color: ButtonColorsEnum.LGREEN,
-                            '&:hover': {
-                                color: ButtonColorsEnum.DGREEN,
-                            },
-                        }}
-                    >
-                        3
-                    </Button>
                 </Box>
                 <Grid
                     container
@@ -128,7 +81,7 @@ const AuctionList = () => {
                         </>
                     ) : (
                         <>
-                            {currentAuctions.map((auction: AuctionItem) => (
+                            {currentAuctions.map((auction: AuctionInt) => (
                                 <Grid
                                     item
                                     xs={2}
