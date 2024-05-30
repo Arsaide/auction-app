@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import WarningAlert from '../../layout/common/alerts/warningAlert/WarningAlert';
 import AuctionList from './auctionList/AuctionList';
 import { AuthContext } from '../../../lib/providers/AuthContext';
+import Box from '@mui/material/Box';
 
 const AuctionsPage = () => {
     const { isLoggedIn } = useContext(AuthContext);
