@@ -325,4 +325,13 @@ export default class Store {
             throw e;
         }
     }
+
+    async searchAtLetters(letters: string | null) {
+        try {
+            const response = await AuctionService.getSearchAtLetters(letters);
+            return response;
+        } catch (e: any) {
+            throw e;
+        }
+    }
 }

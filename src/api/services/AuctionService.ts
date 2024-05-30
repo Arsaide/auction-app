@@ -2,7 +2,12 @@ import $api from '../request';
 import { AxiosResponse } from 'axios';
 import { AuthResponse } from '../models/response/AuthResponse';
 import { Dayjs } from 'dayjs';
-import { AuctionHistoryBetsLists } from '../../app/auction/auction-id/AuctionItemProps';
+import {
+    AuctionHistoryBetsLists,
+    AuctionInt,
+    ListOfBets,
+    OwnAuctionInt,
+} from '../../app/auction/auction-id/AuctionItemProps';
 
 export default class AuctionService {
     static async createAuction(
@@ -93,5 +98,11 @@ export default class AuctionService {
         id: string | undefined,
     ): Promise<AxiosResponse<AuctionHistoryBetsLists>> {
         return $api.get(`/gethistoryauction?id=${id}`);
+    }
+
+    static async getSearchAtLetters(
+        letters: string | null,
+    ): Promise<AxiosResponse<OwnAuctionInt>> {
+        return $api.get(`/search?value=${letters}`);
     }
 }
