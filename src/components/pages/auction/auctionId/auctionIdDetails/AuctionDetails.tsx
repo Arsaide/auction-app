@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { AuctionInt } from '../../../../../app/auction/auction-id/AuctionItemProps';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
 
 interface AuctionDetailsProps {
     auction: AuctionInt;
@@ -37,11 +37,11 @@ const AuctionDetails: FC<AuctionDetailsProps> = ({ auction }) => {
             <Box sx={{ position: 'absolute', top: -5, left: 5 }}>
                 {auction.active ? (
                     <VerifiedIcon
-                        sx={{ color: ButtonColors.LGREEN, fontSize: 85 }}
+                        sx={{ color: ButtonColorsEnum.LGREEN, fontSize: 85 }}
                     />
                 ) : (
                     <CancelIcon
-                        sx={{ color: ButtonColors.LRED, fontSize: 85 }}
+                        sx={{ color: ButtonColorsEnum.LRED, fontSize: 85 }}
                     />
                 )}
             </Box>

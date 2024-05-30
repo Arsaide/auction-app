@@ -10,7 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import { MainColors } from '../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../lib/colors/MainColors.enum';
 import { useContext } from 'react';
 import { Context } from '../../../../index';
 import Avatar from '@mui/material/Avatar';
@@ -25,12 +25,12 @@ const SideBar = () => {
 
     return (
         <>
-            <Toolbar sx={{ bgcolor: MainColors.GRAY333 }} />
+            <Toolbar sx={{ bgcolor: MainColorsEnum.GRAY333 }} />
             <Divider />
             <List>
                 <ListItem
                     disablePadding
-                    sx={{ '&:hover': { bgcolor: MainColors.GRAY333_01 } }}
+                    sx={{ '&:hover': { bgcolor: MainColorsEnum.GRAY333_01 } }}
                 >
                     <NavLink
                         to={'/'}
@@ -39,8 +39,8 @@ const SideBar = () => {
                             [isActive ? 'active' : ''].join(' ')
                         }
                     >
-                        <ListItemButton sx={{ color: MainColors.WHITE }}>
-                            <ListItemIcon sx={{ color: MainColors.WHITE }}>
+                        <ListItemButton sx={{ color: MainColorsEnum.WHITE }}>
+                            <ListItemIcon sx={{ color: MainColorsEnum.WHITE }}>
                                 <HomeIcon />
                             </ListItemIcon>
                             <ListItemText primary={'Home'} />
@@ -49,11 +49,11 @@ const SideBar = () => {
                 </ListItem>
                 <ListItem
                     disablePadding
-                    sx={{ '&:hover': { bgcolor: MainColors.GRAY333_01 } }}
+                    sx={{ '&:hover': { bgcolor: MainColorsEnum.GRAY333_01 } }}
                 >
                     <NavLink to={'/auction'} style={{ width: '100%' }}>
-                        <ListItemButton sx={{ color: MainColors.WHITE }}>
-                            <ListItemIcon sx={{ color: MainColors.WHITE }}>
+                        <ListItemButton sx={{ color: MainColorsEnum.WHITE }}>
+                            <ListItemIcon sx={{ color: MainColorsEnum.WHITE }}>
                                 <CurrencyBitcoinIcon />
                             </ListItemIcon>
                             <ListItemText primary={'Place an auction'} />
@@ -62,11 +62,11 @@ const SideBar = () => {
                 </ListItem>
                 <ListItem
                     disablePadding
-                    sx={{ '&:hover': { bgcolor: MainColors.GRAY333_01 } }}
+                    sx={{ '&:hover': { bgcolor: MainColorsEnum.GRAY333_01 } }}
                 >
                     <NavLink to={'/online-chat'} style={{ width: '100%' }}>
-                        <ListItemButton sx={{ color: MainColors.WHITE }}>
-                            <ListItemIcon sx={{ color: MainColors.WHITE }}>
+                        <ListItemButton sx={{ color: MainColorsEnum.WHITE }}>
+                            <ListItemIcon sx={{ color: MainColorsEnum.WHITE }}>
                                 <QuestionAnswerIcon />
                             </ListItemIcon>
                             <ListItemText primary={'Online chat'} />
@@ -75,11 +75,11 @@ const SideBar = () => {
                 </ListItem>
                 <ListItem
                     disablePadding
-                    sx={{ '&:hover': { bgcolor: MainColors.GRAY333_01 } }}
+                    sx={{ '&:hover': { bgcolor: MainColorsEnum.GRAY333_01 } }}
                 >
                     <NavLink to={'/information'} style={{ width: '100%' }}>
-                        <ListItemButton sx={{ color: MainColors.WHITE }}>
-                            <ListItemIcon sx={{ color: MainColors.WHITE }}>
+                        <ListItemButton sx={{ color: MainColorsEnum.WHITE }}>
+                            <ListItemIcon sx={{ color: MainColorsEnum.WHITE }}>
                                 <AssistantIcon />
                             </ListItemIcon>
                             <ListItemText primary={'Information'} />
@@ -91,7 +91,9 @@ const SideBar = () => {
                         <ListItem
                             disablePadding
                             sx={{
-                                '&:hover': { bgcolor: MainColors.GRAY333_01 },
+                                '&:hover': {
+                                    bgcolor: MainColorsEnum.GRAY333_01,
+                                },
                                 borderTop: 1,
                                 borderColor: 'divider',
                                 mt: 4,
@@ -106,10 +108,10 @@ const SideBar = () => {
                                 style={{ width: '100%' }}
                             >
                                 <ListItemButton
-                                    sx={{ color: MainColors.WHITE }}
+                                    sx={{ color: MainColorsEnum.WHITE }}
                                 >
                                     <ListItemIcon
-                                        sx={{ color: MainColors.WHITE }}
+                                        sx={{ color: MainColorsEnum.WHITE }}
                                     >
                                         <Avatar
                                             sx={{ width: 24, height: 24 }}

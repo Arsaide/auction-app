@@ -8,7 +8,7 @@ import useOpenUserMenu from '../../../hooks/useOpenUserMenu/useOpenUserMenu';
 import useOpenModal from '../../../hooks/useOpenModal/useOpenModal';
 import { Hidden } from '@mui/material';
 import AppBarMenu from './component/appBarMenu/AppBarMenu';
-import { MainColors } from '../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../lib/colors/MainColors.enum';
 
 interface ResponsiveDrawerProps {
     children: React.ReactNode;
@@ -47,7 +47,7 @@ function NavBar({ children }: ResponsiveDrawerProps) {
                     sx={{
                         display: { xs: 'none', md: 'block' },
                         '& .MuiDrawer-paper': {
-                            bgcolor: MainColors.GRAY333,
+                            bgcolor: MainColorsEnum.GRAY333,
                             boxSizing: 'border-box',
                             width: drawerWidth,
                         },

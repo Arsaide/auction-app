@@ -10,8 +10,8 @@ import LoginForm from '../../loginForm/LoginForm';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
-import { MainColors } from '../../../../../lib/colors/MainColors';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
+import { MainColorsEnum } from '../../../../../lib/colors/MainColors.enum';
 import { DialogContentText } from '@mui/material';
 
 interface RegistrationFormValues {
@@ -85,15 +85,19 @@ const RegistrationForm: FC = () => {
                             <Typography
                                 variant={'h6'}
                                 sx={{
-                                    bgcolor: MainColors.GRAY595,
-                                    color: MainColors.WHITE,
+                                    bgcolor: MainColorsEnum.GRAY595,
+                                    color: MainColorsEnum.WHITE,
                                     pb: 3,
                                 }}
                             >
                                 Registration
                             </Typography>
                             <DialogContentText
-                                sx={{ color: MainColors.WHITE, ml: 0, mb: 2 }}
+                                sx={{
+                                    color: MainColorsEnum.WHITE,
+                                    ml: 0,
+                                    mb: 2,
+                                }}
                             >
                                 Enter your details. Everything is confidential!
                             </DialogContentText>
@@ -137,14 +141,14 @@ const RegistrationForm: FC = () => {
                                     type="submit"
                                     disabled={!isValid || isSubmitting}
                                     sx={{
-                                        bgcolor: ButtonColors.LGREEN,
+                                        bgcolor: ButtonColorsEnum.LGREEN,
                                         mt: 1,
                                         '&:hover': {
-                                            bgcolor: ButtonColors.DGREEN,
+                                            bgcolor: ButtonColorsEnum.DGREEN,
                                         },
                                         '&:disabled': {
-                                            bgcolor: ButtonColors.LRED,
-                                            color: ButtonColors.WHITE,
+                                            bgcolor: ButtonColorsEnum.LRED,
+                                            color: ButtonColorsEnum.WHITE,
                                         },
                                     }}
                                 >
@@ -154,9 +158,9 @@ const RegistrationForm: FC = () => {
                                 </Button>
                                 <Button
                                     sx={{
-                                        color: ButtonColors.WHITE,
+                                        color: ButtonColorsEnum.WHITE,
                                         '&:hover': {
-                                            color: ButtonColors.GRAY,
+                                            color: ButtonColorsEnum.GRAY,
                                         },
                                     }}
                                     onClick={handleLoginClick}
@@ -167,7 +171,7 @@ const RegistrationForm: FC = () => {
                             {errorMessage && (
                                 <Typography
                                     sx={{
-                                        color: ButtonColors.LRED,
+                                        color: ButtonColorsEnum.LRED,
                                         maxWidth: '340px',
                                     }}
                                 >

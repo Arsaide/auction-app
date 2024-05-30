@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Context } from '../../../../index';
-import { MainColors } from '../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../lib/colors/MainColors.enum';
 import { AuthContext } from '../../../../lib/providers/AuthContext';
 
 const BottomNav = () => {
@@ -51,7 +51,7 @@ const BottomNav = () => {
                 left: 0,
                 right: 0,
                 zIndex: 10,
-                backgroundColor: MainColors.GRAY333,
+                backgroundColor: MainColorsEnum.GRAY333,
             }}
         >
             <BottomNavigationAction
@@ -63,16 +63,21 @@ const BottomNav = () => {
                         sx={{
                             color:
                                 value === 0
-                                    ? MainColors.WHITE
-                                    : MainColors.GRAY808,
+                                    ? MainColorsEnum.WHITE
+                                    : MainColorsEnum.GRAY808,
                         }}
                     />
                 }
                 sx={{
-                    color: value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                    color:
+                        value === 3
+                            ? MainColorsEnum.GRAY808
+                            : MainColorsEnum.WHITE,
                     '& .MuiBottomNavigationAction-label': {
                         color:
-                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                            value === 3
+                                ? MainColorsEnum.GRAY808
+                                : MainColorsEnum.WHITE,
                     },
                 }}
             >
@@ -87,16 +92,21 @@ const BottomNav = () => {
                         sx={{
                             color:
                                 value === 1
-                                    ? MainColors.WHITE
-                                    : MainColors.GRAY808,
+                                    ? MainColorsEnum.WHITE
+                                    : MainColorsEnum.GRAY808,
                         }}
                     />
                 }
                 sx={{
-                    color: value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                    color:
+                        value === 3
+                            ? MainColorsEnum.GRAY808
+                            : MainColorsEnum.WHITE,
                     '& .MuiBottomNavigationAction-label': {
                         color:
-                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                            value === 3
+                                ? MainColorsEnum.GRAY808
+                                : MainColorsEnum.WHITE,
                     },
                 }}
             >
@@ -111,16 +121,21 @@ const BottomNav = () => {
                         sx={{
                             color:
                                 value === 2
-                                    ? MainColors.WHITE
-                                    : MainColors.GRAY808,
+                                    ? MainColorsEnum.WHITE
+                                    : MainColorsEnum.GRAY808,
                         }}
                     />
                 }
                 sx={{
-                    color: value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                    color:
+                        value === 3
+                            ? MainColorsEnum.GRAY808
+                            : MainColorsEnum.WHITE,
                     '& .MuiBottomNavigationAction-label': {
                         color:
-                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                            value === 3
+                                ? MainColorsEnum.GRAY808
+                                : MainColorsEnum.WHITE,
                     },
                 }}
             >
@@ -135,16 +150,21 @@ const BottomNav = () => {
                         sx={{
                             color:
                                 value === 3
-                                    ? MainColors.WHITE
-                                    : MainColors.GRAY808,
+                                    ? MainColorsEnum.WHITE
+                                    : MainColorsEnum.GRAY808,
                         }}
                     />
                 }
                 sx={{
-                    color: value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                    color:
+                        value === 3
+                            ? MainColorsEnum.GRAY808
+                            : MainColorsEnum.WHITE,
                     '& .MuiBottomNavigationAction-label': {
                         color:
-                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                            value === 3
+                                ? MainColorsEnum.GRAY808
+                                : MainColorsEnum.WHITE,
                     },
                 }}
             >
@@ -172,19 +192,21 @@ const BottomNav = () => {
                             sx={{
                                 color:
                                     value === 4
-                                        ? MainColors.WHITE
-                                        : MainColors.GRAY808,
+                                        ? MainColorsEnum.WHITE
+                                        : MainColorsEnum.GRAY808,
                             }}
                         />
                     }
                     sx={{
                         color:
-                            value === 3 ? MainColors.GRAY808 : MainColors.WHITE,
+                            value === 3
+                                ? MainColorsEnum.GRAY808
+                                : MainColorsEnum.WHITE,
                         '& .MuiBottomNavigationAction-label': {
                             color:
                                 value === 3
-                                    ? MainColors.GRAY808
-                                    : MainColors.WHITE,
+                                    ? MainColorsEnum.GRAY808
+                                    : MainColorsEnum.WHITE,
                         },
                     }}
                 >

@@ -7,7 +7,7 @@ import {
     AccordionDetails,
 } from '@mui/material';
 import Box from '@mui/material/Box';
-import { MainColors } from '../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../lib/colors/MainColors.enum';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import auctionFeatures from './auctionFeatures';
 
@@ -17,16 +17,19 @@ const InformationPage = () => {
             <Chip
                 label="Information"
                 variant="outlined"
-                sx={{ color: MainColors.WHITE, mb: 1 }}
+                sx={{ color: MainColorsEnum.WHITE, mb: 1 }}
             />
-            <Typography variant={'h4'} sx={{ color: MainColors.WHITE, mb: 2 }}>
+            <Typography
+                variant={'h4'}
+                sx={{ color: MainColorsEnum.WHITE, mb: 2 }}
+            >
                 Information about this project
             </Typography>
             <Box sx={{ maxWidth: '1000px' }}>
                 {auctionFeatures.map(item => (
                     <Accordion
                         key={item.key}
-                        sx={{ backgroundColor: MainColors.GRAY333_01 }}
+                        sx={{ backgroundColor: MainColorsEnum.GRAY333_01 }}
                         defaultExpanded={item.defaultExpanded}
                     >
                         <AccordionSummary
@@ -36,13 +39,13 @@ const InformationPage = () => {
                         >
                             <Typography
                                 variant={'h6'}
-                                sx={{ color: MainColors.WHITE }}
+                                sx={{ color: MainColorsEnum.WHITE }}
                             >
                                 {item.title}
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Typography sx={{ color: MainColors.WHITE }}>
+                            <Typography sx={{ color: MainColorsEnum.WHITE }}>
                                 {item.description}
                                 <br />
                                 {item.functionality}

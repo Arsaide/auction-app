@@ -9,8 +9,8 @@ import {
     DialogContent,
     DialogTitle,
 } from '@mui/material';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
-import { MainColors } from '../../../../../lib/colors/MainColors';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
+import { MainColorsEnum } from '../../../../../lib/colors/MainColors.enum';
 
 interface IDeleteSection {
     id: string | undefined;
@@ -36,10 +36,10 @@ const DeleteSection: FC<IDeleteSection> = ({ id }) => {
                 variant={'contained'}
                 onClick={handleSubmit}
                 sx={{
-                    color: MainColors.WHITE,
-                    bgcolor: ButtonColors.LRED,
+                    color: MainColorsEnum.WHITE,
+                    bgcolor: ButtonColorsEnum.LRED,
                     '&:hover': {
-                        bgcolor: ButtonColors.DRED,
+                        bgcolor: ButtonColorsEnum.DRED,
                     },
                 }}
             >
@@ -50,23 +50,23 @@ const DeleteSection: FC<IDeleteSection> = ({ id }) => {
                 <DialogTitle
                     id={'form-dialog-title'}
                     sx={{
-                        bgcolor: MainColors.GRAY595,
-                        color: MainColors.WHITE,
+                        bgcolor: MainColorsEnum.GRAY595,
+                        color: MainColorsEnum.WHITE,
                         pl: 3,
                     }}
                 >
                     Delete Auction
                 </DialogTitle>
 
-                <DialogContent sx={{ bgcolor: MainColors.GRAY595 }}>
+                <DialogContent sx={{ bgcolor: MainColorsEnum.GRAY595 }}>
                     <DeleteAuction />
                 </DialogContent>
-                <DialogActions sx={{ bgcolor: MainColors.GRAY595 }}>
+                <DialogActions sx={{ bgcolor: MainColorsEnum.GRAY595 }}>
                     <Button
                         onClick={() => setIsOpen(false)}
                         variant="outlined"
                         sx={{
-                            color: MainColors.WHITE,
+                            color: MainColorsEnum.WHITE,
                             mr: 1,
                             mb: 1,
                             p: 0.5,

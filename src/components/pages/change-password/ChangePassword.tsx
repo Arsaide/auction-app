@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Context } from '../../../index';
 import { CircularProgress, Typography } from '@mui/material';
 import ChangePasswordForm from './changePasswordForm/ChangePasswordForm';
-import { MainColors } from '../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../lib/colors/MainColors.enum';
 import Box from '@mui/material/Box';
 import ChangePasswordWindow from './changePasswordWindow/ChangePasswordWindow';
 
@@ -47,7 +47,7 @@ const ChangePassword = () => {
                     <CircularProgress
                         size={200}
                         thickness={2}
-                        sx={{ color: MainColors.GREEN }}
+                        sx={{ color: MainColorsEnum.GREEN }}
                     />
                 </Box>
             ) : isValidToken ? (

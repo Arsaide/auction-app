@@ -8,10 +8,10 @@ import Input from '../../../layout/common/inputs/input/Input';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import RegistrationForm from '../registration/registrationForm/RegistrationForm';
-import { ButtonColors } from '../../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../../lib/colors/ButtonColors.enum';
 import ForgotPasswordForm from '../recoveryPassword/forgotPassword/ForgotPasswordForm';
 import { DialogContentText } from '@mui/material';
-import { MainColors } from '../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../lib/colors/MainColors.enum';
 import { AuthContext } from '../../../../lib/providers/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -102,15 +102,19 @@ const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
                             <Typography
                                 variant={'h6'}
                                 sx={{
-                                    bgcolor: MainColors.GRAY595,
-                                    color: MainColors.WHITE,
+                                    bgcolor: MainColorsEnum.GRAY595,
+                                    color: MainColorsEnum.WHITE,
                                     pb: 3,
                                 }}
                             >
                                 Log in
                             </Typography>
                             <DialogContentText
-                                sx={{ color: MainColors.WHITE, ml: 0, mb: 1 }}
+                                sx={{
+                                    color: MainColorsEnum.WHITE,
+                                    ml: 0,
+                                    mb: 1,
+                                }}
                             >
                                 Enter your account login information
                             </DialogContentText>
@@ -141,14 +145,14 @@ const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
                                     type="submit"
                                     disabled={!isValid || isSubmitting}
                                     sx={{
-                                        bgcolor: ButtonColors.LGREEN,
+                                        bgcolor: ButtonColorsEnum.LGREEN,
                                         mt: 1,
                                         '&:hover': {
-                                            bgcolor: ButtonColors.DGREEN,
+                                            bgcolor: ButtonColorsEnum.DGREEN,
                                         },
                                         '&:disabled': {
-                                            bgcolor: ButtonColors.LRED,
-                                            color: ButtonColors.WHITE,
+                                            bgcolor: ButtonColorsEnum.LRED,
+                                            color: ButtonColorsEnum.WHITE,
                                         },
                                     }}
                                 >
@@ -157,7 +161,7 @@ const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
                                 {errorMessage && (
                                     <Typography
                                         sx={{
-                                            color: ButtonColors.LRED,
+                                            color: ButtonColorsEnum.LRED,
                                             maxWidth: '340px',
                                         }}
                                     >
@@ -167,9 +171,9 @@ const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
                                 <Button
                                     onClick={handleRegistrationClick}
                                     sx={{
-                                        color: ButtonColors.WHITE,
+                                        color: ButtonColorsEnum.WHITE,
                                         '&:hover': {
-                                            color: ButtonColors.GRAY,
+                                            color: ButtonColorsEnum.GRAY,
                                         },
                                     }}
                                 >
@@ -178,9 +182,9 @@ const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
                                 <Button
                                     onClick={handleForgotPasswordClick}
                                     sx={{
-                                        color: ButtonColors.WHITE,
+                                        color: ButtonColorsEnum.WHITE,
                                         '&:hover': {
-                                            color: ButtonColors.GRAY,
+                                            color: ButtonColorsEnum.GRAY,
                                         },
                                     }}
                                 >

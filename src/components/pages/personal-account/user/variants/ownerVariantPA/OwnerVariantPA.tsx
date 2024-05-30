@@ -8,11 +8,12 @@ import { AuctionInt } from '../../../../../../app/auction/auction-id/AuctionItem
 import { Context } from '../../../../../../index';
 import { toast } from 'react-toastify';
 import OwnerAuctionsInfo from './ownerTabs/ownAuctionsInfo/OwnerAuctionsInfo';
-import { MainColors } from '../../../../../../lib/colors/MainColors';
+
 import { CircularProgress } from '@mui/material';
 import { CustomTabPanel } from '../subComponents/customTabPanel';
 import OwnSettings from './ownerTabs/ownSettings/OwnSettings';
 import OwnAboutMe from './ownerTabs/ownAboutMe/OwnAboutMe';
+import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
 
 interface IOwnerVariantPersonalAccount {
     id: string | undefined;
@@ -89,7 +90,7 @@ const OwnerVariantPA: FC<IOwnerVariantPersonalAccount> = ({
                                 <CircularProgress
                                     size={200}
                                     thickness={2}
-                                    sx={{ color: MainColors.GREEN }}
+                                    sx={{ color: MainColorsEnum.GREEN }}
                                 />
                             </Box>
                         )}

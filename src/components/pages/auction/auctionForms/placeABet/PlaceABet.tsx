@@ -6,8 +6,8 @@ import { Context } from '../../../../../index';
 import { PlaceABetValidationSchema } from './placeABetValidationSchema/PlaceABetValidationSchema';
 import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
-import { MainColors } from '../../../../../lib/colors/MainColors';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
+import { MainColorsEnum } from '../../../../../lib/colors/MainColors.enum';
 import Typography from '@mui/material/Typography';
 import { calculateMinBet } from './CalculateMinBet';
 import './PlaceABet.css';
@@ -91,7 +91,7 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
                     <Form>
                         <Typography variant={'subtitle2'} sx={{ mt: 2 }}>
                             Minimum amount you can bet{' '}
-                            <span style={{ color: MainColors.RED }}>
+                            <span style={{ color: MainColorsEnum.RED }}>
                                 {calculateMinBet(parseFloat(maxBet))}$
                             </span>
                         </Typography>
@@ -117,8 +117,8 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
                                 sx={{
                                     mt: 2,
                                     '&:disabled': {
-                                        bgcolor: ButtonColors.LRED,
-                                        color: MainColors.WHITE,
+                                        bgcolor: ButtonColorsEnum.LRED,
+                                        color: MainColorsEnum.WHITE,
                                     },
                                 }}
                             >
@@ -131,13 +131,13 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
                                 disabled={!isValid || isSubmitting}
                                 sx={{
                                     mt: 2,
-                                    bgcolor: ButtonColors.LGREEN,
+                                    bgcolor: ButtonColorsEnum.LGREEN,
                                     '&:hover': {
-                                        bgcolor: ButtonColors.DGREEN,
+                                        bgcolor: ButtonColorsEnum.DGREEN,
                                     },
                                     '&:disabled': {
-                                        bgcolor: ButtonColors.LRED,
-                                        color: MainColors.WHITE,
+                                        bgcolor: ButtonColorsEnum.LRED,
+                                        color: MainColorsEnum.WHITE,
                                     },
                                 }}
                             >
@@ -145,7 +145,7 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
                             </Button>
                         )}
                         {errorMessage.server && (
-                            <Typography sx={{ color: MainColors.RED }}>
+                            <Typography sx={{ color: MainColorsEnum.RED }}>
                                 {errorMessage.server}
                             </Typography>
                         )}

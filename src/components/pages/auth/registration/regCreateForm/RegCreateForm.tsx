@@ -7,8 +7,8 @@ import Input from '../../../../layout/common/inputs/input/Input';
 import { regCreateValidationSchema } from './regCreateValidation/regCreateValidationSchema';
 import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
-import { MainColors } from '../../../../../lib/colors/MainColors';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
+import { MainColorsEnum } from '../../../../../lib/colors/MainColors.enum';
 import { DialogContentText } from '@mui/material';
 
 interface RegCreateFormProps {
@@ -55,15 +55,15 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                         <Typography
                             variant={'h6'}
                             sx={{
-                                bgcolor: MainColors.GRAY595,
-                                color: MainColors.WHITE,
+                                bgcolor: MainColorsEnum.GRAY595,
+                                color: MainColorsEnum.WHITE,
                                 pb: 3,
                             }}
                         >
                             Email confirmation
                         </Typography>
                         <DialogContentText
-                            sx={{ color: MainColors.WHITE, ml: 0, mb: 1 }}
+                            sx={{ color: MainColorsEnum.WHITE, ml: 0, mb: 1 }}
                         >
                             Enter the code that came to your email
                         </DialogContentText>
@@ -88,13 +88,13 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                                 type="submit"
                                 disabled={!isValid || isSubmitting}
                                 sx={{
-                                    bgcolor: ButtonColors.LGREEN,
+                                    bgcolor: ButtonColorsEnum.LGREEN,
                                     '&:hover': {
-                                        bgcolor: ButtonColors.DGREEN,
+                                        bgcolor: ButtonColorsEnum.DGREEN,
                                     },
                                     '&:disabled': {
-                                        bgcolor: ButtonColors.LRED,
-                                        color: ButtonColors.WHITE,
+                                        bgcolor: ButtonColorsEnum.LRED,
+                                        color: ButtonColorsEnum.WHITE,
                                     },
                                 }}
                             >
@@ -106,7 +106,7 @@ const RegCreateForm: FC<RegCreateFormProps> = ({ onSubmit }) => {
                         {errorMessage && (
                             <Typography
                                 sx={{
-                                    color: ButtonColors.LRED,
+                                    color: ButtonColorsEnum.LRED,
                                     maxWidth: '340px',
                                 }}
                             >

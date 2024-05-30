@@ -8,7 +8,7 @@ import AuctionReloadButton from './components/AuctionReloadButton/AuctionReloadB
 import Button from '@mui/material/Button';
 import usePagination from '../../../../hooks/usePagination/usePagination';
 import { pagintaionStyles } from './pagination.styles';
-import { ButtonColors } from '../../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../../lib/colors/ButtonColors.enum';
 
 interface AuctionItem {
     _id: string;
@@ -84,9 +84,9 @@ const AuctionList = () => {
                     />
                     <Button
                         sx={{
-                            color: ButtonColors.LGREEN,
+                            color: ButtonColorsEnum.LGREEN,
                             '&:hover': {
-                                color: ButtonColors.DGREEN,
+                                color: ButtonColorsEnum.DGREEN,
                             },
                         }}
                     >
@@ -94,9 +94,9 @@ const AuctionList = () => {
                     </Button>
                     <Button
                         sx={{
-                            color: ButtonColors.LGREEN,
+                            color: ButtonColorsEnum.LGREEN,
                             '&:hover': {
-                                color: ButtonColors.DGREEN,
+                                color: ButtonColorsEnum.DGREEN,
                             },
                         }}
                     >
@@ -104,9 +104,9 @@ const AuctionList = () => {
                     </Button>
                     <Button
                         sx={{
-                            color: ButtonColors.LGREEN,
+                            color: ButtonColorsEnum.LGREEN,
                             '&:hover': {
-                                color: ButtonColors.DGREEN,
+                                color: ButtonColorsEnum.DGREEN,
                             },
                         }}
                     >

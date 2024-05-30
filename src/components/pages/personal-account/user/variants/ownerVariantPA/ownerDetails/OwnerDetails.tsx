@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 
 import Box from '@mui/material/Box';
 import { Dialog, DialogContent, DialogTitle, Skeleton } from '@mui/material';
-import { MainColors } from '../../../../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../../../../lib/colors/MainColors.enum';
 import AddUserAvatarForm from '../../../userForms/addUserAvatarForm/AddUserAvatarForm';
 
 interface OwnerDetailsProps {
@@ -82,14 +82,14 @@ const OwnerDetails: FC<OwnerDetailsProps> = ({
                 <DialogTitle
                     id={'form-dialog-title'}
                     sx={{
-                        bgcolor: MainColors.GRAY595,
-                        color: MainColors.WHITE,
+                        bgcolor: MainColorsEnum.GRAY595,
+                        color: MainColorsEnum.WHITE,
                         pl: 3,
                     }}
                 >
                     Upload image
                 </DialogTitle>
-                <DialogContent sx={{ bgcolor: MainColors.GRAY595 }}>
+                <DialogContent sx={{ bgcolor: MainColorsEnum.GRAY595 }}>
                     <AddUserAvatarForm />
                 </DialogContent>
             </Dialog>

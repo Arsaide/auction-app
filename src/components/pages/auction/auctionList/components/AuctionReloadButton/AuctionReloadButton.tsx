@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Button from '@mui/material/Button';
 import CachedIcon from '@mui/icons-material/Cached';
 import { keyframes } from '@mui/system';
-import { ButtonColors } from '../../../../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../../../../lib/colors/ButtonColors.enum';
 
 interface ReloadButtonInt {
     disabled: boolean;
@@ -30,13 +30,13 @@ const AuctionReloadButton: FC<ReloadButtonInt> = ({
             variant="contained"
             onClick={onClick}
             sx={{
-                bgcolor: ButtonColors.DGREEN,
+                bgcolor: ButtonColorsEnum.DGREEN,
                 '&:hover': {
-                    bgcolor: ButtonColors.LGREEN,
+                    bgcolor: ButtonColorsEnum.LGREEN,
                 },
                 '&:disabled': {
-                    bgcolor: ButtonColors.LRED,
-                    color: ButtonColors.WHITE,
+                    bgcolor: ButtonColorsEnum.LRED,
+                    color: ButtonColorsEnum.WHITE,
                 },
             }}
         >

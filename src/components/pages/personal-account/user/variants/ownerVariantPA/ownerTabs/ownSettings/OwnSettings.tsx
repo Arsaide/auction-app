@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
-import { ButtonColors } from '../../../../../../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../../../../../../lib/colors/ButtonColors.enum';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../../../../../../../../index';
 import { AuthContext } from '../../../../../../../../lib/providers/AuthContext';
@@ -44,9 +44,9 @@ const OwnSettings = () => {
                             }
                             sx={{
                                 mt: 3,
-                                bgcolor: ButtonColors.LGREEN,
+                                bgcolor: ButtonColorsEnum.LGREEN,
                                 '&:hover': {
-                                    bgcolor: ButtonColors.DGREEN,
+                                    bgcolor: ButtonColorsEnum.DGREEN,
                                 },
                             }}
                         >
@@ -60,9 +60,9 @@ const OwnSettings = () => {
                             onClick={() => setIsForgotPasswordFormVisible(true)}
                             sx={{
                                 mt: 3,
-                                bgcolor: ButtonColors.LGREEN,
+                                bgcolor: ButtonColorsEnum.LGREEN,
                                 '&:hover': {
-                                    bgcolor: ButtonColors.DGREEN,
+                                    bgcolor: ButtonColorsEnum.DGREEN,
                                 },
                             }}
                         >
@@ -73,9 +73,9 @@ const OwnSettings = () => {
                             onClick={handleSubmit}
                             sx={{
                                 mt: 3,
-                                bgcolor: ButtonColors.LGREEN,
+                                bgcolor: ButtonColorsEnum.LGREEN,
                                 '&:hover': {
-                                    bgcolor: ButtonColors.DGREEN,
+                                    bgcolor: ButtonColorsEnum.DGREEN,
                                 },
                             }}
                         >

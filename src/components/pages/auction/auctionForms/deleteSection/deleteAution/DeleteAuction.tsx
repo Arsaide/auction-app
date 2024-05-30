@@ -7,8 +7,8 @@ import Input from '../../../../../layout/common/inputs/input/Input';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import { deleteAuctionValidationSchema } from './deleteAutctionValidation/deleteAuctionValidationSchema';
-import { ButtonColors } from '../../../../../../lib/colors/ButtonColors';
-import { MainColors } from '../../../../../../lib/colors/MainColors';
+import { ButtonColorsEnum } from '../../../../../../lib/colors/ButtonColors.enum';
+import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
 
 interface DeleteAuctionFormValues {
     code: string;
@@ -69,13 +69,13 @@ const DeleteAuction: FC = () => {
                                 type={'submit'}
                                 disabled={!isValid || isSubmitting}
                                 sx={{
-                                    bgcolor: ButtonColors.LGREEN,
+                                    bgcolor: ButtonColorsEnum.LGREEN,
                                     '&:hover': {
-                                        bgcolor: ButtonColors.DGREEN,
+                                        bgcolor: ButtonColorsEnum.DGREEN,
                                     },
                                     '&:disabled': {
-                                        bgcolor: ButtonColors.LRED,
-                                        color: MainColors.WHITE,
+                                        bgcolor: ButtonColorsEnum.LRED,
+                                        color: MainColorsEnum.WHITE,
                                     },
                                 }}
                             >
@@ -87,7 +87,7 @@ const DeleteAuction: FC = () => {
                         {errorMessage && (
                             <Typography
                                 sx={{
-                                    color: MainColors.RED,
+                                    color: MainColorsEnum.RED,
                                     maxWidth: '340px',
                                 }}
                             >

@@ -6,7 +6,7 @@ import { CustomTabList } from '../subComponents/customTabList';
 import Tab from '@mui/material/Tab';
 import { CustomTabPanel } from '../subComponents/customTabPanel';
 import { CircularProgress } from '@mui/material';
-import { MainColors } from '../../../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
 import { Context } from '../../../../../../index';
 import { AuctionInt } from '../../../../../../app/auction/auction-id/AuctionItemProps';
 import { toast } from 'react-toastify';
@@ -80,7 +80,7 @@ const UserVariantPA: FC<IUserVariantPersonalAccount> = ({
                                 <CircularProgress
                                     size={200}
                                     thickness={2}
-                                    sx={{ color: MainColors.GREEN }}
+                                    sx={{ color: MainColorsEnum.GREEN }}
                                 />
                             </Box>
                         )}

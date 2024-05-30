@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
-import { ButtonColors } from '../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../lib/colors/ButtonColors.enum';
 import { Close } from '@mui/icons-material';
 import CreateAuctionForm from './auctionForms/createAuction/CreateAuctionForm';
 import { Typography } from '@mui/material';
@@ -22,9 +22,9 @@ const AuctionsPage = () => {
                             <Button
                                 variant="contained"
                                 sx={{
-                                    bgcolor: ButtonColors.LRED,
+                                    bgcolor: ButtonColorsEnum.LRED,
                                     '&:hover': {
-                                        bgcolor: ButtonColors.DRED,
+                                        bgcolor: ButtonColorsEnum.DRED,
                                     },
                                     mb: 2,
                                 }}
@@ -49,9 +49,9 @@ const AuctionsPage = () => {
                             <Button
                                 variant="contained"
                                 sx={{
-                                    bgcolor: ButtonColors.LGREEN,
+                                    bgcolor: ButtonColorsEnum.LGREEN,
                                     '&:hover': {
-                                        bgcolor: ButtonColors.DGREEN,
+                                        bgcolor: ButtonColorsEnum.DGREEN,
                                     },
                                 }}
                                 onClick={() => setIsFormVisible(true)}

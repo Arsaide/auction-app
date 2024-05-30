@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import UserVariantPA from './variants/userVariantPA/UserVariantPA';
 import OwnerVariantPA from './variants/ownerVariantPA/OwnerVariantPA';
 import { CircularProgress } from '@mui/material';
-import { MainColors } from '../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../lib/colors/MainColors.enum';
 import Box from '@mui/material/Box';
 
 const UserIdPage: FC = () => {
@@ -87,7 +87,7 @@ const UserIdPage: FC = () => {
                         <CircularProgress
                             size={200}
                             thickness={2}
-                            sx={{ color: MainColors.GREEN }}
+                            sx={{ color: MainColorsEnum.GREEN }}
                         />
                     </Box>
                 </>

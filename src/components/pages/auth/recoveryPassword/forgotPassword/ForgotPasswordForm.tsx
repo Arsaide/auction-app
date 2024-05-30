@@ -5,10 +5,10 @@ import { forgotPasswordFormValidationSchema } from './forgotPasswordValidation/f
 import Box from '@mui/material/Box';
 import Input from '../../../../layout/common/inputs/input/Input';
 import Button from '@mui/material/Button';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
 import Typography from '@mui/material/Typography';
 import LoginForm from '../../loginForm/LoginForm';
-import { MainColors } from '../../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../../lib/colors/MainColors.enum';
 import { toast } from 'react-toastify';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
 import Cookies from 'js-cookie';
@@ -94,15 +94,19 @@ const ForgotPasswordForm: FC<IForgotPasswordForm> = ({
                             <Typography
                                 variant={'h6'}
                                 sx={{
-                                    bgcolor: MainColors.GRAY595,
-                                    color: MainColors.WHITE,
+                                    bgcolor: MainColorsEnum.GRAY595,
+                                    color: MainColorsEnum.WHITE,
                                     pb: 3,
                                 }}
                             >
                                 Forgot password?
                             </Typography>
                             <DialogContentText
-                                sx={{ color: MainColors.WHITE, ml: 0, mb: 1 }}
+                                sx={{
+                                    color: MainColorsEnum.WHITE,
+                                    ml: 0,
+                                    mb: 1,
+                                }}
                             >
                                 Enter your email to reset your password
                             </DialogContentText>
@@ -129,14 +133,16 @@ const ForgotPasswordForm: FC<IForgotPasswordForm> = ({
                                             type="submit"
                                             disabled={!isValid || isSubmitting}
                                             sx={{
-                                                bgcolor: ButtonColors.LGREEN,
+                                                bgcolor:
+                                                    ButtonColorsEnum.LGREEN,
                                                 '&:hover': {
                                                     bgcolor:
-                                                        ButtonColors.DGREEN,
+                                                        ButtonColorsEnum.DGREEN,
                                                 },
                                                 '&:disabled': {
-                                                    bgcolor: ButtonColors.LRED,
-                                                    color: ButtonColors.WHITE,
+                                                    bgcolor:
+                                                        ButtonColorsEnum.LRED,
+                                                    color: ButtonColorsEnum.WHITE,
                                                 },
                                             }}
                                         >
@@ -149,7 +155,7 @@ const ForgotPasswordForm: FC<IForgotPasswordForm> = ({
                                     <>
                                         <Typography
                                             sx={{
-                                                color: MainColors.GREEN,
+                                                color: MainColorsEnum.GREEN,
                                                 maxWidth: '261px',
                                             }}
                                         >
@@ -170,9 +176,9 @@ const ForgotPasswordForm: FC<IForgotPasswordForm> = ({
                                     <Button
                                         onClick={handleLoginClick}
                                         sx={{
-                                            color: ButtonColors.WHITE,
+                                            color: ButtonColorsEnum.WHITE,
                                             '&:hover': {
-                                                color: ButtonColors.GRAY,
+                                                color: ButtonColorsEnum.GRAY,
                                             },
                                         }}
                                     >
@@ -183,7 +189,7 @@ const ForgotPasswordForm: FC<IForgotPasswordForm> = ({
                             {errorMessage && (
                                 <Typography
                                     sx={{
-                                        color: ButtonColors.LRED,
+                                        color: ButtonColorsEnum.LRED,
                                         maxWidth: '340px',
                                     }}
                                 >

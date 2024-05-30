@@ -7,7 +7,7 @@ import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
 import WrapTextIcon from '@mui/icons-material/WrapText';
 import './TextEditInput.css';
 import Button from '@mui/material/Button';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
 import parse from 'html-react-parser';
 import { Field, ErrorMessage as Error, useFormikContext } from 'formik';
 import { textParserOptions } from '../../../../../lib/parserOptions/textParserOptions/textParserOptions';
@@ -65,10 +65,10 @@ const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
                             <Button
                                 className={'toolsBtn'}
                                 sx={{
-                                    color: ButtonColors.WHITE,
+                                    color: ButtonColorsEnum.WHITE,
                                     mt: 1,
                                     '&:hover': {
-                                        color: ButtonColors.LRED,
+                                        color: ButtonColorsEnum.LRED,
                                     },
                                 }}
                                 onClick={() => setText('')}
@@ -80,10 +80,10 @@ const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
                             <Button
                                 className={'toolsBtn'}
                                 sx={{
-                                    color: ButtonColors.WHITE,
+                                    color: ButtonColorsEnum.WHITE,
                                     mt: 1,
                                     '&:hover': {
-                                        color: ButtonColors.GRAY,
+                                        color: ButtonColorsEnum.GRAY,
                                     },
                                 }}
                                 onClick={() => applyFormat('bold')}
@@ -95,10 +95,10 @@ const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
                             <Button
                                 className={'toolsBtn'}
                                 sx={{
-                                    color: ButtonColors.WHITE,
+                                    color: ButtonColorsEnum.WHITE,
                                     mt: 1,
                                     '&:hover': {
-                                        color: ButtonColors.GRAY,
+                                        color: ButtonColorsEnum.GRAY,
                                     },
                                 }}
                                 onClick={() => applyFormat('italic')}
@@ -110,10 +110,10 @@ const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
                             <Button
                                 className={'toolsBtn'}
                                 sx={{
-                                    color: ButtonColors.WHITE,
+                                    color: ButtonColorsEnum.WHITE,
                                     mt: 1,
                                     '&:hover': {
-                                        color: ButtonColors.GRAY,
+                                        color: ButtonColorsEnum.GRAY,
                                     },
                                 }}
                                 onClick={() => applyFormat('underline')}
@@ -128,10 +128,10 @@ const TextEditInput: FC<ITextEditInput> = ({ id, name, placeholder }) => {
                             <Button
                                 className={'toolsBtn'}
                                 sx={{
-                                    color: ButtonColors.WHITE,
+                                    color: ButtonColorsEnum.WHITE,
                                     mt: 1,
                                     '&:hover': {
-                                        color: ButtonColors.GRAY,
+                                        color: ButtonColorsEnum.GRAY,
                                     },
                                 }}
                                 onClick={() => lineBreak()}

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
-import { MainColors } from '../../../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
 
 interface SubmitTimerInterface {
     nextSubmitTime: number;
@@ -38,7 +38,7 @@ const SubmitTimer: FC<SubmitTimerInterface> = ({ nextSubmitTime, text }) => {
     };
 
     return (
-        <Typography sx={{ color: MainColors.RED }}>
+        <Typography sx={{ color: MainColorsEnum.RED }}>
             {!timerExpired && (
                 <>
                     {text}

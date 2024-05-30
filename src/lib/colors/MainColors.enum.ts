@@ -1,4 +1,4 @@
-export enum MainColors {
+export enum MainColorsEnum {
     GRAY333 = '#333',
     GRAY333_01 = 'rgba(255, 255, 255, 0.1)',
     GRAY808 = '#808080',

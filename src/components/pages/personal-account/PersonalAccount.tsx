@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LoginForm from '../auth/loginForm/LoginForm';
 import RegistrationForm from '../auth/registration/registrationForm/RegistrationForm';
-import { ButtonColors } from '../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../lib/colors/ButtonColors.enum';
 import { AuthContext } from '../../../lib/providers/AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -66,10 +66,10 @@ const PersonalAccountPage: FC = () => {
                             >
                                 <Button
                                     sx={{
-                                        color: ButtonColors.WHITE,
-                                        bgcolor: ButtonColors.DGREEN,
+                                        color: ButtonColorsEnum.WHITE,
+                                        bgcolor: ButtonColorsEnum.DGREEN,
                                         '&:hover': {
-                                            bgcolor: ButtonColors.LGREEN,
+                                            bgcolor: ButtonColorsEnum.LGREEN,
                                         },
                                     }}
                                     variant="contained"
@@ -80,10 +80,10 @@ const PersonalAccountPage: FC = () => {
                                 </Button>
                                 <Button
                                     sx={{
-                                        color: ButtonColors.WHITE,
-                                        bgcolor: ButtonColors.DGREEN,
+                                        color: ButtonColorsEnum.WHITE,
+                                        bgcolor: ButtonColorsEnum.DGREEN,
                                         '&:hover': {
-                                            bgcolor: ButtonColors.LGREEN,
+                                            bgcolor: ButtonColorsEnum.LGREEN,
                                         },
                                     }}
                                     variant="contained"

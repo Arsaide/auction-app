@@ -12,8 +12,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SubmitTimer from '../../../../layout/common/ui/timers/submitTimer/SubmitTimer';
-import { MainColors } from '../../../../../lib/colors/MainColors';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { MainColorsEnum } from '../../../../../lib/colors/MainColors.enum';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
 import Cookies from 'js-cookie';
 import TextEditInput from '../../../../layout/common/inputs/textEditInput/TextEditInput';
 import { requestParserOptions } from '../../../../../lib/parserOptions/requestParserOptions/requestParserOptions';
@@ -158,18 +158,18 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                         disabled
                                         sx={{
                                             '& input.MuiInputBase-input': {
-                                                color: `${MainColors.GRAY999} !important`,
+                                                color: `${MainColorsEnum.GRAY999} !important`,
                                             },
                                             '& fieldset': {
-                                                borderColor: `${MainColors.GRAY999} !important`,
+                                                borderColor: `${MainColorsEnum.GRAY999} !important`,
                                             },
                                             '& .MuiSvgIcon-root': {
-                                                color: `${MainColors.GRAY999} !important`,
+                                                color: `${MainColorsEnum.GRAY999} !important`,
                                             },
                                             '& .MuiInputBase-input.Mui-disabled':
                                                 {
                                                     WebkitTextFillColor:
-                                                        MainColors.GRAY999,
+                                                        MainColorsEnum.GRAY999,
                                                 },
                                         }}
                                     />
@@ -183,23 +183,24 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                         disablePast
                                         sx={{
                                             '& input': {
-                                                color: MainColors.WHITE,
+                                                color: MainColorsEnum.WHITE,
                                             },
                                             '& fieldset': {
-                                                borderColor: MainColors.WHITE,
+                                                borderColor:
+                                                    MainColorsEnum.WHITE,
                                             },
                                             '& .MuiSvgIcon-root': {
-                                                color: MainColors.WHITE,
+                                                color: MainColorsEnum.WHITE,
                                             },
                                             '&:hover': {
                                                 '& input': {
-                                                    color: MainColors.GRAY999,
+                                                    color: MainColorsEnum.GRAY999,
                                                 },
                                                 '& fieldset': {
-                                                    borderColor: `${MainColors.GRAY999} !important`,
+                                                    borderColor: `${MainColorsEnum.GRAY999} !important`,
                                                 },
                                                 '& .MuiSvgIcon-root': {
-                                                    color: MainColors.GRAY999,
+                                                    color: MainColorsEnum.GRAY999,
                                                 },
                                             },
                                         }}
@@ -211,13 +212,13 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                     disabled={!isValid || isSubmitting}
                                     sx={{
                                         height: 60,
-                                        bgcolor: ButtonColors.LGREEN,
+                                        bgcolor: ButtonColorsEnum.LGREEN,
                                         '&:hover': {
-                                            bgcolor: ButtonColors.DGREEN,
+                                            bgcolor: ButtonColorsEnum.DGREEN,
                                         },
                                         '&:disabled': {
-                                            bgcolor: ButtonColors.LRED,
-                                            color: MainColors.WHITE,
+                                            bgcolor: ButtonColorsEnum.LRED,
+                                            color: MainColorsEnum.WHITE,
                                         },
                                     }}
                                 >
@@ -226,7 +227,9 @@ const EditAuctionForm: FC<EditAuctionsSubmitProps> = ({
                                         : 'Edit your auction'}
                                 </Button>
                                 {errorMessage && (
-                                    <Typography sx={{ color: MainColors.RED }}>
+                                    <Typography
+                                        sx={{ color: MainColorsEnum.RED }}
+                                    >
                                         {errorMessage}
                                     </Typography>
                                 )}

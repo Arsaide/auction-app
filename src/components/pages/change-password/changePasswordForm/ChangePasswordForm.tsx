@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import Box from '@mui/material/Box';
 import Input from '../../../layout/common/inputs/input/Input';
 import Button from '@mui/material/Button';
-import { ButtonColors } from '../../../../lib/colors/ButtonColors';
+import { ButtonColorsEnum } from '../../../../lib/colors/ButtonColors.enum';
 import Typography from '@mui/material/Typography';
 import { Context } from '../../../../index';
 import { changePasswordFormValidationSchema } from './changePasswordFormValidation/changePasswordFormValidationSchema';
@@ -76,14 +76,14 @@ const ChangePasswordForm: FC<IChangePasswordForm> = ({ token }) => {
                             type="submit"
                             disabled={!isValid || isSubmitting}
                             sx={{
-                                bgcolor: ButtonColors.LGREEN,
+                                bgcolor: ButtonColorsEnum.LGREEN,
                                 mt: 1,
                                 '&:hover': {
-                                    bgcolor: ButtonColors.DGREEN,
+                                    bgcolor: ButtonColorsEnum.DGREEN,
                                 },
                                 '&:disabled': {
-                                    bgcolor: ButtonColors.LRED,
-                                    color: ButtonColors.WHITE,
+                                    bgcolor: ButtonColorsEnum.LRED,
+                                    color: ButtonColorsEnum.WHITE,
                                 },
                             }}
                         >
@@ -93,7 +93,7 @@ const ChangePasswordForm: FC<IChangePasswordForm> = ({ token }) => {
                     {errorMessage && (
                         <Typography
                             sx={{
-                                color: ButtonColors.LRED,
+                                color: ButtonColorsEnum.LRED,
                                 maxWidth: '340px',
                             }}
                         >

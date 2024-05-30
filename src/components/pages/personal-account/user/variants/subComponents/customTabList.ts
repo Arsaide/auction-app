@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import TabList from '@mui/lab/TabList';
-import { MainColors } from '../../../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
 
 export const CustomTabList = styled(TabList)`
     gap: 10px;
     & .MuiTabs-indicator {
-        background-color: ${MainColors.GREEN};
+        background-color: ${MainColorsEnum.GREEN};
     }
     & .MuiTab-root {
-        color: ${MainColors.GRAY999};
+        color: ${MainColorsEnum.GRAY999};
         margin-right: 5px;
     }
     & .Mui-selected {
-        color: ${MainColors.WHITE};
+        color: ${MainColorsEnum.WHITE};
     }
 `;

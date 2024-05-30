@@ -16,8 +16,8 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import { Context } from '../../../../../index';
-import { MainColors } from '../../../../../lib/colors/MainColors';
-import { ButtonColors } from '../../../../../lib/colors/ButtonColors';
+import { MainColorsEnum } from '../../../../../lib/colors/MainColors.enum';
+import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
 import { AuthContext } from '../../../../../lib/providers/AuthContext';
 
 interface AppBarMenuInt {
@@ -55,7 +55,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
             sx={{
                 width: { md: `calc(100% - ${drawerWidth}px)` },
                 ml: { sm: `${drawerWidth}px` },
-                bgcolor: MainColors.GRAY333,
+                bgcolor: MainColorsEnum.GRAY333,
             }}
         >
             <Toolbar
@@ -71,13 +71,13 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                             <Chip
                                 label={`${balance} $`}
                                 color="default"
-                                sx={{ mr: 2, bgcolor: MainColors.WHITE }}
+                                sx={{ mr: 2, bgcolor: MainColorsEnum.WHITE }}
                             />
                         ) : (
                             <Chip
                                 label={`Loading...`}
                                 color="default"
-                                sx={{ mr: 2, bgcolor: MainColors.WHITE }}
+                                sx={{ mr: 2, bgcolor: MainColorsEnum.WHITE }}
                             />
                         )}
                     </Hidden>
@@ -101,9 +101,10 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         color="inherit"
                                         sx={{
                                             color: 'white',
-                                            bgcolor: ButtonColors.DGREEN,
+                                            bgcolor: ButtonColorsEnum.DGREEN,
                                             '&:hover': {
-                                                bgcolor: ButtonColors.LGREEN,
+                                                bgcolor:
+                                                    ButtonColorsEnum.LGREEN,
                                             },
                                         }}
                                         onClick={handleLoginClickOpen}
@@ -116,9 +117,10 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                         sx={{
                                             color: 'white',
                                             ml: 2,
-                                            bgcolor: ButtonColors.DGREEN,
+                                            bgcolor: ButtonColorsEnum.DGREEN,
                                             '&:hover': {
-                                                bgcolor: ButtonColors.LGREEN,
+                                                bgcolor:
+                                                    ButtonColorsEnum.LGREEN,
                                             },
                                         }}
                                         onClick={handleRegistrationClickOpen}
@@ -145,7 +147,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                             color="default"
                                             sx={{
                                                 mr: 2,
-                                                bgcolor: MainColors.WHITE,
+                                                bgcolor: MainColorsEnum.WHITE,
                                             }}
                                         />
                                     ) : (
@@ -154,7 +156,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                             color="default"
                                             sx={{
                                                 mr: 2,
-                                                bgcolor: MainColors.WHITE,
+                                                bgcolor: MainColorsEnum.WHITE,
                                             }}
                                         />
                                     )}
@@ -195,7 +197,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                                     }
                                                     style={{
                                                         textDecoration: 'none',
-                                                        color: MainColors.BLACK,
+                                                        color: MainColorsEnum.BLACK,
                                                     }}
                                                 >
                                                     My account
@@ -224,7 +226,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                           sx={{
                               bgcolor: 'white',
                               '& .MuiLinearProgress-bar': {
-                                  backgroundColor: MainColors.GREEN,
+                                  backgroundColor: MainColorsEnum.GREEN,
                               },
                           }}
                       />

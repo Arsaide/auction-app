@@ -14,8 +14,8 @@ import LazyLoadImage from '../../../../../layout/common/lazyLoadImage/LazyLoadIm
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Box } from '@mui/material';
-import { ButtonColors } from '../../../../../../lib/colors/ButtonColors';
-import { MainColors } from '../../../../../../lib/colors/MainColors';
+import { ButtonColorsEnum } from '../../../../../../lib/colors/ButtonColors.enum';
+import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
 import { AuthContext } from '../../../../../../lib/providers/AuthContext';
 import { textParserOptions } from '../../../../../../lib/parserOptions/textParserOptions/textParserOptions';
 import parse from 'html-react-parser';
@@ -68,11 +68,14 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 <Box sx={{ position: 'absolute', top: 5, left: 5, zIndex: 5 }}>
                     {active ? (
                         <VerifiedIcon
-                            sx={{ color: ButtonColors.LGREEN, fontSize: 45 }}
+                            sx={{
+                                color: ButtonColorsEnum.LGREEN,
+                                fontSize: 45,
+                            }}
                         />
                     ) : (
                         <CancelIcon
-                            sx={{ color: ButtonColors.LRED, fontSize: 45 }}
+                            sx={{ color: ButtonColorsEnum.LRED, fontSize: 45 }}
                         />
                     )}
                 </Box>
@@ -96,7 +99,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                             <u>
                                 <span
                                     style={{
-                                        color: MainColors.BLACK_06,
+                                        color: MainColorsEnum.BLACK_06,
                                         cursor: 'pointer',
                                     }}
                                     onClick={handleLearnMoreClick}
@@ -106,7 +109,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                             </u>
                         ) : (
                             <Link
-                                style={{ color: MainColors.BLACK_06 }}
+                                style={{ color: MainColorsEnum.BLACK_06 }}
                                 to={`/auction/${id}`}
                             >
                                 ...read more
@@ -122,7 +125,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                 <u>{minRates}</u>$
                                 <span
                                     style={{
-                                        color: MainColors.GREEN,
+                                        color: MainColorsEnum.GREEN,
                                         fontSize: '14px',
                                         fontWeight: '700',
                                         paddingLeft: '10px',
@@ -136,7 +139,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                 <u>{rates}</u>$
                                 <span
                                     style={{
-                                        color: MainColors.RED,
+                                        color: MainColorsEnum.RED,
                                         fontSize: '14px',
                                         fontWeight: '700',
                                         paddingLeft: '10px',
@@ -154,7 +157,9 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         <>
                             <span>
                                 Auction sold for -{' '}
-                                <u style={{ color: MainColors.RED }}>{rates}</u>
+                                <u style={{ color: MainColorsEnum.RED }}>
+                                    {rates}
+                                </u>
                                 $
                             </span>
                         </>
@@ -170,10 +175,10 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         size="small"
                         variant="contained"
                         sx={{
-                            color: MainColors.WHITE,
-                            bgcolor: ButtonColors.DGREEN,
+                            color: MainColorsEnum.WHITE,
+                            bgcolor: ButtonColorsEnum.DGREEN,
                             '&:hover': {
-                                bgcolor: ButtonColors.LGREEN,
+                                bgcolor: ButtonColorsEnum.LGREEN,
                             },
                         }}
                         onClick={handleLearnMoreClick}
@@ -187,16 +192,16 @@ const AuctionCard: FC<AuctionCardProps> = ({
                         size="small"
                         variant="contained"
                         sx={{
-                            color: MainColors.WHITE,
-                            bgcolor: ButtonColors.DGREEN,
+                            color: MainColorsEnum.WHITE,
+                            bgcolor: ButtonColorsEnum.DGREEN,
                             '&:hover': {
-                                bgcolor: ButtonColors.LGREEN,
+                                bgcolor: ButtonColorsEnum.LGREEN,
                             },
                         }}
                     >
                         <Link
                             style={{
-                                color: MainColors.WHITE,
+                                color: MainColorsEnum.WHITE,
                                 textDecoration: 'none',
                             }}
                             to={`/auction/${id}`}

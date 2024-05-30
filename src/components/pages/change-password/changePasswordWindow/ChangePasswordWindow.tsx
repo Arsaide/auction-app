@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Box from '@mui/material/Box';
-import { MainColors } from '../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../lib/colors/MainColors.enum';
 
 interface IChangePasswordWindow {
     children: React.ReactNode;
@@ -18,7 +18,7 @@ const ChangePasswordWindow: FC<IChangePasswordWindow> = ({ children }) => {
         >
             <Box
                 sx={{
-                    backgroundColor: MainColors.GRAY808,
+                    backgroundColor: MainColorsEnum.GRAY808,
                     padding: 4,
                     borderRadius: '4px',
                     maxWidth: '400px',

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import RegistrationForm from '../../../pages/auth/registration/registrationForm/RegistrationForm';
 import Button from '@mui/material/Button';
-import { MainColors } from '../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../lib/colors/MainColors.enum';
 
 interface RegModalInterface {
     open: boolean;
@@ -16,15 +16,15 @@ const RegModal: FC<RegModalInterface> = ({ open, onClose }) => {
             onClose={onClose}
             aria-labelledby={'form-dialog-title'}
         >
-            <DialogContent sx={{ bgcolor: MainColors.GRAY595 }}>
+            <DialogContent sx={{ bgcolor: MainColorsEnum.GRAY595 }}>
                 <RegistrationForm />
             </DialogContent>
-            <DialogActions sx={{ bgcolor: MainColors.GRAY595 }}>
+            <DialogActions sx={{ bgcolor: MainColorsEnum.GRAY595 }}>
                 <Button
                     onClick={onClose}
                     variant="outlined"
                     sx={{
-                        color: MainColors.WHITE,
+                        color: MainColorsEnum.WHITE,
                         mr: 1,
                         mb: 1,
                         p: 0.5,

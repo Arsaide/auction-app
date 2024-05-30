@@ -1,5 +1,5 @@
 import { HTMLReactParserOptions, Element } from 'html-react-parser';
-import { MainColors } from '../../colors/MainColors';
+import { MainColorsEnum } from '../../colors/MainColors.enum';
 import React from 'react';
 
 export const textParserOptions: HTMLReactParserOptions = {
@@ -10,7 +10,7 @@ export const textParserOptions: HTMLReactParserOptions = {
                 return (
                     <>
                         <div>
-                            <b style={{ color: MainColors.WHITE }}>
+                            <b style={{ color: MainColorsEnum.WHITE }}>
                                 ❗You wrote something wrong...🤔
                             </b>
                         </div>

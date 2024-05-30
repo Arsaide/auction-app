@@ -14,7 +14,7 @@ import { setCanvasPreview } from './setCanvasPreview';
 import { CanvasProps } from './canvasProps';
 import './AddUserAvatarForm.css';
 import Box from '@mui/material/Box';
-import { MainColors } from '../../../../../../lib/colors/MainColors';
+import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
 
 const AddUserAvatarForm: FC = () => {
     const { store } = useContext(Context);
@@ -160,7 +160,7 @@ const AddUserAvatarForm: FC = () => {
                 </FormControl>
                 <Box
                     sx={{
-                        backgroundColor: MainColors.GRAY808,
+                        backgroundColor: MainColorsEnum.GRAY808,
                     }}
                 >
                     {imgSrc && (
