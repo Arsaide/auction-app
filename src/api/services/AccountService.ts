@@ -24,12 +24,6 @@ export default class AccountService {
         return $api.post('/getownauctions', { token, id });
     }
 
-    static async getHistoryAuctionBets(
-        id: string | undefined,
-    ): Promise<AxiosResponse<OwnAuctionInt>> {
-        return $api.get(`/gethistoryauction?id=${id}`);
-    }
-
     static async editProfileImage(
         token: string,
         image: File | null,

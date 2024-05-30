@@ -2,7 +2,7 @@ import $api from '../request';
 import { AxiosResponse } from 'axios';
 import { AuthResponse } from '../models/response/AuthResponse';
 import { Dayjs } from 'dayjs';
-import { OwnAuctionInt } from '../../app/auction/auction-id/AuctionItemProps';
+import { AuctionHistoryBetsLists } from '../../app/auction/auction-id/AuctionItemProps';
 
 export default class AuctionService {
     static async createAuction(
@@ -87,5 +87,11 @@ export default class AuctionService {
             idAuction,
             sum,
         });
+    }
+
+    static async getHistoryAuctionBets(
+        id: string | undefined,
+    ): Promise<AxiosResponse<AuctionHistoryBetsLists>> {
+        return $api.get(`/gethistoryauction?id=${id}`);
     }
 }

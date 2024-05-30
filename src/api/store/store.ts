@@ -263,7 +263,7 @@ export default class Store {
 
     async getHistoryAuctionBets(id: string | undefined) {
         try {
-            return await AccountService.getHistoryAuctionBets(id);
+            return await AuctionService.getHistoryAuctionBets(id);
         } catch (e: any) {
             throw e;
         }

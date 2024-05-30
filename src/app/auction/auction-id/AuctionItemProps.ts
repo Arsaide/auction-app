@@ -17,6 +17,18 @@ export interface OwnAuctionInt {
     auctions: AuctionInt[];
 }
 
+export interface AuctionHistoryBetsUsers {
+    id: string;
+    sum: number;
+    time: string;
+    user: string;
+    avatar: string;
+}
+
+export interface AuctionHistoryBetsLists {
+    ListUser: AuctionHistoryBetsUsers[];
+}
+
 export interface ListOfBets {
     auctions: AuctionInt[];
 }
