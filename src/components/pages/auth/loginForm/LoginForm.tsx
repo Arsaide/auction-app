@@ -27,13 +27,14 @@ interface ILoginForm {
 
 const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
     const { store } = useContext(Context);
-    const { setIsLoggedIn } = useContext(AuthContext);
+    const { setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isShowRegistrationForm, setIsShowRegistrationForm] =
         useState<boolean>(false);
     const [isShowForgotPasswordForm, setIsShowForgotPasswordForm] =
         useState<boolean>(false);
+
     const navigate = useNavigate();
 
     const initialValues = {
@@ -50,15 +51,15 @@ const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
                     return store.getUser();
                 })
                 .then(() => {
+                    setIsLoggedIn(true);
                     if (redirect) {
-                        const token = localStorage.getItem('token');
+                        const { id } = store.user || {};
                         navigate(
                             toRedirect === 'pa'
-                                ? `/personal-account/${token}`
+                                ? `/personal-account/${id}`
                                 : '/personal-account',
                         );
                     }
-                    setIsLoggedIn(true);
                 })
                 .catch(error => {
                     setIsLoggedIn(false);

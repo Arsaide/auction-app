@@ -35,7 +35,7 @@ const PersonalAccountPage: FC = () => {
         <>
             {showLoginComponent || showRegComponent ? null : (
                 <>
-                    {isLoggedIn && (
+                    {!isLoggedIn && (
                         <Box
                             sx={{
                                 display: 'flex',
