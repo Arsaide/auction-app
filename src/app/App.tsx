@@ -55,7 +55,7 @@ function App() {
                             <Route path={'*'} element={<NotFound />} />
                         </>
                     ) : (
-                        <NotFound />
+                        <Route path={'*'} element={<NotFound />} />
                     )}
                 </Routes>
                 <Hidden mdUp>
