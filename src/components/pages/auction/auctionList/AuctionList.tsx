@@ -107,6 +107,8 @@ const AuctionList = () => {
                                         timeEnd={auction.timeEnd}
                                         active={auction.active}
                                         id={auction._id}
+                                        owner={auction.owner}
+                                        ownerId={auction.ownerId}
                                     />
                                 </Grid>
                             ))}

@@ -12,7 +12,7 @@ import { ButtonColorsEnum } from '../../../../../lib/colors/ButtonColors.enum';
 import PlaceABet from '../../auctionForms/placeABet/PlaceABet';
 import { Close } from '@mui/icons-material';
 import parse from 'html-react-parser';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import { Chip } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 
@@ -45,10 +45,8 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
             <Typography sx={{ borderBottom: '1px solid white', mb: 1, pb: 1 }}>
                 Author -{' '}
                 <Link
-                    underline="hover"
-                    href={`/personal-account/${auction.ownerId}`}
-                    variant="body1"
-                    color="inherit"
+                    to={`/personal-account/${auction.ownerId}`}
+                    style={{ color: MainColorsEnum.WHITE }}
                 >
                     <Chip
                         avatar={
@@ -59,7 +57,13 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                         }
                         label={auction.owner}
                         variant="outlined"
-                        sx={{ color: MainColorsEnum.WHITE }}
+                        sx={{
+                            color: MainColorsEnum.WHITE,
+                            '&:hover': {
+                                opacity: '.85',
+                                cursor: 'pointer',
+                            },
+                        }}
                     />
                 </Link>
             </Typography>

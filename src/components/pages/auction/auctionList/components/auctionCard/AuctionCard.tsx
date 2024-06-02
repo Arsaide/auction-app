@@ -30,6 +30,8 @@ interface AuctionCardProps {
     timeEnd: string;
     id: string;
     active: boolean;
+    owner: string;
+    ownerId: string;
 }
 
 const AuctionCard: FC<AuctionCardProps> = ({
@@ -42,6 +44,8 @@ const AuctionCard: FC<AuctionCardProps> = ({
     timeEnd,
     id,
     active,
+    owner,
+    ownerId,
 }) => {
     const { openLoginModal, handleLoginClickOpen, handleClose } =
         useOpenModal();
@@ -112,7 +116,7 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                 style={{ color: MainColorsEnum.BLACK_06 }}
                                 to={`/auction/${id}`}
                             >
-                                ...read more
+                                read more
                             </Link>
                         ))}
                 </Typography>
@@ -167,6 +171,18 @@ const AuctionCard: FC<AuctionCardProps> = ({
                 </Typography>
                 <Divider sx={{ mt: 1.3, mb: 1 }} />
                 <Typography>Created: {formatedTimeStart}</Typography>
+                <Typography sx={{ fontSize: '15px' }}>
+                    Author:{' '}
+                    <Link
+                        style={{
+                            textDecoration: 'none',
+                            color: MainColorsEnum.BLACK_06,
+                        }}
+                        to={`/personal-account/${ownerId}`}
+                    >
+                        @{owner}
+                    </Link>
+                </Typography>
                 <AuctionTimer timeEnd={timeEnd} />
             </CardContent>
             <CardActions sx={{ ml: 1, mb: 1 }}>
