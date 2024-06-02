@@ -23,6 +23,7 @@ interface AuctionInformationProps {
     isRequesting: boolean;
     id: string | undefined;
     avatar: string | null;
+    userBet: number | null;
 }
 
 const AuctionInformation: FC<AuctionInformationProps> = ({
@@ -32,9 +33,13 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
     isRequesting,
     id,
     avatar,
+    userBet,
 }) => {
     const [isVisibleEditForm, setIsVisibleEditForm] = useState<boolean>(false);
     const [isVisibleBetForm, setIsVisibleBetForm] = useState<boolean>(false);
+
+    const requiredAmount =
+        parseFloat(auction.rates) - parseFloat(String(userBet));
 
     const handleReloadAuction = () => {
         reloadAuction();
@@ -88,9 +93,13 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                         fontSize: '20px',
                                     }}
                                 >
-                                    {auction.minRates}
+                                    {parseFloat(
+                                        auction.minRates,
+                                    ).toLocaleString('de-DE', {
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    })}
                                 </span>{' '}
-                                $
                             </Typography>
                             <Typography
                                 sx={{
@@ -106,10 +115,65 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                         fontSize: '20px',
                                     }}
                                 >
-                                    {auction.rates}
+                                    {parseFloat(auction.rates).toLocaleString(
+                                        'de-DE',
+                                        {
+                                            style: 'currency',
+                                            currency: 'USD',
+                                        },
+                                    )}
                                 </span>{' '}
-                                $
                             </Typography>
+                            {!owner && (
+                                <>
+                                    <Typography>
+                                        My current rate:{' '}
+                                        <span
+                                            style={{
+                                                color: MainColorsEnum.GREEN,
+                                                fontSize: '20px',
+                                            }}
+                                        >
+                                            {userBet
+                                                ? userBet.toLocaleString(
+                                                      'de-DE',
+                                                      {
+                                                          style: 'currency',
+                                                          currency: 'USD',
+                                                      },
+                                                  )
+                                                : null}
+                                        </span>
+                                    </Typography>
+                                    {userBet &&
+                                    userBet < parseFloat(auction.rates) ? (
+                                        <Typography
+                                            sx={{
+                                                borderBottom: '1px solid white',
+                                                mb: 1,
+                                                pb: 1,
+                                            }}
+                                        >
+                                            You are ahead by:{' '}
+                                            <span
+                                                style={{
+                                                    color: MainColorsEnum.RED,
+                                                }}
+                                            >
+                                                <i>
+                                                    {requiredAmount.toLocaleString(
+                                                        'de-DE',
+                                                        {
+                                                            style: 'currency',
+                                                            currency: 'USD',
+                                                        },
+                                                    )}
+                                                </i>
+                                            </span>
+                                        </Typography>
+                                    ) : null}
+                                </>
+                            )}
                             <Typography>
                                 Auction start date:{' '}
                                 {new Date(auction.timeStart).toLocaleDateString(
@@ -207,6 +271,7 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
                                 auctionId={id}
                                 minBet={auction.minRates}
                                 maxBet={auction.rates}
+                                requiredAmount={requiredAmount}
                             />
                         </Box>
                     ) : (

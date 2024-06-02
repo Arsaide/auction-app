@@ -18,6 +18,7 @@ const AuctionIdPage: FC = () => {
     const [isRequesting, setIsRequesting] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [avatar, setAvatar] = useState<string>('');
+    const [userBet, setUserBet] = useState<number | null>(null);
 
     useEffect(() => {
         fetchData();
@@ -37,6 +38,7 @@ const AuctionIdPage: FC = () => {
                 setOwner(true);
             } else {
                 setOwner(false);
+                setUserBet(response.data.UserBid.sum);
             }
         } catch (error) {
             console.error('Error fetching auction:', error);
@@ -92,6 +94,7 @@ const AuctionIdPage: FC = () => {
                     isRequesting={isRequesting}
                     id={id}
                     avatar={avatar}
+                    userBet={userBet}
                 />
             </Grid>
             <AuctionBetHistory id={id} />

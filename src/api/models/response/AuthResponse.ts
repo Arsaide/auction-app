@@ -11,4 +11,7 @@ export interface AuthResponse {
     avatar: string; // avatar
     stateOwner: boolean;
     status: boolean; // recovery password
+    UserBid: {
+        sum: number;
+    };
 }

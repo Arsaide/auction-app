@@ -17,6 +17,7 @@ interface IPlaceABet {
     auctionId: string | undefined;
     minBet: string;
     maxBet: string;
+    requiredAmount: number;
 }
 
 interface PlaceBetValues {
@@ -28,7 +29,7 @@ interface IError {
     client: string;
 }
 
-const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
+const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet, requiredAmount }) => {
     const { store } = useContext(Context);
     const { balance } = store.user;
     const [errorMessage, setErrorMessage] = useState<IError>({
@@ -42,7 +43,7 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
     };
 
     useEffect(() => {
-        if (parseFloat(balance) < calculateMinBet(parseFloat(maxBet))) {
+        if (parseFloat(balance) < requiredAmount) {
             setErrorMessage(prevState => ({
                 ...prevState,
                 client: "You don't have enough money",
@@ -53,20 +54,6 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
     const handleSubmit = async (values: PlaceBetValues) => {
         setIsSubmitting(true);
         try {
-            // const userBet = parseFloat(values.bet);
-
-            // const currentBet = parseFloat(maxBet);
-
-            // const minBet = calculateMinBet(currentBet);
-
-            // if (userBet < minBet) {
-            //     setErrorMessage(prevState => ({
-            //         ...prevState,
-            //         client: `Minimum bet is ${minBet}$`,
-            //     }));
-            //     setIsSubmitting(false);
-            //     return;
-            // }
             const response = await store.placeABet(values.bet, auctionId);
         } catch (e: any) {
             setIsSubmitting(false);
@@ -92,7 +79,10 @@ const PlaceABet: FC<IPlaceABet> = ({ auctionId, maxBet }) => {
                         <Typography variant={'subtitle2'} sx={{ mt: 2 }}>
                             Minimum amount you can bet{' '}
                             <span style={{ color: MainColorsEnum.RED }}>
-                                {calculateMinBet(parseFloat(maxBet))}$
+                                {requiredAmount.toLocaleString('de-DE', {
+                                    style: 'currency',
+                                    currency: 'USD',
+                                })}
                             </span>
                         </Typography>
                         <Typography variant={'subtitle2'}>
