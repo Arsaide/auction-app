@@ -141,9 +141,15 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
 
                             {isLoggedIn && (
                                 <>
-                                    {balance ? (
+                                    {parseFloat(balance) ||
+                                    parseFloat(balance) == 0 ? (
                                         <Chip
-                                            label={`${balance} $`}
+                                            label={`${parseFloat(
+                                                balance,
+                                            ).toLocaleString('de-DE', {
+                                                style: 'currency',
+                                                currency: 'USD',
+                                            })}`}
                                             color="default"
                                             sx={{
                                                 mr: 2,
@@ -192,7 +198,7 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                                                 <Link
                                                     to={
                                                         isLoading
-                                                            ? `/personal-account`
+                                                            ? ``
                                                             : `/personal-account/${id}`
                                                     }
                                                     style={{
