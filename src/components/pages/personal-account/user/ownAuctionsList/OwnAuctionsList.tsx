@@ -6,6 +6,8 @@ import clsx from 'clsx';
 import '../PersonalIdGrid.css';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../formatDate';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import { ClearIcon } from '@mui/x-date-pickers';
 
 interface OwnAuctionsListProps {
     auctions: AuctionInt[];
@@ -27,10 +29,53 @@ const OwnAuctionsList: FC<OwnAuctionsListProps> = ({ auctions }) => {
             ),
         },
         { field: 'title', headerName: 'Title', width: 250 },
-        { field: 'minRates', headerName: 'Minimum Rate', width: 200 },
-        { field: 'rates', headerName: 'Actual Rate', width: 200 },
+        {
+            field: 'minRates',
+            headerName: 'Minimum Rate',
+            width: 200,
+            renderCell: (params: GridCellParams) => (
+                <div>
+                    {parseFloat(params.value as string).toLocaleString(
+                        'de-DE',
+                        {
+                            style: 'currency',
+                            currency: 'USD',
+                        },
+                    )}
+                </div>
+            ),
+        },
+        {
+            field: 'rates',
+            headerName: 'Actual Rate',
+            width: 200,
+            renderCell: (params: GridCellParams) => (
+                <div>
+                    {parseFloat(params.value as string).toLocaleString(
+                        'de-DE',
+                        {
+                            style: 'currency',
+                            currency: 'USD',
+                        },
+                    )}
+                </div>
+            ),
+        },
         { field: 'desct', headerName: 'Description', width: 200 },
-        { field: 'active', headerName: 'Active', width: 100 },
+        {
+            field: 'active',
+            headerName: 'Active',
+            width: 75,
+            renderCell: (params: GridCellParams) => (
+                <>
+                    {params.value === true ? (
+                        <VerifiedIcon fontSize="small" />
+                    ) : (
+                        <ClearIcon fontSize="small" />
+                    )}
+                </>
+            ),
+        },
         {
             field: 'timeStart',
             headerName: 'Time Start',
