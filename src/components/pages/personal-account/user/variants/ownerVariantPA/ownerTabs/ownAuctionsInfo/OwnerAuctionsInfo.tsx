@@ -18,12 +18,6 @@ const OwnerAuctionsInfo: FC<IOwnerAuctionsInfo> = ({ auctions }) => {
                 </Typography>
                 <Typography variant={'h5'}>List of my auctions</Typography>
                 <OwnAuctionsList auctions={auctions} />
-
-                <Typography sx={{ mb: 3 }}>
-                    All listings of auctions you have created and your bidding
-                    histories will be displayed here
-                </Typography>
-                <Typography variant={'h5'}>History list my auctions</Typography>
             </Box>
         </>
     );

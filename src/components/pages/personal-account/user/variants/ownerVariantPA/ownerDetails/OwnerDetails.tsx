@@ -112,7 +112,15 @@ const OwnerDetails: FC<OwnerDetailsProps> = ({
                     <Skeleton width={160} height={25} />
                 )}
                 {balance ? (
-                    <Typography>Balance: {balance} $</Typography>
+                    <Typography>
+                        Balance:{' '}
+                        <span style={{ color: MainColorsEnum.GREEN }}>
+                            {parseFloat(balance).toLocaleString('de-DE', {
+                                style: 'currency',
+                                currency: 'USD',
+                            })}
+                        </span>
+                    </Typography>
                 ) : (
                     <Skeleton width={160} height={25} />
                 )}
