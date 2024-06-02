@@ -126,7 +126,15 @@ const AuctionCard: FC<AuctionCardProps> = ({
                     {active ? (
                         minRates === rates ? (
                             <>
-                                <u>{minRates}</u>$
+                                <u>
+                                    {parseFloat(minRates).toLocaleString(
+                                        'de-DE',
+                                        {
+                                            style: 'currency',
+                                            currency: 'USD',
+                                        },
+                                    )}
+                                </u>
                                 <span
                                     style={{
                                         color: MainColorsEnum.GREEN,
@@ -140,7 +148,12 @@ const AuctionCard: FC<AuctionCardProps> = ({
                             </>
                         ) : (
                             <>
-                                <u>{rates}</u>$
+                                <u>
+                                    {parseFloat(rates).toLocaleString('de-DE', {
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    })}
+                                </u>
                                 <span
                                     style={{
                                         color: MainColorsEnum.RED,
@@ -149,7 +162,16 @@ const AuctionCard: FC<AuctionCardProps> = ({
                                         paddingLeft: '10px',
                                     }}
                                 >
-                                    initial bid - <u>{minRates}</u>$
+                                    initial bid -{' '}
+                                    <u>
+                                        {parseFloat(minRates).toLocaleString(
+                                            'de-DE',
+                                            {
+                                                style: 'currency',
+                                                currency: 'USD',
+                                            },
+                                        )}
+                                    </u>
                                 </span>
                             </>
                         )
@@ -162,9 +184,11 @@ const AuctionCard: FC<AuctionCardProps> = ({
                             <span>
                                 Auction sold for -{' '}
                                 <u style={{ color: MainColorsEnum.RED }}>
-                                    {rates}
+                                    {parseFloat(rates).toLocaleString('de-DE', {
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    })}
                                 </u>
-                                $
                             </span>
                         </>
                     )}
