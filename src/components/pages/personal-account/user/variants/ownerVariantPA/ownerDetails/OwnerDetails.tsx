@@ -10,7 +10,7 @@ import AddUserAvatarForm from '../../../userForms/addUserAvatarForm/AddUserAvata
 interface OwnerDetailsProps {
     name: string | null;
     email: string | null;
-    balance: number | null;
+    balance: string | null;
     avatar: string | null;
 }
 
@@ -111,16 +111,8 @@ const OwnerDetails: FC<OwnerDetailsProps> = ({
                 ) : (
                     <Skeleton width={160} height={25} />
                 )}
-                {balance || balance == 0 ? (
-                    <Typography>
-                        Balance:{' '}
-                        <span style={{ color: MainColorsEnum.GREEN }}>
-                            {balance.toLocaleString('de-DE', {
-                                style: 'currency',
-                                currency: 'USD',
-                            })}
-                        </span>
-                    </Typography>
+                {balance ? (
+                    <Typography>Balance: {balance} $</Typography>
                 ) : (
                     <Skeleton width={160} height={25} />
                 )}
