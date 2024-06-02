@@ -1,26 +1,20 @@
-import React, { FC, useContext, useEffect, useRef, useState } from 'react';
-import { Form, Formik, FormikHelpers, useFormikContext } from 'formik';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { Form, Formik, useFormikContext } from 'formik';
 import { Context } from '../../../../../../index';
-import Input from '../../../../../layout/common/inputs/input/Input';
 import { auctionSearchValidationSchema } from './auctionSearchValidation/AuctionSearchValidationSchema';
-import Button from '@mui/material/Button';
-import { ButtonColorsEnum } from '../../../../../../lib/colors/ButtonColors.enum';
-import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
-import SearchIcon from '@mui/icons-material/Search';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import SendIcon from '@mui/icons-material/Send';
-import { Link } from 'react-router-dom';
-import { Box, MenuItem, MenuList } from '@mui/material';
+import { Box } from '@mui/material';
 import { AuctionInt } from '../../../../../../app/auction/auction-id/AuctionItemProps';
 import SearchInput from '../../../../../layout/common/inputs/searchInput/SearchInput';
 
-interface IAuctionSearch {}
+interface IAuctionSearch {
+    onSearch: (auctions: AuctionInt[]) => void;
+}
 
 interface AuctionSearchValues {
     text: string;
 }
 
-const AuctionSearch: FC<IAuctionSearch> = () => {
+const AuctionSearch: FC<IAuctionSearch> = ({ onSearch }) => {
     const { store } = useContext(Context);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [hasSubmittedTwoLetters, setHasSubmittedTwoLetters] = useState(false);
@@ -45,14 +39,11 @@ const AuctionSearch: FC<IAuctionSearch> = () => {
         }
     };
 
-    const handleSubmitByRequest = async (
-        values: AuctionSearchValues,
-        actions: any,
-    ) => {
+    const handleSubmitByRequest = async (values: AuctionSearchValues) => {
         setIsSubmitting(true);
         try {
             const response = await store.searchByRequest(values.text);
-            console.log(response.data.auctions);
+            onSearch(response.data.auctions);
         } catch (e: any) {
             console.error(e);
             setIsSubmitting(false);
@@ -62,7 +53,7 @@ const AuctionSearch: FC<IAuctionSearch> = () => {
     };
 
     const AutoSubmit: FC = () => {
-        const { values, submitForm } = useFormikContext<AuctionSearchValues>();
+        const { values } = useFormikContext<AuctionSearchValues>();
 
         useEffect(() => {
             if (

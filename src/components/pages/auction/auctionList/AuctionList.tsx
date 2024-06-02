@@ -39,6 +39,14 @@ const AuctionList = () => {
             });
     }, []);
 
+    const handleSearchResult = (searchResult: AuctionInt[]) => {
+        if (searchResult.length > 0) {
+            setAuction(searchResult);
+        } else {
+            fetchData();
+        }
+    };
+
     const reloadAuctions = () => {
         fetchData();
     };
@@ -59,7 +67,7 @@ const AuctionList = () => {
                     Auction List
                 </Typography>
                 <Box sx={{ mb: 1 }}>
-                    <AuctionSearch />
+                    <AuctionSearch onSearch={handleSearchResult} />
                     <AuctionReloadButton
                         disabled={isRequesting}
                         onClick={reloadAuctions}
