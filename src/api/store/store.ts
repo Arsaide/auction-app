@@ -334,4 +334,13 @@ export default class Store {
             throw e;
         }
     }
+
+    async searchByRequest(request: string | null) {
+        try {
+            const response = await AuctionService.getSearchByRequest(request);
+            return response;
+        } catch (e: any) {
+            throw e;
+        }
+    }
 }

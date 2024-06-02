@@ -105,4 +105,10 @@ export default class AuctionService {
     ): Promise<AxiosResponse<OwnAuctionInt>> {
         return $api.get(`/search?value=${letters}`);
     }
+
+    static async getSearchByRequest(
+        request: string | null,
+    ): Promise<AxiosResponse<OwnAuctionInt>> {
+        return $api.get(`/searchget?value=${request}`);
+    }
 }
