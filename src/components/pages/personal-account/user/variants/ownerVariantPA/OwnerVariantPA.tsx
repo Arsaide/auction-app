@@ -57,7 +57,7 @@ const OwnerVariantPA: FC<IOwnerVariantPersonalAccount> = ({
             <OwnerDetails
                 name={name}
                 email={email}
-                balance={balance}
+                balance={parseFloat(balance)}
                 avatar={avatar}
             />
             <Box sx={{ width: '100%', typography: 'body1' }}>
