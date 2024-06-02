@@ -24,16 +24,35 @@ const AuctionSearch: FC<IAuctionSearch> = () => {
     const { store } = useContext(Context);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [hasSubmittedTwoLetters, setHasSubmittedTwoLetters] = useState(false);
-    const [auctions, setAuctions] = useState<AuctionInt[]>([]);
+    const [auctionsHippies, setAuctionsHippies] = useState<AuctionInt[]>([]);
     const initialValues = {
         text: '',
     };
 
-    const handleSubmit = async (values: AuctionSearchValues, actions: any) => {
+    const autoSubmitByLetters = async (
+        values: AuctionSearchValues,
+        actions: any,
+    ) => {
         setIsSubmitting(true);
         try {
             const response = await store.searchAtLetters(values.text);
-            setAuctions(response.data.auctions);
+            setAuctionsHippies(response.data.auctions);
+        } catch (e: any) {
+            console.error(e);
+            setIsSubmitting(false);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const handleSubmitByRequest = async (
+        values: AuctionSearchValues,
+        actions: any,
+    ) => {
+        setIsSubmitting(true);
+        try {
+            const response = await store.searchByRequest(values.text);
+            console.log(response.data.auctions);
         } catch (e: any) {
             console.error(e);
             setIsSubmitting(false);
@@ -52,11 +71,11 @@ const AuctionSearch: FC<IAuctionSearch> = () => {
                 !hasSubmittedTwoLetters
             ) {
                 setHasSubmittedTwoLetters(true);
-                handleSubmit(values, null);
+                autoSubmitByLetters(values, null);
             } else if (values.text.length % 2 !== 0) {
                 setHasSubmittedTwoLetters(false);
             } else if (values.text.length < 2) {
-                setAuctions([]);
+                setAuctionsHippies([]);
             }
         }, [values.text]);
 
@@ -68,7 +87,7 @@ const AuctionSearch: FC<IAuctionSearch> = () => {
             validationSchema={auctionSearchValidationSchema}
             validateOnMount
             initialValues={initialValues}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitByRequest}
         >
             {({ isValid }) => (
                 <Form>
@@ -80,7 +99,7 @@ const AuctionSearch: FC<IAuctionSearch> = () => {
                             placeholder={
                                 'Enter your request for auction search'
                             }
-                            hippies={auctions}
+                            hippies={auctionsHippies}
                             isValid={isValid}
                             isSubmitting={isSubmitting}
                         />

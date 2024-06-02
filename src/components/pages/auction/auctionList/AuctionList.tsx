@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Box, Grid, Pagination, ThemeProvider } from '@mui/material';
 import AuctionCard from './components/auctionCard/AuctionCard';
 import { API_URL } from '../../../../api/request';
@@ -21,7 +21,7 @@ const AuctionList = () => {
         fetchData();
     }, [currentPage]);
 
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         setLoading(true);
         setIsRequesting(true);
 
@@ -37,7 +37,7 @@ const AuctionList = () => {
                 setLoading(false);
                 setIsRequesting(false);
             });
-    };
+    }, []);
 
     const reloadAuctions = () => {
         fetchData();
