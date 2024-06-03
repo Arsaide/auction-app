@@ -18,14 +18,28 @@ const AuctionBetHistory: FC<IAuctionBetHistory> = ({ id }) => {
     const [historyBets, setHistoryBets] = useState<AuctionHistoryBetsUsers[]>(
         [],
     );
-    const [firstAppearance, setFirstAppearance] = useState<{
-        [userId: string]: boolean;
-    }>({});
 
     const fetchData = async () => {
         try {
             const response = await store.getHistoryAuctionBets(id);
-            setHistoryBets(response.data.ListUser);
+            const data = response.data.ListUser;
+
+            const idMap = new Map<string, number>();
+
+            const proccesedData = data.map(item => {
+                if (!idMap.has(item.id)) {
+                    item.firstAppearance = true;
+                    idMap.set(item.id, 1);
+                } else {
+                    item.repeatAppearance = (idMap.get(item.id) || 0) + 1;
+                    idMap.set(item.id, item.repeatAppearance);
+                }
+
+                return item;
+            });
+
+            setHistoryBets(proccesedData);
+            console.log(proccesedData);
         } catch (error) {
             console.error('Error fetching auction:', error);
         }
@@ -34,17 +48,6 @@ const AuctionBetHistory: FC<IAuctionBetHistory> = ({ id }) => {
     useEffect(() => {
         fetchData();
     }, [id]);
-
-    useEffect(() => {
-        const appearance: { [userId: string]: boolean } = {};
-        historyBets.forEach(item => {
-            if (!appearance[item.id]) {
-                appearance[item.id] = true;
-            }
-        });
-
-        setFirstAppearance(appearance);
-    }, [historyBets]);
 
     return (
         <Box sx={{ mt: 2 }}>
@@ -79,7 +82,7 @@ const AuctionBetHistory: FC<IAuctionBetHistory> = ({ id }) => {
                         </div>
                         <div className={'historyInfo item'}>
                             <div className={'historySum'}>
-                                {firstAppearance[item.id] ? (
+                                {item.firstAppearance && (
                                     <>
                                         User bet:{' '}
                                         <span
@@ -93,12 +96,13 @@ const AuctionBetHistory: FC<IAuctionBetHistory> = ({ id }) => {
                                             })}
                                         </span>{' '}
                                     </>
-                                ) : (
+                                )}
+                                {item.repeatAppearance && (
                                     <>
-                                        User added bet:
+                                        User added bet:{' '}
                                         <span
                                             style={{
-                                                color: MainColorsEnum.GREEN,
+                                                color: MainColorsEnum.YELLOW,
                                             }}
                                         >
                                             +{' '}
@@ -106,7 +110,7 @@ const AuctionBetHistory: FC<IAuctionBetHistory> = ({ id }) => {
                                                 style: 'currency',
                                                 currency: 'USD',
                                             })}
-                                        </span>
+                                        </span>{' '}
                                     </>
                                 )}
                             </div>

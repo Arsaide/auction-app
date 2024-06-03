@@ -23,6 +23,8 @@ export interface AuctionHistoryBetsUsers {
     time: string;
     user: string;
     avatar: string;
+    firstAppearance?: boolean;
+    repeatAppearance?: number;
 }
 
 export interface AuctionHistoryBetsLists {
