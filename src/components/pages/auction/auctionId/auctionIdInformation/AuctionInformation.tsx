@@ -19,7 +19,7 @@ import Avatar from '@mui/material/Avatar';
 interface AuctionInformationProps {
     auction: AuctionInt;
     owner: boolean;
-    reloadAuction: () => void;
+    reloadAuction: () => Promise<void>;
     isRequesting: boolean;
     id: string | undefined;
     avatar: string | null;

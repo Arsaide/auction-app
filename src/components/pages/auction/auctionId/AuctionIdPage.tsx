@@ -1,4 +1,11 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, {
+    FC,
+    useCallback,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import { Context } from '../../../../index';
 import { useParams } from 'react-router-dom';
 import { AuctionInt } from '../../../../app/auction/auction-id/AuctionItemProps';
@@ -9,30 +16,35 @@ import AuctionInformation from './auctionIdInformation/AuctionInformation';
 import AuctionIdPageSkeleton from './auctionIdPageSkeleton/AuctionIdPageSkeleton';
 import WarningAlert from '../../../layout/common/alerts/warningAlert/WarningAlert';
 import AuctionBetHistory from './auctionBetHistory/AuctionBetHistory';
+import { AuthContext } from '../../../../lib/providers/AuthContext';
+import NotAuth from '../../../../app/not-auth/page';
+import { toast } from 'react-toastify';
 
 const AuctionIdPage: FC = () => {
     const { store } = useContext(Context);
     const { id } = useParams<{ id: string }>();
+    const { isLoggedIn } = useContext(AuthContext);
+
     const [auction, setAuction] = useState<AuctionInt | null>(null);
     const [owner, setOwner] = useState<boolean>(false);
-    const [isRequesting, setIsRequesting] = useState<boolean>(false);
+    const [isRequesting, setIsRequesting] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(true);
     const [avatar, setAvatar] = useState<string>('');
     const [userBet, setUserBet] = useState<number | null>(null);
+    const isRequest = useRef<boolean>(false);
 
     useEffect(() => {
-        fetchData();
+        if (!isRequest.current) {
+            isRequest.current = true;
+            fetchData();
+        }
     }, [id]);
 
-    const fetchData = async () => {
-        setIsRequesting(true);
-        setLoading(true);
+    const fetchData = useCallback(async () => {
         try {
             const response = await store.getOneAuction(id);
             setAuction(response.data.auction as unknown as AuctionInt);
             setAvatar(response.data.avatar);
-            setIsRequesting(false);
-            setLoading(false);
 
             if (response.data.stateOwner) {
                 setOwner(true);
@@ -40,18 +52,14 @@ const AuctionIdPage: FC = () => {
                 setOwner(false);
                 setUserBet(response.data.UserBid.sum);
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error fetching auction:', error);
-            setIsRequesting(true);
-            setLoading(true);
+            toast.error(error.message);
+        } finally {
+            setIsRequesting(false);
+            setLoading(false);
         }
-        setIsRequesting(false);
-        setLoading(false);
-    };
-
-    const reloadAuction = () => {
-        fetchData();
-    };
+    }, [id, store]);
 
     if (loading) {
         return (
@@ -64,10 +72,14 @@ const AuctionIdPage: FC = () => {
     if (!auction) {
         return (
             <>
-                <WarningAlert
-                    text={'There is no such auction'}
-                    title={'404 Not Found'}
-                />
+                {isLoggedIn ? (
+                    <WarningAlert
+                        text={'There is no such auction'}
+                        title={'404 Not Found'}
+                    />
+                ) : (
+                    <NotAuth id={id} request={fetchData} />
+                )}
             </>
         );
     }
@@ -90,7 +102,7 @@ const AuctionIdPage: FC = () => {
                 <AuctionInformation
                     auction={auction}
                     owner={owner}
-                    reloadAuction={reloadAuction}
+                    reloadAuction={fetchData}
                     isRequesting={isRequesting}
                     id={id}
                     avatar={avatar}
