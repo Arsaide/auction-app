@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { AuctionInt } from '../../../../../app/auction/auction-id/AuctionItemProps';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -37,9 +37,41 @@ const AuctionInformation: FC<AuctionInformationProps> = ({
 }) => {
     const [isVisibleEditForm, setIsVisibleEditForm] = useState<boolean>(false);
     const [isVisibleBetForm, setIsVisibleBetForm] = useState<boolean>(false);
+    const [requiredAmount, setRequiredAmount] = useState<number>(0);
 
-    const requiredAmount =
-        parseFloat(auction.rates) - parseFloat(String(userBet));
+    const currentRate = parseFloat(auction.rates);
+
+    useEffect(() => {
+        if (currentRate >= 1000000) {
+            setRequiredAmount(
+                currentRate -
+                    parseFloat(String(userBet)) +
+                    1 +
+                    currentRate * 0.01,
+            );
+        } else if (currentRate >= 100000) {
+            setRequiredAmount(
+                currentRate -
+                    parseFloat(String(userBet)) +
+                    1 +
+                    currentRate * 0.05,
+            );
+        } else if (currentRate >= 5000) {
+            setRequiredAmount(
+                currentRate -
+                    parseFloat(String(userBet)) +
+                    1 +
+                    currentRate * 0.07,
+            );
+        } else if (currentRate >= 0) {
+            setRequiredAmount(
+                currentRate -
+                    parseFloat(String(userBet)) +
+                    1 +
+                    currentRate * 0.1,
+            );
+        }
+    }, [auction.rates, userBet]);
 
     const handleReloadAuction = () => {
         reloadAuction();
