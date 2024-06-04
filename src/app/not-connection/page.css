@@ -1,0 +1,23 @@
+.connectionCnt {
+    display: flex;
+    justify-content: center;
+}
+
+.connectionContent {
+    max-width: 700px;
+    width: 100%;
+    animation: anim 4s infinite ease-in-out;
+}
+
+@keyframes anim {
+    0% {
+        transform: translateY(0) translateX(0) scale(1);
+
+    }
+    50% {
+        transform: translateY(calc(5vh - 3% - 40px)) translateX(calc(1vw - 2% - 10px)) scale(1.011);
+    }
+    100% {
+        transform: translateY(0) translateX(0) scale(1);
+    }
+}

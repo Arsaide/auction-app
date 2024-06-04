@@ -12,5 +12,5 @@ export enum MainColorsEnum {
 
     RED = '#f54242',
     GREEN = '#7dc738',
-    YELLOW = 'rgba(255, 186, 0)',
+    YELLOW = '#FFBA00', //rgba(255, 186, 0)
 }
