@@ -22,12 +22,13 @@ interface LoginFormValues {
 
 interface ILoginForm {
     redirect?: boolean;
-    toRedirect?: 'pa';
+    toRedirect?: 'pa' | string;
+    request?: (() => Promise<void>) | undefined;
 }
 
-const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
+const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect, request }) => {
     const { store } = useContext(Context);
-    const { setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
+    const { setIsLoggedIn } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isShowRegistrationForm, setIsShowRegistrationForm] =
@@ -54,11 +55,16 @@ const LoginForm: FC<ILoginForm> = ({ redirect, toRedirect }) => {
                     setIsLoggedIn(true);
                     if (redirect) {
                         const { id } = store.user || {};
-                        navigate(
-                            toRedirect === 'pa'
-                                ? `/personal-account/${id}`
-                                : '/personal-account',
-                        );
+                        if (toRedirect == 'pa') {
+                            navigate(
+                                toRedirect === 'pa'
+                                    ? `/personal-account/${id}`
+                                    : '/personal-account',
+                            );
+                        }
+                        if (request) {
+                            request();
+                        }
                     }
                 })
                 .catch(error => {

@@ -16,6 +16,8 @@ import Toolbar from '@mui/material/Toolbar';
 import NotFound from './not-found/page';
 import ChangePasswordPage from './change-password/page';
 import useOnlineStatus from '../hooks/useOnlineStatus/useOnlineStatus';
+import NotAuth from './not-auth/page';
+import NotConnection from './not-connection/page';
 
 function App() {
     const isOnline = useOnlineStatus();
@@ -55,7 +57,7 @@ function App() {
                             <Route path={'*'} element={<NotFound />} />
                         </>
                     ) : (
-                        <Route path={'*'} element={<NotFound />} />
+                        <Route path={'*'} element={<NotConnection />} />
                     )}
                 </Routes>
                 <Hidden mdUp>
