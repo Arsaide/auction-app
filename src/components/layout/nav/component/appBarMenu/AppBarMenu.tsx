@@ -69,7 +69,13 @@ const AppBarMenu: FC<AppBarMenuInt> = ({
                     <Hidden mdUp>
                         {balance ? (
                             <Chip
-                                label={`${balance} $`}
+                                label={`${parseFloat(balance).toLocaleString(
+                                    'de-DE',
+                                    {
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    },
+                                )}`}
                                 color="default"
                                 sx={{ mr: 2, bgcolor: MainColorsEnum.WHITE }}
                             />
