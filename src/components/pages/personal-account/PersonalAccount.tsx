@@ -6,14 +6,13 @@ import LoginForm from '../auth/loginForm/LoginForm';
 import RegistrationForm from '../auth/registration/registrationForm/RegistrationForm';
 import { ButtonColorsEnum } from '../../../lib/colors/ButtonColors.enum';
 import { AuthContext } from '../../../lib/providers/AuthContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const PersonalAccountPage: FC = () => {
     const [showLoginComponent, setShowLoginComponent] =
         useState<boolean>(false);
     const [showRegComponent, setShowRegComponent] = useState<boolean>(false);
     const { isLoggedIn } = useContext(AuthContext);
-    const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
     useEffect(() => {
