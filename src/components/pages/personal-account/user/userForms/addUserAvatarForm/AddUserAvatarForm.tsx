@@ -15,6 +15,8 @@ import { CanvasProps } from './canvasProps';
 import './AddUserAvatarForm.css';
 import Box from '@mui/material/Box';
 import { MainColorsEnum } from '../../../../../../lib/colors/MainColors.enum';
+import { redirect, useNavigate } from 'react-router-dom';
+import { useFetchData } from '../../../../../../lib/providers/FetchDataPA';
 
 const AddUserAvatarForm: FC = () => {
     const { store } = useContext(Context);
@@ -27,6 +29,7 @@ const AddUserAvatarForm: FC = () => {
     const [isCropClicked, setIsCropClicked] = useState<boolean>(false);
     const imageRef = useRef<HTMLImageElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const { fetchData } = useFetchData();
 
     const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -130,6 +133,9 @@ const AddUserAvatarForm: FC = () => {
         try {
             if (croppedImage) {
                 const response = await store.editProfileImage(croppedImage);
+                if (response?.status == 200) {
+                    await fetchData();
+                }
             } else {
                 toast.error('Please crop the image before uploading.');
             }

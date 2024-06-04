@@ -8,6 +8,7 @@ import OwnerVariantPA from './variants/ownerVariantPA/OwnerVariantPA';
 import { CircularProgress } from '@mui/material';
 import { MainColorsEnum } from '../../../../lib/colors/MainColors.enum';
 import Box from '@mui/material/Box';
+import { FetchDataProvider } from '../../../../lib/providers/FetchDataPA';
 
 const UserIdPage: FC = () => {
     const { store } = useContext(Context);
@@ -29,29 +30,30 @@ const UserIdPage: FC = () => {
         redirectPage();
     }, [isLoggedIn]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await store.getPersonalAccount(id);
+    const fetchData = async () => {
+        setIsSubmitting(false);
+        try {
+            const response = await store.getPersonalAccount(id);
 
-                if (response.data.status) {
-                    setIsOwner(true);
-                } else {
-                    setIsOwner(false);
-                }
-            } catch (error: any) {
-                console.error('Error fetching auction:', error);
-                toast.error(error.response?.data?.message);
-            } finally {
-                setIsSubmitting(true);
+            if (response.data.status) {
+                setIsOwner(true);
+            } else {
+                setIsOwner(false);
             }
-        };
+        } catch (error: any) {
+            console.error('Error fetching auction:', error);
+            toast.error(error.response?.data?.message);
+        } finally {
+            setIsSubmitting(true);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, [id, store]);
 
     return (
-        <>
+        <FetchDataProvider fetchData={fetchData}>
             {isSubmitting ? (
                 <>
                     {isOwner && (
@@ -92,7 +94,7 @@ const UserIdPage: FC = () => {
                     </Box>
                 </>
             )}
-        </>
+        </FetchDataProvider>
     );
 };
 
